@@ -70,3 +70,7 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+
+# Paid Assets
+/[Pp]ackages/com.projectdawn.navigation/
+/[Pp]ackages/com.projectdawn.navigation.crowds/
