@@ -4,21 +4,15 @@ using UnityEngine;
 
 namespace FoxHill.Quest
 {
-    public class QuestManager : MonoBehaviour
+    public static class QuestManager
     {
-        [SerializeField] private QuestSheet _sheet; // Quest ∏Ìºº∞° ¥„±‰ ø¢ºø Ω√∆Æ∏¶ ExcelImporter∑Œ import«— ScriptableObject
-        [SerializeField] private List<QuestForm> _forms; // ø¢ºø ∆ƒΩÃ + ∞°∞¯¿∏∑Œ æÚ¿∫ Quest µ•¿Ã≈Õ
+        private static List<QuestForm> _forms = new List<QuestForm>(8); // ÏóëÏÖÄ ÌååÏã± + Í∞ÄÍ≥µÏúºÎ°ú ÏñªÏùÄ Quest Îç∞Ïù¥ÌÑ∞
 
-        private void Awake()
-        {
-            InitializeQuestForms(_sheet);
-        }
-
-        private void InitializeQuestForms(QuestSheet sheet)
+        public static void InitializeQuestForms(QuestSheet sheet)
         {
             if (sheet == null)
             {
-                throw new NullReferenceException("Cannot find sheet while InitializeQuestForms");                
+                throw new NullReferenceException("Cannot find sheet while InitializeQuestForms");
             }
 
             _forms.Clear();
@@ -27,6 +21,19 @@ namespace FoxHill.Quest
             {
                 _forms.Add(QuestFormConverter.Convert(element));
             }
+
+            Debug.Log($"Initialized {_forms.Count} Quests");
+        }
+
+        public static QuestForm GetForm(int index)
+        {
+            if (index < 0 || index >= _forms.Count)
+            {
+                Debug.LogWarning($"Cannot get QuestForm : invalid index {index}");
+                return null;
+            }
+
+            return _forms[index];
         }
     }
 }

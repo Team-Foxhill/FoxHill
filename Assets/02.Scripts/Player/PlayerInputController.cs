@@ -4,19 +4,17 @@ using UnityEngine.InputSystem;
 
 namespace FoxHill.Player
 {
-    [RequireComponent(typeof(PlayerController))]
+    [RequireComponent(typeof(PlayerManager))]
     public class PlayerInputController : MonoBehaviour, PlayerInputAction.IPlayerActionActions
     {
-        private PlayerController _playerController;
+        private PlayerManager _playerManager;
 
         private PlayerInputAction _inputAction;
         private Vector2 _moveInput;
 
-        private float _moveSpeed = 5f; // TODO : ºÐ¸®
-
         private void Awake()
         {
-            _playerController = GetComponent<PlayerController>();
+            _playerManager = GetComponent<PlayerManager>();
 
             _inputAction = new PlayerInputAction();
             _inputAction.PlayerAction.AddCallbacks(this);
@@ -25,6 +23,9 @@ namespace FoxHill.Player
 
         private void Update()
         {
+            if (_playerManager.IsPaused == true)
+                return;
+
             if (_moveInput != Vector2.zero)
             {
                 Move();
@@ -66,8 +67,8 @@ namespace FoxHill.Player
 
         public void Move()
         {
-            Vector2 movePosition = _moveInput * _moveSpeed * Time.deltaTime;
-            _playerController.CharacterController.Move(movePosition);
+            Vector2 movePosition = _moveInput * _playerManager.Stat.MoveSpeed * Time.deltaTime;
+            _playerManager.CharacterController.Move(movePosition);
         }
     }
 }

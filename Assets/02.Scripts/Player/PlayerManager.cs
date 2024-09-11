@@ -4,8 +4,9 @@ using UnityEngine;
 
 namespace FoxHill.Player
 {
-    public class PlayerController : CharacterControllerBase
+    public class PlayerManager : CharacterControllerBase
     {
+        public bool IsPaused => _isPaused;
         public PlayerStat Stat { get; private set; }
 
         public CharacterController CharacterController { get; private set; }
