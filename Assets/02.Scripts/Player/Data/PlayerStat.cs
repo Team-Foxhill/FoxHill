@@ -1,6 +1,6 @@
 namespace FoxHill.Player.Data
 {
-    public class PlayerStat
+    public class PlayerStat // TODO : 인터페이스 적용
     {
         public float Hp;
         public float Exp;

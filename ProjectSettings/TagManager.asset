@@ -41,3 +41,18 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 223141029
+    locked: 0
+  - name: SkillBehind
+    uniqueID: 2838658717
+    locked: 0
+  - name: Player
+    uniqueID: 777893151
+    locked: 0
+  - name: SkillFront
+    uniqueID: 3011655595
+    locked: 0
+  - name: UI
+    uniqueID: 431154081
+    locked: 0
