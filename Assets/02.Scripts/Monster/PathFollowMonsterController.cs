@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 using ProjectDawn.Navigation.Hybrid;
-using Debugger = FoxHill.Core.Debugger;
+using DebugFox = FoxHill.Core.DebugFox;
 using Unity.VisualScripting;
 using System.Collections.Generic;
 using System;
@@ -12,6 +12,7 @@ namespace FoxHill.Monster
 {
     public class PathFollowMonsterController : MonsterBase
     {
+        [SerializeField] private int _monsterIndexNumber;
         [SerializeField] private AgentAuthoring _agentAuthoring;
         [SerializeField] private AgentBody _agentBody;
         [SerializeField] private SpriteRenderer _spriteRenderer;
@@ -26,16 +27,22 @@ namespace FoxHill.Monster
         private float _xVelocity;
         private bool _loop;
 
-
         private void Awake()
         {
+            MonsterDataManager.TryGetMonster(_monsterIndexNumber, out base._monsterForm);
             _agentAuthoring = GetComponent<AgentAuthoring>();
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _waitTime = new WaitForSecondsRealtime(_rotateUpdateInterval);
             _deadWait = new WaitForSecondsRealtime(1f);
+            SetStat();
+        }
+        protected override void SetStat()
+        {
+            base.SetStat();
         }
 
-               private void OnEnable()
+
+        private void OnEnable()
         {
             StartCoroutine(UpdateSprite(_moveSpriteSet, true));
             StartCoroutine(UpdateRotation());
@@ -46,7 +53,7 @@ namespace FoxHill.Monster
         {
             _loop = loop;
             float endFrame = spriteSet.Length;
-            Debugger.Log(endFrame);
+            DebugFox.Log(endFrame);
             _animationInterval = new WaitForSecondsRealtime(1 / endFrame);
 
             do
@@ -74,13 +81,6 @@ namespace FoxHill.Monster
                 transform.localScale = _agentBody.Velocity.x > 0f ? Vector3.one : _left;
                 yield return _waitTime;
             }
-        }
-
-
-        protected override void SetStat()
-        {
-            //파일에서 몬스터 종류 읽고 몬스터 스탯 가져오기.
-
         }
 
         public override void TakeDamage(float damage)

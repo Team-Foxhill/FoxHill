@@ -7,30 +7,33 @@ namespace FoxHill.Monster
 {
     public abstract class MonsterBase : MonoBehaviour, IStat, IDamageable
     {
-        public float MaxHp { get; protected set; }
+        public float MaxHp { get; private set; }
         public float CurrentHp { get; protected set; }
-        public float MoveSpeed { get; protected set; }
-        public float Power { get; protected set; }
-        public float Defense { get; protected set; }
+        public float MoveSpeed { get; private set; }
+        public float Power { get; private set; }
+        public float Defense { get; private set; }
 
 
-    protected int _monsterNumber;
+        protected int _monsterNumber;
+        protected MonsterForm _monsterForm;
 
 
         /// <summary>
         /// 스탯을 파일에서 불러오는 메서드.
         /// </summary>
-        protected abstract void SetStat();
+        protected virtual void SetStat()
+        {
+            MaxHp = _monsterForm.MaxHp;
+            CurrentHp = MaxHp;
+            MoveSpeed = _monsterForm.MoveSpeed;
+            Power = _monsterForm.Power;
+            Defense = _monsterForm.Defense;
+        }
 
         protected virtual void PerformMove()
         {
-            
-        }
 
-        /// <summary>
-        /// 공격을 실행하는 메서드.
-        /// </summary>
-        /// <returns>대미지 양.</returns>
+        }
 
         /// <summary>
         /// 대미지를 처리하는 메서드.
