@@ -30,21 +30,21 @@ namespace FoxHill.Quest
             };
         }
 
-        private static List<Condition> ParseCondition(List<string> conditions)
+        private static List<PreCondition> ParseCondition(List<string> conditions)
         {
             return conditions.Select(condition =>
             {
                 var parts = condition.Split('(');
 
                 if (parts.Length != 2
-                    || Enum.TryParse(parts[0], out ConditionType conditionType) == false
+                    || Enum.TryParse(parts[0], out PreConditionType conditionType) == false
                     || int.TryParse(parts[1].Split(')')[0], out int parameter) == false)
                 {
                     Debug.LogWarning($"Failed to parse condition: {condition}");
                     return null;
                 }
 
-                return new Condition
+                return new PreCondition
                 {
                     Type = conditionType,
                     Value = parameter

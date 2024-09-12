@@ -10,7 +10,7 @@ namespace FoxHill.States
         Dodge,
         Skill,
         Dead
-    }
+    } 
 
     public static class StateRepository
     {

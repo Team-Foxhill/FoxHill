@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace FoxHill.Dialogue
+namespace FoxHill.Core.Dialogue
 {
     public class DialogueHUD : MonoBehaviour
     {

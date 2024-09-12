@@ -7,8 +7,21 @@ namespace FoxHill.Player.HP
         [SerializeField] private PlayerManager _playerManager;
         [SerializeField] private PlayerHPUIController _uiController;
 
-        // TODO : PlayerManager에서 PlayerDamaged 받으면
-        // 데미지 처리 후 UIController 
-        // 데미지 처리 중 죽으면 PlayerManager.PlayerDead invoke
+        private void Start()
+        {
+            _playerManager.OnPlayerDamaged.AddListener(ProcessDamage);
+        }
+
+        private void ProcessDamage(float damage)
+        {
+            float damageToApply = damage * (1 - _playerManager.Stat.Defense);
+            _playerManager.Stat.CurrentHp -= damageToApply;
+
+            if (_playerManager.Stat.CurrentHp <= 0f)
+            {
+                _playerManager.Stat.CurrentHp = 0f;
+                _playerManager.Dead();
+            }
+        }
     }
 }

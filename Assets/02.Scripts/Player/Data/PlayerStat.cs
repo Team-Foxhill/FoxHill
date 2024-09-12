@@ -1,22 +1,29 @@
+using FoxHill.Core.Stat;
+using FoxHill.Player.Stat;
+
 namespace FoxHill.Player.Data
 {
-    public class PlayerStat // TODO : 인터페이스 적용
+    public class PlayerStat : IPlayerStat
     {
-        public float Hp;
-        public float Exp;
-        public float MoveSpeed;
-        public float NormalAttackSpeed;
-        public float NormalAttackDamage;
-        public int Level;
+        public float MaxHp { get; set; }
+        public float CurrentHp { get; set; }
+        public float MoveSpeed { get; set; }
+        public float Power { get; set; }
+        public float Defense { get; set; }
+        public float AttackSpeed { get; set; }
+        public float Exp { get; set; }
+        public int Level { get; set; }
 
-        public void LoadData(PlayerData data)
+        public void InitializeStat(PlayerData data)
         {
-            Hp = data.Hp;
-            Exp = data.Exp;
+            MaxHp = data.Hp;
+            CurrentHp = data.Hp;
             MoveSpeed = data.MoveSpeed;
-            NormalAttackSpeed = data.NormalAttackSpeed;
-            NormalAttackDamage = data.NormalAttackDamage;
-            Level = data.Level;
+            Power = data.Power;
+            Defense = data.Defense;
+            AttackSpeed = data.AttackSpeed;
+            Exp = 0f;
+            Level = 1;
         }
     }
 }

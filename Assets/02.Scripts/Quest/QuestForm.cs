@@ -2,10 +2,10 @@ using System.Collections.Generic;
 
 namespace FoxHill.Quest
 {
-    public enum ConditionType
+    public enum PreConditionType
     {
-        CheckItem,
-        CheckNotItem,
+        HaveItem,
+        NotHaveItem,
         MinPlayerLevel,
         MaxPlayerLevel,
         ClearQuest,
@@ -14,18 +14,18 @@ namespace FoxHill.Quest
 
     public enum ObjectiveType
     {
-        Collect,
-        Kill,
-        Deliver,
-        Escort,
-        Talk
+        Collect, // 4
+        Kill, // 2
+        Deliver, // 3
+        Escort, // 5
+        Talk // 1
     }
 
     public enum RewardType
     {
-        Buff,
-        Item,
-        Exp
+        Buff, // 3
+        Item, // 2
+        Exp // 1
     }
 
     public enum PenaltyType
@@ -37,8 +37,8 @@ namespace FoxHill.Quest
     }
 
     /// <summary>
-    /// Excel Importer »ç¿ëÇÏ±â À§ÇØ ÀÚ·áÇü º¯°æÇÑ Å¬·¡½º
-    /// ½ÇÁ¦ °ÔÀÓ ³»¿¡¼­´Â QuestForm class·Î º¯È¯ÇÏ¿© »ç¿ë
+    /// Excel Importer ì‚¬ìš©í•˜ê¸° ìœ„í•´ ìë£Œí˜• ë³€ê²½í•œ í´ë˜ìŠ¤
+    /// ì‹¤ì œ ê²Œì„ ë‚´ì—ì„œëŠ” QuestForm classë¡œ ë³€í™˜í•˜ì—¬ ì‚¬ìš©
     /// </summary>
     [System.Serializable]
     public class QuestFormRaw
@@ -63,7 +63,7 @@ namespace FoxHill.Quest
     {
         public int QuestNumber;
         public float QuestShowTime;
-        public List<Condition> PreCondition;
+        public List<PreCondition> PreCondition;
         public int StartNPC;
         public List<Objective> Objective;
         public float TimeLimit;
@@ -76,9 +76,9 @@ namespace FoxHill.Quest
         public List<Penalty> Penalty;
     }
 
-    public class Condition
+    public class PreCondition
     {
-        public ConditionType Type;
+        public PreConditionType Type;
         public int Value;
     }
 

@@ -9,6 +9,7 @@ namespace FoxHill.Controller
     public abstract class CharacterControllerBase : MonoBehaviour, IPausable
     {
         protected bool _isPaused = false;
+        protected bool _isDead = false;
 
         protected Animator _animator;
         protected State _state = State.Idle;
