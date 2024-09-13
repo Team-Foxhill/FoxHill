@@ -28,6 +28,7 @@ public class SpawnTester : MonoBehaviour
             _positionY = transform.position.y + Random.Range(-_range, _range);
             GameObject newOne = Instantiate(_gameObject);
             newOne.transform.position = new Vector2(_positionX, _positionY);
+            newOne.SetActive(true);
             newOne.name = $"Obstacle_{_index}";
             _index++;
 

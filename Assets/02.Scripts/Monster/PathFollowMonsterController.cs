@@ -27,18 +27,22 @@ namespace FoxHill.Monster
         private float _xVelocity;
         private bool _loop;
 
-        private void Awake()
+        private void Start()
         {
-            MonsterDataManager.TryGetMonster(_monsterIndexNumber, out base._monsterForm);
+            MonsterDataManager.TryGetMonster(_monsterIndexNumber, out _monsterForm);
             _agentAuthoring = GetComponent<AgentAuthoring>();
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _waitTime = new WaitForSecondsRealtime(_rotateUpdateInterval);
             _deadWait = new WaitForSecondsRealtime(1f);
             SetStat();
+            StartCoroutine(UpdateSprite(_moveSpriteSet, true));
         }
         protected override void SetStat()
         {
             base.SetStat();
+            var Locomotion = _agentAuthoring.EntityLocomotion;
+            Locomotion.Speed = MoveSpeed;
+            _agentAuthoring.EntityLocomotion = Locomotion;
         }
 
 

@@ -30,6 +30,7 @@ namespace FoxHill.Monster
 
         public static bool TryGetMonster(int monsterNumber, out MonsterForm monster)
         {
+
             if (_forms.TryGetValue(monsterNumber, out monster) == false)
             {
                 DebugFox.LogWarning($"Monster number {monsterNumber} not found.");
