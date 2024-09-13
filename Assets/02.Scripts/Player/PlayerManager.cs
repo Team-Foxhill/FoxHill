@@ -1,8 +1,8 @@
 using FoxHill.Controller;
 using FoxHill.Core.Damage;
 using FoxHill.Player.Data;
-using FoxHill.Player.HP;
 using FoxHill.Player.Quest;
+using FoxHill.Player.Skill;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -11,8 +11,10 @@ namespace FoxHill.Player
     [RequireComponent(typeof(CharacterController))]
     public class PlayerManager : CharacterControllerBase, IDamageable
     {
-        public UnityEvent<float> OnPlayerDamaged;
-        public UnityEvent OnPlayerDead;
+        [HideInInspector] public UnityEvent<float> OnPlayerDamaged;
+        [HideInInspector] public UnityEvent OnPlayerDead;
+        [HideInInspector] public UnityEvent OnSwitchSkill;
+        [HideInInspector] public UnityEvent OnCastSkill;
 
         public bool IsPaused => _isPaused;
         public bool IsDead => _isDead;

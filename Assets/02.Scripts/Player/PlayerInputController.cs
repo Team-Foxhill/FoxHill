@@ -1,20 +1,19 @@
-using FoxHill.Controller;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace FoxHill.Player
 {
-    [RequireComponent(typeof(PlayerManager))]
     public class PlayerInputController : MonoBehaviour, PlayerInputAction.IPlayerActionActions
     {
-        private PlayerManager _playerManager;
+        [SerializeField] private PlayerManager _playerManager;
 
         private PlayerInputAction _inputAction;
         private Vector2 _moveInput;
 
         private void Awake()
         {
-            _playerManager = GetComponent<PlayerManager>();
+            if (_playerManager == null)
+                _playerManager = GetComponentInParent<PlayerManager>();
 
             _inputAction = new PlayerInputAction();
             _inputAction.PlayerAction.AddCallbacks(this);
@@ -43,20 +42,29 @@ namespace FoxHill.Player
             Debug.Log("Dodge");
         }
 
-        public void OnMove(InputAction.CallbackContext context)
+        public void OnMove(InputAction.CallbackContext context) // Arrow
         {
             Debug.Log("Move");
+
             _moveInput = context.ReadValue<Vector2>();
         }
 
-        public void OnSkill(InputAction.CallbackContext context)
+        public void OnCastSkill(InputAction.CallbackContext context) // B
         {
-            Debug.Log("Skill");
+            if (context.started == true)
+            {
+                Debug.Log("CastSkill");
+                CastSkill();
+            }
         }
 
-        public void OnSwap(InputAction.CallbackContext context)
+        public void OnSwitchSkill(InputAction.CallbackContext context) // X
         {
-            Debug.Log("Swap");
+            if (context.started == true)
+            {
+                Debug.Log("SwitchSkill");
+                SwitchSkill();
+            }
         }
 
         public void OnTower(InputAction.CallbackContext context)
@@ -69,6 +77,16 @@ namespace FoxHill.Player
         {
             Vector2 movePosition = _moveInput * _playerManager.Stat.MoveSpeed * Time.deltaTime;
             _playerManager.CharacterController.Move(movePosition);
+        }
+
+        public void CastSkill()
+        {
+            _playerManager.OnCastSkill?.Invoke();
+        }
+
+        public void SwitchSkill()
+        {
+            _playerManager.OnSwitchSkill?.Invoke();
         }
     }
 }

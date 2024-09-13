@@ -56,6 +56,9 @@ TagManager:
   - name: SkillFront
     uniqueID: 3011655595
     locked: 0
-  - name: UI
+  - name: UI_Dialogue
     uniqueID: 431154081
+    locked: 0
+  - name: UI_Overlay
+    uniqueID: 3268466559
     locked: 0

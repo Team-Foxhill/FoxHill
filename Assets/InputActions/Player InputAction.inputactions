@@ -24,7 +24,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Swap",
+                    "name": "SwitchSkill",
                     "type": "Button",
                     "id": "ddf18a7b-e2e8-4249-ba25-938987ce2fc4",
                     "expectedControlType": "Button",
@@ -42,7 +42,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Skill",
+                    "name": "CastSkill",
                     "type": "Button",
                     "id": "dfea5937-a767-4039-9153-67688e9294ae",
                     "expectedControlType": "Button",
@@ -134,7 +134,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "PC",
-                    "action": "Swap",
+                    "action": "SwitchSkill",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -156,7 +156,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "PC",
-                    "action": "Skill",
+                    "action": "CastSkill",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

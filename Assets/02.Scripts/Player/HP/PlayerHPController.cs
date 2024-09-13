@@ -9,7 +9,8 @@ namespace FoxHill.Player.HP
 
         private void Start()
         {
-            _playerManager.OnPlayerDamaged.AddListener(ProcessDamage);
+            _playerManager.OnPlayerDamaged?.AddListener(ProcessDamage);
+            _playerManager.OnPlayerDamaged?.AddListener(_ => _uiController.OnPlayerDamaged());
         }
 
         private void ProcessDamage(float damage)
