@@ -28,6 +28,7 @@ namespace FoxHill.Player
             if (_moveInput != Vector2.zero)
             {
                 Move();
+                _playerManager.Direction = _moveInput;
             }
         }
 

@@ -228,6 +228,90 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1131606443
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1131606445}
+  - component: {fileID: 1131606444}
+  m_Layer: 0
+  m_Name: 41576354_8918172
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!212 &1131606444
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1131606443}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: 76f4e11413794d049b5e526921a39f1b, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 30.007326, y: 20}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!4 &1131606445
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1131606443}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.5763913, y: -0.07225011, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1471415779
 GameObject:
   m_ObjectHideFlags: 0
@@ -744,61 +828,9 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 745683648097212173, guid: f9d19e0f019222e489ef3e00403251bb, type: 3}
-      propertyPath: _skills.Array.data[0]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 745683648097212173, guid: f9d19e0f019222e489ef3e00403251bb, type: 3}
-      propertyPath: _skills.Array.data[1]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 745683648097212173, guid: f9d19e0f019222e489ef3e00403251bb, type: 3}
-      propertyPath: _skills.Array.data[2]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 745683648097212173, guid: f9d19e0f019222e489ef3e00403251bb, type: 3}
-      propertyPath: _skills.Array.data[3]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 745683648097212173, guid: f9d19e0f019222e489ef3e00403251bb, type: 3}
-      propertyPath: _skillPrefab.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 745683648097212173, guid: f9d19e0f019222e489ef3e00403251bb, type: 3}
-      propertyPath: _skillPrefabs.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 745683648097212173, guid: f9d19e0f019222e489ef3e00403251bb, type: 3}
-      propertyPath: _skillPrefab.Array.data[0]
-      value: 
-      objectReference: {fileID: 8766840991660166018, guid: 30818c1515e8dbc48b6a9532f7edeea0, type: 3}
-    - target: {fileID: 745683648097212173, guid: f9d19e0f019222e489ef3e00403251bb, type: 3}
-      propertyPath: _skillPrefab.Array.data[1]
-      value: 
-      objectReference: {fileID: 8766840991660166018, guid: b4acb3c7942edee4280436e142c7f70a, type: 3}
-    - target: {fileID: 745683648097212173, guid: f9d19e0f019222e489ef3e00403251bb, type: 3}
-      propertyPath: _skillPrefab.Array.data[2]
-      value: 
-      objectReference: {fileID: 8766840991660166018, guid: 517cdad74e7b65144b568ead38a40faf, type: 3}
-    - target: {fileID: 745683648097212173, guid: f9d19e0f019222e489ef3e00403251bb, type: 3}
-      propertyPath: _skillPrefab.Array.data[3]
-      value: 
-      objectReference: {fileID: 8766840991660166018, guid: 6a9bb7807c0cdf744a9c401fef4ef80c, type: 3}
-    - target: {fileID: 745683648097212173, guid: f9d19e0f019222e489ef3e00403251bb, type: 3}
-      propertyPath: _skillPrefabs.Array.data[0]
-      value: 
-      objectReference: {fileID: 8766840991660166018, guid: 30818c1515e8dbc48b6a9532f7edeea0, type: 3}
-    - target: {fileID: 745683648097212173, guid: f9d19e0f019222e489ef3e00403251bb, type: 3}
       propertyPath: _skillPrefabs.Array.data[1]
       value: 
-      objectReference: {fileID: 8766840991660166018, guid: b4acb3c7942edee4280436e142c7f70a, type: 3}
-    - target: {fileID: 745683648097212173, guid: f9d19e0f019222e489ef3e00403251bb, type: 3}
-      propertyPath: _skillPrefabs.Array.data[2]
-      value: 
-      objectReference: {fileID: 8766840991660166018, guid: 517cdad74e7b65144b568ead38a40faf, type: 3}
-    - target: {fileID: 745683648097212173, guid: f9d19e0f019222e489ef3e00403251bb, type: 3}
-      propertyPath: _skillPrefabs.Array.data[3]
-      value: 
-      objectReference: {fileID: 8766840991660166018, guid: 6a9bb7807c0cdf744a9c401fef4ef80c, type: 3}
+      objectReference: {fileID: 7293203469971250306, guid: b4acb3c7942edee4280436e142c7f70a, type: 3}
     - target: {fileID: 773413226809554975, guid: f9d19e0f019222e489ef3e00403251bb, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -843,6 +875,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerDummy
       objectReference: {fileID: 0}
+    - target: {fileID: 8393001220816952002, guid: f9d19e0f019222e489ef3e00403251bb, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8393001220816952002, guid: f9d19e0f019222e489ef3e00403251bb, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8393001220816952002, guid: f9d19e0f019222e489ef3e00403251bb, type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -861,3 +905,4 @@ SceneRoots:
   - {fileID: 1646839393}
   - {fileID: 1785047272}
   - {fileID: 761441251}
+  - {fileID: 1131606445}

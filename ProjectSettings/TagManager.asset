@@ -44,7 +44,7 @@ TagManager:
   - name: Background
     uniqueID: 223141029
     locked: 0
-  - name: SkillBehind
+  - name: SkillBack
     uniqueID: 2838658717
     locked: 0
   - name: Enemy
@@ -55,6 +55,12 @@ TagManager:
     locked: 0
   - name: SkillFront
     uniqueID: 3011655595
+    locked: 0
+  - name: UI_SkillBack
+    uniqueID: 1269817723
+    locked: 0
+  - name: UI_SkillFront
+    uniqueID: 1495349851
     locked: 0
   - name: UI_Dialogue
     uniqueID: 431154081

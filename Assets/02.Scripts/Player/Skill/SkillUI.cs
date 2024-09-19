@@ -16,21 +16,22 @@ namespace FoxHill.Player.Skill
         private const int MAX_SKILL_COUNT = 4;
 
         private List<SpriteRenderer> _icons = new List<SpriteRenderer>(4);
+        private readonly List<Color> INITIAL_COLORS = new List<Color>(4);
         private int _iconIndex = 0;
         #endregion
 
         private void Awake()
         {
+            int index = 0;
             foreach (Transform skillUI in transform)
             {
                 _icons.Add(skillUI.GetComponent<SpriteRenderer>());
+                INITIAL_COLORS.Add(_icons[index++].color);
             }
         }
 
         public void Cast()
         {
-            Debug.Log(_iconIndex);
-
             DisableIcon(_iconIndex);
         }
 
@@ -62,7 +63,7 @@ namespace FoxHill.Player.Skill
 
         public void EnableIcon(int index)
         {
-            _icons[_iconIndex].color = Color.white;
+            _icons[index].color = INITIAL_COLORS[index];
         }
 
         public void DisableIcon(int index)

@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cae5faa09efa4224192ecb9b9c4b5907, type: 3}
-  m_Name: Data_Skill_VermilionBird
+  m_Name: Data_Skill_WhiteTiger
   m_EditorClassIdentifier: 
-  Type: 1
+  Type: 2
   Power: 20
-  Cooldown: 5
+  Cooldown: 10

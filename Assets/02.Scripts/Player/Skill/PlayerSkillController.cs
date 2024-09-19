@@ -11,12 +11,12 @@ namespace FoxHill.Player.Skill
         public UnityEvent<int> OnCooldownComplete; // 파라미터(int) : 쿨다운이 끝난 스킬의 인덱스
 
         public bool IsRotating => _isRotating;
-        
+
 
         [SerializeField] private PlayerManager _playerManager;
 
         private const int MAX_SKILL_COUNT = 4;
-        private const float COOLDOWN_SWITCH_SKILL = 0.5f;
+        private const float COOLDOWN_SWITCH_SKILL = 0.4f;
 
         [Header("Skill prefabs (Match UI order)")]
         [SerializeField] private List<SkillBase> _skillPrefabs = new List<SkillBase>(4);
@@ -39,7 +39,7 @@ namespace FoxHill.Player.Skill
         {
             public ISkill Skill => _skill;
             public float Cooldown => _cooldown;
-            
+
             private ISkill _skill;
             private float _cooldown = 0f;
             private UnityEvent<int> _onCooldownComplete;
@@ -61,6 +61,7 @@ namespace FoxHill.Player.Skill
                 while (_cooldown > 0f)
                 {
                     _cooldown -= Time.deltaTime;
+
                     yield return null;
                 }
 
@@ -106,6 +107,7 @@ namespace FoxHill.Player.Skill
             _isRotating = true;
 
             _currentSkillIndex = (_currentSkillIndex + 1) % MAX_SKILL_COUNT;
+
             _skillUI.SwitchSkill();
 
             yield return _switchingCooldownWait;
@@ -125,7 +127,14 @@ namespace FoxHill.Player.Skill
             }
 
             var castedSkillGO = Instantiate(_skillPrefabs[_currentSkillIndex].gameObject, transform.root.position, Quaternion.identity);
-            castedSkillGO.GetComponent<ISkill>().Cast();
+            
+            SkillParameter parameters = new SkillParameter 
+            { 
+                Direction = _playerManager.Direction, 
+                Power = _playerManager.Stat.Power 
+            };
+
+            castedSkillGO.GetComponent<ISkill>().Cast(parameters);
             _skillUI.Cast();
 
             StartCooldown(_skills[_currentSkillIndex]);

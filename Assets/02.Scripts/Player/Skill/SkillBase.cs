@@ -39,6 +39,6 @@ namespace FoxHill.Player.Skill
             }
         }
 
-        public abstract void Cast();
+        public abstract void Cast(SkillParameter parameters);
     }
 }

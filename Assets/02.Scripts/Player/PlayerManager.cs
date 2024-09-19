@@ -8,6 +8,9 @@ using UnityEngine.Events;
 
 namespace FoxHill.Player
 {
+    /// <summary>
+    /// 플레이어와 관련된 이벤트 및 데이터, 상태 등을 전반적으로 관리합니다.
+    /// </summary>
     [RequireComponent(typeof(CharacterController))]
     public class PlayerManager : CharacterControllerBase, IDamageable
     {
@@ -19,11 +22,24 @@ namespace FoxHill.Player
         public bool IsPaused => _isPaused;
         public bool IsDead => _isDead;
 
-        public PlayerStat Stat { get; private set; }
-        [SerializeField] private PlayerData _data;
+        public Vector2 Direction { 
+            get => _direction;
+            set
+            {
+                if (value == Vector2.zero)
+                    return;
 
+                _direction = value;
+            }
+        }
+
+        public PlayerStat Stat { get; private set; }
         public CharacterController CharacterController { get; private set; }
         public PlayerQuestManager Quest { get; private set; }
+
+
+        [SerializeField] private PlayerData _data;
+        [SerializeField] private Vector2 _direction = Vector2.right;
 
         protected override void Awake()
         {
