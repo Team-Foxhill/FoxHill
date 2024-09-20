@@ -24,6 +24,11 @@ namespace FoxHill.Player.Skill.Implementations
             float elapsedTime = 0f;
             while (elapsedTime < 2.5f)
             {
+                if (_isPaused == true)
+                {
+                    yield return new WaitUntil(() => _isPaused == false);
+                }
+
                 elapsedTime += Time.deltaTime;
                 var s = Physics2D.OverlapBoxAll(transform.position, new Vector2(4f, 2f), 0f);
 

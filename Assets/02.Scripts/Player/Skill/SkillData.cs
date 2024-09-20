@@ -16,5 +16,6 @@ namespace FoxHill.Player.Skill
         public SkillType Type;
         public float Power;
         public float Cooldown;
+        public float Duration;
     }
 }

@@ -44,11 +44,14 @@ TagManager:
   - name: Background
     uniqueID: 223141029
     locked: 0
+  - name: Enemy
+    uniqueID: 3851478349
+    locked: 0
   - name: SkillBack
     uniqueID: 2838658717
     locked: 0
-  - name: Enemy
-    uniqueID: 3851478349
+  - name: Item
+    uniqueID: 2377915049
     locked: 0
   - name: Player
     uniqueID: 777893151
@@ -61,6 +64,9 @@ TagManager:
     locked: 0
   - name: UI_SkillFront
     uniqueID: 1495349851
+    locked: 0
+  - name: UI_Inventory
+    uniqueID: 2269846091
     locked: 0
   - name: UI_Dialogue
     uniqueID: 431154081

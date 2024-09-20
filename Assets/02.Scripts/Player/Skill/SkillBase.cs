@@ -1,9 +1,10 @@
+using FoxHill.Core.Pause;
 using System;
 using UnityEngine;
 
 namespace FoxHill.Player.Skill
 {
-    public abstract class SkillBase : MonoBehaviour, ISkill
+    public abstract class SkillBase : MonoBehaviour, ISkill, IPausable
     {
         public SkillModel Stat
         {
@@ -32,6 +33,7 @@ namespace FoxHill.Player.Skill
             if(_data != null)
             {
                 _model = new SkillModel(_data);
+                PauseManager.Register(this);
             }
             else
             {
@@ -39,6 +41,26 @@ namespace FoxHill.Player.Skill
             }
         }
 
+        protected virtual void OnDestroy()
+        {
+            PauseManager.Unregister(this);
+        }
+
         public abstract void Cast(SkillParameter parameters);
+
+
+        #region Pausable
+        protected bool _isPaused = false;
+
+        public virtual void Pause()
+        {
+            _isPaused = true;
+        }
+        public virtual void Resume()
+        {
+            _isPaused = false;
+        }
+
+        #endregion
     }
 }

@@ -1,3 +1,4 @@
+using FoxHill.Core.Pause;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -47,9 +48,12 @@ namespace FoxHill.Player.Skill
             private int _index = 0;
             private static int _skillCount = 0;
 
-            public SkillContainer(SkillBase skill, PlayerSkillController outerClass)
+            private PlayerManager _playerManager;
+
+            public SkillContainer(SkillBase skill, PlayerManager playerManager, PlayerSkillController outerClass)
             {
                 _skill = skill;
+                _playerManager = playerManager;
                 _index = _skillCount++;
                 _onCooldownComplete = outerClass.OnCooldownComplete;
             }
@@ -60,6 +64,11 @@ namespace FoxHill.Player.Skill
 
                 while (_cooldown > 0f)
                 {
+                    if (_playerManager.IsPaused == true)
+                    {
+                        yield return new WaitUntil(() => _playerManager.IsPaused == false);
+                    }
+
                     _cooldown -= Time.deltaTime;
 
                     yield return null;
@@ -78,7 +87,7 @@ namespace FoxHill.Player.Skill
 
             foreach (var skill in _skillPrefabs)
             {
-                _skills.Add(new SkillContainer(skill, this));
+                _skills.Add(new SkillContainer(skill, _playerManager, this));
             }
         }
 
@@ -87,11 +96,6 @@ namespace FoxHill.Player.Skill
             _playerManager.OnSwitchSkill?.AddListener(SwitchSkill);
             _playerManager.OnCastSkill?.AddListener(CastSkill);
             OnCooldownComplete?.AddListener(_skillUI.EnableIcon);
-        }
-
-        public void Initialize(SkillUI ui)
-        {
-            _skillUI = ui;
         }
 
         public void SwitchSkill()
@@ -127,11 +131,11 @@ namespace FoxHill.Player.Skill
             }
 
             var castedSkillGO = Instantiate(_skillPrefabs[_currentSkillIndex].gameObject, transform.root.position, Quaternion.identity);
-            
-            SkillParameter parameters = new SkillParameter 
-            { 
-                Direction = _playerManager.Direction, 
-                Power = _playerManager.Stat.Power 
+
+            SkillParameter parameters = new SkillParameter
+            {
+                Direction = _playerManager.Direction,
+                Power = _playerManager.Stat.Power
             };
 
             castedSkillGO.GetComponent<ISkill>().Cast(parameters);

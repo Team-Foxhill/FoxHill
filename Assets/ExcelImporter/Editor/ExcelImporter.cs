@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
@@ -218,6 +218,8 @@ public class ExcelImporter : AssetPostprocessor
 		{
 			ISheet sheet =  book.GetSheet(assetField.Name);
 			if(sheet == null) continue;
+
+
 
 			Type fieldType = assetField.FieldType;
 			if(! fieldType.IsGenericType || (fieldType.GetGenericTypeDefinition() != typeof(List<>))) continue;

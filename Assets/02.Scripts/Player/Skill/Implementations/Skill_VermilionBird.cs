@@ -24,6 +24,11 @@ namespace FoxHill.Player.Skill.Implementations
             float elapsedTime = 0f;
             while (elapsedTime < 1.5f)
             {
+                if (_isPaused == true)
+                {
+                    yield return new WaitUntil(() => _isPaused == false);
+                }
+
                 gameObject.transform.Translate(direction * 2f * Time.deltaTime);
                 elapsedTime += Time.deltaTime;
                 yield return null;

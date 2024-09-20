@@ -73,7 +73,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Tower"",
+                    ""name"": ""Inventory"",
                     ""type"": ""Button"",
                     ""id"": ""3a680ec0-b515-4e31-9ac9-3f504ae1140c"",
                     ""expectedControlType"": ""Button"",
@@ -189,7 +189,139 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""PC"",
-                    ""action"": ""Tower"",
+                    ""action"": ""Inventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""InventoryAction"",
+            ""id"": ""a50640f2-22e1-4e53-b2e8-a52111dd8b54"",
+            ""actions"": [
+                {
+                    ""name"": ""SwitchSlot"",
+                    ""type"": ""Value"",
+                    ""id"": ""4cf5d461-fc14-4718-a339-c05107bf47ab"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Close"",
+                    ""type"": ""Button"",
+                    ""id"": ""f45d1a26-4e5d-415f-8e96-aff03abe6fda"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Select"",
+                    ""type"": ""Button"",
+                    ""id"": ""3276fe34-50f6-473e-9bd0-07c9c2a55f31"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Deselect"",
+                    ""type"": ""Button"",
+                    ""id"": ""27707e52-b710-4974-a1df-3a1303dfb45a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""0b97e07b-1b48-44fc-97df-7668c3a7b40a"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchSlot"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""bd413f3d-57a8-403d-8e37-78e94f36b87c"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""SwitchSlot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""ddae75cc-bfce-42f0-a726-a04e190fe571"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""SwitchSlot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""20f6da82-09fd-4da1-aaac-234b920d7569"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""SwitchSlot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""b727537b-c438-4f8a-89ee-91426031dcb0"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""SwitchSlot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3792d236-9a41-4b11-8a84-986cfe3ba53c"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Close"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3065e9fb-8fc8-4ecf-a1ab-fb31996f0791"",
+                    ""path"": ""<Keyboard>/z"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0e029f63-4d46-4a0c-8bcf-860120e86a01"",
+                    ""path"": ""<Keyboard>/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Deselect"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -222,7 +354,13 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         m_PlayerAction_SwitchSkill = m_PlayerAction.FindAction("SwitchSkill", throwIfNotFound: true);
         m_PlayerAction_Attack = m_PlayerAction.FindAction("Attack", throwIfNotFound: true);
         m_PlayerAction_CastSkill = m_PlayerAction.FindAction("CastSkill", throwIfNotFound: true);
-        m_PlayerAction_Tower = m_PlayerAction.FindAction("Tower", throwIfNotFound: true);
+        m_PlayerAction_Inventory = m_PlayerAction.FindAction("Inventory", throwIfNotFound: true);
+        // InventoryAction
+        m_InventoryAction = asset.FindActionMap("InventoryAction", throwIfNotFound: true);
+        m_InventoryAction_SwitchSlot = m_InventoryAction.FindAction("SwitchSlot", throwIfNotFound: true);
+        m_InventoryAction_Close = m_InventoryAction.FindAction("Close", throwIfNotFound: true);
+        m_InventoryAction_Select = m_InventoryAction.FindAction("Select", throwIfNotFound: true);
+        m_InventoryAction_Deselect = m_InventoryAction.FindAction("Deselect", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -289,7 +427,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerAction_SwitchSkill;
     private readonly InputAction m_PlayerAction_Attack;
     private readonly InputAction m_PlayerAction_CastSkill;
-    private readonly InputAction m_PlayerAction_Tower;
+    private readonly InputAction m_PlayerAction_Inventory;
     public struct PlayerActionActions
     {
         private @PlayerInputAction m_Wrapper;
@@ -299,7 +437,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         public InputAction @SwitchSkill => m_Wrapper.m_PlayerAction_SwitchSkill;
         public InputAction @Attack => m_Wrapper.m_PlayerAction_Attack;
         public InputAction @CastSkill => m_Wrapper.m_PlayerAction_CastSkill;
-        public InputAction @Tower => m_Wrapper.m_PlayerAction_Tower;
+        public InputAction @Inventory => m_Wrapper.m_PlayerAction_Inventory;
         public InputActionMap Get() { return m_Wrapper.m_PlayerAction; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -324,9 +462,9 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @CastSkill.started += instance.OnCastSkill;
             @CastSkill.performed += instance.OnCastSkill;
             @CastSkill.canceled += instance.OnCastSkill;
-            @Tower.started += instance.OnTower;
-            @Tower.performed += instance.OnTower;
-            @Tower.canceled += instance.OnTower;
+            @Inventory.started += instance.OnInventory;
+            @Inventory.performed += instance.OnInventory;
+            @Inventory.canceled += instance.OnInventory;
         }
 
         private void UnregisterCallbacks(IPlayerActionActions instance)
@@ -346,9 +484,9 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @CastSkill.started -= instance.OnCastSkill;
             @CastSkill.performed -= instance.OnCastSkill;
             @CastSkill.canceled -= instance.OnCastSkill;
-            @Tower.started -= instance.OnTower;
-            @Tower.performed -= instance.OnTower;
-            @Tower.canceled -= instance.OnTower;
+            @Inventory.started -= instance.OnInventory;
+            @Inventory.performed -= instance.OnInventory;
+            @Inventory.canceled -= instance.OnInventory;
         }
 
         public void RemoveCallbacks(IPlayerActionActions instance)
@@ -366,6 +504,76 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         }
     }
     public PlayerActionActions @PlayerAction => new PlayerActionActions(this);
+
+    // InventoryAction
+    private readonly InputActionMap m_InventoryAction;
+    private List<IInventoryActionActions> m_InventoryActionActionsCallbackInterfaces = new List<IInventoryActionActions>();
+    private readonly InputAction m_InventoryAction_SwitchSlot;
+    private readonly InputAction m_InventoryAction_Close;
+    private readonly InputAction m_InventoryAction_Select;
+    private readonly InputAction m_InventoryAction_Deselect;
+    public struct InventoryActionActions
+    {
+        private @PlayerInputAction m_Wrapper;
+        public InventoryActionActions(@PlayerInputAction wrapper) { m_Wrapper = wrapper; }
+        public InputAction @SwitchSlot => m_Wrapper.m_InventoryAction_SwitchSlot;
+        public InputAction @Close => m_Wrapper.m_InventoryAction_Close;
+        public InputAction @Select => m_Wrapper.m_InventoryAction_Select;
+        public InputAction @Deselect => m_Wrapper.m_InventoryAction_Deselect;
+        public InputActionMap Get() { return m_Wrapper.m_InventoryAction; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(InventoryActionActions set) { return set.Get(); }
+        public void AddCallbacks(IInventoryActionActions instance)
+        {
+            if (instance == null || m_Wrapper.m_InventoryActionActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_InventoryActionActionsCallbackInterfaces.Add(instance);
+            @SwitchSlot.started += instance.OnSwitchSlot;
+            @SwitchSlot.performed += instance.OnSwitchSlot;
+            @SwitchSlot.canceled += instance.OnSwitchSlot;
+            @Close.started += instance.OnClose;
+            @Close.performed += instance.OnClose;
+            @Close.canceled += instance.OnClose;
+            @Select.started += instance.OnSelect;
+            @Select.performed += instance.OnSelect;
+            @Select.canceled += instance.OnSelect;
+            @Deselect.started += instance.OnDeselect;
+            @Deselect.performed += instance.OnDeselect;
+            @Deselect.canceled += instance.OnDeselect;
+        }
+
+        private void UnregisterCallbacks(IInventoryActionActions instance)
+        {
+            @SwitchSlot.started -= instance.OnSwitchSlot;
+            @SwitchSlot.performed -= instance.OnSwitchSlot;
+            @SwitchSlot.canceled -= instance.OnSwitchSlot;
+            @Close.started -= instance.OnClose;
+            @Close.performed -= instance.OnClose;
+            @Close.canceled -= instance.OnClose;
+            @Select.started -= instance.OnSelect;
+            @Select.performed -= instance.OnSelect;
+            @Select.canceled -= instance.OnSelect;
+            @Deselect.started -= instance.OnDeselect;
+            @Deselect.performed -= instance.OnDeselect;
+            @Deselect.canceled -= instance.OnDeselect;
+        }
+
+        public void RemoveCallbacks(IInventoryActionActions instance)
+        {
+            if (m_Wrapper.m_InventoryActionActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IInventoryActionActions instance)
+        {
+            foreach (var item in m_Wrapper.m_InventoryActionActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_InventoryActionActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public InventoryActionActions @InventoryAction => new InventoryActionActions(this);
     private int m_PCSchemeIndex = -1;
     public InputControlScheme PCScheme
     {
@@ -382,6 +590,13 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         void OnSwitchSkill(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
         void OnCastSkill(InputAction.CallbackContext context);
-        void OnTower(InputAction.CallbackContext context);
+        void OnInventory(InputAction.CallbackContext context);
+    }
+    public interface IInventoryActionActions
+    {
+        void OnSwitchSlot(InputAction.CallbackContext context);
+        void OnClose(InputAction.CallbackContext context);
+        void OnSelect(InputAction.CallbackContext context);
+        void OnDeselect(InputAction.CallbackContext context);
     }
 }
