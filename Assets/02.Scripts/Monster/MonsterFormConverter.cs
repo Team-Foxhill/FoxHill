@@ -1,7 +1,4 @@
-﻿using FoxHill.Core;
-using NUnit.Framework;
-using System;
-using System.Diagnostics;
+﻿using System;
 
 namespace FoxHill.Monster
 {

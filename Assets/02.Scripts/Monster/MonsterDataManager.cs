@@ -10,7 +10,7 @@ namespace FoxHill.Monster
         private static Dictionary<int, MonsterForm> _forms = new Dictionary<int, MonsterForm>(8); // 엑셀 파싱 + 가공으로 얻은 Monster 데이터.
         
 
-        public static void InitializeMonsterForms(MonsterSheet sheet)
+        public static void InitializeMonsterForms(MonsterData sheet)
         {
             if (sheet == null)
             {
@@ -25,12 +25,11 @@ namespace FoxHill.Monster
                 _forms.Add(form.MonsterIndexNumber, form);
             }
 
-            DebugFox.Log($"Initialized {_forms.Count} Monsters");
+            DebugFox.Log($"Initialized {_forms.Count} MonsterDatas");
         }
 
         public static bool TryGetMonster(int monsterNumber, out MonsterForm monster)
         {
-
             if (_forms.TryGetValue(monsterNumber, out monster) == false)
             {
                 DebugFox.LogWarning($"Monster number {monsterNumber} not found.");
@@ -41,8 +40,5 @@ namespace FoxHill.Monster
                 return true;
             }
         }
-
-
-
     }
 }

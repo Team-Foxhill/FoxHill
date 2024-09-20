@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
-using FoxHill.Core;
 using FoxHill.Core.Stat;
 using FoxHill.Core.Damage;
+using IPoolable = FoxHill.Core.IPoolable;
+using System;
 
 namespace FoxHill.Monster
 {
@@ -39,12 +40,16 @@ namespace FoxHill.Monster
         /// 대미지를 처리하는 메서드.
         /// </summary>
         /// <param name="damage">PerformAttack에서 받은 대미지</param>
-        public abstract void TakeDamage(float damage);
+        public void TakeDamage(float damage)
+        {
+            //프로퍼티 체력 깎기.
+            CurrentHp -= damage;
+            if (CurrentHp <= 0f) Dead();
+        }
 
         /// <summary>
         /// 죽음을 처리하는 메서드.
         /// </summary>
         public abstract void Dead();
-
     }
 }

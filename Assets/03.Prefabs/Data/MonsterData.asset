@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a08db289cd109454c9782d6b8f38c01f, type: 3}
+  m_Script: {fileID: 11500000, guid: a71f24bb96a316a44aa43c7ab21070ec, type: 3}
   m_Name: MonsterData
   m_EditorClassIdentifier: 
   Sheet1:
@@ -29,3 +29,11 @@ MonoBehaviour:
     Power: 1.2
     Defense: 0.9
     DropGroupIndexNumber: 2
+  - MonsterIndexNumber: 3
+    MonsterType: BehaviourTreeMonster
+    MonsterName: "\uBD88\uAC00\uC0AC\uB9AC"
+    MaxHp: 2000
+    MoveSpeed: 2.2
+    Power: 2.1
+    Defense: 1.8
+    DropGroupIndexNumber: 3

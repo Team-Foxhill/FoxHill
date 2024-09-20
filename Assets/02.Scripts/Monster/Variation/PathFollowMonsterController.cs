@@ -3,37 +3,38 @@ using System.Collections;
 using UnityEngine;
 using ProjectDawn.Navigation.Hybrid;
 using DebugFox = FoxHill.Core.DebugFox;
-using Unity.VisualScripting;
-using System.Collections.Generic;
+using UnityEngine.Pool;
+using FoxHill.Core.Test;
+using FoxHill.Core;
 using System;
 
 
 namespace FoxHill.Monster
 {
-    public class PathFollowMonsterController : MonsterBase
+    public class PathFollowMonsterController : MonsterBase, IPoolable
     {
+        public event Action<IPoolable> OnRelease;
         [SerializeField] private int _monsterIndexNumber;
         [SerializeField] private AgentAuthoring _agentAuthoring;
         [SerializeField] private AgentBody _agentBody;
         [SerializeField] private SpriteRenderer _spriteRenderer;
-        [SerializeField] private float _rotateUpdateInterval;
+        [SerializeField] private float _rotateUpdateInterval = 2f;
         [SerializeField] private Sprite[] _moveSpriteSet;
         [SerializeField] private Sprite[] _deadSpriteSet;
         [SerializeField] private Vector2 _teleportPosition = new Vector2(-55f, -70f);
+        [SerializeField] private ObjectPoolManager _objectPoolManager;
         private readonly Vector3 _left = new Vector3(-1, 1, 1);
         private WaitForSecondsRealtime _waitTime;
         private WaitForSecondsRealtime _animationInterval;
-        private WaitForSecondsRealtime _deadWait;
         private float _xVelocity;
         private bool _loop;
 
+
         private void Start()
         {
-            MonsterDataManager.TryGetMonster(_monsterIndexNumber, out _monsterForm);
-            _agentAuthoring = GetComponent<AgentAuthoring>();
-            _spriteRenderer = GetComponent<SpriteRenderer>();
             _waitTime = new WaitForSecondsRealtime(_rotateUpdateInterval);
-            _deadWait = new WaitForSecondsRealtime(1f);
+            MonsterDataManager.TryGetMonster(_monsterIndexNumber, out _monsterForm);
+            StartCoroutine(WaitForComponents());
             SetStat();
             StartCoroutine(UpdateSprite(_moveSpriteSet, true));
         }
@@ -48,8 +49,31 @@ namespace FoxHill.Monster
 
         private void OnEnable()
         {
+            StartCoroutine(WaitForComponents());
             StartCoroutine(UpdateSprite(_moveSpriteSet, true));
             StartCoroutine(UpdateRotation());
+        }
+
+        private IEnumerator WaitForComponents()
+        {
+            while (_agentAuthoring == default || _spriteRenderer == default)
+            {
+                if (_agentAuthoring == default)
+                {
+                    _agentAuthoring = GetComponent<AgentAuthoring>();
+                }
+                if (_spriteRenderer == default)
+                {
+                    _spriteRenderer = GetComponent<SpriteRenderer>();
+                }
+                if (_agentAuthoring != default && _spriteRenderer != default)
+                {
+                    DebugFox.Log("All components Found.");
+                    yield break;
+                }
+                DebugFox.Log("Some Component Not Found.");
+                yield return _animationInterval;
+            }
         }
 
         // 단순히 move와 dead만 있는 경우이므로 bool값으로 코루틴 동작 정지 여부 결정.]
@@ -64,6 +88,10 @@ namespace FoxHill.Monster
             {
                 for (int i = 0; i < endFrame; i++)
                 {
+                    if (_spriteRenderer.enabled == false)
+                    {
+                        yield return new WaitUntil(() => _spriteRenderer.enabled == true);
+                    }
                     if (spriteSet != _deadSpriteSet && _loop == false) break;
                     _spriteRenderer.sprite = spriteSet[i];
                     yield return _animationInterval;
@@ -75,23 +103,19 @@ namespace FoxHill.Monster
 
         private IEnumerator UpdateRotation()
         {
+            while (!_agentAuthoring.HasEntityBody)
+            {
+                yield return null;
+            }
+
             while (gameObject.activeSelf)
             {
-                if (!_agentAuthoring.HasEntityBody)
-                    yield break;
-
                 _agentBody = _agentAuthoring.EntityBody;
                 _xVelocity = _agentBody.Velocity.x;
                 transform.localScale = _agentBody.Velocity.x > 0f ? Vector3.one : _left;
+
                 yield return _waitTime;
             }
-        }
-
-        public override void TakeDamage(float damage)
-        {
-            //프로퍼티 체력 깎기.
-            CurrentHp -= damage;
-            if (CurrentHp <= 0f) Dead();
         }
 
         public override void Dead()
@@ -104,12 +128,8 @@ namespace FoxHill.Monster
         {
             //죽음 애니메이션 실행시키기.
             yield return StartCoroutine(UpdateSprite(_deadSpriteSet, false));
-            yield return _deadWait;
-            // 안 보이는 곳으로 텔레포트
-            transform.position = _teleportPosition;
-            // HP 리셋.
-            CurrentHp = MaxHp;
-            gameObject.SetActive(false);
+            // 풀에 되돌리기.
+            OnRelease?.Invoke(this);
             yield break;
         }
     }
