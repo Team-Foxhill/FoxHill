@@ -11,8 +11,7 @@ namespace FoxHill.Player.Skill
     {
         public UnityEvent<int> OnCooldownComplete; // 파라미터(int) : 쿨다운이 끝난 스킬의 인덱스
 
-        public bool IsRotating => _isRotating;
-
+        public bool IsSkillUIActivated { get; private set; } = false; // TODO : Skill UI 끄고 켜기 매핑
 
         [SerializeField] private PlayerManager _playerManager;
 
@@ -96,6 +95,11 @@ namespace FoxHill.Player.Skill
             _playerManager.OnSwitchSkill?.AddListener(SwitchSkill);
             _playerManager.OnCastSkill?.AddListener(CastSkill);
             OnCooldownComplete?.AddListener(_skillUI.EnableIcon);
+        }
+
+        public void ToggleSkillUI(bool toggle)
+        {
+
         }
 
         public void SwitchSkill()

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace FoxHill.Item
+namespace FoxHill.Items
 {
     public enum ItemType
     {

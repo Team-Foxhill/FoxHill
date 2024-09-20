@@ -18,8 +18,6 @@ namespace FoxHill.Player.HP
 
         private readonly WaitForSeconds _colorChangeWait = new WaitForSeconds(0.2f);
 
-        private float _scaleMultiplier = 1f;
-
         private void Awake()
         {
             _animator = GetComponent<Animator>();
@@ -41,17 +39,26 @@ namespace FoxHill.Player.HP
             transform.localScale = Vector3.one * 2.5f;
         }
 
-        public void OnPlayerDamaged()
+        public void OnPlayerDamaged(float HPRatio)
         {
             StartCoroutine(C_ChangeColor());
-            _scaleMultiplier -= 0.1f;
 
-            if (_scaleMultiplier < 0f)
+            if (HPRatio < 0f)
             {
-                _scaleMultiplier = 0f;
+                HPRatio = 0f;
             }
 
-            transform.localScale = _initialScale * _scaleMultiplier;
+            transform.localScale = _initialScale * HPRatio;
+        }
+
+        public void OnPlayerHealed(float HPRatio)
+        {
+            if (HPRatio > 1f)
+            {
+                HPRatio = 1f;
+            }
+
+            transform.localScale = _initialScale * HPRatio;
         }
 
         private IEnumerator C_ChangeColor()

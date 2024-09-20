@@ -45,12 +45,11 @@ namespace FoxHill.Player
         public PlayerStat Stat { get; private set; }
         public CharacterController CharacterController { get; private set; }
         public PlayerQuestManager Quest { get; private set; }
-
+        public PlayerInventory Inventory { get; private set; }
 
         [SerializeField] private PlayerData _data;
         [SerializeField] private Vector2 _direction = Vector2.right;
 
-        [SerializeField] private PlayerInventory _inventory;
         private bool _isInventoryOpen = false;
 
         protected override void Awake()
@@ -64,8 +63,8 @@ namespace FoxHill.Player
 
             Quest = new PlayerQuestManager();
 
-            if (_inventory == null)
-                _inventory = FindFirstObjectByType<PlayerInventory>();
+            if (Inventory == null)
+                Inventory = FindFirstObjectByType<PlayerInventory>();
         }
 
         private void Start()
@@ -73,30 +72,30 @@ namespace FoxHill.Player
             OnOpenInventory?.AddListener(() =>
             {
                 _isInventoryOpen = true;
-                _inventory.ToggleCanvas(true);
+                Inventory.ToggleCanvas(true);
                 PauseManager.Pause();
             });
 
             OnCloseInventory?.AddListener(() =>
             {
                 _isInventoryOpen = false;
-                _inventory.ToggleCanvas(false);
+                Inventory.ToggleCanvas(false);
                 PauseManager.Resume();
             });
 
             OnSwitchSlotInventory?.AddListener((input) =>
             {
-                _inventory.SwitchSlot(input);
+                Inventory.SwitchSlot(input);
             });
 
             OnSelectInventory?.AddListener(() =>
             {
-                _inventory.SelectSlot();
+                Inventory.SelectSlot();
             });
 
             OnDeselectInventory?.AddListener(() =>
             {
-                _inventory.DeselectSlot();
+                Inventory.DeselectSlot();
             });
         }
 
@@ -115,6 +114,5 @@ namespace FoxHill.Player
 
             OnPlayerDead?.Invoke();
         }
-
     }
 }

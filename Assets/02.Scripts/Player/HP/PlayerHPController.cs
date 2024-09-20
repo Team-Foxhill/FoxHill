@@ -10,7 +10,9 @@ namespace FoxHill.Player.HP
         private void Start()
         {
             _playerManager.OnPlayerDamaged?.AddListener(ProcessDamage);
-            _playerManager.OnPlayerDamaged?.AddListener(_ => _uiController.OnPlayerDamaged());
+
+            _playerManager.Inventory.OnUseRestorativeItem?.AddListener((item) =>
+                Heal(item.Amount));
         }
 
         private void ProcessDamage(float damage)
@@ -18,11 +20,26 @@ namespace FoxHill.Player.HP
             float damageToApply = damage * (1 - _playerManager.Stat.Defense);
             _playerManager.Stat.CurrentHp -= damageToApply;
 
+            _uiController.OnPlayerDamaged(_playerManager.Stat.CurrentHp / _playerManager.Stat.MaxHp);
+            Debug.Log($"Remain HP : {_playerManager.Stat.CurrentHp} / Got Damage : {damageToApply}");
             if (_playerManager.Stat.CurrentHp <= 0f)
             {
                 _playerManager.Stat.CurrentHp = 0f;
                 _playerManager.Dead();
             }
+        }
+
+        private void Heal(float amount)
+        {
+            _playerManager.Stat.CurrentHp += amount;
+
+            if (_playerManager.Stat.CurrentHp > _playerManager.Stat.MaxHp)
+            {
+                _playerManager.Stat.CurrentHp = _playerManager.Stat.MaxHp;
+            }
+
+            _uiController.OnPlayerHealed(_playerManager.Stat.CurrentHp / _playerManager.Stat.MaxHp);
+            Debug.Log($"Remain HP : {_playerManager.Stat.CurrentHp} / Healed : {amount}");
         }
     }
 }

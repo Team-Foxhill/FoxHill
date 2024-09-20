@@ -279,6 +279,7 @@ namespace FoxHill.Quest
         private static bool CheckPreCondition_HaveItem(int itemCount, int target)
         {
             // TODO : Item 시스템 구축 후 제작 가능 :  Dictionary.containskey 같은거로 구현하면 될듯
+            // OR 파라미터로 Inventory 배열 넘겨주고 직접 순회
             return true;
         }
 

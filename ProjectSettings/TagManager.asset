@@ -8,9 +8,10 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
+  - Tower
   - 
   - 
   - 
@@ -19,8 +20,7 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
+  - Item
   - 
   - 
   - 

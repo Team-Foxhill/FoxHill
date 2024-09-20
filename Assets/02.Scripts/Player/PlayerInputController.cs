@@ -37,20 +37,18 @@ namespace FoxHill.Player
 
         #region InputAction Callback
         // PlayerAction
-        public void OnAttack(InputAction.CallbackContext context)
+        public void OnAttack(InputAction.CallbackContext context) // V
         {
             Debug.Log("Attack");
         }
 
-        public void OnDodge(InputAction.CallbackContext context)
+        public void OnDodge(InputAction.CallbackContext context) // Z
         {
             Debug.Log("Dodge");
         }
 
         public void OnMove(InputAction.CallbackContext context) // Arrow
         {
-            Debug.Log("Move");
-
             _moveInput = context.ReadValue<Vector2>();
         }
 
@@ -58,7 +56,6 @@ namespace FoxHill.Player
         {
             if (context.started == true)
             {
-                Debug.Log("CastSkill");
                 CastSkill();
             }
         }
@@ -67,7 +64,6 @@ namespace FoxHill.Player
         {
             if (context.started == true)
             {
-                Debug.Log("SwitchSkill");
                 SwitchSkill();
             }
         }
@@ -76,7 +72,6 @@ namespace FoxHill.Player
         {
             if (context.started == true)
             {
-                Debug.Log("Open Inventory");
                 ToggleInventory(true);
             }
         }
@@ -95,7 +90,6 @@ namespace FoxHill.Player
         {
             if (context.started == true)
             {
-                Debug.Log("Close Inventory");
                 ToggleInventory(false);
             }
         }
