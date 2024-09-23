@@ -18,7 +18,7 @@ namespace FoxHill.Player.Skill
         private List<SpriteRenderer> _icons = new List<SpriteRenderer>(4);
         private readonly List<Color> INITIAL_COLORS = new List<Color>(4);
         private int _iconIndex = 0;
-        #endregion
+        #endregion 
 
         private void Awake()
         {
@@ -28,6 +28,11 @@ namespace FoxHill.Player.Skill
                 _icons.Add(skillUI.GetComponent<SpriteRenderer>());
                 INITIAL_COLORS.Add(_icons[index++].color);
             }
+        }
+
+        public void ToggleUI(bool toggle)
+        {
+            this.gameObject.SetActive(toggle);
         }
 
         public void Cast()

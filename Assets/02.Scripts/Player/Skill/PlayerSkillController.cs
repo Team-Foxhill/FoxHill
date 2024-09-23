@@ -1,9 +1,7 @@
-using FoxHill.Core.Pause;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.InputSystem.Interactions;
 
 namespace FoxHill.Player.Skill
 {
@@ -11,25 +9,25 @@ namespace FoxHill.Player.Skill
     {
         public UnityEvent<int> OnCooldownComplete; // 파라미터(int) : 쿨다운이 끝난 스킬의 인덱스
 
-        public bool IsSkillUIActivated { get; private set; } = false; // TODO : Skill UI 끄고 켜기 매핑
-
-        [SerializeField] private PlayerManager _playerManager;
+        public bool IsSkillUIActivated { get; private set; } = false;
 
         private const int MAX_SKILL_COUNT = 4;
         private const float COOLDOWN_SWITCH_SKILL = 0.4f;
+        private const float MAX_UI_ACTIVATION_TIME = 3f;
 
         [Header("Skill prefabs (Match UI order)")]
         [SerializeField] private List<SkillBase> _skillPrefabs = new List<SkillBase>(4);
 
         private List<SkillContainer> _skills = new List<SkillContainer>(4); // 실제로 게임 중에 주로 사용될 스킬 정보 리스트
 
+        [SerializeField] private PlayerManager _playerManager;
         [SerializeField] private SkillUI _skillUI;
 
-        private int _currentSkillIndex = 0;
-
-        private bool _isRotating = false;
         private readonly WaitForSeconds _switchingCooldownWait = new WaitForSeconds(COOLDOWN_SWITCH_SKILL);
+        private int _currentSkillIndex = 0;
+        private bool _isRotating = false;
 
+        private float _uiActivatedTime = 0f;
 
         /// <summary>
         /// 스킬 정보와 현재 상태 등을 담은 내부 클래스.
@@ -97,17 +95,49 @@ namespace FoxHill.Player.Skill
             OnCooldownComplete?.AddListener(_skillUI.EnableIcon);
         }
 
+        /// <summary>
+        /// 타당성 검사 수행 이후 UI를 켜고 끕니다.
+        /// </summary>
+        /// <param name="toggle">>True면 인벤토리를 켜고, False면 인벤토리를 끕니다.</param>
         public void ToggleSkillUI(bool toggle)
         {
+            if (IsSkillUIActivated ^ toggle == true)
+            {
+                IsSkillUIActivated = toggle;
+                _skillUI.ToggleUI(toggle);
+            }
+        }
 
+        /// <summary>
+        /// 사용자로부터 일정 시간 스킬 Switch / Use 입력을 받지 않으면 UI를 끕니다.
+        /// 이를 위해 입력을 받지 않은 시간을 체크합니다.
+        /// </summary>
+        private IEnumerator C_CheckUIActivatedTime()
+        {
+            while (_uiActivatedTime < MAX_UI_ACTIVATION_TIME)
+            {
+                _uiActivatedTime += Time.deltaTime;
+                yield return null;
+            }
+
+            ToggleSkillUI(false);
+            _uiActivatedTime = 0f;
         }
 
         public void SwitchSkill()
         {
+            if (IsSkillUIActivated == false)
+            {
+                ToggleSkillUI(true);
+                StartCoroutine(C_CheckUIActivatedTime());
+                return;
+            }
+
             if (_isRotating == true)
                 return;
 
             StartCoroutine(C_SwitchSkill());
+            _uiActivatedTime = 0f;
         }
 
         private IEnumerator C_SwitchSkill()
@@ -129,6 +159,11 @@ namespace FoxHill.Player.Skill
         /// </summary>
         public void CastSkill()
         {
+            if (IsSkillUIActivated == false)
+            {
+                return;
+            }
+
             if (_skills[_currentSkillIndex].Cooldown > 0f)
             {
                 return;
@@ -145,6 +180,7 @@ namespace FoxHill.Player.Skill
             castedSkillGO.GetComponent<ISkill>().Cast(parameters);
             _skillUI.Cast();
 
+            _uiActivatedTime = 0f;
             StartCooldown(_skills[_currentSkillIndex]);
         }
 
