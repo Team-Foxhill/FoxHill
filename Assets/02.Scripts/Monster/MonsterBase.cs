@@ -15,6 +15,7 @@ namespace FoxHill.Monster
         public float Defense { get; private set; }
 
 
+        public event Action OnDead;
         protected int _monsterNumber;
         protected MonsterForm _monsterForm;
 
@@ -50,6 +51,9 @@ namespace FoxHill.Monster
         /// <summary>
         /// 죽음을 처리하는 메서드.
         /// </summary>
-        public abstract void Dead();
+        public virtual void Dead()
+        {
+            OnDead?.Invoke();
+        }
     }
 }

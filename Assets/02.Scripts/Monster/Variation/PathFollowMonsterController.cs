@@ -3,10 +3,11 @@ using System.Collections;
 using UnityEngine;
 using ProjectDawn.Navigation.Hybrid;
 using DebugFox = FoxHill.Core.DebugFox;
-using UnityEngine.Pool;
+using IPoolable = FoxHill.Core.IPoolable;
 using FoxHill.Core.Test;
 using FoxHill.Core;
 using System;
+using Unity.VisualScripting;
 
 
 namespace FoxHill.Monster
@@ -120,6 +121,7 @@ namespace FoxHill.Monster
 
         public override void Dead()
         {
+            base.Dead();
             _loop = false;
             StartCoroutine(PerformDie());
         }

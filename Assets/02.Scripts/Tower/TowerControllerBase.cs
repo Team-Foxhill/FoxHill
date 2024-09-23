@@ -3,13 +3,14 @@ using FoxHill.Core.Stat;
 using FoxHill.Core.Damage;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 namespace FoxHill.Tower
 {
     public abstract class TowerControllerBase : MonoBehaviour, IStat, IDamageable
     {
         public Color gizmoColor = new Color(1, 0, 0, 0.2f);
-
+        public event Action OnDead;
         public float MaxHp { get; private set; }
         public float CurrentHp { get; protected set; }
         public float AttackSpeed { get; private set; }
@@ -72,6 +73,7 @@ namespace FoxHill.Tower
         /// </summary>
         public void Dead()
         {
+            OnDead.Invoke();
             gameObject.SetActive(false);
         }
 
