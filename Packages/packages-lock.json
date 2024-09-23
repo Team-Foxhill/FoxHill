@@ -1,26 +1,5 @@
 {
   "dependencies": {
-    "com.projectdawn.navigation": {
-      "version": "file:com.projectdawn.navigation",
-      "depth": 0,
-      "source": "embedded",
-      "dependencies": {
-        "com.unity.ai.navigation": "1.1.4",
-        "com.unity.entities": "1.0.14",
-        "com.unity.modules.ui": "1.0.0"
-      }
-    },
-    "com.projectdawn.navigation.crowds": {
-      "version": "file:com.projectdawn.navigation.crowds",
-      "depth": 0,
-      "source": "embedded",
-      "dependencies": {
-        "com.projectdawn.navigation": "3.5.0",
-        "com.unity.ai.navigation": "1.1.4",
-        "com.unity.entities": "1.0.14",
-        "com.unity.modules.ui": "1.0.0"
-      }
-    },
     "com.unity.2d.animation": {
       "version": "9.1.1",
       "depth": 1,
@@ -115,18 +94,9 @@
       },
       "url": "https://packages.unity.com"
     },
-    "com.unity.ai.navigation": {
-      "version": "1.1.5",
-      "depth": 1,
-      "source": "registry",
-      "dependencies": {
-        "com.unity.modules.ai": "1.0.0"
-      },
-      "url": "https://packages.unity.com"
-    },
     "com.unity.burst": {
       "version": "1.8.17",
-      "depth": 2,
+      "depth": 3,
       "source": "registry",
       "dependencies": {
         "com.unity.mathematics": "1.2.1",
@@ -221,6 +191,15 @@
       "source": "registry",
       "dependencies": {
         "com.unity.test-framework": "1.1.9"
+      },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.inputsystem": {
+      "version": "1.7.0",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.modules.uielements": "1.0.0"
       },
       "url": "https://packages.unity.com"
     },

@@ -1,5 +1,6 @@
 using FoxHill.Monster;
 using FoxHill.Tower;
+using FoxHill.Quest;
 using UnityEngine;
 
 namespace FoxHill.Core
@@ -13,6 +14,7 @@ namespace FoxHill.Core
 
         [SerializeField] private MonsterData _monsterSheet; // Monster 명세가 담긴 엑셀 시트를 ExcelImporter로 import한 ScriptableObject.
         [SerializeField] private TowerData _towerSheet; // Tower 명세가 담긴 엑셀 시트를 ExcelImporter로 import한 ScriptableObject.
+        [SerializeField] private QuestSheet _questSheet; // Quest 명세가 담긴 엑셀 시트를 ExcelImporter로 import한 ScriptableObject
 
         private void Awake()
         {
@@ -28,6 +30,7 @@ namespace FoxHill.Core
 
             MonsterDataManager.InitializeMonsterForms(_monsterSheet);
             TowerDataManager.InitializeMonsterForms(_towerSheet);
+            QuestManager.InitializeQuestForms(_questSheet);
         }
     }
 }
