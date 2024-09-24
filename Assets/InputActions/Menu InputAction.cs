@@ -156,6 +156,140 @@ public partial class @MenuInputAction: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""TitleSceneSettings"",
+            ""id"": ""e55805e6-bbb5-4fac-a027-213b1bb467da"",
+            ""actions"": [
+                {
+                    ""name"": ""SwitchMenu"",
+                    ""type"": ""Value"",
+                    ""id"": ""688f77f2-8a9d-4aa9-9a16-9427553cee0f"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Select"",
+                    ""type"": ""Button"",
+                    ""id"": ""1e6fa679-a83f-4de5-b113-999d5b3d2b46"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Deselect"",
+                    ""type"": ""Button"",
+                    ""id"": ""bb5db2d6-4396-4974-8b03-e3dcdf9f97a7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""81349f86-be3f-433b-a713-fd3600d59222"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchMenu"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""8f63a156-af57-4de9-866b-7bc3ff2cee9c"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""SwitchMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""a0d47b7d-d747-4fe3-9155-ca881fea7c8a"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""SwitchMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""dd5e6d68-7375-438e-b103-1d90bd3e6a69"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""SwitchMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""67f8ebf6-d721-4154-8f4a-caba67c249be"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""SwitchMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bb0c4e8f-a3d3-4202-9eeb-a27a66c90f39"",
+                    ""path"": ""<Keyboard>/z"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dfa5c92b-1733-4fb2-ad5b-0b6eeec2030b"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fb49a10e-94e1-4459-8656-59336471f24c"",
+                    ""path"": ""<Keyboard>/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Deselect"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""df896e44-c2be-478d-9830-82c446a4d781"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Deselect"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -165,6 +299,11 @@ public partial class @MenuInputAction: IInputActionCollection2, IDisposable
         m_TitleScene_SwitchMenu = m_TitleScene.FindAction("SwitchMenu", throwIfNotFound: true);
         m_TitleScene_Select = m_TitleScene.FindAction("Select", throwIfNotFound: true);
         m_TitleScene_Deselect = m_TitleScene.FindAction("Deselect", throwIfNotFound: true);
+        // TitleSceneSettings
+        m_TitleSceneSettings = asset.FindActionMap("TitleSceneSettings", throwIfNotFound: true);
+        m_TitleSceneSettings_SwitchMenu = m_TitleSceneSettings.FindAction("SwitchMenu", throwIfNotFound: true);
+        m_TitleSceneSettings_Select = m_TitleSceneSettings.FindAction("Select", throwIfNotFound: true);
+        m_TitleSceneSettings_Deselect = m_TitleSceneSettings.FindAction("Deselect", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -284,7 +423,75 @@ public partial class @MenuInputAction: IInputActionCollection2, IDisposable
         }
     }
     public TitleSceneActions @TitleScene => new TitleSceneActions(this);
+
+    // TitleSceneSettings
+    private readonly InputActionMap m_TitleSceneSettings;
+    private List<ITitleSceneSettingsActions> m_TitleSceneSettingsActionsCallbackInterfaces = new List<ITitleSceneSettingsActions>();
+    private readonly InputAction m_TitleSceneSettings_SwitchMenu;
+    private readonly InputAction m_TitleSceneSettings_Select;
+    private readonly InputAction m_TitleSceneSettings_Deselect;
+    public struct TitleSceneSettingsActions
+    {
+        private @MenuInputAction m_Wrapper;
+        public TitleSceneSettingsActions(@MenuInputAction wrapper) { m_Wrapper = wrapper; }
+        public InputAction @SwitchMenu => m_Wrapper.m_TitleSceneSettings_SwitchMenu;
+        public InputAction @Select => m_Wrapper.m_TitleSceneSettings_Select;
+        public InputAction @Deselect => m_Wrapper.m_TitleSceneSettings_Deselect;
+        public InputActionMap Get() { return m_Wrapper.m_TitleSceneSettings; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(TitleSceneSettingsActions set) { return set.Get(); }
+        public void AddCallbacks(ITitleSceneSettingsActions instance)
+        {
+            if (instance == null || m_Wrapper.m_TitleSceneSettingsActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_TitleSceneSettingsActionsCallbackInterfaces.Add(instance);
+            @SwitchMenu.started += instance.OnSwitchMenu;
+            @SwitchMenu.performed += instance.OnSwitchMenu;
+            @SwitchMenu.canceled += instance.OnSwitchMenu;
+            @Select.started += instance.OnSelect;
+            @Select.performed += instance.OnSelect;
+            @Select.canceled += instance.OnSelect;
+            @Deselect.started += instance.OnDeselect;
+            @Deselect.performed += instance.OnDeselect;
+            @Deselect.canceled += instance.OnDeselect;
+        }
+
+        private void UnregisterCallbacks(ITitleSceneSettingsActions instance)
+        {
+            @SwitchMenu.started -= instance.OnSwitchMenu;
+            @SwitchMenu.performed -= instance.OnSwitchMenu;
+            @SwitchMenu.canceled -= instance.OnSwitchMenu;
+            @Select.started -= instance.OnSelect;
+            @Select.performed -= instance.OnSelect;
+            @Select.canceled -= instance.OnSelect;
+            @Deselect.started -= instance.OnDeselect;
+            @Deselect.performed -= instance.OnDeselect;
+            @Deselect.canceled -= instance.OnDeselect;
+        }
+
+        public void RemoveCallbacks(ITitleSceneSettingsActions instance)
+        {
+            if (m_Wrapper.m_TitleSceneSettingsActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(ITitleSceneSettingsActions instance)
+        {
+            foreach (var item in m_Wrapper.m_TitleSceneSettingsActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_TitleSceneSettingsActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public TitleSceneSettingsActions @TitleSceneSettings => new TitleSceneSettingsActions(this);
     public interface ITitleSceneActions
+    {
+        void OnSwitchMenu(InputAction.CallbackContext context);
+        void OnSelect(InputAction.CallbackContext context);
+        void OnDeselect(InputAction.CallbackContext context);
+    }
+    public interface ITitleSceneSettingsActions
     {
         void OnSwitchMenu(InputAction.CallbackContext context);
         void OnSelect(InputAction.CallbackContext context);

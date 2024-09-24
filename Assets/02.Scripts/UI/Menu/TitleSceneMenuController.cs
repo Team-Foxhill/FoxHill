@@ -33,7 +33,6 @@ namespace FoxHill.UI.Menu
         }
 
         [SerializeField] private GameSettingsManager _settingsManager;
-        [SerializeField] private Animator _characterAnimator;
 
         private enum Menu
         {
@@ -58,7 +57,7 @@ namespace FoxHill.UI.Menu
                 _settingsManager = FindFirstObjectByType<GameSettingsManager>();
             }
             _settingsManager.InputAction = _inputAction;
-            _inputAction.TitleScene.AddCallbacks(_settingsManager);
+            _inputAction.TitleSceneSettings.AddCallbacks(_settingsManager);
 
             _startButton.Initialize();
             _settingsButton.Initialize();
