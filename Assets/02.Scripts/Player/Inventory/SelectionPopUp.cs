@@ -19,7 +19,7 @@ namespace FoxHill.Player.Inventory
         private int _currentIndex = 0;
 
         [SerializeField] private Image[] _optionImages = new Image[2];
-        private readonly Color SELECTED_COLOR = new Color(255f / 255f, 150f / 255f, 150f / 255f);
+        private readonly Color COLOR_SELECTED = new Color(255f / 255f, 150f / 255f, 150f / 255f);
 
         private void Awake()
         {
@@ -87,7 +87,7 @@ namespace FoxHill.Player.Inventory
         {
             _optionImages[index].GetComponent<Image>().color
                 = (toggle == true)
-                ? SELECTED_COLOR
+                ? COLOR_SELECTED
                 : Color.white;
         }
 

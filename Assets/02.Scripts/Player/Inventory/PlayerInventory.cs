@@ -79,6 +79,7 @@ namespace FoxHill.Player.Inventory
             else // 인벤토리 닫을 때 수행할 동작
             {
                 ToggleSlot(_currentSlot, false);
+                _popUp.Toggle(false);
             }
         }
 
@@ -311,6 +312,11 @@ namespace FoxHill.Player.Inventory
             slot.Amount--;
 
             UpdateSlotUI(slot);
+
+            if (slot.Amount <= 0)
+            {
+                _itemDescription.ClearDescription();
+            }
         }
     }
 }

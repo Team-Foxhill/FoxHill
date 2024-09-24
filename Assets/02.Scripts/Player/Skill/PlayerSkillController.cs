@@ -93,6 +93,8 @@ namespace FoxHill.Player.Skill
             _playerManager.OnSwitchSkill?.AddListener(SwitchSkill);
             _playerManager.OnCastSkill?.AddListener(CastSkill);
             OnCooldownComplete?.AddListener(_skillUI.EnableIcon);
+
+            _skillUI.ToggleUI(false);
         }
 
         /// <summary>

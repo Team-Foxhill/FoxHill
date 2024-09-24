@@ -4,6 +4,7 @@ using FoxHill.Core.Pause;
 using FoxHill.Player.Data;
 using FoxHill.Player.Inventory;
 using FoxHill.Player.Quest;
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -26,6 +27,7 @@ namespace FoxHill.Player
         [HideInInspector] public UnityEvent OnSelectInventory;
         [HideInInspector] public UnityEvent OnDeselectInventory;
 
+        public event Action OnDead;
         public bool IsInventoryOpen => _isInventoryOpen;
         public bool IsPaused => _isPaused;
         public bool IsDead => _isDead;
@@ -51,6 +53,7 @@ namespace FoxHill.Player
         [SerializeField] private Vector2 _direction = Vector2.right;
 
         private bool _isInventoryOpen = false;
+
 
         protected override void Awake()
         {

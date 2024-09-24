@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 
-namespace FoxHill.Item
+namespace FoxHill.Items
 {
     /// <summary>
     /// Excel Importer 사용 위해 자료형 변경한 클래스.

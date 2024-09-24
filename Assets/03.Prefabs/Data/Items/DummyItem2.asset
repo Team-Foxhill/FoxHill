@@ -16,7 +16,7 @@ MonoBehaviour:
   ItemName: "\uCE60\uC9C0\uB3C4"
   ItemString: "\uC54C \uC218 \uC5C6\uB294 \uD6A8\uACFC"
   ItemType: 2
-  Perform: 1
+  Perform: 2
   Amount: 0
   LastingTime: 0
   Range: 0
