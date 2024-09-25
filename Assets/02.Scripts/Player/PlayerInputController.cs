@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 namespace FoxHill.Player
 {
-    public class PlayerInputController : MonoBehaviour, PlayerInputAction.IPlayerActionActions, PlayerInputAction.IInventoryActionActions
+    public class PlayerInputController : MonoBehaviour, PlayerInputAction.IPlayerActionActions, PlayerInputAction.IInventoryActionActions, PlayerInputAction.ISpawnActionActions
     {
         [SerializeField] private PlayerManager _playerManager;
 
@@ -108,6 +108,30 @@ namespace FoxHill.Player
                 _playerManager.OnDeselectInventory?.Invoke();
             }
         }
+
+        public void OnMovePrefab(InputAction.CallbackContext context)
+        {
+            if (context.started == true)
+            {
+                _playerManager.OnMovePrefabSpawn?.Invoke(context.ReadValue<Vector2>());
+            }
+        }
+        public void OnConfirm(InputAction.CallbackContext context)
+        {
+            if (context.started == true)
+            {
+                _playerManager.OnConfirmSpawn?.Invoke();
+            }
+        }
+        public void OnCancel(InputAction.CallbackContext context)
+        {
+            if (context.started == true)
+            {
+                ToggleSpawn(false);
+                _playerManager.OnCancelSpawn?.Invoke();
+            }
+        }
+
         #endregion
 
 
@@ -152,6 +176,21 @@ namespace FoxHill.Player
                 _playerManager.OnCloseInventory?.Invoke();
                 _inputAction.InventoryAction.Disable();
                 _inputAction.PlayerAction.Enable();
+            }
+        }
+
+        private void ToggleSpawn(bool toggle)
+        {
+            if (toggle == false && _playerManager.IsInventoryOpen == true)
+            {
+                _inputAction.SpawnAction.Disable();
+                _inputAction.InventoryAction.Enable();
+            }
+
+            else if (toggle == true && _playerManager.IsInventoryOpen == true)
+            {
+                _inputAction.InventoryAction.Disable();
+                _inputAction.SpawnAction.Enable();
             }
         }
     }

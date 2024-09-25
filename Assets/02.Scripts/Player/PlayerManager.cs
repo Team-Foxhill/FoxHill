@@ -4,6 +4,7 @@ using FoxHill.Core.Pause;
 using FoxHill.Player.Data;
 using FoxHill.Player.Inventory;
 using FoxHill.Player.Quest;
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -15,6 +16,7 @@ namespace FoxHill.Player
     [RequireComponent(typeof(CharacterController))]
     public class PlayerManager : CharacterControllerBase, IDamageable
     {
+        public event Action OnDead;
         [HideInInspector] public UnityEvent<float> OnPlayerDamaged;
         [HideInInspector] public UnityEvent OnPlayerDead;
         [HideInInspector] public UnityEvent OnSwitchSkill;
@@ -25,10 +27,15 @@ namespace FoxHill.Player
         [HideInInspector] public UnityEvent<Vector2> OnSwitchSlotInventory;
         [HideInInspector] public UnityEvent OnSelectInventory;
         [HideInInspector] public UnityEvent OnDeselectInventory;
+        [HideInInspector] public UnityEvent OnEnterSpawn;
+        [HideInInspector] public UnityEvent<Vector2> OnMovePrefabSpawn;
+        [HideInInspector] public UnityEvent OnConfirmSpawn;
+        [HideInInspector] public UnityEvent OnCancelSpawn;
 
         public bool IsInventoryOpen => _isInventoryOpen;
         public bool IsPaused => _isPaused;
         public bool IsDead => _isDead;
+        public bool IsSpawnOpen => _isSpawnOpen;
 
         public Vector2 Direction
         {
@@ -46,11 +53,13 @@ namespace FoxHill.Player
         public CharacterController CharacterController { get; private set; }
         public PlayerQuestManager Quest { get; private set; }
         public PlayerInventory Inventory { get; private set; }
+        public PrefabSpawner Spawner { get; private set; }
 
         [SerializeField] private PlayerData _data;
         [SerializeField] private Vector2 _direction = Vector2.right;
 
         private bool _isInventoryOpen = false;
+        private bool _isSpawnOpen = false;
 
         protected override void Awake()
         {
@@ -65,6 +74,8 @@ namespace FoxHill.Player
 
             if (Inventory == null)
                 Inventory = FindFirstObjectByType<PlayerInventory>();
+            if (Spawner == null)
+                Spawner = FindFirstObjectByType<PrefabSpawner>();
         }
 
         private void Start()
@@ -96,6 +107,24 @@ namespace FoxHill.Player
             OnDeselectInventory?.AddListener(() =>
             {
                 Inventory.DeselectSlot();
+            });
+            OnOpenInventory?.AddListener(() =>
+            {
+                _isSpawnOpen = true;
+                Spawner.ToggleSprite(true);
+            });
+            OnCancelSpawn?.AddListener(() =>
+            {
+                _isSpawnOpen = false;
+                Spawner.ToggleSprite(false);
+            });
+            OnConfirmSpawn?.AddListener(() =>
+            {
+                Spawner.ConfirmSpawn();
+            });
+            OnMovePrefabSpawn?.AddListener((input) =>
+            {
+                Spawner.OnMovePrefabSpawn(input);
             });
         }
 

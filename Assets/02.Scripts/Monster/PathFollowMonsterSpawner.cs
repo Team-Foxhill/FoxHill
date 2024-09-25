@@ -1,4 +1,6 @@
-﻿using System;
+using FoxHill.Core.Pause;
+using FoxHill.Monster;
+using System;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -7,7 +9,7 @@ using Random = UnityEngine.Random;
 
 namespace FoxHill.Core
 {
-    public class PathFollowMonsterSpawner : MonoBehaviour
+    public class PathFollowMonsterSpawner : MonoBehaviour, IPausable
     {
         [SerializeField] private FoxHill.Core.Test.ObjectPoolManager _testObjectPoolManager;
         //[SerializeField] private FoxHill.Tester.ObjectPoolManager _objectPoolManager; // 현재 사용하지 않는 클래스.
@@ -19,6 +21,7 @@ namespace FoxHill.Core
         private WaitForSecondsRealtime _time;
         private int _randomValue;
         private Vector2 _newPosition;
+        private bool _isPaused;
 
 
         public void GetMonster(float getCount, float interval, float roundTime)
@@ -31,14 +34,21 @@ namespace FoxHill.Core
             _time = new WaitForSecondsRealtime(interval);
 
 
-                for (int i = 0; getCount > i; i++)
+            for (int i = 0; getCount > i; i++)
+            {
+                if (_isPaused == true)
                 {
+                    yield return new WaitUntil(() => _isPaused == false);
+                }
+
                 if (_testObjectPoolManager != null)
                 {
                     GameObject newOne = _testObjectPoolManager.Get();
                     if (newOne != null)
                     {
                         newOne.transform.position = GetSpawnPosition();
+                        IPausable newPausable = newOne.GetComponent<MonsterBase>();
+                        PauseManager.Register(newPausable);
                         newOne.SetActive(true);
                     }
 
@@ -52,8 +62,8 @@ namespace FoxHill.Core
                 //        newOne.SetActive(true);
                 //    }
                 //}
-                    yield return _time;
-                }
+                yield return _time;
+            }
             _time.Reset();
 
             yield break;
@@ -62,6 +72,7 @@ namespace FoxHill.Core
 
         private void Start()
         {
+            PauseManager.Register(this);
             StartCoroutine(GetMonsterPeriodically(_getCount, _spawnInterval, _roundTime));
         }
 
@@ -83,5 +94,14 @@ namespace FoxHill.Core
             return new Vector2(_spawnPosition.transform.position.x + Random.Range(-_range, _range), _spawnPosition.transform.position.y + Random.Range(-_range, _range));
         }
 
+        public void Pause()
+        {
+            _isPaused = true;
+        }
+
+        public void Resume()
+        {
+            _isPaused = false;
+        }
     }
 }

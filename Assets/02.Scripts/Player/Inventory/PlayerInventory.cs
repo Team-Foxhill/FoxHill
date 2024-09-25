@@ -13,9 +13,9 @@ namespace FoxHill.Player.Inventory
     /// </summary>
     public class PlayerInventory : MonoBehaviour
     {
-        [HideInInspector] public UnityEvent<ItemData> OnUseRestorativeItem;
-        [HideInInspector] public UnityEvent<ItemData> OnUseConstructiveItem;
-        [HideInInspector] public UnityEvent<ItemData> OnUseQuestItem;
+        [HideInInspector] public UnityEvent<Items.ItemData> OnUseRestorativeItem;
+        [HideInInspector] public UnityEvent<Items.ItemData> OnUseConstructiveItem;
+        [HideInInspector] public UnityEvent<Items.ItemData> OnUseQuestItem;
 
         public Mode CurrentMode => _currentMode;
         public enum Mode

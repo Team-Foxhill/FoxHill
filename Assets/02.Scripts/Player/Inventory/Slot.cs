@@ -7,7 +7,7 @@ namespace FoxHill.Player.Inventory
 { 
     public class Slot : MonoBehaviour
     {
-        public ItemData ItemInfo;
+        public Items.ItemData ItemInfo;
         public Image BackgroundImage;
         public Image ItemImage;
         public TMP_Text AmountText;

@@ -326,6 +326,118 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""SpawnAction"",
+            ""id"": ""89aa6920-2bbd-434a-8147-8d69dd0be8c2"",
+            ""actions"": [
+                {
+                    ""name"": ""MovePrefab"",
+                    ""type"": ""Value"",
+                    ""id"": ""8b7dd646-5125-4b55-9918-1dff446df6e2"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""ConfirmSpawn"",
+                    ""type"": ""Button"",
+                    ""id"": ""b819cf86-d358-43a6-9dd0-da37b6738d11"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CancelSpawn"",
+                    ""type"": ""Button"",
+                    ""id"": ""3ddb4646-819e-4e7d-8730-6c59bffc6592"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""7b9dd79f-983c-4091-a248-88b5db041396"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MovePrefab"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""ce166e49-a3fc-46bf-8ea5-43982ebe11a0"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""MovePrefab"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""d6dfeeb8-096e-4a34-a60e-5a13313f5476"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""MovePrefab"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""f0d3167c-a6e8-4f90-8f33-c84355d811db"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""MovePrefab"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""8f78accc-e9dd-4a33-9ec1-4834503ec15d"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""MovePrefab"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""79183c08-4b7c-4886-8b6b-989580023971"",
+                    ""path"": ""<Keyboard>/z"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ConfirmSpawn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""13909e3a-002b-4200-9e64-431fcb64d127"",
+                    ""path"": ""<Keyboard>/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CancelSpawn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -361,6 +473,11 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         m_InventoryAction_Close = m_InventoryAction.FindAction("Close", throwIfNotFound: true);
         m_InventoryAction_Select = m_InventoryAction.FindAction("Select", throwIfNotFound: true);
         m_InventoryAction_Deselect = m_InventoryAction.FindAction("Deselect", throwIfNotFound: true);
+        // SpawnAction
+        m_SpawnAction = asset.FindActionMap("SpawnAction", throwIfNotFound: true);
+        m_SpawnAction_MovePrefab = m_SpawnAction.FindAction("MovePrefab", throwIfNotFound: true);
+        m_SpawnAction_ConfirmSpawn = m_SpawnAction.FindAction("ConfirmSpawn", throwIfNotFound: true);
+        m_SpawnAction_CancelSpawn = m_SpawnAction.FindAction("CancelSpawn", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -574,6 +691,68 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         }
     }
     public InventoryActionActions @InventoryAction => new InventoryActionActions(this);
+
+    // SpawnAction
+    private readonly InputActionMap m_SpawnAction;
+    private List<ISpawnActionActions> m_SpawnActionActionsCallbackInterfaces = new List<ISpawnActionActions>();
+    private readonly InputAction m_SpawnAction_MovePrefab;
+    private readonly InputAction m_SpawnAction_ConfirmSpawn;
+    private readonly InputAction m_SpawnAction_CancelSpawn;
+    public struct SpawnActionActions
+    {
+        private @PlayerInputAction m_Wrapper;
+        public SpawnActionActions(@PlayerInputAction wrapper) { m_Wrapper = wrapper; }
+        public InputAction @MovePrefab => m_Wrapper.m_SpawnAction_MovePrefab;
+        public InputAction @ConfirmSpawn => m_Wrapper.m_SpawnAction_ConfirmSpawn;
+        public InputAction @CancelSpawn => m_Wrapper.m_SpawnAction_CancelSpawn;
+        public InputActionMap Get() { return m_Wrapper.m_SpawnAction; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(SpawnActionActions set) { return set.Get(); }
+        public void AddCallbacks(ISpawnActionActions instance)
+        {
+            if (instance == null || m_Wrapper.m_SpawnActionActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_SpawnActionActionsCallbackInterfaces.Add(instance);
+            @MovePrefab.started += instance.OnMovePrefab;
+            @MovePrefab.performed += instance.OnMovePrefab;
+            @MovePrefab.canceled += instance.OnMovePrefab;
+            @ConfirmSpawn.started += instance.OnConfirm;
+            @ConfirmSpawn.performed += instance.OnConfirm;
+            @ConfirmSpawn.canceled += instance.OnConfirm;
+            @CancelSpawn.started += instance.OnCancel;
+            @CancelSpawn.performed += instance.OnCancel;
+            @CancelSpawn.canceled += instance.OnCancel;
+        }
+
+        private void UnregisterCallbacks(ISpawnActionActions instance)
+        {
+            @MovePrefab.started -= instance.OnMovePrefab;
+            @MovePrefab.performed -= instance.OnMovePrefab;
+            @MovePrefab.canceled -= instance.OnMovePrefab;
+            @ConfirmSpawn.started -= instance.OnConfirm;
+            @ConfirmSpawn.performed -= instance.OnConfirm;
+            @ConfirmSpawn.canceled -= instance.OnConfirm;
+            @CancelSpawn.started -= instance.OnCancel;
+            @CancelSpawn.performed -= instance.OnCancel;
+            @CancelSpawn.canceled -= instance.OnCancel;
+        }
+
+        public void RemoveCallbacks(ISpawnActionActions instance)
+        {
+            if (m_Wrapper.m_SpawnActionActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(ISpawnActionActions instance)
+        {
+            foreach (var item in m_Wrapper.m_SpawnActionActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_SpawnActionActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public SpawnActionActions @SpawnAction => new SpawnActionActions(this);
     private int m_PCSchemeIndex = -1;
     public InputControlScheme PCScheme
     {
@@ -598,5 +777,11 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         void OnClose(InputAction.CallbackContext context);
         void OnSelect(InputAction.CallbackContext context);
         void OnDeselect(InputAction.CallbackContext context);
+    }
+    public interface ISpawnActionActions
+    {
+        void OnMovePrefab(InputAction.CallbackContext context);
+        void OnConfirm(InputAction.CallbackContext context);
+        void OnCancel(InputAction.CallbackContext context);
     }
 }

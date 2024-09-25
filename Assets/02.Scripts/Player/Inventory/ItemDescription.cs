@@ -19,7 +19,7 @@ namespace FoxHill.Player.Inventory
             ClearDescription();
         }
 
-        public void UpdateDescription(ItemData item)
+        public void UpdateDescription(Items.ItemData item)
         {
             _itemNameText.text = item.ItemName;
             _itemStringText.text = item.ItemString;

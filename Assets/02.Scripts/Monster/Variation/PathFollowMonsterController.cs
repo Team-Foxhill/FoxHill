@@ -1,4 +1,4 @@
-﻿using ProjectDawn.Navigation;
+using ProjectDawn.Navigation;
 using System.Collections;
 using UnityEngine;
 using ProjectDawn.Navigation.Hybrid;
@@ -93,6 +93,12 @@ namespace FoxHill.Monster
                     {
                         yield return new WaitUntil(() => _spriteRenderer.enabled == true);
                     }
+                    if (_isPaused == true)
+                    {
+                        _agentAuthoring.enabled = false;
+                        yield return new WaitUntil(() => _isPaused == false);
+                        _agentAuthoring.enabled = true;
+                    }
                     if (spriteSet != _deadSpriteSet && _loop == false) break;
                     _spriteRenderer.sprite = spriteSet[i];
                     yield return _animationInterval;
@@ -111,6 +117,12 @@ namespace FoxHill.Monster
 
             while (gameObject.activeSelf)
             {
+                if (_isPaused == true)
+                {
+                    _agentAuthoring.enabled = false;
+                    yield return new WaitUntil(() => _isPaused == false);
+                    _agentAuthoring.enabled = true;
+                }
                 _agentBody = _agentAuthoring.EntityBody;
                 _xVelocity = _agentBody.Velocity.x;
                 transform.localScale = _agentBody.Velocity.x > 0f ? Vector3.one : _left;

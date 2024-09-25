@@ -1,12 +1,13 @@
-﻿using UnityEngine;
+using UnityEngine;
 using FoxHill.Core.Stat;
 using FoxHill.Core.Damage;
 using IPoolable = FoxHill.Core.IPoolable;
 using System;
+using FoxHill.Core.Pause;
 
 namespace FoxHill.Monster
 {
-    public abstract class MonsterBase : MonoBehaviour, IStat, IDamageable
+    public abstract class MonsterBase : MonoBehaviour, IStat, IDamageable, IPausable
     {
         public float MaxHp { get; private set; }
         public float CurrentHp { get; protected set; }
@@ -18,6 +19,7 @@ namespace FoxHill.Monster
         public event Action OnDead;
         protected int _monsterNumber;
         protected MonsterForm _monsterForm;
+        protected bool _isPaused = false;
 
 
         /// <summary>
@@ -30,11 +32,6 @@ namespace FoxHill.Monster
             MoveSpeed = _monsterForm.MoveSpeed;
             Power = _monsterForm.Power;
             Defense = _monsterForm.Defense;
-        }
-
-        protected virtual void PerformMove()
-        {
-
         }
 
         /// <summary>
@@ -54,6 +51,16 @@ namespace FoxHill.Monster
         public virtual void Dead()
         {
             OnDead?.Invoke();
+        }
+
+        public void Pause()
+        {
+            _isPaused = true;
+        }
+
+        public void Resume()
+        {
+            _isPaused = false;
         }
     }
 }

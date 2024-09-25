@@ -19,7 +19,7 @@ namespace FoxHill.Player.Inventory
         {
             if (collision.gameObject.layer == LayerRepository.LAYER_ITEM)
             {
-                var item = collision.gameObject.GetComponent<Item>();
+                var item = collision.gameObject.GetComponent<Items.Item>();
                 if (_inventory.PushItem(item) == true)
                 {
                     item.Obtain(transform);

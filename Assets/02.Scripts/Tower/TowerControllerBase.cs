@@ -1,13 +1,14 @@
-﻿using UnityEngine;
+using UnityEngine;
 using FoxHill.Core.Stat;
 using FoxHill.Core.Damage;
 using System.Collections;
 using System.Collections.Generic;
 using System;
+using FoxHill.Core.Pause;
 
 namespace FoxHill.Tower
 {
-    public abstract class TowerControllerBase : MonoBehaviour, IStat, IDamageable
+    public abstract class TowerControllerBase : MonoBehaviour, IStat, IDamageable, IPausable
     {
         public Color gizmoColor = new Color(1, 0, 0, 0.2f);
         public event Action OnDead;
@@ -28,6 +29,7 @@ namespace FoxHill.Tower
         protected HashSet<Collider2D> objectsInTrigger = new HashSet<Collider2D>();
         protected Collider2D _attackTarget;
         protected IDamageable _damageable;
+        protected bool _isPaused = false;
 
 
         protected virtual void Start()
@@ -126,5 +128,16 @@ namespace FoxHill.Tower
         /// </summary>
         /// <returns></returns>
         protected abstract IEnumerator PerformTowerFunction();
+
+        public void Pause()
+        {
+            _isPaused = true;
+
+        }
+
+        public void Resume()
+        {
+            _isPaused = false;
+        }
     }
 }

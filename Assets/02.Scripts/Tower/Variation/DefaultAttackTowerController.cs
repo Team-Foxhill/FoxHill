@@ -1,10 +1,11 @@
-﻿using FoxHill.Core.Damage;
+using FoxHill.Core.Damage;
 using FoxHill.Core;
 using System.Collections;
 using UnityEngine;
 using System.Linq;
 using Unity.VisualScripting;
 using IPoolable = FoxHill.Core.IPoolable;
+using ProjectDawn.Navigation.Hybrid;
 
 namespace FoxHill.Tower
 {
@@ -26,6 +27,10 @@ namespace FoxHill.Tower
         {
             while (true)
             {
+                if (_isPaused == true)
+                {
+                    yield return new WaitUntil(() => _isPaused == false);
+                }
                 if (objectsInTrigger.Count == 0)
                 {
                     _bulletRenderer.enabled = false;
@@ -65,6 +70,10 @@ namespace FoxHill.Tower
             float elapsedTime = 0f;
             while (elapsedTime < _attackInterval)
             {
+                if (_isPaused == true)
+                {
+                    yield return new WaitUntil(() => _isPaused == false);
+                }
                 // 선형 보간을 사용하여 부드럽게 이동
                 Vector2 direction = ((Vector2)_attackTarget.transform.position - (Vector2)_bullet.transform.position).normalized;
                 float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;

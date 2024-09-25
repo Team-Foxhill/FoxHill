@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections.Generic;
 using Unity.Collections;
 using Unity.Jobs;
@@ -53,16 +53,16 @@ namespace FoxHill.Core.Test
 
         private void Awake()
         {
-            if (Instance == null)
-            {
-                Instance = this;
-                DontDestroyOnLoad(gameObject);
-            }
-            else
-            {
-                Destroy(gameObject);
-                return;
-            }
+            //if (Instance == null)
+            //{
+            //    Instance = this;
+            //    DontDestroyOnLoad(gameObject);
+            //}
+            //else
+            //{
+            //    Destroy(gameObject);
+            //    return;
+            //}
 
             _mainCamera = Camera.main;
             InitializePool();
