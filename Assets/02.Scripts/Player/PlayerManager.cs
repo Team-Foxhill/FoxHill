@@ -32,6 +32,7 @@ namespace FoxHill.Player
         [HideInInspector] public UnityEvent OnConfirmSpawn;
         [HideInInspector] public UnityEvent OnCancelSpawn;
 
+        public event Action OnDead;
         public bool IsInventoryOpen => _isInventoryOpen;
         public bool IsPaused => _isPaused;
         public bool IsDead => _isDead;
@@ -60,6 +61,7 @@ namespace FoxHill.Player
 
         private bool _isInventoryOpen = false;
         private bool _isSpawnOpen = false;
+
 
         protected override void Awake()
         {

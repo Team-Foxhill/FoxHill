@@ -16,6 +16,7 @@ namespace FoxHill.Player
                 _playerManager = GetComponentInParent<PlayerManager>();
 
             _inputAction = new PlayerInputAction();
+            
             _inputAction.PlayerAction.AddCallbacks(this);
             _inputAction.InventoryAction.AddCallbacks(this);
             _inputAction.PlayerAction.Enable();
@@ -34,6 +35,10 @@ namespace FoxHill.Player
             }
         }
 
+        private void OnDestroy()
+        {
+            _inputAction?.Dispose();
+        }
 
         #region InputAction Callback
         // PlayerAction

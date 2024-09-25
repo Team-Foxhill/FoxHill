@@ -23,7 +23,7 @@ namespace FoxHill.Player.Skill
         [SerializeField] private PlayerManager _playerManager;
         [SerializeField] private SkillUI _skillUI;
 
-        private readonly WaitForSeconds _switchingCooldownWait = new WaitForSeconds(COOLDOWN_SWITCH_SKILL);
+        private readonly WaitForSecondsRealtime _switchingCooldownWait = new WaitForSecondsRealtime(COOLDOWN_SWITCH_SKILL);
         private int _currentSkillIndex = 0;
         private bool _isRotating = false;
 
@@ -93,6 +93,8 @@ namespace FoxHill.Player.Skill
             _playerManager.OnSwitchSkill?.AddListener(SwitchSkill);
             _playerManager.OnCastSkill?.AddListener(CastSkill);
             OnCooldownComplete?.AddListener(_skillUI.EnableIcon);
+
+            _skillUI.ToggleUI(false);
         }
 
         /// <summary>

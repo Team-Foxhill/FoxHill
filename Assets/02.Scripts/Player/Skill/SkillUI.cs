@@ -8,7 +8,7 @@ namespace FoxHill.Player.Skill
     {
         #region Rotation
         private const float ROTATION_Z_AMOUNT = -90f;
-        private const float ROTATION_Z_SPEED = 3f;
+        private const float ROTATION_Z_SPEED = 5f;
         #endregion
 
 

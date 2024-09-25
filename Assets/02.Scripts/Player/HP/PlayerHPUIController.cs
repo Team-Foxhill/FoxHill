@@ -9,7 +9,7 @@ namespace FoxHill.Player.HP
     [RequireComponent(typeof(SpriteRenderer), typeof(Animator))]
     public class PlayerHPUIController : MonoBehaviour
     {
-        private readonly Color DAMAGED_COLOR = new Color(255f / 255f, 47f / 255f, 47f / 255f);
+        private readonly Color COLOR_DAMAGED = new Color(255f / 255f, 47f / 255f, 47f / 255f);
 
         private Animator _animator;
         private SpriteRenderer _spriteRenderer;
@@ -63,7 +63,7 @@ namespace FoxHill.Player.HP
 
         private IEnumerator C_ChangeColor()
         {
-            _spriteRenderer.color = DAMAGED_COLOR;
+            _spriteRenderer.color = COLOR_DAMAGED;
             yield return _colorChangeWait;
             _spriteRenderer.color = _initialColor;
         }

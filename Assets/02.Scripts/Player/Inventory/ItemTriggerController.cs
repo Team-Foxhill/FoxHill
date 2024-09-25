@@ -1,5 +1,4 @@
 using FoxHill.Core.Utils;
-using FoxHill.Items;
 using UnityEngine;
 
 namespace FoxHill.Player.Inventory
