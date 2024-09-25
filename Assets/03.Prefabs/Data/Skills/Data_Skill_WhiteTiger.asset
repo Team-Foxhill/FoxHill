@@ -15,3 +15,5 @@ MonoBehaviour:
   Type: 2
   Power: 20
   Cooldown: 10
+  Duration: 4
+  Speed: 0

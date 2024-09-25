@@ -24,7 +24,7 @@ namespace FoxHill.Player.Skill.Implementations
         {
             float elapsedTime = 0f;
 
-            while (elapsedTime < 10f)
+            while (elapsedTime < Stat.Duration)
             {
                 if (_isPaused == true)
                 {

@@ -341,7 +341,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""ConfirmSpawn"",
+                    ""name"": ""Confirm"",
                     ""type"": ""Button"",
                     ""id"": ""b819cf86-d358-43a6-9dd0-da37b6738d11"",
                     ""expectedControlType"": ""Button"",
@@ -350,7 +350,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""CancelSpawn"",
+                    ""name"": ""Cancel"",
                     ""type"": ""Button"",
                     ""id"": ""3ddb4646-819e-4e7d-8730-6c59bffc6592"",
                     ""expectedControlType"": ""Button"",
@@ -422,7 +422,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""ConfirmSpawn"",
+                    ""action"": ""Confirm"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -433,7 +433,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""CancelSpawn"",
+                    ""action"": ""Cancel"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -476,8 +476,8 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         // SpawnAction
         m_SpawnAction = asset.FindActionMap("SpawnAction", throwIfNotFound: true);
         m_SpawnAction_MovePrefab = m_SpawnAction.FindAction("MovePrefab", throwIfNotFound: true);
-        m_SpawnAction_ConfirmSpawn = m_SpawnAction.FindAction("ConfirmSpawn", throwIfNotFound: true);
-        m_SpawnAction_CancelSpawn = m_SpawnAction.FindAction("CancelSpawn", throwIfNotFound: true);
+        m_SpawnAction_Confirm = m_SpawnAction.FindAction("Confirm", throwIfNotFound: true);
+        m_SpawnAction_Cancel = m_SpawnAction.FindAction("Cancel", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -696,15 +696,15 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_SpawnAction;
     private List<ISpawnActionActions> m_SpawnActionActionsCallbackInterfaces = new List<ISpawnActionActions>();
     private readonly InputAction m_SpawnAction_MovePrefab;
-    private readonly InputAction m_SpawnAction_ConfirmSpawn;
-    private readonly InputAction m_SpawnAction_CancelSpawn;
+    private readonly InputAction m_SpawnAction_Confirm;
+    private readonly InputAction m_SpawnAction_Cancel;
     public struct SpawnActionActions
     {
         private @PlayerInputAction m_Wrapper;
         public SpawnActionActions(@PlayerInputAction wrapper) { m_Wrapper = wrapper; }
         public InputAction @MovePrefab => m_Wrapper.m_SpawnAction_MovePrefab;
-        public InputAction @ConfirmSpawn => m_Wrapper.m_SpawnAction_ConfirmSpawn;
-        public InputAction @CancelSpawn => m_Wrapper.m_SpawnAction_CancelSpawn;
+        public InputAction @Confirm => m_Wrapper.m_SpawnAction_Confirm;
+        public InputAction @Cancel => m_Wrapper.m_SpawnAction_Cancel;
         public InputActionMap Get() { return m_Wrapper.m_SpawnAction; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -717,12 +717,12 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @MovePrefab.started += instance.OnMovePrefab;
             @MovePrefab.performed += instance.OnMovePrefab;
             @MovePrefab.canceled += instance.OnMovePrefab;
-            @ConfirmSpawn.started += instance.OnConfirm;
-            @ConfirmSpawn.performed += instance.OnConfirm;
-            @ConfirmSpawn.canceled += instance.OnConfirm;
-            @CancelSpawn.started += instance.OnCancel;
-            @CancelSpawn.performed += instance.OnCancel;
-            @CancelSpawn.canceled += instance.OnCancel;
+            @Confirm.started += instance.OnConfirm;
+            @Confirm.performed += instance.OnConfirm;
+            @Confirm.canceled += instance.OnConfirm;
+            @Cancel.started += instance.OnCancel;
+            @Cancel.performed += instance.OnCancel;
+            @Cancel.canceled += instance.OnCancel;
         }
 
         private void UnregisterCallbacks(ISpawnActionActions instance)
@@ -730,12 +730,12 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @MovePrefab.started -= instance.OnMovePrefab;
             @MovePrefab.performed -= instance.OnMovePrefab;
             @MovePrefab.canceled -= instance.OnMovePrefab;
-            @ConfirmSpawn.started -= instance.OnConfirm;
-            @ConfirmSpawn.performed -= instance.OnConfirm;
-            @ConfirmSpawn.canceled -= instance.OnConfirm;
-            @CancelSpawn.started -= instance.OnCancel;
-            @CancelSpawn.performed -= instance.OnCancel;
-            @CancelSpawn.canceled -= instance.OnCancel;
+            @Confirm.started -= instance.OnConfirm;
+            @Confirm.performed -= instance.OnConfirm;
+            @Confirm.canceled -= instance.OnConfirm;
+            @Cancel.started -= instance.OnCancel;
+            @Cancel.performed -= instance.OnCancel;
+            @Cancel.canceled -= instance.OnCancel;
         }
 
         public void RemoveCallbacks(ISpawnActionActions instance)

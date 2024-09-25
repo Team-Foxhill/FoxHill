@@ -14,4 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Type: 0
   Power: 0
-  Cooldown: 15
+  Cooldown: 12
+  Duration: 8
+  Speed: 0

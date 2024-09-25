@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace FoxHill.Quest
 {
-    public static class QuestManager
+    public class QuestManager
     {
         public enum QuestStatus
         {

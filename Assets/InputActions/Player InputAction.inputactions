@@ -319,7 +319,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "ConfirmSpawn",
+                    "name": "Confirm",
                     "type": "Button",
                     "id": "b819cf86-d358-43a6-9dd0-da37b6738d11",
                     "expectedControlType": "Button",
@@ -328,7 +328,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "CancelSpawn",
+                    "name": "Cancel",
                     "type": "Button",
                     "id": "3ddb4646-819e-4e7d-8730-6c59bffc6592",
                     "expectedControlType": "Button",
@@ -400,7 +400,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "ConfirmSpawn",
+                    "action": "Confirm",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -411,7 +411,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "CancelSpawn",
+                    "action": "Cancel",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

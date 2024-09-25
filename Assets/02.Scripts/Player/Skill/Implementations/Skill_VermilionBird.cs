@@ -15,21 +15,25 @@ namespace FoxHill.Player.Skill.Implementations
 
         public override void Cast(SkillParameter parameters)
         {
-            StartCoroutine(C_TESTMOVE(parameters.Direction));
+            // 스킬 방향에 따라 이펙트의 이미지 회전값 변환
+            Vector3 rotationValue = Vector3.forward * Mathf.Atan2(parameters.Direction.y, parameters.Direction.x) * Mathf.Rad2Deg;
+            transform.GetChild(0).localRotation = Quaternion.Euler(rotationValue);
+
+            StartCoroutine(C_Cast(parameters.Direction));
         }
 
-        // test code
-        private IEnumerator C_TESTMOVE(Vector2 direction)
+        private IEnumerator C_Cast(Vector2 direction)
         {
             float elapsedTime = 0f;
-            while (elapsedTime < 1.5f)
+
+            while (elapsedTime < Stat.Duration)
             {
                 if (_isPaused == true)
                 {
                     yield return new WaitUntil(() => _isPaused == false);
                 }
 
-                gameObject.transform.Translate(direction * 2f * Time.deltaTime);
+                gameObject.transform.Translate(direction * Stat.Speed * Time.deltaTime);
                 elapsedTime += Time.deltaTime;
                 yield return null;
             }

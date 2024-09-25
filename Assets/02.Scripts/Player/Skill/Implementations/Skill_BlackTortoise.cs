@@ -15,14 +15,14 @@ namespace FoxHill.Player.Skill.Implementations
 
         public override void Cast(SkillParameter parameters)
         {
-            StartCoroutine(C_Cast());
+            StartCoroutine(C_Cast(parameters.Transform));
         }
 
-        // test code
-        private IEnumerator C_Cast()
+        private IEnumerator C_Cast(Transform followTarget)
         {
             float elapsedTime = 0f;
-            while (elapsedTime < 2.5f)
+
+            while (elapsedTime < Stat.Duration)
             {
                 if (_isPaused == true)
                 {
@@ -30,7 +30,9 @@ namespace FoxHill.Player.Skill.Implementations
                 }
 
                 elapsedTime += Time.deltaTime;
-                var s = Physics2D.OverlapBoxAll(transform.position, new Vector2(4f, 2f), 0f);
+                var attackRange = Physics2D.OverlapCircleAll(transform.position, 3f);
+
+                this.transform.position = followTarget.position;
 
                 yield return null;
             }
@@ -41,7 +43,7 @@ namespace FoxHill.Player.Skill.Implementations
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.green;
-            Gizmos.DrawWireCube(transform.position, new Vector2(8f, 3f));
+            Gizmos.DrawWireSphere(transform.position, 3f);
         }
     }
 }

@@ -176,7 +176,8 @@ namespace FoxHill.Player.Skill
             SkillParameter parameters = new SkillParameter
             {
                 Direction = _playerManager.Direction,
-                Power = _playerManager.Stat.Power
+                Power = _playerManager.Stat.Power,
+                Transform = _playerManager.transform
             };
 
             castedSkillGO.GetComponent<ISkill>().Cast(parameters);

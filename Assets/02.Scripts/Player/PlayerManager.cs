@@ -27,12 +27,12 @@ namespace FoxHill.Player
         [HideInInspector] public UnityEvent<Vector2> OnSwitchSlotInventory;
         [HideInInspector] public UnityEvent OnSelectInventory;
         [HideInInspector] public UnityEvent OnDeselectInventory;
+
         [HideInInspector] public UnityEvent OnEnterSpawn;
         [HideInInspector] public UnityEvent<Vector2> OnMovePrefabSpawn;
         [HideInInspector] public UnityEvent OnConfirmSpawn;
         [HideInInspector] public UnityEvent OnCancelSpawn;
 
-        public event Action OnDead;
         public bool IsInventoryOpen => _isInventoryOpen;
         public bool IsPaused => _isPaused;
         public bool IsDead => _isDead;
@@ -110,15 +110,10 @@ namespace FoxHill.Player
             {
                 Inventory.DeselectSlot();
             });
-            OnOpenInventory?.AddListener(() =>
-            {
-                _isSpawnOpen = true;
-                Spawner.ToggleSprite(true);
-            });
+
             OnCancelSpawn?.AddListener(() =>
             {
                 _isSpawnOpen = false;
-                Spawner.ToggleSprite(false);
             });
             OnConfirmSpawn?.AddListener(() =>
             {

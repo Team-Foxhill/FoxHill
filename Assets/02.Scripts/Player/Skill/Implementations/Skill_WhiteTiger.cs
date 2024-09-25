@@ -8,6 +8,8 @@ namespace FoxHill.Player.Skill.Implementations
     /// </summary>
     public class Skill_WhiteTiger : SkillBase
     {
+        private const float SKILL_RANGE = 3f;
+
         protected override void Awake()
         {
             base.Awake();
@@ -15,7 +17,7 @@ namespace FoxHill.Player.Skill.Implementations
 
         public override void Cast(SkillParameter parameters)
         {
-            gameObject.transform.Translate(parameters.Direction * 3f);
+            gameObject.transform.Translate(parameters.Direction * SKILL_RANGE);
             StartCoroutine(C_Cast());
         }
 
@@ -23,7 +25,7 @@ namespace FoxHill.Player.Skill.Implementations
         {
             float elapsedTime = 0f;
 
-            while (elapsedTime < 5f)
+            while (elapsedTime < Stat.Duration)
             {
                 if (_isPaused == true)
                 {
