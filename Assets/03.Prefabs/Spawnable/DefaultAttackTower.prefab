@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4815094117884478191}
   - component: {fileID: 4758325161692392291}
   - component: {fileID: 297687947539920049}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DefaultAttackTower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29,8 +29,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1186978205777042293}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -2}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -75,8 +75,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1917052247
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 5dc331708cd40c444ad4be6270f46fcf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -153,11 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ec228a19b231a1448417b31d18fdc6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gizmoColor: {r: 1, g: 0, b: 0, a: 0.2}
   _towerIndex: 1
-  _targetLayer:
-    serializedVersion: 2
-    m_Bits: 128
   _bullet: {fileID: 3096770387664413297}
 --- !u!50 &297687947539920049
 Rigidbody2D:
@@ -197,6 +193,14 @@ PrefabInstance:
     - target: {fileID: 788681781357023124, guid: 6e9cb4b2ab8a22943a5d777d0015f55f, type: 3}
       propertyPath: m_Name
       value: FireBullet
+      objectReference: {fileID: 0}
+    - target: {fileID: 5726545064797734705, guid: 6e9cb4b2ab8a22943a5d777d0015f55f, type: 3}
+      propertyPath: m_SortingLayer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5726545064797734705, guid: 6e9cb4b2ab8a22943a5d777d0015f55f, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1456308579
       objectReference: {fileID: 0}
     - target: {fileID: 5936372230041850882, guid: 6e9cb4b2ab8a22943a5d777d0015f55f, type: 3}
       propertyPath: m_LocalPosition.x

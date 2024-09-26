@@ -5,56 +5,84 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using FoxHill.Core.Pause;
+using FoxHill.Core;
+using FoxHill.Core.Utils;
 
 namespace FoxHill.Tower
 {
-    public abstract class TowerControllerBase : MonoBehaviour, IStat, IDamageable, IPausable
+    [RequireComponent(typeof(CircleCollider2D))]
+    public abstract class TowerControllerBase : MonoBehaviour, IDamageable, IPausable
     {
-        public Color gizmoColor = new Color(1, 0, 0, 0.2f);
         public event Action OnDead;
-        public float MaxHp { get; private set; }
-        public float CurrentHp { get; protected set; }
-        public float AttackSpeed { get; private set; }
-        public float AttackRange { get; private set; }
-        public float MoveSpeed { get => _moveSpeed; private set => _moveSpeed = 0f; }
-        public float Power { get; private set; }
-        public float Defense { get; private set; }
+        public int Index => _towerIndex;
+
+        protected class TowerStat : IStat
+        {
+            public TowerStat(TowerForm form)
+            {
+                MaxHp = form.MaxHp;
+                CurrentHp = MaxHp;
+                AttackSpeed = form.AttackSpeed;
+                AttackRange = form.AttackRange;
+                MoveSpeed = 0f;
+                Power = form.Power;
+                Defense = form.Defense;
+            }
+
+            public float MaxHp { get; set; }
+            public float CurrentHp { get; set; }
+            public float AttackSpeed { get; set; }
+            public float AttackRange { get; set; }
+            public float MoveSpeed { get; set; }
+            public float Power { get; set; }
+            public float Defense { get; set; }
+        }
+
+        protected TowerStat _stat;
+        protected CircleCollider2D _trigger;
+
         [SerializeField] protected int _towerIndex;
-        [SerializeField] protected LayerMask _targetLayer;
+        protected int _targetLayer;
         [SerializeField] protected GameObject _bullet;
-        private float _moveSpeed = 0f;
-        private bool _isDamageable = false;
-        protected float _attackInterval;
-        protected TowerForm _towerForm;
-        protected HashSet<Collider2D> objectsInTrigger = new HashSet<Collider2D>();
-        protected Collider2D _attackTarget;
-        protected IDamageable _damageable;
+
+        protected bool _isDamageable = false;
         protected bool _isPaused = false;
 
+        protected float _attackInterval;
+        protected HashSet<IDamageable> _objectsInTrigger = new HashSet<IDamageable>();
+        protected IDamageable _attackTarget;
+
+        public Transform Transform => gameObject.transform;
+
+        protected virtual void Awake()
+        {
+            _trigger = GetComponent<CircleCollider2D>();
+            _targetLayer = LayerRepository.LAYER_PATH_FOLLOW_MONSTER;
+
+            if (TowerDataManager.TryGetTower(_towerIndex, out var towerForm) == true)
+            {
+                _stat = new TowerStat(towerForm);
+
+                if (towerForm.TowerType == TowerType.DefenseTower)
+                { 
+                    _isDamageable = true;
+                }
+            }
+            else
+            {
+                DebugFox.LogError("Failed to initialize TowerStat");
+            }
+
+            _trigger.radius = _stat.AttackRange;
+            _attackInterval = (1 / _stat.AttackSpeed);
+
+            PauseManager.Register(this);
+        }
 
         protected virtual void Start()
         {
-            TowerDataManager.TryGetTower(_towerIndex, out _towerForm);
-            SetStat();
-            CircleCollider2D collider = gameObject.GetComponent<CircleCollider2D>();
-            collider.radius = AttackRange;
-            _attackInterval = (1 / AttackSpeed);
             StartCoroutine(PerformTowerFunction());
         }
-
-        /// <summary>
-        /// 스탯을 파일에서 불러오는 메서드.
-        /// </summary>
-        private void SetStat()
-        {
-            MaxHp = _towerForm.MaxHp;
-            CurrentHp = MaxHp;
-            AttackSpeed = _towerForm.AttackSpeed;
-            AttackRange = _towerForm.AttackRange;
-            Power = _towerForm.Power;
-            Defense = _towerForm.Defense;
-        }
-
 
         /// <summary>
         /// 대미지를 처리하는 메서드.
@@ -65,8 +93,12 @@ namespace FoxHill.Tower
             if (_isDamageable == true)
             {
                 //프로퍼티 체력 깎기.
-                CurrentHp -= damage;
-                if (CurrentHp <= 0f) Dead();
+                _stat.CurrentHp -= damage;
+
+                if (_stat.CurrentHp <= 0f)
+                {
+                    Dead();
+                }
             }
         }
 
@@ -76,24 +108,43 @@ namespace FoxHill.Tower
         public void Dead()
         {
             OnDead.Invoke();
-            gameObject.SetActive(false);
+            PauseManager.Unregister(this);
+            Destroy(gameObject);
+        }
+        public void Pause()
+        {
+            _isPaused = true;
+        }
+
+        public void Resume()
+        {
+            _isPaused = false;
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (((1 << collision.gameObject.layer) & _targetLayer) != 0)
+            if (collision.gameObject.layer == _targetLayer)
             {
-                objectsInTrigger.Add(collision);
-            }
-        }
-        private void OnTriggerExit2D(Collider2D collision)
-        {
-            if (((1 << collision.gameObject.layer) & _targetLayer) != 0)
-            {
-                objectsInTrigger.Remove(collision);
+                if (collision.TryGetComponent<IDamageable>(out var damageable) == true)
+                {
+                    _objectsInTrigger.Add(damageable);
+                }
             }
         }
 
+        private void OnTriggerExit2D(Collider2D collision)
+        {
+            if (collision.gameObject.layer == _targetLayer)
+            {
+                if(collision.TryGetComponent<IDamageable>(out var damageable) == true)
+                {
+                    _objectsInTrigger.Remove(damageable);
+                }
+            }
+        }
+        protected abstract IEnumerator PerformTowerFunction();
+
+        
         /// <summary>
         /// 공격할 때마다 범위 내의 랜덤 대상을 지정하여 공격하는 형태.
         /// 만일 한 대상이 죽을 때까지 공격해야 한다면 그건 조금 생각해볼 필요가 있을 듯.
@@ -127,17 +178,6 @@ namespace FoxHill.Tower
         /// 여기 부분에 두 좌표(타워, 대상 몬스터) 사이의 직선 경로로 날아가는 타워 발사체 스프라이트 하나 필요.
         /// </summary>
         /// <returns></returns>
-        protected abstract IEnumerator PerformTowerFunction();
 
-        public void Pause()
-        {
-            _isPaused = true;
-
-        }
-
-        public void Resume()
-        {
-            _isPaused = false;
-        }
     }
 }

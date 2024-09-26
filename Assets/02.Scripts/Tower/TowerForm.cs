@@ -1,6 +1,5 @@
-﻿namespace FoxHill.Tower
+namespace FoxHill.Tower
 {
-
     public enum TowerType
     {
         AttackTower,

@@ -1,13 +1,10 @@
 using ProjectDawn.Navigation;
+using ProjectDawn.Navigation.Hybrid;
+using System;
 using System.Collections;
 using UnityEngine;
-using ProjectDawn.Navigation.Hybrid;
 using DebugFox = FoxHill.Core.DebugFox;
 using IPoolable = FoxHill.Core.IPoolable;
-using FoxHill.Core.Test;
-using FoxHill.Core;
-using System;
-using Unity.VisualScripting;
 
 
 namespace FoxHill.Monster
@@ -23,7 +20,6 @@ namespace FoxHill.Monster
         [SerializeField] private Sprite[] _moveSpriteSet;
         [SerializeField] private Sprite[] _deadSpriteSet;
         [SerializeField] private Vector2 _teleportPosition = new Vector2(-55f, -70f);
-        [SerializeField] private ObjectPoolManager _objectPoolManager;
         private readonly Vector3 _left = new Vector3(-1, 1, 1);
         private WaitForSecondsRealtime _waitTime;
         private WaitForSecondsRealtime _animationInterval;

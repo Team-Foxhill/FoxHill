@@ -15,6 +15,7 @@ namespace FoxHill.Monster
         public float Power { get; private set; }
         public float Defense { get; private set; }
 
+        public Transform Transform => gameObject.transform;
 
         public event Action OnDead;
         protected int _monsterNumber;

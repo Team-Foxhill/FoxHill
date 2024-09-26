@@ -1,9 +1,11 @@
-using UnityEngine;
+using FoxHill.Core.Pause;
+using FoxHill.Monster;
 using System.Collections.Generic;
+using Unity.Burst;
 using Unity.Collections;
 using Unity.Jobs;
-using Unity.Burst;
 using UnityEditor;
+using UnityEngine;
 
 namespace FoxHill.Core.Test
 {
@@ -53,16 +55,16 @@ namespace FoxHill.Core.Test
 
         private void Awake()
         {
-            //if (Instance == null)
-            //{
-            //    Instance = this;
-            //    DontDestroyOnLoad(gameObject);
-            //}
-            //else
-            //{
-            //    Destroy(gameObject);
-            //    return;
-            //}
+            if (Instance == null)
+            {
+                Instance = this;
+                DontDestroyOnLoad(gameObject);
+            }
+            else
+            {
+                Destroy(gameObject);
+                return;
+            }
 
             _mainCamera = Camera.main;
             InitializePool();
@@ -78,6 +80,10 @@ namespace FoxHill.Core.Test
             {
                 GameObject newObject = Instantiate(_itemPrefab);
                 newObject.SetActive(false);
+
+                IPausable newPausable = newObject.GetComponent<MonsterBase>();
+                PauseManager.Register(newPausable);
+
                 _pooledObjects.Add(new PooledObjectData(newObject));
                 _availableIndices.Enqueue(i);
             }

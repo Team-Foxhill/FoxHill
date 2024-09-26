@@ -1,11 +1,11 @@
-using FoxHill.Tower;
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[ExcelAsset]
-public class TowerData : ScriptableObject
+namespace FoxHill.Tower
 {
-    public List<TowerFormRaw> Sheet1;
+    [ExcelAsset]
+    public class TowerData : ScriptableObject
+    {
+        public List<TowerFormRaw> Sheet1;
+    }
 }

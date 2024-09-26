@@ -1,5 +1,4 @@
 using FoxHill.Items;
-using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -299,7 +298,7 @@ namespace FoxHill.Player.Inventory
                     break;
                 case ItemType.ConstructiveItem:
                     {
-                        OnUseConstructiveItem?.Invoke(item); // TODO : Tower와 연동
+                        OnUseConstructiveItem?.Invoke(item);
                     }
                     break;
                 case ItemType.QuestItem:

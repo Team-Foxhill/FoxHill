@@ -3,7 +3,8 @@ using UnityEngine.InputSystem;
 
 namespace FoxHill.Player
 {
-    public class PlayerInputController : MonoBehaviour, PlayerInputAction.IPlayerActionActions, PlayerInputAction.IInventoryActionActions, PlayerInputAction.ISpawnActionActions
+    public class PlayerInputController : MonoBehaviour, 
+        PlayerInputAction.IPlayerActionActions, PlayerInputAction.IInventoryActionActions, PlayerInputAction.ISpawnActionActions
     {
         [SerializeField] private PlayerManager _playerManager;
 
@@ -19,8 +20,18 @@ namespace FoxHill.Player
             
             _inputAction.PlayerAction.AddCallbacks(this);
             _inputAction.InventoryAction.AddCallbacks(this);
+            _inputAction.SpawnAction.AddCallbacks(this);
+
             _inputAction.PlayerAction.Enable();
             _inputAction.InventoryAction.Disable();
+            _inputAction.SpawnAction.Disable();
+        }
+
+        private void Start()
+        {
+            _playerManager.Inventory.OnUseConstructiveItem?.AddListener(_ => ToggleTowerSpawnMode(true));
+            _playerManager.OnConfirmSpawn?.AddListener(() => ToggleTowerSpawnMode(false));
+            _playerManager.OnCancelSpawn?.AddListener(() => ToggleTowerSpawnMode(false));
         }
 
         private void Update()
@@ -114,6 +125,7 @@ namespace FoxHill.Player
             }
         }
 
+        // SpawnAction
         public void OnMovePrefab(InputAction.CallbackContext context)
         {
             if (context.started == true)
@@ -196,6 +208,26 @@ namespace FoxHill.Player
             {
                 _inputAction.InventoryAction.Disable();
                 _inputAction.SpawnAction.Enable();
+            }
+        }
+
+        public void ToggleTowerSpawnMode(bool toggle)
+        {
+            if(_playerManager.IsInventoryOpen == false)
+            {
+                return;
+            }
+
+            if(toggle == true)
+            {
+                _inputAction.InventoryAction.Disable();
+                _inputAction.SpawnAction.Enable();
+            }
+
+            if (toggle == false)
+            {
+                _inputAction.SpawnAction.Disable();
+                _inputAction.InventoryAction.Enable();
             }
         }
     }

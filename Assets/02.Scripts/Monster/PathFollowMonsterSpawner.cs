@@ -47,8 +47,6 @@ namespace FoxHill.Core
                     if (newOne != null)
                     {
                         newOne.transform.position = GetSpawnPosition();
-                        IPausable newPausable = newOne.GetComponent<MonsterBase>();
-                        PauseManager.Register(newPausable);
                         newOne.SetActive(true);
                     }
 
