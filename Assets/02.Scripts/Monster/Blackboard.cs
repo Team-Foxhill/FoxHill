@@ -1,6 +1,6 @@
-﻿using ProjectDawn.Navigation;
 using ProjectDawn.Navigation.Hybrid;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace FoxHill.Monster.AI
 {
@@ -9,13 +9,15 @@ namespace FoxHill.Monster.AI
     /// </summary>
     public class Blackboard
     {
-        public Blackboard() {
+        public Blackboard(GameObject owner)
+        {
+            transform = owner.transform;
+            agent = owner.GetComponent<AgentAuthoring>();
                 }
 
         // 소유자.
         public Transform transform { get; set; }
-        public AgentAuthoring agentAuthoring { get; set; }
-
+        public AgentAuthoring agent { get; set; }
         // 목표물.
         public Transform target { get; set; }
     }
