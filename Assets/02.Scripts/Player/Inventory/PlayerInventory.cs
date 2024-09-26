@@ -1,5 +1,6 @@
 using FoxHill.Items;
 using TMPro;
+using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -12,9 +13,9 @@ namespace FoxHill.Player.Inventory
     /// </summary>
     public class PlayerInventory : MonoBehaviour
     {
-        [HideInInspector] public UnityEvent<Items.ItemData> OnUseRestorativeItem;
-        [HideInInspector] public UnityEvent<Items.ItemData> OnUseConstructiveItem;
-        [HideInInspector] public UnityEvent<Items.ItemData> OnUseQuestItem;
+        [HideInInspector] public UnityEvent<ItemData> OnUseRestorativeItem;
+        [HideInInspector] public UnityEvent<ItemData> OnUseConstructiveItem;
+        [HideInInspector] public UnityEvent<ItemData> OnUseQuestItem;
 
         public Mode CurrentMode => _currentMode;
         public enum Mode
@@ -34,8 +35,11 @@ namespace FoxHill.Player.Inventory
         [SerializeField] private SelectionPopUp _popUp;
         [SerializeField] private ItemDescription _itemDescription;
 
-        private int _currentSlot = 0;
+        private int _currentSlotIndex = 0;
         private Mode _currentMode = Mode.Switch;
+
+        private Slot _reservedSlot = new Slot();
+        private int _reservedSlotIndex;
 
         private void Awake()
         {
@@ -70,14 +74,14 @@ namespace FoxHill.Player.Inventory
 
             if (toggle == true) // 인벤토리 열 때 수행할 동작
             {
-                _currentSlot = 0;
+                _currentSlotIndex = 0;
                 _currentMode = Mode.Switch;
-                ToggleSlot(_currentSlot, true);
-                UpdateDescriptionUI(_slots[_currentSlot]);
+                ToggleSlot(_currentSlotIndex, true);
+                UpdateDescriptionUI(_slots[_currentSlotIndex]);
             }
             else // 인벤토리 닫을 때 수행할 동작
             {
-                ToggleSlot(_currentSlot, false);
+                ToggleSlot(_currentSlotIndex, false);
                 _popUp.Toggle(false);
             }
         }
@@ -88,38 +92,38 @@ namespace FoxHill.Player.Inventory
             {
                 if (input == Vector2.up)
                 {
-                    if (CheckRange(_currentSlot - COL_SIZE) == true)
+                    if (CheckRange(_currentSlotIndex - COL_SIZE) == true)
                     {
-                        ToggleSlot(_currentSlot, false);
-                        _currentSlot = _currentSlot - COL_SIZE;
-                        ToggleSlot(_currentSlot, true);
+                        ToggleSlot(_currentSlotIndex, false);
+                        _currentSlotIndex = _currentSlotIndex - COL_SIZE;
+                        ToggleSlot(_currentSlotIndex, true);
                     }
                 }
                 else if (input == Vector2.down)
                 {
-                    if (CheckRange(_currentSlot + COL_SIZE) == true)
+                    if (CheckRange(_currentSlotIndex + COL_SIZE) == true)
                     {
-                        ToggleSlot(_currentSlot, false);
-                        _currentSlot = _currentSlot + COL_SIZE;
-                        ToggleSlot(_currentSlot, true);
+                        ToggleSlot(_currentSlotIndex, false);
+                        _currentSlotIndex = _currentSlotIndex + COL_SIZE;
+                        ToggleSlot(_currentSlotIndex, true);
                     }
                 }
                 else if (input == Vector2.left)
                 {
-                    if (CheckRange(_currentSlot - 1) == true)
+                    if (CheckRange(_currentSlotIndex - 1) == true)
                     {
-                        ToggleSlot(_currentSlot, false);
-                        _currentSlot = _currentSlot - 1;
-                        ToggleSlot(_currentSlot, true);
+                        ToggleSlot(_currentSlotIndex, false);
+                        _currentSlotIndex = _currentSlotIndex - 1;
+                        ToggleSlot(_currentSlotIndex, true);
                     }
                 }
                 else if (input == Vector2.right)
                 {
-                    if (CheckRange(_currentSlot + 1) == true)
+                    if (CheckRange(_currentSlotIndex + 1) == true)
                     {
-                        ToggleSlot(_currentSlot, false);
-                        _currentSlot = _currentSlot + 1;
-                        ToggleSlot(_currentSlot, true);
+                        ToggleSlot(_currentSlotIndex, false);
+                        _currentSlotIndex = _currentSlotIndex + 1;
+                        ToggleSlot(_currentSlotIndex, true);
                     }
                 }
                 else
@@ -127,7 +131,7 @@ namespace FoxHill.Player.Inventory
                     return;
                 }
 
-                UpdateDescriptionUI(_slots[_currentSlot]);
+                UpdateDescriptionUI(_slots[_currentSlotIndex]);
 
                 bool CheckRange(int index)
                 {
@@ -152,7 +156,7 @@ namespace FoxHill.Player.Inventory
         {
             if (_currentMode == Mode.Switch) // 아이템 팝업 창 표시
             {
-                if (_slots[_currentSlot].Amount <= 0)
+                if (_slots[_currentSlotIndex].Amount <= 0)
                 {
                     return;
                 }
@@ -160,13 +164,13 @@ namespace FoxHill.Player.Inventory
                 _currentMode = Mode.Selection;
 
                 _popUp.Toggle(true);
-                _popUp.SetPosition(_slots[_currentSlot].transform.position);
+                _popUp.SetPosition(_slots[_currentSlotIndex].transform.position);
             }
             else if (_currentMode == Mode.Selection)
             {
                 if (_popUp.Selected == SelectionPopUp.Option.UseItem)
                 {
-                    UseItem(_slots[_currentSlot]);
+                    UseItem(_slots[_currentSlotIndex]);
 
                     _currentMode = Mode.Switch;
                     _popUp.Toggle(false);
@@ -226,6 +230,7 @@ namespace FoxHill.Player.Inventory
             return false;
         }
 
+
         /// <summary>
         /// 특정 Slot의 아이템 정보 및 이미지를 UI에 표시합니다.
         /// </summary>
@@ -249,7 +254,7 @@ namespace FoxHill.Player.Inventory
             }
             else
             {
-                slot.ItemImage.sprite = null;
+                // slot.ItemImage.sprite = null;
                 slot.ItemImage.color = COLOR_EMPTY_SLOT;
                 slot.AmountText.text = string.Empty;
             }
@@ -288,6 +293,7 @@ namespace FoxHill.Player.Inventory
             }
 
             var item = slot.ItemInfo;
+            ReserveSlot(slot);
 
             switch (item.ItemType)
             {
@@ -309,12 +315,34 @@ namespace FoxHill.Player.Inventory
             }
 
             slot.Amount--;
-
             UpdateSlotUI(slot);
 
             if (slot.Amount <= 0)
             {
                 _itemDescription.ClearDescription();
+            }
+        }
+
+        private void ReserveSlot(Slot slotToReserve)
+        {
+            _reservedSlotIndex = _currentSlotIndex;
+            _reservedSlot.Amount = slotToReserve.Amount;
+        }
+
+        public void RestoreReservedSlot()
+        {
+            if (_slots[_reservedSlotIndex].Amount > 0)
+            {
+                _slots[_reservedSlotIndex].Amount++;
+
+                UpdateSlotUI(_reservedSlotIndex);
+            }
+            else
+            {
+                _slots[_reservedSlotIndex].ItemImage.color = Color.white;
+                _slots[_reservedSlotIndex].Amount++;
+
+                UpdateSlotUI(_reservedSlotIndex);
             }
         }
     }

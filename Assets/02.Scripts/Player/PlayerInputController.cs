@@ -3,13 +3,14 @@ using UnityEngine.InputSystem;
 
 namespace FoxHill.Player
 {
-    public class PlayerInputController : MonoBehaviour, 
+    public class PlayerInputController : MonoBehaviour,
         PlayerInputAction.IPlayerActionActions, PlayerInputAction.IInventoryActionActions, PlayerInputAction.ISpawnActionActions
     {
         [SerializeField] private PlayerManager _playerManager;
 
         private PlayerInputAction _inputAction;
         private Vector2 _moveInput;
+        private Vector2 _towerMoveInput;
 
         private void Awake()
         {
@@ -17,7 +18,7 @@ namespace FoxHill.Player
                 _playerManager = GetComponentInParent<PlayerManager>();
 
             _inputAction = new PlayerInputAction();
-            
+
             _inputAction.PlayerAction.AddCallbacks(this);
             _inputAction.InventoryAction.AddCallbacks(this);
             _inputAction.SpawnAction.AddCallbacks(this);
@@ -30,12 +31,17 @@ namespace FoxHill.Player
         private void Start()
         {
             _playerManager.Inventory.OnUseConstructiveItem?.AddListener(_ => ToggleTowerSpawnMode(true));
-            _playerManager.OnConfirmSpawn?.AddListener(() => ToggleTowerSpawnMode(false));
-            _playerManager.OnCancelSpawn?.AddListener(() => ToggleTowerSpawnMode(false));
+            _playerManager.OnExitSpawn?.AddListener(() => ToggleTowerSpawnMode(false));
         }
 
         private void Update()
         {
+            if (_towerMoveInput != Vector2.zero)
+            {
+                MoveTower();
+            }
+
+            // 이 구문 상단에 위치한 코드는 일시정지여도 실행할 수 있는 행동, 하단은 실행할 수 없는 행동
             if (_playerManager.IsPaused == true)
                 return;
 
@@ -126,21 +132,20 @@ namespace FoxHill.Player
         }
 
         // SpawnAction
-        public void OnMovePrefab(InputAction.CallbackContext context)
+        public void OnMovePrefab(InputAction.CallbackContext context) // Arrow
         {
-            if (context.started == true)
-            {
-                _playerManager.OnMovePrefabSpawn?.Invoke(context.ReadValue<Vector2>());
-            }
+            _towerMoveInput = context.ReadValue<Vector2>();
         }
-        public void OnConfirm(InputAction.CallbackContext context)
+
+        public void OnConfirm(InputAction.CallbackContext context) // Z
         {
             if (context.started == true)
             {
                 _playerManager.OnConfirmSpawn?.Invoke();
             }
         }
-        public void OnCancel(InputAction.CallbackContext context)
+
+        public void OnCancel(InputAction.CallbackContext context) // X
         {
             if (context.started == true)
             {
@@ -213,12 +218,12 @@ namespace FoxHill.Player
 
         public void ToggleTowerSpawnMode(bool toggle)
         {
-            if(_playerManager.IsInventoryOpen == false)
+            if (_playerManager.IsInventoryOpen == false)
             {
                 return;
             }
 
-            if(toggle == true)
+            if (toggle == true)
             {
                 _inputAction.InventoryAction.Disable();
                 _inputAction.SpawnAction.Enable();
@@ -230,5 +235,11 @@ namespace FoxHill.Player
                 _inputAction.InventoryAction.Enable();
             }
         }
+
+        private void MoveTower()
+        {
+            _playerManager.OnMovePrefabSpawn?.Invoke(_towerMoveInput);
+        }
+
     }
 }

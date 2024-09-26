@@ -134,6 +134,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DefaultAttackTower
       objectReference: {fileID: 0}
+    - target: {fileID: 1186978205777042293, guid: bb84cb045481f0d468966459fd772580, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8270398462239746656, guid: bb84cb045481f0d468966459fd772580, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.4674962
@@ -1185,6 +1189,10 @@ PrefabInstance:
       propertyPath: _towerPrefabs.Array.data[0]
       value: 
       objectReference: {fileID: 1186978205777042293, guid: bb84cb045481f0d468966459fd772580, type: 3}
+    - target: {fileID: 163402381224672261, guid: 7851d792565b5a4448db2a2d24b6df74, type: 3}
+      propertyPath: _invalidPositionLayer.m_Bits
+      value: 192
+      objectReference: {fileID: 0}
     - target: {fileID: 1849585062831865402, guid: 7851d792565b5a4448db2a2d24b6df74, type: 3}
       propertyPath: m_Name
       value: TowerManager
@@ -1228,6 +1236,14 @@ PrefabInstance:
     - target: {fileID: 3171165438863274924, guid: 7851d792565b5a4448db2a2d24b6df74, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9084412352469247038, guid: 7851d792565b5a4448db2a2d24b6df74, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9084412352469247038, guid: 7851d792565b5a4448db2a2d24b6df74, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

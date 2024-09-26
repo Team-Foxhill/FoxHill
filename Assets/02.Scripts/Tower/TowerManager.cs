@@ -1,8 +1,6 @@
 using FoxHill.Items;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace FoxHill.Tower
 {
@@ -13,17 +11,23 @@ namespace FoxHill.Tower
     {
         private class Tower
         {
-            public Tower(GameObject towerPrefab, SpriteRenderer sprite)
+            public Tower(GameObject towerPrefab, SpriteRenderer sprite, float size)
             {
                 TowerPrefab = towerPrefab;
                 Sprite = sprite;
+                Size = size;
             }
 
             public GameObject TowerPrefab { get; private set; }
             public SpriteRenderer Sprite { get; private set; }
+            public float Size { get; private set; } // 타워의 반지름 (공격 범위 X)
         }
 
-        private const float MOVE_OFFSET = 0.1f;
+        private const float SPAWN_VALID_RANGE = 4.5f;
+        private const float PREVIEW_INITIAL_MOVE_SPEED = 2f;
+        private const float PREVIEW_MAX_MOVE_SPEED = 8f;
+        private readonly Color COLOR_TRANSPARENT_VALID = new Color(1f, 1f, 1f, 0.5f);
+        private readonly Color COLOR_TRANSPARENT_INVALID = Color.red;
 
         [SerializeField] private List<GameObject> _towerPrefabs = new List<GameObject>(4); // 인스펙터에서 소환 가능한 타워 모두 연결
         private Dictionary<int, Tower> _towerRepository = new Dictionary<int, Tower>(4);
@@ -31,11 +35,17 @@ namespace FoxHill.Tower
         private Tower _currentTower = null;
         [SerializeField] private SpriteRenderer _previewImage = null;
 
+        private Vector2 _initialPosition;
+        [SerializeField] private LayerMask _invalidPositionLayer; // 타워를 설치할 수 없는 위치의 Layer를 설정(ex. 지형, 몬스터, 타워)
+
+        private Vector2 _lastMoveDirection;
+        private float _moveSpeed = PREVIEW_INITIAL_MOVE_SPEED;
+
         private void Awake()
         {
             foreach (var tower in _towerPrefabs)
             {
-                Tower newTower = new Tower(tower, tower.GetComponent<SpriteRenderer>());
+                Tower newTower = new Tower(tower, tower.GetComponent<SpriteRenderer>(), tower.GetComponent<CircleCollider2D>().radius);
                 int towerIndex = tower.GetComponent<TowerControllerBase>().Index;
 
                 _towerRepository.Add(towerIndex, newTower);
@@ -55,12 +65,15 @@ namespace FoxHill.Tower
 
             _previewImage.enabled = true;
             _previewImage.sprite = _currentTower.Sprite.sprite;
-            _previewImage.transform.localPosition = initialPosition;
+
+            _initialPosition = initialPosition;
+            _previewImage.transform.localPosition = _initialPosition;
+
+            _previewImage.color = (CheckSpawnValidation() == true) ? COLOR_TRANSPARENT_VALID : COLOR_TRANSPARENT_INVALID;
         }
-        
+
         public void ExitSpawnMode()
         {
-            Debug.Log("exit");
             _currentTower = null;
 
             _previewImage.enabled = false;
@@ -74,10 +87,17 @@ namespace FoxHill.Tower
         /// <returns>설치 시도 결과</returns>
         public bool TrySpawnTower()
         {
-            Instantiate(_currentTower.TowerPrefab, _previewImage.transform.position, Quaternion.identity);
-            _previewImage.enabled = false;
+            if((CheckSpawnValidation() == true))
+            {
+                Instantiate(_currentTower.TowerPrefab, _previewImage.transform.position, Quaternion.identity);
+                _previewImage.enabled = false;
 
-            return true;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         /// <summary>
@@ -86,13 +106,54 @@ namespace FoxHill.Tower
         /// <param name="direction"></param>
         public void MoveTowerPreview(Vector2 direction)
         {
-            Debug.Log(_currentTower);
             if ((direction == Vector2.up) || (direction == Vector2.down)
                 || (direction == Vector2.left) || (direction == Vector2.right))
             {
-                _previewImage.transform.localPosition += (Vector3)direction * MOVE_OFFSET;
+                if(_lastMoveDirection == direction) // 같은 방향으로 계속 이동하는 경우 조금씩 가속
+                {
+                    _moveSpeed += 0.005f;
+                    if(_moveSpeed > PREVIEW_MAX_MOVE_SPEED)
+                    {
+                        _moveSpeed = PREVIEW_MAX_MOVE_SPEED;
+                    }
+                }
+                else // 다른 방향으로 이동하는 경우 초기화
+                {
+                    _moveSpeed = PREVIEW_INITIAL_MOVE_SPEED;
+                }
+                _previewImage.transform.localPosition += (Vector3)direction * _moveSpeed * Time.deltaTime;
             }
 
+            _lastMoveDirection = direction;
+            _previewImage.color = (CheckSpawnValidation() == true) ? COLOR_TRANSPARENT_VALID : COLOR_TRANSPARENT_INVALID;
+        }
+
+        /// <summary>
+        /// 현재 위치에 타워를 설치할 수 있는지를 판단합니다.
+        /// </summary>
+        /// <returns>설치 가능 여부</returns>
+        private bool CheckSpawnValidation()
+        {
+            if((_previewImage.transform.localPosition - (Vector3)_initialPosition).magnitude > SPAWN_VALID_RANGE)
+            {
+                return false;
+            }
+
+            var hits = Physics2D.OverlapCircleAll(_previewImage.transform.localPosition, _currentTower.Size, _invalidPositionLayer);
+            if (hits.Length > 0)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        private void OnDrawGizmos()
+        {
+            if(_previewImage != null && _currentTower != null)
+            {
+                Gizmos.DrawWireSphere(_previewImage.transform.localPosition, _currentTower.Size);
+            }
         }
     }
 }

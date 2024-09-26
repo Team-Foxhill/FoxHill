@@ -1,6 +1,7 @@
 using FoxHill.Controller;
 using FoxHill.Core.Damage;
 using FoxHill.Core.Pause;
+using FoxHill.Items;
 using FoxHill.Player.Data;
 using FoxHill.Player.Inventory;
 using FoxHill.Player.Quest;
@@ -33,6 +34,7 @@ namespace FoxHill.Player
         [HideInInspector] public UnityEvent OnDeselectInventory;
 
         [HideInInspector] public UnityEvent OnEnterSpawn;
+        [HideInInspector] public UnityEvent OnExitSpawn;
         [HideInInspector] public UnityEvent<Vector2> OnMovePrefabSpawn;
         [HideInInspector] public UnityEvent OnConfirmSpawn;
         [HideInInspector] public UnityEvent OnCancelSpawn;
@@ -58,7 +60,7 @@ namespace FoxHill.Player
         public CharacterController CharacterController { get; private set; }
         public PlayerQuestManager Quest { get; private set; }
         public PlayerInventory Inventory { get; private set; }
-        [field:SerializeField] public TowerManager Tower { get; private set; }
+        [field: SerializeField] public TowerManager Tower { get; private set; }
 
         public Transform Transform => gameObject.transform;
 
@@ -68,6 +70,7 @@ namespace FoxHill.Player
         private bool _isInventoryOpen = false;
         private bool _isTowerSpawnerOpen = false;
 
+        private Item _currentSpawnItem = null;
 
         protected override void Awake()
         {
@@ -85,7 +88,7 @@ namespace FoxHill.Player
                 Inventory = FindFirstObjectByType<PlayerInventory>();
             }
 
-            if(Tower == null)
+            if (Tower == null)
             {
                 Tower = FindFirstObjectByType<TowerManager>();
             }
@@ -136,21 +139,25 @@ namespace FoxHill.Player
                 Tower.EnterSpawnMode(item, transform.position);
             });
 
-            // Spawn이 성공하거나 실패하면 인벤토리를 다시 켭니다
-            OnCancelSpawn?.AddListener(() =>
+            OnExitSpawn?.AddListener(() =>
             {
                 Tower.ExitSpawnMode();
-
                 Inventory.ToggleCanvas(true);
                 _isTowerSpawnerOpen = false;
             });
+
+            // Spawn이 성공하거나 실패하면 인벤토리를 다시 켭니다
+            OnCancelSpawn?.AddListener(() =>
+            {
+                Inventory.RestoreReservedSlot();
+                OnExitSpawn?.Invoke();
+            });
             OnConfirmSpawn?.AddListener(() =>
             {
-                Tower.TrySpawnTower();
-                Tower.ExitSpawnMode();
-
-                Inventory.ToggleCanvas(true);
-                _isTowerSpawnerOpen = false;
+                if (Tower.TrySpawnTower() == true)
+                {
+                    OnExitSpawn?.Invoke();
+                }
             });
             OnMovePrefabSpawn?.AddListener((direction) =>
             {

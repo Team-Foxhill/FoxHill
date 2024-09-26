@@ -152,3 +152,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _data: {fileID: 11400000, guid: 3c80d72072c62d44682083e0f975c177, type: 2}
+  _animator: {fileID: 6454139740943092905}

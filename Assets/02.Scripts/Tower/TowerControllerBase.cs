@@ -1,20 +1,19 @@
-using UnityEngine;
-using FoxHill.Core.Stat;
-using FoxHill.Core.Damage;
-using System.Collections;
-using System.Collections.Generic;
-using System;
-using FoxHill.Core.Pause;
 using FoxHill.Core;
-using FoxHill.Core.Utils;
+using FoxHill.Core.Damage;
+using FoxHill.Core.Pause;
+using FoxHill.Core.Stat;
+using System;
+using System.Collections;
+using UnityEngine;
 
 namespace FoxHill.Tower
 {
-    [RequireComponent(typeof(CircleCollider2D))]
+    [RequireComponent(typeof(CircleCollider2D))] // 타워 자체의 크기 트리거
     public abstract class TowerControllerBase : MonoBehaviour, IDamageable, IPausable
     {
         public event Action OnDead;
         public int Index => _towerIndex;
+        public Transform Transform => gameObject.transform;
 
         protected class TowerStat : IStat
         {
@@ -42,29 +41,21 @@ namespace FoxHill.Tower
         protected CircleCollider2D _trigger;
 
         [SerializeField] protected int _towerIndex;
-        protected int _targetLayer;
-        [SerializeField] protected GameObject _bullet;
 
         protected bool _isDamageable = false;
         protected bool _isPaused = false;
 
-        protected float _attackInterval;
-        protected HashSet<IDamageable> _objectsInTrigger = new HashSet<IDamageable>();
-        protected IDamageable _attackTarget;
-
-        public Transform Transform => gameObject.transform;
 
         protected virtual void Awake()
         {
             _trigger = GetComponent<CircleCollider2D>();
-            _targetLayer = LayerRepository.LAYER_PATH_FOLLOW_MONSTER;
 
             if (TowerDataManager.TryGetTower(_towerIndex, out var towerForm) == true)
             {
                 _stat = new TowerStat(towerForm);
 
                 if (towerForm.TowerType == TowerType.DefenseTower)
-                { 
+                {
                     _isDamageable = true;
                 }
             }
@@ -72,9 +63,6 @@ namespace FoxHill.Tower
             {
                 DebugFox.LogError("Failed to initialize TowerStat");
             }
-
-            _trigger.radius = _stat.AttackRange;
-            _attackInterval = (1 / _stat.AttackSpeed);
 
             PauseManager.Register(this);
         }
@@ -111,40 +99,20 @@ namespace FoxHill.Tower
             PauseManager.Unregister(this);
             Destroy(gameObject);
         }
-        public void Pause()
+
+        public virtual void Pause()
         {
             _isPaused = true;
         }
 
-        public void Resume()
+        public virtual void Resume()
         {
             _isPaused = false;
         }
 
-        private void OnTriggerEnter2D(Collider2D collision)
-        {
-            if (collision.gameObject.layer == _targetLayer)
-            {
-                if (collision.TryGetComponent<IDamageable>(out var damageable) == true)
-                {
-                    _objectsInTrigger.Add(damageable);
-                }
-            }
-        }
-
-        private void OnTriggerExit2D(Collider2D collision)
-        {
-            if (collision.gameObject.layer == _targetLayer)
-            {
-                if(collision.TryGetComponent<IDamageable>(out var damageable) == true)
-                {
-                    _objectsInTrigger.Remove(damageable);
-                }
-            }
-        }
         protected abstract IEnumerator PerformTowerFunction();
 
-        
+
         /// <summary>
         /// 공격할 때마다 범위 내의 랜덤 대상을 지정하여 공격하는 형태.
         /// 만일 한 대상이 죽을 때까지 공격해야 한다면 그건 조금 생각해볼 필요가 있을 듯.
