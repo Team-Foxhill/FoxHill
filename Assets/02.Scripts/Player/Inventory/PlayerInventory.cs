@@ -35,11 +35,16 @@ namespace FoxHill.Player.Inventory
         [SerializeField] private SelectionPopUp _popUp;
         [SerializeField] private ItemDescription _itemDescription;
 
-        private int _currentSlotIndex = 0;
         private Mode _currentMode = Mode.Switch;
+        private int _currentSlotIndex = 0;
 
-        private Slot _reservedSlot = new Slot();
-        private int _reservedSlotIndex;
+        private ReservedSlot _reservedSlot = new ReservedSlot();
+
+        public struct ReservedSlot
+        {
+            public int Index;
+            public int Amount;
+        }
 
         private void Awake()
         {
@@ -325,24 +330,24 @@ namespace FoxHill.Player.Inventory
 
         private void ReserveSlot(Slot slotToReserve)
         {
-            _reservedSlotIndex = _currentSlotIndex;
+            _reservedSlot.Index = _currentSlotIndex;
             _reservedSlot.Amount = slotToReserve.Amount;
         }
 
         public void RestoreReservedSlot()
         {
-            if (_slots[_reservedSlotIndex].Amount > 0)
+            if (_slots[_reservedSlot.Index].Amount > 0)
             {
-                _slots[_reservedSlotIndex].Amount++;
+                _slots[_reservedSlot.Index].Amount++;
 
-                UpdateSlotUI(_reservedSlotIndex);
+                UpdateSlotUI(_reservedSlot.Index);
             }
             else
             {
-                _slots[_reservedSlotIndex].ItemImage.color = Color.white;
-                _slots[_reservedSlotIndex].Amount++;
+                _slots[_reservedSlot.Index].ItemImage.color = Color.white;
+                _slots[_reservedSlot.Index].Amount++;
 
-                UpdateSlotUI(_reservedSlotIndex);
+                UpdateSlotUI(_reservedSlot.Index);
             }
         }
     }
