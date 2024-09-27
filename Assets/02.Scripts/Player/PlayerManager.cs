@@ -1,10 +1,10 @@
 using FoxHill.Controller;
 using FoxHill.Core.Damage;
 using FoxHill.Core.Pause;
-using FoxHill.Items;
 using FoxHill.Player.Data;
 using FoxHill.Player.Inventory;
 using FoxHill.Player.Quest;
+using FoxHill.Player.State;
 using FoxHill.Tower;
 using System;
 using UnityEngine;
@@ -57,6 +57,7 @@ namespace FoxHill.Player
         }
 
         public PlayerStat Stat { get; private set; }
+        public PlayerStateManager State { get; private set; }
         public CharacterController CharacterController { get; private set; }
         public PlayerQuestManager Quest { get; private set; }
         public PlayerInventory Inventory { get; private set; }
@@ -65,12 +66,11 @@ namespace FoxHill.Player
         public Transform Transform => gameObject.transform;
 
         [SerializeField] private PlayerData _data;
-        [SerializeField] private Vector2 _direction = Vector2.right;
+        private Vector2 _direction = Vector2.right;
+        private bool _isMoving = false;
 
         private bool _isInventoryOpen = false;
         private bool _isTowerSpawnerOpen = false;
-
-        private Item _currentSpawnItem = null;
 
         protected override void Awake()
         {
@@ -78,20 +78,11 @@ namespace FoxHill.Player
 
             CharacterController = GetComponent<CharacterController>();
 
-            Stat = new PlayerStat();
-            Stat.InitializeStat(_data);
-
+            Stat = new PlayerStat(_data);
             Quest = new PlayerQuestManager();
-
-            if (Inventory == null)
-            {
-                Inventory = FindFirstObjectByType<PlayerInventory>();
-            }
-
-            if (Tower == null)
-            {
-                Tower = FindFirstObjectByType<TowerManager>();
-            }
+            State ??= FindFirstObjectByType<PlayerStateManager>();
+            Inventory ??= FindFirstObjectByType<PlayerInventory>();
+            Tower ??= FindFirstObjectByType<TowerManager>();
         }
 
         private void Start()
@@ -163,6 +154,11 @@ namespace FoxHill.Player
             {
                 Tower.MoveTowerPreview(direction);
             });
+        }
+
+        public void SetState(PlayerState state)
+        {
+            State.SetState(state);
         }
 
         public void TakeDamage(float damage)

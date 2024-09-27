@@ -1,3 +1,4 @@
+using FoxHill.Player.State;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -14,8 +15,7 @@ namespace FoxHill.Player
 
         private void Awake()
         {
-            if (_playerManager == null)
-                _playerManager = GetComponentInParent<PlayerManager>();
+            _playerManager ??= GetComponentInParent<PlayerManager>();
 
             _inputAction = new PlayerInputAction();
 
@@ -47,8 +47,8 @@ namespace FoxHill.Player
 
             if (_moveInput != Vector2.zero)
             {
-                Move();
                 _playerManager.Direction = _moveInput;
+                Move();
             }
         }
 
@@ -155,8 +155,6 @@ namespace FoxHill.Player
         }
 
         #endregion
-
-
         private void Move()
         {
             Vector2 movePosition = _moveInput * _playerManager.Stat.MoveSpeed * Time.deltaTime;
