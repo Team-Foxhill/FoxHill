@@ -53,8 +53,22 @@ namespace FoxHill.Player
                     return;
 
                 _direction = value;
+
+                if(_direction.x > 0)
+                {
+                    _isLeftward = false;
+                }
+                else if(_direction.x < 0)
+                {
+                    _isLeftward = true;
+                }
             }
         }
+
+        /// <summary>
+        /// 플레이어가 X축으로 바라보는 방향
+        /// </summary>
+        public bool IsLeftward => _isLeftward;
 
         public PlayerStat Stat { get; private set; }
         public PlayerStateManager State { get; private set; }
@@ -67,7 +81,7 @@ namespace FoxHill.Player
 
         [SerializeField] private PlayerData _data;
         private Vector2 _direction = Vector2.right;
-        private bool _isMoving = false;
+        private bool _isLeftward = false;
 
         private bool _isInventoryOpen = false;
         private bool _isTowerSpawnerOpen = false;
@@ -154,6 +168,11 @@ namespace FoxHill.Player
             {
                 Tower.MoveTowerPreview(direction);
             });
+        }
+
+        public void SetState(PlayerMoveState state)
+        {
+            State.SetState(state);
         }
 
         public void SetState(PlayerState state)

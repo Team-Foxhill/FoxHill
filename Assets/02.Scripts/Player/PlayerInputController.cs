@@ -7,11 +7,16 @@ namespace FoxHill.Player
     public class PlayerInputController : MonoBehaviour,
         PlayerInputAction.IPlayerActionActions, PlayerInputAction.IInventoryActionActions, PlayerInputAction.ISpawnActionActions
     {
+        private const float IDLE_TRANSITION_TIME = 3f;
+
         [SerializeField] private PlayerManager _playerManager;
 
         private PlayerInputAction _inputAction;
         private Vector2 _moveInput;
         private Vector2 _towerMoveInput;
+
+        private float _elapsedTime = 0f;
+        private bool _isIdle = false;
 
         private void Awake()
         {
@@ -47,8 +52,20 @@ namespace FoxHill.Player
 
             if (_moveInput != Vector2.zero)
             {
+                _isIdle = false;
+                _elapsedTime = 0f;
+
                 _playerManager.Direction = _moveInput;
                 Move();
+            }
+            else
+            {
+                _elapsedTime += Time.deltaTime;
+
+                if (_elapsedTime > IDLE_TRANSITION_TIME && _isIdle == false)
+                {
+                    Idle();
+                }
             }
         }
 
@@ -57,11 +74,17 @@ namespace FoxHill.Player
             _inputAction?.Dispose();
         }
 
+
         #region InputAction Callback
         // PlayerAction
         public void OnAttack(InputAction.CallbackContext context) // V
         {
-            Debug.Log("Attack");
+            if (context.started == true)
+            {
+                _isIdle = false;
+
+                _playerManager.SetState(PlayerState.Attack);
+            }
         }
 
         public void OnDodge(InputAction.CallbackContext context) // Z
@@ -78,6 +101,8 @@ namespace FoxHill.Player
         {
             if (context.started == true)
             {
+                _isIdle = false;
+
                 CastSkill();
             }
         }
@@ -155,11 +180,21 @@ namespace FoxHill.Player
         }
 
         #endregion
+        private void Idle()
+        {
+            _isIdle = true;
+
+            _playerManager.SetState(State.PlayerMoveState.Idle);
+        }
+
         private void Move()
         {
             Vector2 movePosition = _moveInput * _playerManager.Stat.MoveSpeed * Time.deltaTime;
             _playerManager.CharacterController.Move(movePosition);
+
+            _playerManager.SetState(State.PlayerMoveState.Move);
         }
+
 
         private void CastSkill()
         {
@@ -167,6 +202,7 @@ namespace FoxHill.Player
                 return;
 
             _playerManager.OnCastSkill?.Invoke();
+            _playerManager.SetState(PlayerState.Skill);
         }
 
         private void SwitchSkill()

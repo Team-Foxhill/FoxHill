@@ -1249,6 +1249,10 @@ PrefabInstance:
       propertyPath: _inventory
       value: 
       objectReference: {fileID: 1755979869}
+    - target: {fileID: 2671279772930462787, guid: f9d19e0f019222e489ef3e00403251bb, type: 3}
+      propertyPath: m_FlipX
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7662465975669960474, guid: f9d19e0f019222e489ef3e00403251bb, type: 3}
       propertyPath: m_Name
       value: Player
