@@ -6,7 +6,7 @@ using UnityEngine;
 namespace FoxHill.Tower
 {
     [RequireComponent(typeof(CircleCollider2D))] // 공격 범위 트리거
-    public abstract class TowerAttackControllerBase : MonoBehaviour
+    public abstract class TowerAttackControllerBase : MonoBehaviour, IDamager
     {
         protected CircleCollider2D _attackTrigger;
         protected int _targetLayer;
@@ -24,6 +24,8 @@ namespace FoxHill.Tower
         protected Vector3 _startPosition;
 
         protected float _attackDamage;
+
+        public Transform Transform => transform;
 
         public void Initialize(float attackRange, float attackSpeed, float attackDamage)
         {

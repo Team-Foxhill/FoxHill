@@ -12,11 +12,12 @@ namespace FoxHill.Player
         [SerializeField] private PlayerManager _playerManager;
 
         private PlayerInputAction _inputAction;
-        private Vector2 _moveInput;
         private Vector2 _towerMoveInput;
 
-        private float _elapsedTime = 0f;
+        private float _elapsedTime_Idle = 0f; // Idle 상태로 돌아가기 위해 입력을 받지 않은 시간
         private bool _isIdle = false;
+
+        private float _attackCooldown = 0f; // 공격 쿨타임
 
         private void Awake()
         {
@@ -37,6 +38,8 @@ namespace FoxHill.Player
         {
             _playerManager.Inventory.OnUseConstructiveItem?.AddListener(_ => ToggleTowerSpawnMode(true));
             _playerManager.OnExitSpawn?.AddListener(() => ToggleTowerSpawnMode(false));
+
+            _attackCooldown = _playerManager.Stat.AttackSpeed;
         }
 
         private void Update()
@@ -50,21 +53,31 @@ namespace FoxHill.Player
             if (_playerManager.IsPaused == true)
                 return;
 
-            if (_moveInput != Vector2.zero)
+            if (_playerManager.IsDead == true)
+                return;
+
+            // 공격 쿨타임 진행
+            _attackCooldown += Time.deltaTime;
+
+            // 일정 시간동안 입력을 받지 않으면 Idle 상태로 변경
+            if (_playerManager.MoveInput != Vector2.zero)
             {
                 _isIdle = false;
-                _elapsedTime = 0f;
+                _elapsedTime_Idle = 0f;
 
-                _playerManager.Direction = _moveInput;
-                Move();
+                _playerManager.Direction = _playerManager.MoveInput;
+
+                _playerManager.SetState(PlayerState.Move);
             }
             else
             {
-                _elapsedTime += Time.deltaTime;
+                _elapsedTime_Idle += Time.deltaTime;
 
-                if (_elapsedTime > IDLE_TRANSITION_TIME && _isIdle == false)
+                if (_elapsedTime_Idle > IDLE_TRANSITION_TIME && _isIdle == false)
                 {
-                    Idle();
+                    _isIdle = true;
+
+                    _playerManager.SetState(PlayerState.Idle);
                 }
             }
         }
@@ -81,7 +94,14 @@ namespace FoxHill.Player
         {
             if (context.started == true)
             {
+                if(_attackCooldown < _playerManager.Stat.AttackSpeed) // 공격 쿨타임
+                {
+                    return;
+                }
+
                 _isIdle = false;
+                _attackCooldown = 0f;
+                _elapsedTime_Idle = 0f;
 
                 _playerManager.SetState(PlayerState.Attack);
             }
@@ -94,7 +114,7 @@ namespace FoxHill.Player
 
         public void OnMove(InputAction.CallbackContext context) // Arrow
         {
-            _moveInput = context.ReadValue<Vector2>();
+            _playerManager.MoveInput = context.ReadValue<Vector2>();
         }
 
         public void OnCastSkill(InputAction.CallbackContext context) // B
@@ -180,21 +200,6 @@ namespace FoxHill.Player
         }
 
         #endregion
-        private void Idle()
-        {
-            _isIdle = true;
-
-            _playerManager.SetState(State.PlayerMoveState.Idle);
-        }
-
-        private void Move()
-        {
-            Vector2 movePosition = _moveInput * _playerManager.Stat.MoveSpeed * Time.deltaTime;
-            _playerManager.CharacterController.Move(movePosition);
-
-            _playerManager.SetState(State.PlayerMoveState.Move);
-        }
-
 
         private void CastSkill()
         {
@@ -202,7 +207,6 @@ namespace FoxHill.Player
                 return;
 
             _playerManager.OnCastSkill?.Invoke();
-            _playerManager.SetState(PlayerState.Skill);
         }
 
         private void SwitchSkill()
@@ -274,6 +278,5 @@ namespace FoxHill.Player
         {
             _playerManager.OnMovePrefabSpawn?.Invoke(_towerMoveInput);
         }
-
     }
 }

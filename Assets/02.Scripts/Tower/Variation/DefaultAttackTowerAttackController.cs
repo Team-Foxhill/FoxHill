@@ -38,7 +38,7 @@ namespace FoxHill.Tower
                 {
                     yield return StartCoroutine(BulletAnimation());
 
-                    _attackTarget?.TakeDamage(_attackDamage);
+                    _attackTarget?.TakeDamage(this, _attackDamage);
                 }
                 yield return null;
             }

@@ -32,7 +32,7 @@ namespace FoxHill.Player.Skill.Implementations
                 elapsedTime += Time.deltaTime;
                 var attackRange = Physics2D.OverlapCircleAll(transform.position, 3f);
 
-                this.transform.position = followTarget.position;
+                // this.transform.position = followTarget.position;
 
                 yield return null;
             }

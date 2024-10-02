@@ -2,21 +2,43 @@ using UnityEngine;
 
 namespace FoxHill.Player.State
 {
+    [RequireComponent(typeof(PlayerAnimationController))]
     public abstract class PlayerStateBase : MonoBehaviour
     {
-        public PlayerStateBase State => _state;
-        protected abstract PlayerStateBase _state { get; set; }
+        public abstract PlayerState State { get; protected set; }
+        public abstract bool IsMoveState { get; protected set; }
+        public bool IsDone { get; protected set; } = false; // State의 상태가 끝났음을 StateManager에 알리는 프로퍼티
 
-        public virtual void OnEnter()
+        protected PlayerManager _manager;
+        protected PlayerAnimationController _animator;
+
+        protected virtual void Awake()
         {
+            _manager = GetComponentInParent<PlayerManager>();
+            _animator = GetComponent<PlayerAnimationController>();
+
+            this.enabled = false;
         }
 
-        public virtual void OnUpdate()
+        protected virtual void OnEnable()
         {
+            IsDone = false;
+            PlayAnimation();
         }
 
-        public virtual void OnExit()
+        protected virtual void Update()
         {
+
+        }
+
+        protected virtual void OnDisable()
+        {
+
+        }
+
+        public void PlayAnimation()
+        {
+            _animator.PlayAnimation(State);
         }
     }
 }

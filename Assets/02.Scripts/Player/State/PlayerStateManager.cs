@@ -4,13 +4,14 @@ using UnityEngine;
 
 namespace FoxHill.Player.State
 {
-
     public enum PlayerState
     {
+        // Move State
         Idle,
         Move,
+        // Action State
+        None,
         Attack,
-        Skill,
         Dodge,
         Dead
     }
@@ -18,46 +19,64 @@ namespace FoxHill.Player.State
     /// <summary>
     /// Player의 상태를 관리합니다.
     /// </summary>
-    [RequireComponent(typeof(PlayerAnimationController))]
+
     public class PlayerStateManager : MonoBehaviour
     {
-        private PlayerAnimationController _animator;
+        private Dictionary<PlayerState, PlayerStateBase> _stateDictionary = new Dictionary<PlayerState, PlayerStateBase>(6);
 
-        private Dictionary<PlayerState, PlayerStateBase> _states = new(6);
+        private PlayerState _currentMoveState = PlayerState.Idle;
+        private PlayerState _currentActionState = PlayerState.None;
 
         private void Awake()
         {
-            _animator = GetComponent<PlayerAnimationController>();
-
             foreach (PlayerStateBase state in transform.GetComponents<PlayerStateBase>())
             {
-                _states.Add()
+                _stateDictionary.Add(state.State, state);
             }
         }
 
-        public void SetState(PlayerMoveState newState)
+        private void Start()
         {
-            if (newState == _currentMoveState)
+            _stateDictionary[_currentMoveState].enabled = true;
+            _stateDictionary[_currentActionState].enabled = true;
+        }
+
+        private void LateUpdate()
+        {
+            if (_stateDictionary[_currentActionState].IsDone == true)
+            {
+                Debug.Log(_currentActionState);
+                SetState(PlayerState.None);
+                _stateDictionary[_currentMoveState].PlayAnimation();
+            }
+        }
+
+        public void SetState(PlayerState state)
+        {
+            if (!_stateDictionary.TryGetValue(state, out var newState))
+            {
+                DebugFox.LogError($"State {state} not found in stateDictionary");
+                return;
+            }
+
+            // 이전 State와 같으면 무시
+            if (state == _currentMoveState || state == _currentActionState)
             {
                 return;
             }
 
-            _currentMoveState = newState;
-
-            if (_animator.IsActionInProgress == false) // 현재 진행중인 Action이 없으면 Move animation 적용
+            if(newState.IsMoveState == true)
             {
-                _animator.PlayAnimation(_currentMoveState);
+                _stateDictionary[_currentMoveState].enabled = false;
+                _currentMoveState = state;
             }
-        }
-
-        public void SetState(PlayerState newState)
-        {
-            if (_animator.IsActionInProgress == true) // 다른 action이 진행중이면 state 적용되지 않음
+            else
             {
-                return;
+                _stateDictionary[_currentActionState].enabled = false;
+                _currentActionState = state;
             }
 
-            _animator.PlayAnimation(newState);
+            newState.enabled = true;
         }
     }
 }

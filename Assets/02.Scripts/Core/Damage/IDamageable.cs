@@ -7,7 +7,7 @@ namespace FoxHill.Core.Damage
     {
         Transform Transform { get; }
         event Action OnDead;
-        void TakeDamage(float damage);
+        void TakeDamage(IDamager damager, float damage);
         void Dead();
     }
 }

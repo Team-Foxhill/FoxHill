@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c2d259080432db84e8809c435ba50717
+guid: d9af5b6d07267cd468acef413e8d1479
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 24
+  spritePixelsToUnits: 60
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -69,10 +69,10 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 8192
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -97,13 +97,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: GoneWithTheWind_0
+      name: Player_Dead_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 53
-        height: 53
+        width: 115.25
+        height: 115
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -111,20 +111,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4bf14c3e231fd6943b7674ed7cf58e2e
-      internalID: 1852188046
+      spriteID: ac9aa66b25d9b014fa54f5cb78154c0c
+      internalID: -1856891020
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GoneWithTheWind_1
+      name: Player_Dead_1
       rect:
         serializedVersion: 2
-        x: 53
+        x: 115
         y: 0
-        width: 53
-        height: 53
+        width: 115.25
+        height: 115
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -132,20 +132,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8521ddef0d6dd1a48b15d001293f3a7c
-      internalID: 1704185058
+      spriteID: 51729a5236a09d9479828daf2cb985e1
+      internalID: 1307785595
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GoneWithTheWind_2
+      name: Player_Dead_2
       rect:
         serializedVersion: 2
-        x: 106
+        x: 230
         y: 0
-        width: 53
-        height: 53
+        width: 115.25
+        height: 115
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,20 +153,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 11d168d0d3e64bc438eb588d8d5ef063
-      internalID: 1879586143
+      spriteID: c7fcc2be196f017408019221fb02706a
+      internalID: -2040749094
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GoneWithTheWind_3
+      name: Player_Dead_3
       rect:
         serializedVersion: 2
-        x: 159
+        x: 345
         y: 0
-        width: 53
-        height: 53
+        width: 115.25
+        height: 115
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -174,20 +174,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6a0faf9e4f66ad44cb186513a06b4808
-      internalID: -851209060
+      spriteID: bceacb1ced24cc448bb53ef9d8df3a2a
+      internalID: -318403668
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GoneWithTheWind_4
+      name: Player_Dead_4
       rect:
         serializedVersion: 2
-        x: 212
+        x: 460
         y: 0
-        width: 53
-        height: 53
+        width: 115.25
+        height: 115
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -195,20 +195,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7ae014881bc65d442927037fec2d137b
-      internalID: -1601887522
+      spriteID: 6dfc272b81f25d44ea7500098ba71946
+      internalID: -1250068072
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GoneWithTheWind_5
+      name: Player_Dead_5
       rect:
         serializedVersion: 2
-        x: 265
+        x: 575
         y: 0
-        width: 53
-        height: 53
+        width: 115.25
+        height: 115
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -216,20 +216,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f7859f7ae42e3f54f88ab425040b17ff
-      internalID: 801505246
+      spriteID: 0f9888632b7285c409e1d601715377f1
+      internalID: 616040853
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GoneWithTheWind_6
+      name: Player_Dead_6
       rect:
         serializedVersion: 2
-        x: 318
+        x: 690
         y: 0
-        width: 53
-        height: 53
+        width: 115.25
+        height: 115
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -237,20 +237,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 24118d9022343414288c6e76a08f91d6
-      internalID: 772522200
+      spriteID: d0a7f2a796cd9834ba732dead7e296fd
+      internalID: 470525970
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GoneWithTheWind_7
+      name: Player_Dead_7
       rect:
         serializedVersion: 2
-        x: 371
+        x: 805
         y: 0
-        width: 53
-        height: 53
+        width: 115.25
+        height: 115
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -258,20 +258,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 193d2e4b6759cc34ea0a52415d2a8cbb
-      internalID: 1647234520
+      spriteID: bcbbef2e8a05ffa418a37fd001250391
+      internalID: -244900382
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GoneWithTheWind_8
+      name: Player_Dead_8
       rect:
         serializedVersion: 2
-        x: 424
+        x: 920
         y: 0
-        width: 53
-        height: 53
+        width: 115.25
+        height: 115
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -279,20 +279,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8dfdaeea29541f643a332f406353f9ca
-      internalID: 1074171771
+      spriteID: cc303ce09bc0d3f4bb937c2e663c953e
+      internalID: -887528780
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GoneWithTheWind_9
+      name: Player_Dead_9
       rect:
         serializedVersion: 2
-        x: 477
+        x: 1035
         y: 0
-        width: 53
-        height: 53
+        width: 115.25
+        height: 115
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -300,8 +300,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1e2759b9c8ff9044fb27fc72f9bd8166
-      internalID: -2142715595
+      spriteID: 46398daf7e585484880c424ce92662df
+      internalID: -714016563
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Dead_10
+      rect:
+        serializedVersion: 2
+        x: 1150
+        y: 0
+        width: 115.25
+        height: 115
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 75feaa7698e24c345b278b32d9be7662
+      internalID: 1295487262
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Dead_11
+      rect:
+        serializedVersion: 2
+        x: 1265
+        y: 0
+        width: 115.25
+        height: 115
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c4659f08f05ba245bf5bd447c3e1eb1
+      internalID: -1920638899
       vertices: []
       indices: 
       edges: []
@@ -317,16 +359,18 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      GoneWithTheWind_0: 1852188046
-      GoneWithTheWind_1: 1704185058
-      GoneWithTheWind_2: 1879586143
-      GoneWithTheWind_3: -851209060
-      GoneWithTheWind_4: -1601887522
-      GoneWithTheWind_5: 801505246
-      GoneWithTheWind_6: 772522200
-      GoneWithTheWind_7: 1647234520
-      GoneWithTheWind_8: 1074171771
-      GoneWithTheWind_9: -2142715595
+      Player_Dead_0: -1856891020
+      Player_Dead_1: 1307785595
+      Player_Dead_10: 1295487262
+      Player_Dead_11: -1920638899
+      Player_Dead_2: -2040749094
+      Player_Dead_3: -318403668
+      Player_Dead_4: -1250068072
+      Player_Dead_5: 616040853
+      Player_Dead_6: 470525970
+      Player_Dead_7: -244900382
+      Player_Dead_8: -887528780
+      Player_Dead_9: -714016563
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

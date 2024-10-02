@@ -76,7 +76,7 @@ namespace FoxHill.Tower
         /// 대미지를 처리하는 메서드.
         /// </summary>
         /// <param name="damage">PerformAttack에서 받은 대미지</param>
-        public void TakeDamage(float damage)
+        public void TakeDamage(IDamager damager, float damage)
         {
             if (_isDamageable == true)
             {

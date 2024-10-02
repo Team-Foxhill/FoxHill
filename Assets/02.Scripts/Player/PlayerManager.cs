@@ -15,8 +15,7 @@ namespace FoxHill.Player
     /// <summary>
     /// 플레이어와 관련된 이벤트 및 데이터, 상태 등을 전반적으로 관리합니다.
     /// </summary>
-    [RequireComponent(typeof(CharacterController))]
-    public class PlayerManager : CharacterControllerBase, IDamageable
+    public class PlayerManager : CharacterControllerBase, IDamageable, IDamager
     /// 플레이어와 직접적으로 관련된 클래스(ex. HPController, InputController)는 PlayerManager를 가지고 있고
     /// 플레이어와 연관된 외부 시스템 클래스(ex. Quest, Inventory)는 PlayerManager가 가지고 있는 형태입니다.
     {
@@ -44,6 +43,11 @@ namespace FoxHill.Player
         public bool IsDead => _isDead;
         public bool IsTowerSpawnerOpen => _isTowerSpawnerOpen;
 
+        /// <summary>
+        /// 플레이어가 X축으로 바라보는 방향
+        /// </summary>
+        public bool IsLeftward => _isLeftward;
+
         public Vector2 Direction
         {
             get => _direction;
@@ -65,10 +69,8 @@ namespace FoxHill.Player
             }
         }
 
-        /// <summary>
-        /// 플레이어가 X축으로 바라보는 방향
-        /// </summary>
-        public bool IsLeftward => _isLeftward;
+        public Vector2 MoveInput { get; set; }
+
 
         public PlayerStat Stat { get; private set; }
         public PlayerStateManager State { get; private set; }
@@ -77,7 +79,7 @@ namespace FoxHill.Player
         public PlayerInventory Inventory { get; private set; }
         [field: SerializeField] public TowerManager Tower { get; private set; }
 
-        public Transform Transform => gameObject.transform;
+        public Transform Transform => transform;
 
         [SerializeField] private PlayerData _data;
         private Vector2 _direction = Vector2.right;
@@ -170,17 +172,12 @@ namespace FoxHill.Player
             });
         }
 
-        public void SetState(PlayerMoveState state)
-        {
-            State.SetState(state);
-        }
-
         public void SetState(PlayerState state)
         {
             State.SetState(state);
         }
 
-        public void TakeDamage(float damage)
+        public void TakeDamage(IDamager damager, float damage)
         {
             if (IsPaused == true)
                 return;
@@ -194,6 +191,10 @@ namespace FoxHill.Player
                 return;
 
             OnPlayerDead?.Invoke();
+            _isDead = true;
+
+            State.SetState(PlayerState.Idle); // MoveState 설정 
+            State.SetState(PlayerState.Dead); // ActionState 설정
         }
     }
 }

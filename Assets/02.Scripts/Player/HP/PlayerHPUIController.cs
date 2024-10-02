@@ -35,8 +35,7 @@ namespace FoxHill.Player.HP
         /// </summary>
         public void OnPlayerDead()
         {
-            _animator.SetTrigger("Dead");
-            transform.localScale = Vector3.one * 2.5f;
+            _spriteRenderer.enabled = false;
         }
 
         public void OnPlayerDamaged(float HPRatio)

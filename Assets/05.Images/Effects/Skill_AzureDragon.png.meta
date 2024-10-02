@@ -69,7 +69,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 4096
+    maxTextureSize: 8192
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -264,6 +264,69 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Skill_AzureDragon_8
+      rect:
+        serializedVersion: 2
+        x: 4096
+        y: 0
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6fc23c953fd579740a7dc5801e28e5c9
+      internalID: 1382641684
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Skill_AzureDragon_9
+      rect:
+        serializedVersion: 2
+        x: 4608
+        y: 0
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 441baac857cdf65478b47b18251b92cf
+      internalID: -1266034992
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Skill_AzureDragon_10
+      rect:
+        serializedVersion: 2
+        x: 5120
+        y: 0
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 384b1d259eba7774a82c1293400bd3dd
+      internalID: 1046311880
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -277,12 +340,15 @@ TextureImporter:
     nameFileIdTable:
       Skill_AzureDragon_0: 679089278
       Skill_AzureDragon_1: -1649074060
+      Skill_AzureDragon_10: 1046311880
       Skill_AzureDragon_2: -694371840
       Skill_AzureDragon_3: -1899780261
       Skill_AzureDragon_4: 912756129
       Skill_AzureDragon_5: 463889436
       Skill_AzureDragon_6: -292978562
       Skill_AzureDragon_7: -15921450
+      Skill_AzureDragon_8: 1382641684
+      Skill_AzureDragon_9: -1266034992
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

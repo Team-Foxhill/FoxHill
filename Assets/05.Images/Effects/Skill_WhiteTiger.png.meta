@@ -69,7 +69,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 4096
+    maxTextureSize: 8192
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -100,7 +100,7 @@ TextureImporter:
       name: Skill_WhiteTiger_0
       rect:
         serializedVersion: 2
-        x: 512
+        x: 0
         y: 0
         width: 512
         height: 512
@@ -121,7 +121,7 @@ TextureImporter:
       name: Skill_WhiteTiger_1
       rect:
         serializedVersion: 2
-        x: 1024
+        x: 512
         y: 0
         width: 512
         height: 512
@@ -142,7 +142,7 @@ TextureImporter:
       name: Skill_WhiteTiger_2
       rect:
         serializedVersion: 2
-        x: 1536
+        x: 1024
         y: 0
         width: 512
         height: 512
@@ -163,7 +163,7 @@ TextureImporter:
       name: Skill_WhiteTiger_3
       rect:
         serializedVersion: 2
-        x: 2048
+        x: 1536
         y: 0
         width: 512
         height: 512
@@ -184,7 +184,7 @@ TextureImporter:
       name: Skill_WhiteTiger_4
       rect:
         serializedVersion: 2
-        x: 2560
+        x: 2048
         y: 0
         width: 512
         height: 512
@@ -205,7 +205,7 @@ TextureImporter:
       name: Skill_WhiteTiger_5
       rect:
         serializedVersion: 2
-        x: 3072
+        x: 2560
         y: 0
         width: 512
         height: 512
@@ -226,7 +226,7 @@ TextureImporter:
       name: Skill_WhiteTiger_6
       rect:
         serializedVersion: 2
-        x: 3584
+        x: 3072
         y: 0
         width: 512
         height: 512
@@ -247,7 +247,7 @@ TextureImporter:
       name: Skill_WhiteTiger_7
       rect:
         serializedVersion: 2
-        x: 4096
+        x: 3584
         y: 0
         width: 512
         height: 512
@@ -268,7 +268,7 @@ TextureImporter:
       name: Skill_WhiteTiger_8
       rect:
         serializedVersion: 2
-        x: 4608
+        x: 4096
         y: 0
         width: 512
         height: 512
@@ -289,7 +289,7 @@ TextureImporter:
       name: Skill_WhiteTiger_9
       rect:
         serializedVersion: 2
-        x: 5120
+        x: 4608
         y: 0
         width: 512
         height: 512
@@ -310,7 +310,7 @@ TextureImporter:
       name: Skill_WhiteTiger_10
       rect:
         serializedVersion: 2
-        x: 5632
+        x: 5120
         y: 0
         width: 512
         height: 512
@@ -323,6 +323,48 @@ TextureImporter:
       bones: []
       spriteID: c45b589090ab7424081ff8e9e2959d0d
       internalID: -345668045
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Skill_WhiteTiger_11
+      rect:
+        serializedVersion: 2
+        x: 5632
+        y: 0
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2cf883a9e76eeed4c80b1aa2b424d691
+      internalID: 1669953459
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Skill_WhiteTiger_12
+      rect:
+        serializedVersion: 2
+        x: 6144
+        y: 0
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dfc32a80bd51633458b0aafa867570b8
+      internalID: 1442692731
       vertices: []
       indices: 
       edges: []
@@ -341,6 +383,8 @@ TextureImporter:
       Skill_WhiteTiger_0: -502115966
       Skill_WhiteTiger_1: -514833105
       Skill_WhiteTiger_10: -345668045
+      Skill_WhiteTiger_11: 1669953459
+      Skill_WhiteTiger_12: 1442692731
       Skill_WhiteTiger_2: 1953225614
       Skill_WhiteTiger_3: -896747723
       Skill_WhiteTiger_4: -648820669

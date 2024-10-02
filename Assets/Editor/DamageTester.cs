@@ -13,7 +13,6 @@ public class DamageTester : EditorWindow
         private MonoBehaviour _damageableGameObject;
         private float _damageAmount;
 
-
         private void OnGUI()
         {
             DrawGiveDamagePanel();
@@ -42,7 +41,7 @@ public class DamageTester : EditorWindow
             {
                 if (_damageableGameObject.GetComponent<PathFollowMonsterController>() is IDamageable damageable)
                 {
-                    damageable.TakeDamage(_damageAmount);
+                    damageable.TakeDamage(null, _damageAmount);
                 }
                 else
                 {

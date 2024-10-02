@@ -12,7 +12,15 @@ namespace FoxHill.Player
     [RequireComponent(typeof(SpriteRenderer), (typeof(Animator)))]
     public class PlayerAnimationController : MonoBehaviour
     {
-        public bool IsActionInProgress { get; private set; } = false;
+        public float AnimationTime
+        {
+            get => _animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
+        }
+
+        public bool IsSpriteFliped
+        {
+            get => _spriteRenderer.flipX;
+        }
 
         private readonly int HASH_DIRECTION_X = Animator.StringToHash("DirectionX");
         private readonly int HASH_DIRECTION_Y = Animator.StringToHash("DirectionY");
@@ -21,26 +29,12 @@ namespace FoxHill.Player
         private SpriteRenderer _spriteRenderer;
         [SerializeField] private PlayerManager _playerManager;
 
-        private Dictionary<PlayerMoveState, int> _moveAnimations = new Dictionary<PlayerMoveState, int>(3); // {state, animationId}
-        private Dictionary<PlayerState, int> _actionAnimations = new Dictionary<PlayerState, int>(4); // {state, animationId}
+        private Dictionary<PlayerState, int> _animations = new Dictionary<PlayerState, int>(4); // {state, animationId}
 
-        private PlayerMoveState _currentMoveState = PlayerMoveState.Idle;
-
+        private bool _isInitialized = false;
         private void Awake()
         {
-            _animator = GetComponent<Animator>();
-            _spriteRenderer = GetComponent<SpriteRenderer>();
-            _playerManager ??= GetComponentInParent<PlayerManager>();
-
-            foreach (PlayerMoveState state in Enum.GetValues(typeof(PlayerMoveState)))
-            {
-                _moveAnimations[state] = Animator.StringToHash(state.ToString());
-            }
-
-            foreach (PlayerState state in Enum.GetValues(typeof(PlayerState)))
-            {
-                _actionAnimations[state] = Animator.StringToHash(state.ToString());
-            }
+            Initialize();
         }
 
         private void Update()
@@ -48,28 +42,45 @@ namespace FoxHill.Player
             SetDirection();
         }
 
-        public void PlayAnimation(PlayerMoveState state)
-        {
-            _animator.Play(_moveAnimations[state]);
-            _currentMoveState = state;
-        }
-
         public void PlayAnimation(PlayerState state)
         {
-            StartCoroutine(C_PlayAnimation(state));
+
+            if (_animations.TryGetValue(state, out int stateHash) == true)
+            {
+                _animator.Play(stateHash);
+            }
         }
 
-        private IEnumerator C_PlayAnimation(PlayerState state)
+        public void FlipSprite(bool flip)
         {
-            IsActionInProgress = true;
+            try
+            {
+                _spriteRenderer.flipX = flip;
+            }
+            catch (NullReferenceException ex)
+            {
+                Initialize();
+                _spriteRenderer.flipX = flip;
+            }
+        }
 
-            _animator.Play(_actionAnimations[state]);
+        private void Initialize()
+        {
+            if (_isInitialized == true)
+            {
+                return;
+            }
 
-            var length = _animator.GetCurrentAnimatorStateInfo(0).length;
+            _animator = GetComponent<Animator>();
+            _spriteRenderer = GetComponent<SpriteRenderer>();
+            _playerManager ??= GetComponentInParent<PlayerManager>();
 
-            yield return new WaitUntil(() => _animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f);
+            foreach (PlayerState state in Enum.GetValues(typeof(PlayerState)))
+            {
+                _animations[state] = Animator.StringToHash(state.ToString());
+            }
 
-            IsActionInProgress = false;
+            _isInitialized = true;
         }
 
         /// <summary>
