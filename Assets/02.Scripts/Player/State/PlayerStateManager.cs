@@ -41,11 +41,10 @@ namespace FoxHill.Player.State
             _stateDictionary[_currentActionState].enabled = true;
         }
 
-        private void LateUpdate()
+        private void Update()
         {
             if (_stateDictionary[_currentActionState].IsDone == true)
             {
-                Debug.Log(_currentActionState);
                 SetState(PlayerState.None);
                 _stateDictionary[_currentMoveState].PlayAnimation();
             }

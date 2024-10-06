@@ -9,12 +9,13 @@ namespace FoxHill.Player.State.Implementations
     {
         public override PlayerState State { get; protected set; } = PlayerState.Attack;
         public override bool IsMoveState { get; protected set; } = false;
+        private readonly WaitForEndOfFrame FRAME_END_WAIT = new WaitForEndOfFrame();
 
         private LayerMask _attackableLayer;
         private float _attackOffset = 1f;
         private Vector2 _attackRange = Vector2.one * 2f;
-
         private Vector3 _attackPoint;
+
 
         protected override void Awake()
         {
@@ -35,6 +36,11 @@ namespace FoxHill.Player.State.Implementations
             Attack();
         }
 
+        protected override void OnDisable()
+        {
+            _animator.FlipSprite(false);
+        }
+
         private void Attack()
         {
             StartCoroutine(C_Attack());
@@ -51,9 +57,9 @@ namespace FoxHill.Player.State.Implementations
 
             yield return null;
 
-            while (_animator.AnimationTime <= 1f)
+            while (_animator.AnimationTime < 1f)
             {
-                if(_animator.AnimationTime > 0.6f && isPerformed == false)
+                if (_animator.AnimationTime > 0.6f && isPerformed == false)
                 {
                     isPerformed = true;
                     PerformDamage();
@@ -62,10 +68,7 @@ namespace FoxHill.Player.State.Implementations
                 yield return null;
             }
 
-            while(_animator.IsSpriteFliped == true)
-            {
-                _animator.FlipSprite(false);
-            }
+            yield return FRAME_END_WAIT;
 
             IsDone = true;
         }

@@ -1,6 +1,5 @@
 using FoxHill.Player.State;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,11 +14,6 @@ namespace FoxHill.Player
         public float AnimationTime
         {
             get => _animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
-        }
-
-        public bool IsSpriteFliped
-        {
-            get => _spriteRenderer.flipX;
         }
 
         private readonly int HASH_DIRECTION_X = Animator.StringToHash("DirectionX");
@@ -47,7 +41,7 @@ namespace FoxHill.Player
 
             if (_animations.TryGetValue(state, out int stateHash) == true)
             {
-                _animator.Play(stateHash);
+                _animator.Play(stateHash,0,0f);
             }
         }
 
