@@ -1,6 +1,5 @@
 using FoxHill.Items;
 using TMPro;
-using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -61,11 +60,8 @@ namespace FoxHill.Player.Inventory
 
             _outerCanvas = transform.root.GetComponent<Canvas>();
 
-            if (_popUp == null)
-                _popUp = transform.parent.Find("Selection").GetComponent<SelectionPopUp>();
-
-            if (_itemDescription == null)
-                _itemDescription = transform.parent.Find("Description").GetComponent<ItemDescription>();
+            _popUp ??= transform.parent.Find("Selection").GetComponent<SelectionPopUp>();
+            _itemDescription ??= transform.parent.Find("Description").GetComponent<ItemDescription>();
         }
 
         private void Start()

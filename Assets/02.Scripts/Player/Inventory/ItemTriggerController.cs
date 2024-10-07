@@ -10,8 +10,7 @@ namespace FoxHill.Player.Inventory
 
         private void Awake()
         {
-            if (_inventory == null)
-                _inventory = FindFirstObjectByType<PlayerInventory>();
+            _inventory ??= FindFirstObjectByType<PlayerInventory>();
         }
 
         private void OnTriggerEnter2D(Collider2D collision)

@@ -79,8 +79,7 @@ namespace FoxHill.Player.Skill
 
         private void Awake()
         {
-            if (_playerManager == null)
-                _playerManager = GetComponentInParent<PlayerManager>();
+            _playerManager ??= GetComponentInParent<PlayerManager>();
 
             foreach (var skill in _skillPrefabs)
             {

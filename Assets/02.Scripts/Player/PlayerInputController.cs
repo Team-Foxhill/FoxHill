@@ -60,7 +60,7 @@ namespace FoxHill.Player
             _attackCooldown += Time.deltaTime;
 
             // 일정 시간동안 입력을 받지 않으면 Idle 상태로 변경
-            if (_playerManager.MoveInput != Vector2.zero)
+            if (_playerManager.MoveInput != Vector2.zero && _playerManager.IsMovable == true)
             {
                 _isIdle = false;
                 _elapsedTime_Idle = 0f;
@@ -94,6 +94,11 @@ namespace FoxHill.Player
         {
             if (context.started == true)
             {
+                if (_playerManager.IsActable == false || _playerManager.IsOnKnockback == true)
+                {
+                    return;
+                }
+
                 if(_attackCooldown < _playerManager.Stat.AttackSpeed) // 공격 쿨타임
                 {
                     return;
@@ -104,6 +109,19 @@ namespace FoxHill.Player
                 _elapsedTime_Idle = 0f;
 
                 _playerManager.SetState(PlayerState.Attack);
+            }
+        }
+
+        public void OnGuard(InputAction.CallbackContext context) // C
+        {
+            if (context.started == true)
+            {
+                if (_playerManager.IsActable == false || _playerManager.IsOnKnockback == true)
+                {
+                    return;
+                }
+
+                _playerManager.SetState(PlayerState.Guard);
             }
         }
 
@@ -121,6 +139,11 @@ namespace FoxHill.Player
         {
             if (context.started == true)
             {
+                if (_playerManager.IsActable == false)
+                {
+                    return;
+                }
+
                 _isIdle = false;
 
                 CastSkill();
@@ -131,6 +154,11 @@ namespace FoxHill.Player
         {
             if (context.started == true)
             {
+                if (_playerManager.IsActable == false)
+                {
+                    return;
+                }
+
                 SwitchSkill();
             }
         }

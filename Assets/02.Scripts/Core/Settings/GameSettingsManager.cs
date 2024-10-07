@@ -12,13 +12,7 @@ namespace FoxHill.Core.Settings
         public MenuInputAction InputAction
         {
             get => _inputAction;
-            set
-            {
-                if (_inputAction == null)
-                {
-                    _inputAction = value;
-                }
-            }
+            set => _inputAction ??= value;
         }
 
         public bool IsEnabled => _settingsCanvas.enabled;
@@ -210,38 +204,38 @@ namespace FoxHill.Core.Settings
                     ToggleUI(false);
                     return;
                 }
-                 
-                switch (_currentOption)
-                    {
-                        case SettingOptions.Sound:
-                            {
-                                _isSettingSelected = false;
-                                OnHoverSettingEnter();
-                            }
-                            break;
-                        case SettingOptions.Graphics:
-                            {
-                                _isSettingSelected = false;
-                                OnHoverSettingEnter();
-                            }
-                            break;
-                        case SettingOptions.Other:
-                            {
-                                var otherSetting = _otherSetting.Setting as OtherSettings;
 
-                                if (otherSetting.IsDropdownExpanded == true)
-                                {
-                                    otherSetting.ToggleDropdown(false);
-                                }
-                                else
-                                {
-                                    _isSettingSelected = false;
-                                    OnHoverSettingEnter();
-                                }
+                switch (_currentOption)
+                {
+                    case SettingOptions.Sound:
+                        {
+                            _isSettingSelected = false;
+                            OnHoverSettingEnter();
+                        }
+                        break;
+                    case SettingOptions.Graphics:
+                        {
+                            _isSettingSelected = false;
+                            OnHoverSettingEnter();
+                        }
+                        break;
+                    case SettingOptions.Other:
+                        {
+                            var otherSetting = _otherSetting.Setting as OtherSettings;
+
+                            if (otherSetting.IsDropdownExpanded == true)
+                            {
+                                otherSetting.ToggleDropdown(false);
                             }
-                            break;
-                    }
-                
+                            else
+                            {
+                                _isSettingSelected = false;
+                                OnHoverSettingEnter();
+                            }
+                        }
+                        break;
+                }
+
             }
         }
 

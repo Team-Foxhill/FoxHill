@@ -12,5 +12,9 @@ namespace FoxHill.Player.State.Implementations
         {
             // None state는 플레이할 애니메이션 존재하지 않음
         }
+        protected override void OnDisable()
+        {
+            
+        }
     }
 }

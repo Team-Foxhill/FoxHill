@@ -41,21 +41,18 @@ namespace FoxHill.Player
 
             if (_animations.TryGetValue(state, out int stateHash) == true)
             {
-                _animator.Play(stateHash,0,0f);
+                _animator.Play(stateHash, 0, 0f);
             }
         }
 
         public void FlipSprite(bool flip)
         {
-            try
-            {
-                _spriteRenderer.flipX = flip;
-            }
-            catch (NullReferenceException ex)
+            if (_spriteRenderer == null)
             {
                 Initialize();
-                _spriteRenderer.flipX = flip;
             }
+
+            _spriteRenderer.flipX = flip;
         }
 
         private void Initialize()

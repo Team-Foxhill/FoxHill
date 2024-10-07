@@ -1,3 +1,4 @@
+using System.Security.Cryptography;
 using UnityEngine;
 
 namespace FoxHill.Player.State
@@ -11,6 +12,8 @@ namespace FoxHill.Player.State
 
         protected PlayerManager _manager;
         protected PlayerAnimationController _animator;
+
+        protected readonly WaitForEndOfFrame FRAME_END_WAIT = new WaitForEndOfFrame();
 
         protected virtual void Awake()
         {
@@ -32,6 +35,10 @@ namespace FoxHill.Player.State
         }
 
         protected virtual void OnDisable()
+        {
+        }
+
+        public virtual void Initialize(PlayerStateParameters parameters)
         {
 
         }

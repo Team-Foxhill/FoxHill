@@ -277,6 +277,10 @@ PrefabInstance:
       value: FireBullet
       objectReference: {fileID: 0}
     - target: {fileID: 5726545064797734705, guid: 6e9cb4b2ab8a22943a5d777d0015f55f, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1178433520, guid: 6f254d732604c4d41acd343599c62108, type: 3}
+    - target: {fileID: 5726545064797734705, guid: 6e9cb4b2ab8a22943a5d777d0015f55f, type: 3}
       propertyPath: m_SortingLayer
       value: 3
       objectReference: {fileID: 0}

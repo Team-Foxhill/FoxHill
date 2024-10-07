@@ -33,6 +33,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Guard",
+                    "type": "Button",
+                    "id": "5872e2eb-b987-42e7-8327-e5d8b0b4ad3f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Attack",
                     "type": "Button",
                     "id": "a43adb91-9dce-4763-b26d-ca18e8ebf4e0",
@@ -168,6 +177,17 @@
                     "processors": "",
                     "groups": "PC",
                     "action": "Inventory",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "afa6f0d7-3b6f-4c75-8396-8046d0393064",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "Guard",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

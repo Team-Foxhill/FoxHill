@@ -1,5 +1,6 @@
 using FoxHill.Controller;
 using FoxHill.Core.Damage;
+using FoxHill.Core.Knockback;
 using FoxHill.Core.Pause;
 using FoxHill.Player.Data;
 using FoxHill.Player.Inventory;
@@ -15,7 +16,7 @@ namespace FoxHill.Player
     /// <summary>
     /// 플레이어와 관련된 이벤트 및 데이터, 상태 등을 전반적으로 관리합니다.
     /// </summary>
-    public class PlayerManager : CharacterControllerBase, IDamageable, IDamager
+    public class PlayerManager : CharacterControllerBase, IDamageable, IDamager, IKnockbackable
     /// 플레이어와 직접적으로 관련된 클래스(ex. HPController, InputController)는 PlayerManager를 가지고 있고
     /// 플레이어와 연관된 외부 시스템 클래스(ex. Quest, Inventory)는 PlayerManager가 가지고 있는 형태입니다.
     {
@@ -42,6 +43,9 @@ namespace FoxHill.Player
         public bool IsPaused => _isPaused;
         public bool IsDead => _isDead;
         public bool IsTowerSpawnerOpen => _isTowerSpawnerOpen;
+        public bool IsMovable { get => State.CurrentActionState != PlayerState.Knockback; } // 플레이어가 움직일 수 있는지 확인
+        public bool IsActable { get => State.CurrentActionState == PlayerState.None; } // 플레이어가 Action을 수행할 수 있는지 확인
+        public bool IsOnKnockback { get => State.CurrentActionState == PlayerState.Knockback; } // 플레이어가 넉백을 당하고 있는지 확인
 
         /// <summary>
         /// 플레이어가 X축으로 바라보는 방향
@@ -82,6 +86,7 @@ namespace FoxHill.Player
         public Transform Transform => transform;
 
         [SerializeField] private PlayerData _data;
+
         private Vector2 _direction = Vector2.right;
         private bool _isLeftward = false;
 
@@ -172,9 +177,9 @@ namespace FoxHill.Player
             });
         }
 
-        public void SetState(PlayerState state)
+        public void SetState(PlayerState state, bool needParamters = false)
         {
-            State.SetState(state);
+            State.SetState(state, needParamters);
         }
 
         public void TakeDamage(IDamager damager, float damage)
@@ -195,6 +200,12 @@ namespace FoxHill.Player
 
             State.SetState(PlayerState.Idle); // MoveState 설정 
             State.SetState(PlayerState.Dead); // ActionState 설정
+        }
+
+        public void Knockback(Transform attackerTransform)
+        {
+            State.Parameters.AttackerTransform = attackerTransform;
+            State.SetState(PlayerState.Knockback, true);
         }
     }
 }

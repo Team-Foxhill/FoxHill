@@ -1,20 +1,12 @@
 using System.Collections;
 using UnityEngine;
 
-namespace FoxHill.Items
+namespace FoxHill.Core.Exp
 {
-    [RequireComponent(typeof(SpriteRenderer))]
-    public class Item : MonoBehaviour
+    public class Exp : MonoBehaviour
     {
-        public ItemData Info;
-        public Sprite Image => _icon.sprite;
+        public float Amount;
 
-        private SpriteRenderer _icon;
-
-        private void Awake()
-        {
-            _icon = GetComponent<SpriteRenderer>();
-        }
 
         public void Obtain(Transform playerTransform)
         {
@@ -23,14 +15,14 @@ namespace FoxHill.Items
 
         private IEnumerator C_Obtain(Transform playerTransform)
         {
-            float moveSpeed = 5f;
+            float moveSpeed = 6f;
             Vector3 direction = playerTransform.position - transform.position;
 
             while (direction.magnitude > 0.05f)
             {
                 transform.position += direction.normalized * moveSpeed * Time.deltaTime;
                 direction = playerTransform.position - transform.position;
-                moveSpeed += 0.02f;
+                moveSpeed += 0.03f;
                 yield return null;
             }
 

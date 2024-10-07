@@ -12,10 +12,7 @@ namespace FoxHill.Tower
         {
             base.Awake();
 
-            if (_attackController == null)
-            {
-                _attackController = GetComponentInChildren<TowerAttackControllerBase>();
-            }
+            _attackController ??= GetComponentInChildren<TowerAttackControllerBase>();
 
             if (_stat != null)
             {

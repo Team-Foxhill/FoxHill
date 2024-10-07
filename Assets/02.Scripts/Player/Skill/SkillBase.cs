@@ -45,10 +45,7 @@ namespace FoxHill.Player.Skill
                 Debug.LogError($"Cannot find data in skill : {this}");
             }
 
-            if (_animator == null)
-            {
-                _animator = transform.Find("Model").GetComponent<Animator>();
-            }
+            _animator ??= transform.Find("Model").GetComponent<Animator>();
         }
 
         protected virtual void OnDestroy()

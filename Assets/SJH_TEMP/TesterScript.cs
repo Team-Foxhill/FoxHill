@@ -12,7 +12,7 @@ public class TesterScript : MonoBehaviour, IDamager
     public Button button4;
 
     public PlayerManager player;
-
+    public GameObject enemy;
     public Transform Transform => transform;
 
     private void Awake()
@@ -21,7 +21,8 @@ public class TesterScript : MonoBehaviour, IDamager
 
         button1.onClick.AddListener(PauseManager.Pause);
         button2.onClick.AddListener(PauseManager.Resume);
-        button3.onClick.AddListener(() => { player.Quest.TryStartQuest(1, 1); });
+        //button3.onClick.AddListener(() => { player.Quest.TryStartQuest(1, 1); });
+        button3.onClick.AddListener(() => { player.Knockback(enemy.transform); });
         button4.onClick.AddListener(() => { player.TakeDamage(this, 40f); });
     }
 }

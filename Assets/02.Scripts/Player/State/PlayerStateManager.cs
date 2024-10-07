@@ -13,7 +13,10 @@ namespace FoxHill.Player.State
         None,
         Attack,
         Dodge,
-        Dead
+        Dead,
+        Guard,
+        FatalAttack,
+        Knockback
     }
 
     /// <summary>
@@ -22,13 +25,18 @@ namespace FoxHill.Player.State
 
     public class PlayerStateManager : MonoBehaviour
     {
-        private Dictionary<PlayerState, PlayerStateBase> _stateDictionary = new Dictionary<PlayerState, PlayerStateBase>(6);
+        public PlayerState CurrentActionState { get => _currentActionState; }
+        public PlayerStateParameters Parameters { get; set; }
+
+        private Dictionary<PlayerState, PlayerStateBase> _stateDictionary = new Dictionary<PlayerState, PlayerStateBase>(9);
 
         private PlayerState _currentMoveState = PlayerState.Idle;
         private PlayerState _currentActionState = PlayerState.None;
 
         private void Awake()
         {
+            Parameters = ScriptableObject.CreateInstance<PlayerStateParameters>();
+
             foreach (PlayerStateBase state in transform.GetComponents<PlayerStateBase>())
             {
                 _stateDictionary.Add(state.State, state);
@@ -43,14 +51,14 @@ namespace FoxHill.Player.State
 
         private void Update()
         {
-            if (_stateDictionary[_currentActionState].IsDone == true)
+            if ((_stateDictionary[_currentActionState].IsDone == true) && (_currentActionState != PlayerState.None))
             {
                 SetState(PlayerState.None);
                 _stateDictionary[_currentMoveState].PlayAnimation();
             }
         }
 
-        public void SetState(PlayerState state)
+        public void SetState(PlayerState state, bool needParamters = false)
         {
             if (!_stateDictionary.TryGetValue(state, out var newState))
             {
@@ -68,11 +76,21 @@ namespace FoxHill.Player.State
             {
                 _stateDictionary[_currentMoveState].enabled = false;
                 _currentMoveState = state;
+
+                if(needParamters == true)
+                {
+                    _stateDictionary[_currentMoveState].Initialize(Parameters);
+                }
             }
             else
             {
                 _stateDictionary[_currentActionState].enabled = false;
                 _currentActionState = state;
+
+                if (needParamters == true)
+                {
+                    _stateDictionary[_currentActionState].Initialize(Parameters);
+                }
             }
 
             newState.enabled = true;

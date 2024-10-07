@@ -55,6 +55,15 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Guard"",
+                    ""type"": ""Button"",
+                    ""id"": ""5872e2eb-b987-42e7-8327-e5d8b0b4ad3f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Attack"",
                     ""type"": ""Button"",
                     ""id"": ""a43adb91-9dce-4763-b26d-ca18e8ebf4e0"",
@@ -190,6 +199,17 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""PC"",
                     ""action"": ""Inventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""afa6f0d7-3b6f-4c75-8396-8046d0393064"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""Guard"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -464,6 +484,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         m_PlayerAction_Move = m_PlayerAction.FindAction("Move", throwIfNotFound: true);
         m_PlayerAction_Dodge = m_PlayerAction.FindAction("Dodge", throwIfNotFound: true);
         m_PlayerAction_SwitchSkill = m_PlayerAction.FindAction("SwitchSkill", throwIfNotFound: true);
+        m_PlayerAction_Guard = m_PlayerAction.FindAction("Guard", throwIfNotFound: true);
         m_PlayerAction_Attack = m_PlayerAction.FindAction("Attack", throwIfNotFound: true);
         m_PlayerAction_CastSkill = m_PlayerAction.FindAction("CastSkill", throwIfNotFound: true);
         m_PlayerAction_Inventory = m_PlayerAction.FindAction("Inventory", throwIfNotFound: true);
@@ -542,6 +563,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerAction_Move;
     private readonly InputAction m_PlayerAction_Dodge;
     private readonly InputAction m_PlayerAction_SwitchSkill;
+    private readonly InputAction m_PlayerAction_Guard;
     private readonly InputAction m_PlayerAction_Attack;
     private readonly InputAction m_PlayerAction_CastSkill;
     private readonly InputAction m_PlayerAction_Inventory;
@@ -552,6 +574,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_PlayerAction_Move;
         public InputAction @Dodge => m_Wrapper.m_PlayerAction_Dodge;
         public InputAction @SwitchSkill => m_Wrapper.m_PlayerAction_SwitchSkill;
+        public InputAction @Guard => m_Wrapper.m_PlayerAction_Guard;
         public InputAction @Attack => m_Wrapper.m_PlayerAction_Attack;
         public InputAction @CastSkill => m_Wrapper.m_PlayerAction_CastSkill;
         public InputAction @Inventory => m_Wrapper.m_PlayerAction_Inventory;
@@ -573,6 +596,9 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @SwitchSkill.started += instance.OnSwitchSkill;
             @SwitchSkill.performed += instance.OnSwitchSkill;
             @SwitchSkill.canceled += instance.OnSwitchSkill;
+            @Guard.started += instance.OnGuard;
+            @Guard.performed += instance.OnGuard;
+            @Guard.canceled += instance.OnGuard;
             @Attack.started += instance.OnAttack;
             @Attack.performed += instance.OnAttack;
             @Attack.canceled += instance.OnAttack;
@@ -595,6 +621,9 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @SwitchSkill.started -= instance.OnSwitchSkill;
             @SwitchSkill.performed -= instance.OnSwitchSkill;
             @SwitchSkill.canceled -= instance.OnSwitchSkill;
+            @Guard.started -= instance.OnGuard;
+            @Guard.performed -= instance.OnGuard;
+            @Guard.canceled -= instance.OnGuard;
             @Attack.started -= instance.OnAttack;
             @Attack.performed -= instance.OnAttack;
             @Attack.canceled -= instance.OnAttack;
@@ -767,6 +796,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnDodge(InputAction.CallbackContext context);
         void OnSwitchSkill(InputAction.CallbackContext context);
+        void OnGuard(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
         void OnCastSkill(InputAction.CallbackContext context);
         void OnInventory(InputAction.CallbackContext context);
