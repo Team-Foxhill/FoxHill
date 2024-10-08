@@ -1,35 +1,60 @@
-using TMPro;
+using System.Collections.Generic;
+using UnityEngine.UI;
 
 namespace FoxHill.Core.Settings
 {
     public class OtherSettings : SettingsBase
     {
-        public OtherSettings(TMP_Dropdown dropdown) 
-        { 
-            _dropdown = dropdown;
+        public OtherSettings(Image languageSelector)
+        {
+            _languageSelector = new SettingSelector(languageSelector, new List<SettingSelection>
+            {
+                new SettingSelection("한국어", () => {GameManager.Instance.Language.ChangeLanguage(LanguageManager.LanguageType.Korean); }),
+                new SettingSelection("English", () => {GameManager.Instance.Language.ChangeLanguage(LanguageManager.LanguageType.English); }),
+            });
         }
 
-        public bool IsDropdownExpanded { get; private set; } = false;
+        private bool _isActivated = false;
+        private SettingSelector _languageSelector;
 
-        private TMP_Dropdown _dropdown;
-
-        public void ToggleDropdown(bool toggle)
+        public void SwitchSelection(bool isLeftward)
         {
-            if(toggle == true)
+            _languageSelector.OnHoverEnter();
+            if(_isActivated == false)
             {
-                _dropdown.Show();
-                IsDropdownExpanded = true;
+                _isActivated = true;
+            }
+        }
+
+        public void SwitchOption(bool isUpward)
+        {
+            if (_isActivated == false)
+            {
+                return;
+            }
+
+            if (isUpward == true)
+            {
+                _languageSelector.OnSwipeUp();
             }
             else
             {
-                _dropdown.Hide();
-                IsDropdownExpanded = false;
+                _languageSelector.OnSwipeDown();
             }
         }
 
-        public override void OnExit()
+        public void SelectOption()
         {
-            ToggleDropdown(false);
+            _languageSelector.OnSelect();
+        }
+        public override void OnExitSettingSelection()
+        {
+            _languageSelector.OnHoverExit();
+        }
+
+        public override void OnSettingClosed()
+        {
+            _languageSelector.OnHoverExit();
         }
     }
 }

@@ -37,8 +37,8 @@ namespace FoxHill.Player.State.Implementations
                 Vector2 knockbackPosition = _direction * KNOCKBACK_SPEED * Time.deltaTime;
 
                 _playerTransform.Translate(knockbackPosition);
-
                 elapsedTime += Time.deltaTime;
+
                 yield return null;
             }
 

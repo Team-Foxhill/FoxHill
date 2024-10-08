@@ -43,7 +43,11 @@ namespace FoxHill.Player
         public bool IsPaused => _isPaused;
         public bool IsDead => _isDead;
         public bool IsTowerSpawnerOpen => _isTowerSpawnerOpen;
-        public bool IsMovable { get => State.CurrentActionState != PlayerState.Knockback; } // 플레이어가 움직일 수 있는지 확인
+        public bool IsMovable // 플레이어가 움직일 수 있는지 확인
+        {
+            get => (State.CurrentActionState != PlayerState.Knockback) 
+                && (State.CurrentActionState != PlayerState.Dodge); 
+        } 
         public bool IsActable { get => State.CurrentActionState == PlayerState.None; } // 플레이어가 Action을 수행할 수 있는지 확인
         public bool IsOnKnockback { get => State.CurrentActionState == PlayerState.Knockback; } // 플레이어가 넉백을 당하고 있는지 확인
 

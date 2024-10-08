@@ -31,10 +31,15 @@ namespace FoxHill.Core.Settings
                     : 1f;
             }
         }
-
-        public override void OnExit()
+        public override void OnExitSettingSelection()
         {
             return;
         }
+
+        public override void OnSettingClosed()
+        {
+            return;
+        }
+
     }
 }

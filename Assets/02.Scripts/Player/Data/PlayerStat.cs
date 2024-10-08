@@ -13,6 +13,7 @@ namespace FoxHill.Player.Data
             Power = data.Power;
             Defense = data.Defense;
             AttackSpeed = data.AttackSpeed;
+            DodgeCooldown = data.DodgeCooldown;
             Exp = 0f;
             Level = 1;
         }
@@ -23,6 +24,7 @@ namespace FoxHill.Player.Data
         public float Power { get; set; }
         public float Defense { get; set; }
         public float AttackSpeed { get; set; }
+        public float DodgeCooldown { get; set; }
         public float Exp { get; set; }
         public int Level { get; set; }
     }

@@ -13,5 +13,6 @@ namespace FoxHill.Player.Data
         public float Defense = 0.05f;
         public float MoveSpeed = 5f;
         public float AttackSpeed = 2f;
+        public float DodgeCooldown = 4f;
     }
 }

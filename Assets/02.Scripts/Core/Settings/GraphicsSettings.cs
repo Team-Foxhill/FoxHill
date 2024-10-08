@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,54 +7,51 @@ namespace FoxHill.Core.Settings
 {
     public class GraphicsSettings : SettingsBase
     {
-        public GraphicsSettings(Button button1600, Button button1920)
+        public GraphicsSettings(Image screenModeSelector, Image resolutionSelector)
         {
-            _currentIndex = 0;
-            _button1600 = new ResolutionButton(button1600);
-            _button1920 = new ResolutionButton(button1920);
+            _currentIndex = -1;
+            _screenModeSelector = new SettingSelector(screenModeSelector, new List<SettingSelection>
+            {
+                new SettingSelection("전체 화면", () => { _screenMode = FullScreenMode.ExclusiveFullScreen; }),
+                new SettingSelection("창 화면", () => { _screenMode = FullScreenMode. Windowed; }),
+            });
 
-            _buttonDictionary = new Dictionary<int, ResolutionButton>(2);
-            _buttonDictionary.Add(0, _button1600);
-            _buttonDictionary.Add(1, _button1920);
+            _resolutionSelector = new SettingSelector(resolutionSelector, new List<SettingSelection>
+            {
+                new SettingSelection("1920x1080", () => { _width = 1920; _height = 1080; }),
+                new SettingSelection("1600x900", () => { _width = 1600; _height = 900; }),
+            });
 
-            _buttonDictionary[_currentIndex].OnHoverEnter();
+            _buttonDictionary = new Dictionary<int, SettingSelector>(2)
+            {
+                { 0, _screenModeSelector },
+                { 1, _resolutionSelector }
+            };
         }
 
         private const int BUTTON_COUNT = 2; // 현재 관리하고 있는 버튼의 개수
 
-        private int _currentIndex = 0;
+        private int _currentIndex;
 
-        private class ResolutionButton
-        {
-            private readonly Color COLOR_SELECTED = new Color(140f / 255f, 140f / 255f, 140f / 255f, 1f);
+        private SettingSelector _screenModeSelector;
+        private SettingSelector _resolutionSelector;
 
-            private Button _button;
-            private Image _image;
+        private Dictionary<int, SettingSelector> _buttonDictionary;
 
-            public ResolutionButton(Button button)
-            {
-                _button = button;
-                _image = _button.GetComponent<Image>();
-            }
+        private FullScreenMode _screenMode = FullScreenMode.ExclusiveFullScreen;
+        private int _width = 1920;
+        private int _height = 1080;
 
-            public void OnHoverEnter()
-            {
-                _image.color = COLOR_SELECTED;
-            }
-
-            public void OnHoverExit()
-            {
-                _image.color = Color.white;
-            }
-        }
-
-        private ResolutionButton _button1600;
-        private ResolutionButton _button1920;
-
-        private Dictionary<int, ResolutionButton> _buttonDictionary;
 
         public void SwitchSelection(bool isLeftward)
         {
+            if (_currentIndex == -1) // 초기 상태에서 입력을 받으면
+            {
+                _currentIndex = 0;
+                _buttonDictionary[_currentIndex].OnHoverEnter();
+                return;
+            }
+
             _buttonDictionary[_currentIndex].OnHoverExit();
 
             if (isLeftward == true && _currentIndex > 0)
@@ -68,32 +66,56 @@ namespace FoxHill.Core.Settings
             _buttonDictionary[_currentIndex].OnHoverEnter();
         }
 
+        /// <summary>
+        /// 선택된 Graphics Option들을 적용
+        /// </summary>
         public void SelectOption()
         {
-            if (_currentIndex == 0)
+            for (int i = 0; i < BUTTON_COUNT; i++)
             {
-                SetScreenResolution(1600, 900);
+                _buttonDictionary[i].OnSelect();
             }
-            else if (_currentIndex == 1)
+
+            SetScreenResolution();
+        }
+
+        public void SwitchOption(bool isUpward)
+        {
+            if(_currentIndex == -1) // 초기 상태
             {
-                SetScreenResolution(1920, 1080);
+                return;
+            }
+
+            if (isUpward == true)
+            {
+                _buttonDictionary[_currentIndex].OnSwipeUp();
             }
             else
             {
-                Debug.LogError($"Wrong index {_currentIndex} in GraphicsSetting");
+                _buttonDictionary[_currentIndex].OnSwipeDown();
             }
         }
 
-        private void SetScreenResolution(int width, int height)
+        private void SetScreenResolution()
         {
-            Screen.SetResolution(width, height, FullScreenMode.ExclusiveFullScreen);
+            Screen.SetResolution(_width, _height, _screenMode);
         }
 
-        public override void OnExit()
+        public override void OnExitSettingSelection()
         {
             _buttonDictionary[_currentIndex].OnHoverExit();
-            _currentIndex = 0;
-            _buttonDictionary[_currentIndex].OnHoverEnter();
+            _currentIndex = -1;
+        }
+
+        public override void OnSettingClosed()
+        {
+            if(_currentIndex == -1) // 초기 상태
+            {
+                return;
+            }
+
+            _buttonDictionary[_currentIndex].OnHoverExit();
+            _currentIndex = -1;
         }
     }
 }

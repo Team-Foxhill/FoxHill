@@ -18,6 +18,7 @@ namespace FoxHill.Player
         private bool _isIdle = false;
 
         private float _attackCooldown = 0f; // 공격 쿨타임
+        private float _dodgeCooldown = 0f; // 회피 쿨타임
 
         private void Awake()
         {
@@ -40,6 +41,7 @@ namespace FoxHill.Player
             _playerManager.OnExitSpawn?.AddListener(() => ToggleTowerSpawnMode(false));
 
             _attackCooldown = _playerManager.Stat.AttackSpeed;
+            _dodgeCooldown = _playerManager.Stat.DodgeCooldown;
         }
 
         private void Update()
@@ -59,11 +61,13 @@ namespace FoxHill.Player
             // 공격 쿨타임 진행
             _attackCooldown += Time.deltaTime;
 
+            // 회피 쿨타임 진행
+            _dodgeCooldown += Time.deltaTime;
+
             // 일정 시간동안 입력을 받지 않으면 Idle 상태로 변경
             if (_playerManager.MoveInput != Vector2.zero && _playerManager.IsMovable == true)
             {
-                _isIdle = false;
-                _elapsedTime_Idle = 0f;
+                ResetIdleTime();
 
                 _playerManager.Direction = _playerManager.MoveInput;
 
@@ -104,9 +108,8 @@ namespace FoxHill.Player
                     return;
                 }
 
-                _isIdle = false;
                 _attackCooldown = 0f;
-                _elapsedTime_Idle = 0f;
+                ResetIdleTime();
 
                 _playerManager.SetState(PlayerState.Attack);
             }
@@ -121,13 +124,31 @@ namespace FoxHill.Player
                     return;
                 }
 
+                ResetIdleTime();
+
                 _playerManager.SetState(PlayerState.Guard);
             }
         }
 
         public void OnDodge(InputAction.CallbackContext context) // Z
         {
-            Debug.Log("Dodge");
+            if (context.started == true)
+            {
+                if (_dodgeCooldown < _playerManager.Stat.DodgeCooldown) // 회피 쿨타임
+                {
+                    return;
+                }
+
+                if (_playerManager.IsOnKnockback == true)
+                {
+                    return;
+                }
+
+                ResetIdleTime();
+                _dodgeCooldown = 0f;
+
+                _playerManager.SetState(PlayerState.Dodge);
+            }
         }
 
         public void OnMove(InputAction.CallbackContext context) // Arrow
@@ -144,7 +165,7 @@ namespace FoxHill.Player
                     return;
                 }
 
-                _isIdle = false;
+                ResetIdleTime();
 
                 CastSkill();
             }
@@ -305,6 +326,12 @@ namespace FoxHill.Player
         private void MoveTower()
         {
             _playerManager.OnMovePrefabSpawn?.Invoke(_towerMoveInput);
+        }
+
+        private void ResetIdleTime()
+        {
+            _isIdle = false;
+            _elapsedTime_Idle = 0f;
         }
     }
 }
