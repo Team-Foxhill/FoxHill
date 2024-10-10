@@ -16,7 +16,7 @@ namespace FoxHill.Player.State.Implementations
 
         protected override void OnEnable()
         {
-            base.OnEnable();
+            IsDone = false;
             
             _playerTransform = _manager.Transform;
             _direction = _manager.Direction.normalized;

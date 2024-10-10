@@ -34,6 +34,11 @@ namespace FoxHill.Player.State.Implementations
 
             while (elapsedTime < KNOCKBACK_TIME)
             {
+                if (_manager.IsPaused == true)
+                {
+                    yield return new WaitUntil(() => { return _manager.IsPaused == false; });
+                }
+
                 Vector2 knockbackPosition = _direction * KNOCKBACK_SPEED * Time.deltaTime;
 
                 _playerTransform.Translate(knockbackPosition);

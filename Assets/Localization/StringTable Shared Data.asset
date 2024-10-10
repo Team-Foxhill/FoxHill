@@ -51,6 +51,18 @@ MonoBehaviour:
     m_Key: Settings_Tutorial
     m_Metadata:
       m_Items: []
+  - m_Id: 56651498577920
+    m_Key: Menu_Info
+    m_Metadata:
+      m_Items: []
+  - m_Id: 56653948051456
+    m_Key: Menu_Cancel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 56655856459776
+    m_Key: Menu_Exit
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

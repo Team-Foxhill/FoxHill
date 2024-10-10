@@ -75,10 +75,6 @@ namespace FoxHill.Core.Settings
             _optionDictionary.Add(SettingOptions.Other, _otherSetting);
         }
 
-        private void Start()
-        {
-            ToggleUI(false);
-        }
 
         public void ToggleUI(bool toggle)
         {

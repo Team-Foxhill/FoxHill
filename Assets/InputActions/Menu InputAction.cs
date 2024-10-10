@@ -290,6 +290,137 @@ public partial class @MenuInputAction: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""GameScene"",
+            ""id"": ""7542ef84-8b94-4bc6-9368-dc7f46541dbb"",
+            ""actions"": [
+                {
+                    ""name"": ""ShowMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""ca80d314-d4ae-4390-b05e-a4dcfd583051"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""cd6446d5-e0dc-4f71-9c08-fdedde54ac1c"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ShowMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""GameSceneMenu"",
+            ""id"": ""e579c35c-cc1b-43c0-b8ae-5910a99af7c5"",
+            ""actions"": [
+                {
+                    ""name"": ""SwitchMenu"",
+                    ""type"": ""Value"",
+                    ""id"": ""6651a567-f9f6-4f73-8c48-b052785c3ddf"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Select"",
+                    ""type"": ""Button"",
+                    ""id"": ""c3fb25cd-bf6a-49a3-a48a-eb437e843961"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""955988be-7417-423d-9ff3-d92014fbec20"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchMenu"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""bc579b35-8af1-4308-995a-48b7e3ccbb4a"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""8a714ab7-9853-45eb-9c3a-2d2118993f38"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""a59a5af7-a27b-42ca-9f57-4404d371919b"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""e260afa4-ccaa-4b76-bcdd-797503c9729f"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8bb22d21-d6fd-4032-bd0c-3650e839551e"",
+                    ""path"": ""<Keyboard>/z"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""14f8eb90-ff05-4d22-b73c-0f34127f442e"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -304,6 +435,13 @@ public partial class @MenuInputAction: IInputActionCollection2, IDisposable
         m_TitleSceneSettings_SwitchMenu = m_TitleSceneSettings.FindAction("SwitchMenu", throwIfNotFound: true);
         m_TitleSceneSettings_Select = m_TitleSceneSettings.FindAction("Select", throwIfNotFound: true);
         m_TitleSceneSettings_Deselect = m_TitleSceneSettings.FindAction("Deselect", throwIfNotFound: true);
+        // GameScene
+        m_GameScene = asset.FindActionMap("GameScene", throwIfNotFound: true);
+        m_GameScene_ShowMenu = m_GameScene.FindAction("ShowMenu", throwIfNotFound: true);
+        // GameSceneMenu
+        m_GameSceneMenu = asset.FindActionMap("GameSceneMenu", throwIfNotFound: true);
+        m_GameSceneMenu_SwitchMenu = m_GameSceneMenu.FindAction("SwitchMenu", throwIfNotFound: true);
+        m_GameSceneMenu_Select = m_GameSceneMenu.FindAction("Select", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -485,6 +623,106 @@ public partial class @MenuInputAction: IInputActionCollection2, IDisposable
         }
     }
     public TitleSceneSettingsActions @TitleSceneSettings => new TitleSceneSettingsActions(this);
+
+    // GameScene
+    private readonly InputActionMap m_GameScene;
+    private List<IGameSceneActions> m_GameSceneActionsCallbackInterfaces = new List<IGameSceneActions>();
+    private readonly InputAction m_GameScene_ShowMenu;
+    public struct GameSceneActions
+    {
+        private @MenuInputAction m_Wrapper;
+        public GameSceneActions(@MenuInputAction wrapper) { m_Wrapper = wrapper; }
+        public InputAction @ShowMenu => m_Wrapper.m_GameScene_ShowMenu;
+        public InputActionMap Get() { return m_Wrapper.m_GameScene; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(GameSceneActions set) { return set.Get(); }
+        public void AddCallbacks(IGameSceneActions instance)
+        {
+            if (instance == null || m_Wrapper.m_GameSceneActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_GameSceneActionsCallbackInterfaces.Add(instance);
+            @ShowMenu.started += instance.OnShowMenu;
+            @ShowMenu.performed += instance.OnShowMenu;
+            @ShowMenu.canceled += instance.OnShowMenu;
+        }
+
+        private void UnregisterCallbacks(IGameSceneActions instance)
+        {
+            @ShowMenu.started -= instance.OnShowMenu;
+            @ShowMenu.performed -= instance.OnShowMenu;
+            @ShowMenu.canceled -= instance.OnShowMenu;
+        }
+
+        public void RemoveCallbacks(IGameSceneActions instance)
+        {
+            if (m_Wrapper.m_GameSceneActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IGameSceneActions instance)
+        {
+            foreach (var item in m_Wrapper.m_GameSceneActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_GameSceneActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public GameSceneActions @GameScene => new GameSceneActions(this);
+
+    // GameSceneMenu
+    private readonly InputActionMap m_GameSceneMenu;
+    private List<IGameSceneMenuActions> m_GameSceneMenuActionsCallbackInterfaces = new List<IGameSceneMenuActions>();
+    private readonly InputAction m_GameSceneMenu_SwitchMenu;
+    private readonly InputAction m_GameSceneMenu_Select;
+    public struct GameSceneMenuActions
+    {
+        private @MenuInputAction m_Wrapper;
+        public GameSceneMenuActions(@MenuInputAction wrapper) { m_Wrapper = wrapper; }
+        public InputAction @SwitchMenu => m_Wrapper.m_GameSceneMenu_SwitchMenu;
+        public InputAction @Select => m_Wrapper.m_GameSceneMenu_Select;
+        public InputActionMap Get() { return m_Wrapper.m_GameSceneMenu; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(GameSceneMenuActions set) { return set.Get(); }
+        public void AddCallbacks(IGameSceneMenuActions instance)
+        {
+            if (instance == null || m_Wrapper.m_GameSceneMenuActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_GameSceneMenuActionsCallbackInterfaces.Add(instance);
+            @SwitchMenu.started += instance.OnSwitchMenu;
+            @SwitchMenu.performed += instance.OnSwitchMenu;
+            @SwitchMenu.canceled += instance.OnSwitchMenu;
+            @Select.started += instance.OnSelect;
+            @Select.performed += instance.OnSelect;
+            @Select.canceled += instance.OnSelect;
+        }
+
+        private void UnregisterCallbacks(IGameSceneMenuActions instance)
+        {
+            @SwitchMenu.started -= instance.OnSwitchMenu;
+            @SwitchMenu.performed -= instance.OnSwitchMenu;
+            @SwitchMenu.canceled -= instance.OnSwitchMenu;
+            @Select.started -= instance.OnSelect;
+            @Select.performed -= instance.OnSelect;
+            @Select.canceled -= instance.OnSelect;
+        }
+
+        public void RemoveCallbacks(IGameSceneMenuActions instance)
+        {
+            if (m_Wrapper.m_GameSceneMenuActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IGameSceneMenuActions instance)
+        {
+            foreach (var item in m_Wrapper.m_GameSceneMenuActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_GameSceneMenuActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public GameSceneMenuActions @GameSceneMenu => new GameSceneMenuActions(this);
     public interface ITitleSceneActions
     {
         void OnSwitchMenu(InputAction.CallbackContext context);
@@ -496,5 +734,14 @@ public partial class @MenuInputAction: IInputActionCollection2, IDisposable
         void OnSwitchMenu(InputAction.CallbackContext context);
         void OnSelect(InputAction.CallbackContext context);
         void OnDeselect(InputAction.CallbackContext context);
+    }
+    public interface IGameSceneActions
+    {
+        void OnShowMenu(InputAction.CallbackContext context);
+    }
+    public interface IGameSceneMenuActions
+    {
+        void OnSwitchMenu(InputAction.CallbackContext context);
+        void OnSelect(InputAction.CallbackContext context);
     }
 }

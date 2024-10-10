@@ -11,11 +11,11 @@ namespace FoxHill.Core.Settings
             _languageSelector = new SettingSelector(languageSelector, new List<SettingSelection>
             {
                 new SettingSelection(
-                    languageSelector.transform.Find("Text (TMP)_Korean").GetComponent<TMP_Text>(),
-                    () => {GameManager.Instance.Language.ChangeLanguage(LanguageManager.LanguageType.Korean); }),
-                new SettingSelection(
                     languageSelector.transform.Find("Text (TMP)_English").GetComponent<TMP_Text>(),
                     () => {GameManager.Instance.Language.ChangeLanguage(LanguageManager.LanguageType.English); }),
+                new SettingSelection(
+                    languageSelector.transform.Find("Text (TMP)_Korean").GetComponent<TMP_Text>(),
+                    () => {GameManager.Instance.Language.ChangeLanguage(LanguageManager.LanguageType.Korean); }),
             });
         }
 

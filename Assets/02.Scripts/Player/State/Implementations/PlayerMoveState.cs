@@ -23,6 +23,11 @@ namespace FoxHill.Player.State.Implementations
 
         protected override void Update()
         {
+            if(_manager.IsPaused == true)
+            {
+                return;
+            }
+
             Vector2 movePosition = _manager.MoveInput * _manager.Stat.MoveSpeed * Time.deltaTime;
             _playerTransform.Translate(movePosition);
         }

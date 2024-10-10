@@ -86,7 +86,7 @@ namespace FoxHill.Player
         public PlayerQuestManager Quest { get; private set; }
         public PlayerInventory Inventory { get; private set; }
         [field: SerializeField] public TowerManager Tower { get; private set; }
-
+        
         public Transform Transform => transform;
 
         [SerializeField] private PlayerData _data;

@@ -13,21 +13,21 @@ namespace FoxHill.Core.Settings
             _screenModeSelector = new SettingSelector(screenModeSelector, new List<SettingSelection>
             {
                 new SettingSelection(
-                    screenModeSelector.transform.Find("Text (TMP)_FullScreen").GetComponent<TMP_Text>(),
-                    () => { _screenMode = FullScreenMode.ExclusiveFullScreen; }),
-                new SettingSelection(
                     screenModeSelector.transform.Find("Text (TMP)_Windowed").GetComponent<TMP_Text>(),
                     () => { _screenMode = FullScreenMode. Windowed; }),
+                new SettingSelection(
+                    screenModeSelector.transform.Find("Text (TMP)_FullScreen").GetComponent<TMP_Text>(),
+                    () => { _screenMode = FullScreenMode.ExclusiveFullScreen; }),
             });
 
             _resolutionSelector = new SettingSelector(resolutionSelector, new List<SettingSelection>
             {
                 new SettingSelection(
-                    resolutionSelector.transform.Find("Text (TMP)_1920x1080").GetComponent<TMP_Text>(),
-                    () => { _width = 1920; _height = 1080; }),
-                new SettingSelection(
                     resolutionSelector.transform.Find("Text (TMP)_1600x900").GetComponent<TMP_Text>(),
                     () => { _width = 1600; _height = 900; }),
+                new SettingSelection(
+                    resolutionSelector.transform.Find("Text (TMP)_1920x1080").GetComponent<TMP_Text>(),
+                    () => { _width = 1920; _height = 1080; }),
             });
 
             _buttonDictionary = new Dictionary<int, SettingSelector>(2)

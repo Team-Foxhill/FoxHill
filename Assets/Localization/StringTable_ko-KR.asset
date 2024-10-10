@@ -55,6 +55,18 @@ MonoBehaviour:
       Enter = \uC801\uC6A9"
     m_Metadata:
       m_Items: []
+  - m_Id: 56651498577920
+    m_Localized: "\uC77C\uC2DC\uC815\uC9C0"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 56653948051456
+    m_Localized: "\uB3CC\uC544\uAC00\uAE30"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 56655856459776
+    m_Localized: "\uC885\uB8CC"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -31,8 +31,9 @@ namespace FoxHill.Core
             else
             {
                 Destroy(gameObject);
+                return;
             }
-            
+
             Language = new LanguageManager(_localizationSettings);
             MonsterDataManager.InitializeMonsterForms(_monsterSheet);
             TowerDataManager.InitializeMonsterForms(_towerSheet);

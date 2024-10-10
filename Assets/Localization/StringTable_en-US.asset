@@ -60,6 +60,18 @@ MonoBehaviour:
 '
     m_Metadata:
       m_Items: []
+  - m_Id: 56651498577920
+    m_Localized: Pause
+    m_Metadata:
+      m_Items: []
+  - m_Id: 56653948051456
+    m_Localized: Return
+    m_Metadata:
+      m_Items: []
+  - m_Id: 56655856459776
+    m_Localized: Exit Game
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -14,7 +14,7 @@ namespace FoxHill.UI.Menu
     /// </summary>
     public class TitleSceneMenuController : MonoBehaviour, MenuInputAction.ITitleSceneActions
     {
-        private MenuInputAction _inputAction;
+        [SerializeField] private MenuInputAction _inputAction;
 
         [SerializeField] private TitleButton _startButton;
         [SerializeField] private TitleButton _settingsButton;
@@ -47,15 +47,13 @@ namespace FoxHill.UI.Menu
 
         private void Awake()
         {
-            _inputAction = new MenuInputAction();
+            _inputAction ??= new MenuInputAction();
 
             _inputAction.TitleScene.AddCallbacks(this);
             _inputAction.TitleScene.Enable();
 
-            if (_settingsManager == null)
-            {
-                _settingsManager = FindFirstObjectByType<GameSettingsManager>();
-            }
+            _settingsManager ??= FindFirstObjectByType<GameSettingsManager>();
+
             _settingsManager.InputAction = _inputAction;
             _inputAction.TitleSceneSettings.AddCallbacks(_settingsManager);
 
@@ -72,6 +70,7 @@ namespace FoxHill.UI.Menu
         {
             _currentMenu = Menu.Start;
             _menuButtons[_currentMenu].Animation.OnHoverEnter();
+            _settingsManager.ToggleUI(false);
         }
 
         private void OnDestroy()

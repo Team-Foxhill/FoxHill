@@ -1,3 +1,4 @@
+using FoxHill.Core.Effect;
 using System.Collections;
 using UnityEngine;
 
@@ -18,6 +19,7 @@ namespace FoxHill.Player.Skill.Implementations
         public override void Cast(SkillParameter parameters)
         {
             gameObject.transform.Translate(parameters.Direction * SKILL_RANGE);
+            EffectManager.Play(EffectManager.FeedbackType.Impulse);
             StartCoroutine(C_Cast());
         }
 
