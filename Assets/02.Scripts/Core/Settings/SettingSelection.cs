@@ -1,22 +1,30 @@
 using System;
+using TMPro;
 
 namespace FoxHill.Core.Settings
 {
     public class SettingSelection
     {
-        public SettingSelection(string selectionText, Action action)
+        public SettingSelection(TMP_Text selectionText, Action action)
         {
             _selectionText = selectionText;
             _action = action;
         }
-        public string Text => _selectionText;
 
-        private string _selectionText;
+        public TMP_Text Text => _selectionText;
+
+        private TMP_Text _selectionText;
         private Action _action;
+
 
         public void Select()
         {
             _action?.Invoke();
+        }
+
+        public void Toggle(bool toggle)
+        {
+            _selectionText.enabled = toggle;
         }
     }
 }

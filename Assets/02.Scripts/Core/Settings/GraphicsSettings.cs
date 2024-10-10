@@ -12,14 +12,22 @@ namespace FoxHill.Core.Settings
             _currentIndex = -1;
             _screenModeSelector = new SettingSelector(screenModeSelector, new List<SettingSelection>
             {
-                new SettingSelection("전체 화면", () => { _screenMode = FullScreenMode.ExclusiveFullScreen; }),
-                new SettingSelection("창 화면", () => { _screenMode = FullScreenMode. Windowed; }),
+                new SettingSelection(
+                    screenModeSelector.transform.Find("Text (TMP)_FullScreen").GetComponent<TMP_Text>(),
+                    () => { _screenMode = FullScreenMode.ExclusiveFullScreen; }),
+                new SettingSelection(
+                    screenModeSelector.transform.Find("Text (TMP)_Windowed").GetComponent<TMP_Text>(),
+                    () => { _screenMode = FullScreenMode. Windowed; }),
             });
 
             _resolutionSelector = new SettingSelector(resolutionSelector, new List<SettingSelection>
             {
-                new SettingSelection("1920x1080", () => { _width = 1920; _height = 1080; }),
-                new SettingSelection("1600x900", () => { _width = 1600; _height = 900; }),
+                new SettingSelection(
+                    resolutionSelector.transform.Find("Text (TMP)_1920x1080").GetComponent<TMP_Text>(),
+                    () => { _width = 1920; _height = 1080; }),
+                new SettingSelection(
+                    resolutionSelector.transform.Find("Text (TMP)_1600x900").GetComponent<TMP_Text>(),
+                    () => { _width = 1600; _height = 900; }),
             });
 
             _buttonDictionary = new Dictionary<int, SettingSelector>(2)

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine.UI;
 
 namespace FoxHill.Core.Settings
@@ -9,8 +10,12 @@ namespace FoxHill.Core.Settings
         {
             _languageSelector = new SettingSelector(languageSelector, new List<SettingSelection>
             {
-                new SettingSelection("한국어", () => {GameManager.Instance.Language.ChangeLanguage(LanguageManager.LanguageType.Korean); }),
-                new SettingSelection("English", () => {GameManager.Instance.Language.ChangeLanguage(LanguageManager.LanguageType.English); }),
+                new SettingSelection(
+                    languageSelector.transform.Find("Text (TMP)_Korean").GetComponent<TMP_Text>(),
+                    () => {GameManager.Instance.Language.ChangeLanguage(LanguageManager.LanguageType.Korean); }),
+                new SettingSelection(
+                    languageSelector.transform.Find("Text (TMP)_English").GetComponent<TMP_Text>(),
+                    () => {GameManager.Instance.Language.ChangeLanguage(LanguageManager.LanguageType.English); }),
             });
         }
 
@@ -47,13 +52,16 @@ namespace FoxHill.Core.Settings
         {
             _languageSelector.OnSelect();
         }
+
         public override void OnExitSettingSelection()
         {
+            _isActivated = false;
             _languageSelector.OnHoverExit();
         }
 
         public override void OnSettingClosed()
         {
+            _isActivated = false;
             _languageSelector.OnHoverExit();
         }
     }

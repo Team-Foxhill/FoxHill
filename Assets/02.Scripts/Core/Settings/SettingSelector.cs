@@ -12,7 +12,6 @@ namespace FoxHill.Core.Settings
         private int _currentIndex;
         private int _length;
         private Image _image;
-        private TMP_Text _text;
         private List<SettingSelection> _selections = new List<SettingSelection>(3);
         private GameObject _arrows;
 
@@ -20,11 +19,11 @@ namespace FoxHill.Core.Settings
         {
             _currentIndex = 0;
             _image = image;
-            _text = image.transform.GetChild(0).GetComponent<TMP_Text>();
             _selections = selections;
             _length = selections.Count;
             _arrows = image.transform.Find("Arrows").gameObject;
 
+            Initialize();
             OnHoverExit();
         }
 
@@ -42,19 +41,32 @@ namespace FoxHill.Core.Settings
 
         public void OnSwipeUp()
         {
+            _selections[_currentIndex].Toggle(false);
             _currentIndex = (_currentIndex - 1 >= 0) ? _currentIndex - 1 : _length - 1;
-            _text.text = _selections[_currentIndex].Text;
+            _selections[_currentIndex].Toggle(true);
         }
 
         public void OnSwipeDown()
         {
+            _selections[_currentIndex].Toggle(false);
             _currentIndex = (_currentIndex + 1 < _length) ? _currentIndex + 1 : 0;
-            _text.text = _selections[_currentIndex].Text;
+            _selections[_currentIndex].Toggle(true);
         }
 
         public void OnSelect()
         {
             _selections[_currentIndex]?.Select();
+        }
+
+        private void Initialize()
+        {
+            _selections[0].Toggle(true);
+
+            int selectionCount = _selections.Count;
+            for (int i = 1; i < selectionCount; i++)
+            {
+                _selections[i].Toggle(false);
+            }
         }
     }
 }

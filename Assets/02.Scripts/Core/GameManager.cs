@@ -3,6 +3,7 @@ using FoxHill.Monster;
 using FoxHill.Quest;
 using FoxHill.Tower;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 
 namespace FoxHill.Core
 {
@@ -13,8 +14,9 @@ namespace FoxHill.Core
     {
         public static GameManager Instance { get; private set; }
 
-        public LanguageManager Language { get; private set; } = new LanguageManager();
+        public LanguageManager Language { get; private set; }
 
+        [SerializeField] private LocalizationSettings _localizationSettings;
         [SerializeField] private MonsterData _monsterSheet; // Monster 명세가 담긴 엑셀 시트를 ExcelImporter로 import한 ScriptableObject.
         [SerializeField] private TowerData _towerSheet; // Tower 명세가 담긴 엑셀 시트를 ExcelImporter로 import한 ScriptableObject.
         [SerializeField] private QuestSheet _questSheet; // Quest 명세가 담긴 엑셀 시트를 ExcelImporter로 import한 ScriptableObject
@@ -31,6 +33,7 @@ namespace FoxHill.Core
                 Destroy(gameObject);
             }
             
+            Language = new LanguageManager(_localizationSettings);
             MonsterDataManager.InitializeMonsterForms(_monsterSheet);
             TowerDataManager.InitializeMonsterForms(_towerSheet);
             QuestManager.InitializeQuestForms(_questSheet);
