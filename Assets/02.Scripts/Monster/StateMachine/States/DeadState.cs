@@ -21,7 +21,7 @@ namespace FoxHill.Monster.FSM
         {
             // 이동 애니매이션으로 전환 실행.
             animator.Play(_deathHash);
-            yield break;
+            yield return new WaitUntil(() => IsAnimationComplete(_deathHash));
         }
 
         public override IEnumerator OnExit()

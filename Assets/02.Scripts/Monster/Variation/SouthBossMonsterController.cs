@@ -1,12 +1,12 @@
 using FoxHill.Core;
 using FoxHill.Core.Damage;
+using FoxHill.Core.Parry;
+using FoxHill.Core.Pause;
 using FoxHill.Core.Stat;
 using FoxHill.Monster.FSM;
+using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 using IState = FoxHill.Monster.FSM.IState;
 using State = FoxHill.Monster.FSM.State;
 using StateMachine = FoxHill.Monster.FSM.StateMachine;
@@ -16,7 +16,7 @@ namespace FoxHill.Monster.AI
     [RequireComponent(typeof(MonsterBehaviourTree))]
     [RequireComponent(typeof(Animator))]
     [RequireComponent(typeof(StateMachine))]
-    public class SouthBossMonsterController : MonoBehaviour, IDamager, IDamageable, IStat
+    public class SouthBossMonsterController : MonoBehaviour, IDamager, IDamageable, IStat, IStaggerable, IPausable
     {
         public Transform Transform => transform;
 
@@ -29,6 +29,7 @@ namespace FoxHill.Monster.AI
         public float Power => 10f;
 
         public float Defense => 3f;
+        public bool IsFatalAttackable => _machine.CurrentState == State.Stagger;
 
         public event System.Action OnDead;
         [Header("AI Behaviours")]
@@ -49,27 +50,15 @@ namespace FoxHill.Monster.AI
         [SerializeField] private float _chargeAttackRange;
         [SerializeField] private float _jumpAttackRange;
         [SerializeField] private float _returnToOriginDelay;
-        private float _lostTargetTimer;
-        private static readonly Vector2 Horizontal = Vector2.up;
-        private static readonly Vector2 Vertical = Vector2.down;
-        private static readonly Vector2 Charge = Vector2.right;
-        private static readonly Vector2 Jump = Vector2.left;
-        private static readonly int OnDeadId = Animator.StringToHash("OnDead");
-        private static readonly int OnStaggerId = Animator.StringToHash("OnStagger");
-        private static readonly int OnMoveStartId = Animator.StringToHash("OnMoveStart");
-        private static readonly int OnMoveEndId = Animator.StringToHash("OnMoveEnd");
-        private static readonly int isIdleOnMoveEnd = Animator.StringToHash("isIdleOnMoveEnd");
-        private LayerMask _seektargetMask;
+        private LayerMask _playerMask;
         private LayerMask _towerMask;
-        private float _elapsedTime;
         private bool _isNextAttackReady = true;
         private bool _isTargetInRange = false;
-        private bool _isAttackEventInvoked = false;
         private StateMachine _machine;
         private SpriteRenderer _spriteRenderer;
         private bool _isThisRunning;
         private Blackboard _blackboard;
-
+        private bool _isPaused;
 
 
         private void Awake()
@@ -90,9 +79,10 @@ namespace FoxHill.Monster.AI
                 //{ State.Move, new MoveState(inputCommand) },
                 //{ State.Jump, new JumpState(inputCommand) },
             });
-            _seektargetMask = 1 << _seektargetLayer;
+            _playerMask = 1 << _seektargetLayer;
             _towerMask = 1 << 6;
             MakeBehaviourTree();
+            CurrentHp = MaxHp;
 
             //gameObject.GetComponent<SpriteRenderer> ().enabled = false;
         }
@@ -103,17 +93,18 @@ namespace FoxHill.Monster.AI
             tree.Build(this)
                 .Selector(this)
                     .Sequence(this)
-                        .Seek(tree, this, _maxDistanceFromOrigin, transform.right, _seekRadius, _seekAngle, _seektargetMask, _seekMaxDistance, _stoppingDistance, _moveSpeed, _directionUpdateInterval)
+                        .Seek(tree, this, _maxDistanceFromOrigin, transform.right, _seekRadius, _seekAngle, _playerMask, _seekMaxDistance, _stoppingDistance, _moveSpeed, _directionUpdateInterval)
                         //.Decorator(this, () => CheckTargetRange(tree, _verticalAttackRange) && CheckNextAttackReady() && Random.value < _specialAttackProbability)/* 타겟이 범위 내에 있는지, 특수 공격 가능한 상태인지 확인*/
                         //.Execution(this, () => PerformAttack(tree, State.Charge))
-                        .Decorator(this, () => CheckTargetRange(tree, _horizontalAttackRange) && _machine.CurrentState != State.AttackHorizontal && Random.value < 0.3f)/* 타겟이 범위 내에 있는지 확인 */
-                        .Execution(this, () => PerformAction(tree, State.AttackHorizontal))
-                        .Decorator(this, () => CheckTargetRange(tree, _verticalAttackRange) && _machine.CurrentState != State.AttackVertical && Random.value < 0.3f)/* 타겟이 범위 내에 있는지 확인 */
-                        .Execution(this, () => PerformAction(tree, State.AttackVertical))
-                        .Decorator(this, () => CheckTargetRange(tree, _jumpAttackRange) && _machine.CurrentState != State.Jump && Random.value < 0.3f)/* 타겟이 범위 내에 있는지 확인 */
-                        .Execution(this, () => PerformAction(tree, State.Jump))
-                        .Decorator(this, () => CheckTargetRange(tree, _chargeAttackRange) && _machine.CurrentState != State.Charge && Random.value < 0.1f)/* 타겟이 범위 내에 있는지 확인 */
-                        .Execution(this, () => PerformAction(tree, State.Charge))
+                        //.Decorator(this, () => CheckTargetRange(tree, _horizontalAttackRange) && _machine.CurrentState != State.AttackHorizontal && Random.value < 0.3f)/* 타겟이 범위 내에 있는지 확인 */
+                        //.Execution(this, () => PerformAction(tree, State.AttackHorizontal))
+                        //.Decorator(this, () => CheckTargetRange(tree, _verticalAttackRange) && _machine.CurrentState != State.AttackVertical && Random.value < 0.3f)/* 타겟이 범위 내에 있는지 확인 */
+                        //.Execution(this, () => PerformAction(tree, State.AttackVertical))
+                        //.Decorator(this, () => CheckTargetRange(tree, _jumpAttackRange) && _machine.CurrentState != State.Jump && Random.value < 0.3f)/* 타겟이 범위 내에 있는지 확인 */
+                        //.Execution(this, () => PerformAction(tree, State.Jump))
+                        //.Decorator(this, () => CheckTargetRange(tree, _chargeAttackRange) && _machine.CurrentState != State.Charge && Random.value < 0.1f)/* 타겟이 범위 내에 있는지 확인 */
+                        //.Execution(this, () => PerformAction(tree, State.Charge))
+                        .Execution(this, () => PerformAction(tree, State.Stagger))
                     .FinishCurrentComposite()
                 .FinishCurrentComposite();
             tree.blackboard.OriginPosition = transform.position;
@@ -193,13 +184,11 @@ namespace FoxHill.Monster.AI
         {
             if (!tree.blackboard.IsNextActionReady && _isThisRunning == false)
             {
-                DebugFox.Log("attack is not ready!");
                 return Result.Failure;
             }
 
             if (_isThisRunning == false) // 공격중이 아니라면
             {
-                DebugFox.Log("Starting Attack!");
                 tree.blackboard.IsNextActionReady = false;
                 _isThisRunning = true;
                 Vector2 targetVector;
@@ -215,12 +204,21 @@ namespace FoxHill.Monster.AI
                 _machine.ChangeState(type);
                 return Result.Running;
             }
-            
+
             if (IsAttackingNow() == true) // 공격에 해당하는 애니메이션이라면.
             {
-                DebugFox.Log("attack is Running!");
-                Vector2 direction = ((Vector2)tree.blackboard.Target.position - (Vector2)tree.blackboard.Transform.position).normalized;
-                Vector2 newPosition = (Vector2)transform.position + direction * (_moveSpeed /4) * Time.deltaTime;
+                Vector2 direction;
+                Vector2 newPosition;
+                if (tree.blackboard.Target)
+                {
+                    direction = ((Vector2)tree.blackboard.Target.position - (Vector2)tree.blackboard.Transform.position).normalized;
+                    newPosition = (Vector2)transform.position + direction * (_moveSpeed / 4) * Time.deltaTime;
+                }
+                else
+                {
+                    direction = Vector2.zero;
+                    newPosition = (Vector2)transform.position;
+                }
                 ChangeDirection(direction);
                 if (IsValidPosition(newPosition))
                 {
@@ -236,7 +234,6 @@ namespace FoxHill.Monster.AI
             }
             else
             {
-                DebugFox.Log("attack is completed!");
                 // 행동 완료
                 _isThisRunning = false;
                 tree.blackboard.IsNextActionReady = true;
@@ -246,7 +243,6 @@ namespace FoxHill.Monster.AI
 
         private Result PerformSpecialAttack()
         {
-            Debug.Log("Performing Special Attack");
             // 실제 특수 공격 로직과 애니메이션 변경 구현할 것.
             _machine.ChangeState(State.Charge);
             return Result.Success;
@@ -258,38 +254,73 @@ namespace FoxHill.Monster.AI
             CurrentHp -= (damage - Defense);
             if (_blackboard.Target == null) // 현재 공격 대상이 없는 경우에만.
             {
-            _blackboard.Target = damager.Transform; // 공격 대상으로 공격자를 설정.
+                _blackboard.Target = damager.Transform; // 공격 대상으로 공격자를 설정.
+                IDamageable damageable = damager.Transform.GetComponent<IDamageable>();
+                if (damageable != null)
+                {
+                    damageable.OnDead += ResetTarget;
+                }
             }
+            if (CurrentHp <= 0f)
+            {
+                Dead();
+            }
+        }
+
+        private void ResetTarget()
+        {
+            _blackboard.Target = null;
         }
 
         public void Dead()
         {
-            throw new System.NotImplementedException();
+            _machine.ChangeState(State.Dead);
         }
 
+        AttackSpec tmp;
         private void PerformAttack(AnimationEvent animationEvent) // Todo.Villin 기즈모 만들기.
         {
-            // 범위 판정.
-            DebugFox.Log("performAttack started!");
-            var attakcSpec = (AttackSpec)animationEvent.objectReferenceParameter;
-            RaycastHit2D[] hit2D = Physics2D.CircleCastAll(attakcSpec.CastCenterPosition, attakcSpec.CastAngleSize, attakcSpec.Direction, attakcSpec.Distance);
-            foreach (var hit in hit2D)
+            if (_isPaused)
             {
-                DebugFox.Log($"현재 감지된 콜라이더의 게임오브젝트 이름 {hit.transform.gameObject.name} 현재 감지된 게임오브젝트의 레이어 {(int)hit.transform.gameObject.layer}, 현재 감지된 콜라이더 갯수 {hit2D.Length}");
+                return;
+            }
+            // 범위 판정.
+            var attakcSpec = (AttackSpec)animationEvent.objectReferenceParameter;
+            tmp = attakcSpec; // 기즈모용.
+            RaycastHit2D[] hit2D = Physics2D.CircleCastAll((Vector2)transform.position + attakcSpec.CastCenterPosition, attakcSpec.Radius, attakcSpec.Direction, attakcSpec.Distance, _playerMask | _towerMask);
+            foreach (var hit in hit2D) // 각도 확인하는 작업 필요.
+            {
                 // 여기서 콜라이더2D의 레이어 확인하기. => 대미저블이고 플레이어 혹은 타워라면 IsInSight진행, 아닐 경우는 패스.
                 if (hit.transform.gameObject.TryGetComponent<IDamageable>(out var target) == false)
                 {
                     continue;
                 }
-                if (1 << hit.transform.gameObject.layer == _seektargetMask || 1 << hit.transform.gameObject.layer == _towerMask)
+                if (1 << hit.transform.gameObject.layer == _playerMask) // 플레이어라면,
                 {
-                    DebugFox.Log($"대상 레이어 {1 << hit.transform.gameObject.layer}, 찾고자 하는 레이어 {_seektargetMask} 혹은 {_towerMask}");
+                    IParryable parry = hit.transform.gameObject.GetComponent<IParryable>();
+
+                    if (parry != null && parry.IsPerfectGuard == true)// 상대가 퍼펙트 가드 타이밍인지 확인.
+                    {
+                        _machine.ChangeState(State.Stagger);//stagger 상태 진입.
+                    }
+                    else
+                    {
+                        target.TakeDamage(this, attakcSpec.DamageMultiplier * Power);
+                    }
+                }
+                else
+                {
                     target.TakeDamage(this, attakcSpec.DamageMultiplier * Power);
-                    DebugFox.Log($"{target} found");
                 }
             }
         }
 
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.red;
+            if(tmp != null)
+                Gizmos.DrawWireSphere((Vector2)transform.position + tmp.CastCenterPosition, tmp.Radius);
+        }
         public void SetIdle()
         {
             _machine.ChangeState(State.Idle);
@@ -297,6 +328,10 @@ namespace FoxHill.Monster.AI
 
         public void Move(Vector2 direction)
         {
+            if (_isPaused)
+            {
+                return;
+            }
             // 애니메이션 실행하기.
             if (_isNextAttackReady == false)
             {
@@ -318,12 +353,26 @@ namespace FoxHill.Monster.AI
             Collider2D[] colliders = Physics2D.OverlapCircleAll(position, 0.1f);
             foreach (var collider in colliders)
             {
-                if (1 << collider.gameObject.layer != LayerMask.NameToLayer("Water")) // todo.Villin 임시로 water 사용. 나중엔 obstacle과 같은 이름으로 변경할 것.
+                if (1 << collider.gameObject.layer == LayerMask.NameToLayer("BossMonster"))
+                {
+                    continue;
+                }
+                else if (1 << collider.gameObject.layer == LayerMask.NameToLayer("Water")) // todo.Villin 임시로 water 사용. 나중엔 obstacle과 같은 이름으로 변경할 것.
                 {
                     return false;
                 }
             }
             return true;
+        }
+
+        public void Pause()
+        {
+            _isPaused = true;
+        }
+
+        public void Resume()
+        {
+            _isPaused = false;
         }
     }
 }

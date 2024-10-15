@@ -41,6 +41,10 @@ namespace FoxHill.Monster.FSM
 
         public bool ChangeState(State newState, params object[] parameters)
         {
+            if (CurrentState == State.Dead)
+            {
+                return false;
+            }
             if (_isTransitioning)
             {
                 return false;

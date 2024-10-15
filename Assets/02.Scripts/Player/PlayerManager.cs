@@ -1,7 +1,9 @@
 using FoxHill.Controller;
 using FoxHill.Core.Damage;
 using FoxHill.Core.Knockback;
+using FoxHill.Core.Parry;
 using FoxHill.Core.Pause;
+using FoxHill.Core.Utils;
 using FoxHill.Player.Data;
 using FoxHill.Player.Inventory;
 using FoxHill.Player.Quest;
@@ -16,14 +18,12 @@ namespace FoxHill.Player
     /// <summary>
     /// 플레이어와 관련된 이벤트 및 데이터, 상태 등을 전반적으로 관리합니다.
     /// </summary>
-    public class PlayerManager : CharacterControllerBase, IDamageable, IDamager, IKnockbackable
+    public class PlayerManager : CharacterControllerBase, IDamageable, IDamager, IKnockbackable, IParryable
     /// 플레이어와 직접적으로 관련된 클래스(ex. HPController, InputController)는 PlayerManager를 가지고 있고
     /// 플레이어와 연관된 외부 시스템 클래스(ex. Quest, Inventory)는 PlayerManager가 가지고 있는 형태입니다.
     {
-        public event Action OnDead = null;
-
         [HideInInspector] public UnityEvent<float> OnPlayerDamaged;
-        [HideInInspector] public UnityEvent OnPlayerDead;
+        public event Action OnDead;
         [HideInInspector] public UnityEvent OnSwitchSkill;
         [HideInInspector] public UnityEvent OnCastSkill;
 
@@ -50,6 +50,7 @@ namespace FoxHill.Player
         }
         public bool IsActable { get => State.CurrentActionState == PlayerState.None; } // 플레이어가 Action을 수행할 수 있는지 확인
         public bool IsOnKnockback { get => State.CurrentActionState == PlayerState.Knockback; } // 플레이어가 넉백을 당하고 있는지 확인
+        public bool IsPerfectGuard { get; set; } = false;
 
         /// <summary>
         /// 플레이어가 X축으로 바라보는 방향
@@ -88,6 +89,7 @@ namespace FoxHill.Player
         [field: SerializeField] public TowerManager Tower { get; private set; }
 
         public Transform Transform => transform;
+
 
         [SerializeField] private PlayerData _data;
 
@@ -191,6 +193,10 @@ namespace FoxHill.Player
             if (IsPaused == true)
                 return;
 
+            if (damager.Transform.gameObject.layer == LayerRepository.LAYER_BOSS_MONSTER)
+            {
+                Knockback(damager.Transform);
+            }
             OnPlayerDamaged?.Invoke(damage);
         }
 
@@ -199,7 +205,7 @@ namespace FoxHill.Player
             if (IsPaused == true)
                 return;
 
-            OnPlayerDead?.Invoke();
+            OnDead?.Invoke();
             _isDead = true;
 
             State.SetState(PlayerState.Idle); // MoveState 설정 

@@ -37,7 +37,7 @@ namespace FoxHill.Scene
         {
             _menu.ToggleUI(false);
 
-            StartCoroutine(C_SceneProduction());
+            // StartCoroutine(C_SceneProduction());
         }
 
         private void OnDestroy()

@@ -20,7 +20,7 @@ namespace FoxHill.Player.State.Implementations
         {
             base.Awake();
 
-            _attackableLayer = (1 << LayerRepository.LAYER_PATH_BOSS_MONSTER | 1 << LayerRepository.LAYER_PATH_FOLLOW_MONSTER);
+            _attackableLayer = (1 << LayerRepository.LAYER_BOSS_MONSTER | 1 << LayerRepository.LAYER_PATH_FOLLOW_MONSTER);
         }
 
         protected override void OnEnable()
@@ -48,29 +48,39 @@ namespace FoxHill.Player.State.Implementations
                 ? _manager.Transform.position + Vector3.left * _attackOffset
                 : _manager.transform.position + Vector3.right * _attackOffset;
 
-            // 보스와 일반몬스터가 동시에 존재할 수 있거나 여러 보스가 있을 수 있다면 수정 필요
-            // 특수공격(패링 후 반격) 판단
-            var hits = Physics2D.OverlapBoxAll(_attackPoint, _attackRange, 0f, 1 << LayerRepository.LAYER_PATH_BOSS_MONSTER);
+            //// 보스와 일반몬스터가 동시에 존재할 수 있거나 여러 보스가 있을 수 있다면 수정 필요
+            //// 특수공격(패링 후 반격) 판단
+            var hits = Physics2D.OverlapBoxAll(_attackPoint, _attackRange, 0f, 1 << LayerRepository.LAYER_BOSS_MONSTER);
 
-            if (hits.Length > 0)
+            foreach ( var hit in hits ) 
             {
-                // TODO : if(hit.trygetcomponent<bossmonster>.isFatalAttackable == true)
-                //if (hits[0].TryGetComponent<IDamageable>(out var damageable) == true)
-                //{
-                //    _manager.State.Parameters.FatalAttackTarget = damageable;
-                //    _manager.SetState(PlayerState.FatalAttack, true);
-                //}
+                if (hit.TryGetComponent<IStaggerable>(out var staggerable) == true)
+                {               
+                    if(staggerable.IsFatalAttackable == true)
+                    {
+                        if (hit.TryGetComponent<IDamageable>(out var damageable) == true)
+                        {
 
-                //TEST CODE
-                _manager.State.Parameters.FatalAttackTarget = null;
-                _manager.SetState(PlayerState.FatalAttack, true);
-                IsDone = true;
+                            _manager.State.Parameters.FatalAttackTarget = damageable;
+                            _manager.SetState(PlayerState.FatalAttack, true);
 
-                return;
+                            IsDone = true;
+                            return;
+                        }
+                    }
+                }
             }
 
             StartCoroutine(C_Attack());
         }
+
+        //private bool IsFatalAttackableRange(Transform target)
+        //{
+        //    if(Vector3.Angle(target.position, _manager.transform.position) < 60f)
+        //    {
+
+        //    }
+        //}
 
         private IEnumerator C_Attack()
         {

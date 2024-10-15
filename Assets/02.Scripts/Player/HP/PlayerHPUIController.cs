@@ -30,9 +30,6 @@ namespace FoxHill.Player.HP
             _initialScale = transform.localScale;
         }
 
-        /// <summary>
-        /// PlayerManager의 OnPlayerDead event에 구독시킬 action
-        /// </summary>
         public void OnPlayerDead()
         {
             _spriteRenderer.enabled = false;

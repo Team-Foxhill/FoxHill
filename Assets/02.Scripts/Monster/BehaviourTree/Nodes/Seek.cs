@@ -1,4 +1,5 @@
 using FoxHill.Core;
+using FoxHill.Core.Damage;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -74,6 +75,11 @@ namespace FoxHill.Monster.AI
             }
         }
 
+        private void ResetTarget()
+        {
+            blackboard.Target = null;
+        }
+
         private Result CaseTargetNotFounded()
         {
             Collider2D[] colliders2D = Physics2D.OverlapCircleAll(blackboard.Transform.position, _radius, _targetMask);
@@ -96,6 +102,11 @@ namespace FoxHill.Monster.AI
                 if (IsInSight(collider.transform, _checkDirection)) // 시야 내에 콜라이더가 있다면.
                 {
                     blackboard.Target = collider.transform; // 타겟을 설정하고 이동 시도.
+                    IDamageable damageable = collider.transform.GetComponent<IDamageable>();
+                    if (damageable != null)
+                    {
+                        damageable.OnDead += ResetTarget;
+                    }
                     TryMove();
                     return Result.Running;
                 }
@@ -115,7 +126,6 @@ namespace FoxHill.Monster.AI
             if (_lostTargetTimer < _returnToOriginDelay && _isReturning == false) // 타겟을 잃은 직후에는 타겟을 찾은 후 없다면 잠시 정지.
             {
                 _isWaiting = true;
-                DebugFox.Log($"now lostTargetTimer value is {_lostTargetTimer}");
                 _controller.SetIdle();
                 return Result.Running;
             }
@@ -124,12 +134,10 @@ namespace FoxHill.Monster.AI
             {
                 _isReturning = false;
                 _controller.SetIdle();
-                DebugFox.Log("Seek Success");
                 return Result.Success; // 아무 것도 하지 않음.
             }
             else if (distance >= _maxDistanceFromOrigin || _isWaiting == false) // 만일 원점과의 거리가 최대 거리보다 멀거나, 대기 시간이 지났다면.
             {
-                DebugFox.Log($"now lostTargetTimer reseted as {_lostTargetTimer} and Try Get Back to Origin");
 
                 TryMove(); // 이동을 시도(원점으로).
                 return Result.Running;

@@ -30,7 +30,10 @@ namespace FoxHill.Monster.FSM
 
         protected override List<(Func<bool> condition, State next)> SetTransitions()
         {
-            return new List<(Func<bool>, State)>();
+            return new List<(Func<bool>, State)>()
+            {
+                (() => IsAnimationComplete(_staggerHash), State.Idle)
+            };
         }
     }
 }

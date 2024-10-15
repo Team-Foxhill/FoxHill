@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: SouthBossMonsterAttackHorizontalSpec
   m_EditorClassIdentifier: 
   <DamageMultiplier>k__BackingField: 1
+  <Radius>k__BackingField: 5
   <CastAngleSize>k__BackingField: 60
   <CastCenterPosition>k__BackingField: {x: 0, y: 0}
   <Direction>k__BackingField: {x: 1, y: 0}
-  <Distance>k__BackingField: 5
+  <Distance>k__BackingField: 0
