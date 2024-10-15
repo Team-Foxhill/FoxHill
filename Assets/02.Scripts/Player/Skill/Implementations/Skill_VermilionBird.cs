@@ -1,3 +1,4 @@
+using FoxHill.Core.Damage;
 using System.Collections;
 using UnityEngine;
 
@@ -6,6 +7,7 @@ namespace FoxHill.Player.Skill.Implementations
     /// <summary>
     /// 일정 시간동안 특정 방향으로 날아가며 적에게 데미지를 주는 투사체형 공격 스킬
     /// </summary>
+    [RequireComponent(typeof(CircleCollider2D))]
     public class Skill_VermilionBird : SkillBase
     {
         protected override void Awake()
@@ -20,6 +22,17 @@ namespace FoxHill.Player.Skill.Implementations
             transform.GetChild(0).localRotation = Quaternion.Euler(rotationValue);
 
             StartCoroutine(C_Cast(parameters.Direction));
+        }
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if(collision.TryGetComponent<IDamageable>(out var damageable) == true)
+            {
+                if(((1 << damageable.Transform.gameObject.layer) & _attackableLayer) != 0)
+                {
+                    damageable?.TakeDamage(this, Stat.Power);
+                }
+            }
         }
 
         private IEnumerator C_Cast(Vector2 direction)

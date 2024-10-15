@@ -1,3 +1,4 @@
+using FoxHill.Core.Damage;
 using FoxHill.Core.Effect;
 using System.Collections;
 using UnityEngine;
@@ -20,6 +21,15 @@ namespace FoxHill.Player.Skill.Implementations
         {
             gameObject.transform.Translate(parameters.Direction * SKILL_RANGE);
             EffectManager.Play(EffectManager.FeedbackType.Impulse);
+
+            var hits = Physics2D.OverlapCircleAll(transform.position, SKILL_RANGE, _attackableLayer);
+            foreach (var hit in hits)
+            {
+                if (hit.TryGetComponent<IDamageable>(out var damageable) == true)
+                {
+                    damageable.TakeDamage(this, Stat.Power);
+                }
+            }
             StartCoroutine(C_Cast());
         }
 

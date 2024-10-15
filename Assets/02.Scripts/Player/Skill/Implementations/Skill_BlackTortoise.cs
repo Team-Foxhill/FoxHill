@@ -1,3 +1,4 @@
+using FoxHill.Core.Damage;
 using System.Collections;
 using UnityEngine;
 
@@ -5,6 +6,8 @@ namespace FoxHill.Player.Skill.Implementations
 {
     public class Skill_BlackTortoise : SkillBase
     {
+        private const float SKILL_RANGE = 3f;
+
         /// <summary>
         /// 일정 시간동안 범위 내의 적들에게 지속적인 데미지를 주는 장판/도트 데미지형 공격 스킬
         /// </summary>
@@ -22,6 +25,9 @@ namespace FoxHill.Player.Skill.Implementations
         {
             float elapsedTime = 0f;
 
+            float tick = 1f;
+            float elapsedTickTime = 1f;
+
             while (elapsedTime < Stat.Duration)
             {
                 if (_isPaused == true)
@@ -30,9 +36,24 @@ namespace FoxHill.Player.Skill.Implementations
                 }
 
                 elapsedTime += Time.deltaTime;
-                var attackRange = Physics2D.OverlapCircleAll(transform.position, 3f);
+                elapsedTickTime += Time.deltaTime;
 
-                // this.transform.position = followTarget.position;
+                if(elapsedTickTime > tick)
+                {
+                    var hits = Physics2D.OverlapCircleAll(transform.position, SKILL_RANGE, _attackableLayer);
+                    foreach (var hit in hits)
+                    {
+                        if (hit.TryGetComponent<IDamageable>(out var damageable) == true)
+                        {
+                            damageable.TakeDamage(this, Stat.Power);
+                        }
+                    }
+
+                    elapsedTickTime = 0f;
+                }
+
+
+                this.transform.position = followTarget.position;
 
                 yield return null;
             }

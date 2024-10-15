@@ -2,6 +2,7 @@ using FoxHill.Core.Damage;
 using FoxHill.Core.Utils;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.U2D;
 
 namespace FoxHill.Player.State.Implementations
 {
@@ -9,6 +10,8 @@ namespace FoxHill.Player.State.Implementations
     {
         public override PlayerState State { get; protected set; } = PlayerState.Attack;
         public override bool IsMoveState { get; protected set; } = false;
+
+        private const float FATAL_ATTACKABLE_RANGE = 30f;
 
         private LayerMask _attackableLayer;
         private float _attackOffset = 1f;
@@ -52,13 +55,14 @@ namespace FoxHill.Player.State.Implementations
             //// 특수공격(패링 후 반격) 판단
             var hits = Physics2D.OverlapBoxAll(_attackPoint, _attackRange, 0f, 1 << LayerRepository.LAYER_BOSS_MONSTER);
 
-            foreach ( var hit in hits ) 
+            foreach (var hit in hits)
             {
                 if (hit.TryGetComponent<IStaggerable>(out var staggerable) == true)
-                {               
-                    if(staggerable.IsFatalAttackable == true)
+                {
+                    if (staggerable.IsFatalAttackable == true)
                     {
-                        if (hit.TryGetComponent<IDamageable>(out var damageable) == true)
+                        if ((hit.TryGetComponent<IDamageable>(out var damageable) == true)
+                            && (IsFatalAttackableRange(hit.transform) == true))
                         {
 
                             _manager.State.Parameters.FatalAttackTarget = damageable;
@@ -74,13 +78,14 @@ namespace FoxHill.Player.State.Implementations
             StartCoroutine(C_Attack());
         }
 
-        //private bool IsFatalAttackableRange(Transform target)
-        //{
-        //    if(Vector3.Angle(target.position, _manager.transform.position) < 60f)
-        //    {
+        private bool IsFatalAttackableRange(Transform target)
+        {
+            var angle = Vector3.Angle((target.position - _manager.transform.position).normalized, Vector2.right);
+            angle = (angle > 90f) ? 180f - angle : angle;
 
-        //    }
-        //}
+            Debug.Log(angle);
+            return (angle < FATAL_ATTACKABLE_RANGE);
+        }
 
         private IEnumerator C_Attack()
         {
