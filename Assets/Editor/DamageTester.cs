@@ -42,7 +42,7 @@ public class DamageTester : EditorWindow
             {
                 if (_damageableGameObject.GetComponent<PathFollowMonsterController>() is IDamageable damageable)
                 {
-                    damageable.TakeDamage(_damageAmount);
+                    damageable.TakeDamage(null, _damageAmount);
                 }
                 else
                 {

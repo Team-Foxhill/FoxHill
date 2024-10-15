@@ -121,8 +121,8 @@ namespace FoxHill.Monster
                 }
                 _agentBody = _agentAuthoring.EntityBody;
                 _xVelocity = _agentBody.Velocity.x;
-                transform.localScale = _agentBody.Velocity.x > 0f ? Vector3.one : _left;
-
+                //transform.localScale = _agentBody.Velocity.x > 0f ? Vector3.one : _left;
+                _spriteRenderer.flipX = _agentBody.Velocity.x <= 0f; // todo. 최종 코드에 추가하기.
                 yield return _waitTime;
             }
         }

@@ -1,0 +1,290 @@
+fileFormatVersion: 2
+guid: b33d073a409ae894b9e8c655ecdb0ed5
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: South_Boss_Move_Transition_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 551
+        height: 683
+      alignment: 9
+      pivot: {x: 0.43, y: 0.27}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35390d5190a3cc447bd8b53fd78d5956
+      internalID: -1207440352
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: South_Boss_Move_Transition_1
+      rect:
+        serializedVersion: 2
+        x: 551
+        y: 0
+        width: 551
+        height: 683
+      alignment: 9
+      pivot: {x: 0.43, y: 0.27}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b12216c7cb3b3f04ebd940f754995149
+      internalID: -1650498272
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: South_Boss_Move_Transition_2
+      rect:
+        serializedVersion: 2
+        x: 1102
+        y: 0
+        width: 551
+        height: 683
+      alignment: 9
+      pivot: {x: 0.43, y: 0.27}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f941e658422a4b4da811071bee9adeb
+      internalID: -1929097418
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: South_Boss_Move_Transition_3
+      rect:
+        serializedVersion: 2
+        x: 1653
+        y: 0
+        width: 551
+        height: 683
+      alignment: 9
+      pivot: {x: 0.43, y: 0.27}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 34dc8486803be94459d5e0beec5e0729
+      internalID: -1498168720
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: South_Boss_Move_Transition_4
+      rect:
+        serializedVersion: 2
+        x: 2204
+        y: 0
+        width: 551
+        height: 683
+      alignment: 9
+      pivot: {x: 0.43, y: 0.27}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0035e861bcb2e474a96e085c11797dc7
+      internalID: 435082432
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: South_Boss_Move_Transition_5
+      rect:
+        serializedVersion: 2
+        x: 2755
+        y: 0
+        width: 551
+        height: 683
+      alignment: 9
+      pivot: {x: 0.43, y: 0.27}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af15307e69025504f8d70b5777c4e268
+      internalID: -2021653656
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: South_Boss_Move_Transition_6
+      rect:
+        serializedVersion: 2
+        x: 3306
+        y: 0
+        width: 551
+        height: 683
+      alignment: 9
+      pivot: {x: 0.43, y: 0.27}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ead03454a57170e40a4d663038015b3b
+      internalID: 1650646287
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: South_Boss_Move_Transition_7
+      rect:
+        serializedVersion: 2
+        x: 3857
+        y: 0
+        width: 551
+        height: 683
+      alignment: 9
+      pivot: {x: 0.43, y: 0.27}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 66b8356e3a0242140bfb2061d38b600a
+      internalID: 1119292152
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      South_Boss_Move_Transition_0: -1207440352
+      South_Boss_Move_Transition_1: -1650498272
+      South_Boss_Move_Transition_2: -1929097418
+      South_Boss_Move_Transition_3: -1498168720
+      South_Boss_Move_Transition_4: 435082432
+      South_Boss_Move_Transition_5: -2021653656
+      South_Boss_Move_Transition_6: 1650646287
+      South_Boss_Move_Transition_7: 1119292152
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

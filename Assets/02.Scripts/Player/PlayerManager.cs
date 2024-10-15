@@ -158,7 +158,7 @@ namespace FoxHill.Player
             });
         }
 
-        public void TakeDamage(float damage)
+        public void TakeDamage(IDamager damager, float damage)
         {
             if (IsPaused == true)
                 return;

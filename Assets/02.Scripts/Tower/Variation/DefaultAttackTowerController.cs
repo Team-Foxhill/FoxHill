@@ -53,7 +53,7 @@ namespace FoxHill.Tower
                     yield return StartCoroutine(BulletAnimation());
 
                     DebugFox.Log("TowerAttackPerformed!");
-                    _attackTarget.TakeDamage(_stat.Power);
+                    _attackTarget.TakeDamage(this, _stat.Power);
                 }
                 yield return null;
             }
