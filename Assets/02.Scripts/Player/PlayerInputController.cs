@@ -103,7 +103,7 @@ namespace FoxHill.Player
                     return;
                 }
 
-                if(_attackCooldown < _playerManager.Stat.AttackSpeed) // 공격 쿨타임
+                if (_attackCooldown < _playerManager.Stat.AttackSpeed) // 공격 쿨타임
                 {
                     return;
                 }

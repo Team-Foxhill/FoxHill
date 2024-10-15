@@ -37,6 +37,7 @@ namespace FoxHill.Player.State.Implementations
 
         protected override void OnDisable()
         {
+            base.OnDisable();
             _animator.FlipSprite(false);
         }
 
@@ -62,7 +63,7 @@ namespace FoxHill.Player.State.Implementations
 
                 //TEST CODE
                 _manager.State.Parameters.FatalAttackTarget = null;
-                _manager.SetState(PlayerState.FatalAttack, true); 
+                _manager.SetState(PlayerState.FatalAttack, true);
                 IsDone = true;
 
                 return;

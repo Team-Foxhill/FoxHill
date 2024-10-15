@@ -20,7 +20,20 @@ namespace FoxHill.Player.State.Implementations
 
             _playerTransform = _manager.Transform;
 
+
+            if (_direction.x > 0)
+            {
+                _animator.FlipSprite(true);
+            }
+
             StartCoroutine(C_Knockback());
+        }
+
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+
+            _animator.FlipSprite(false);
         }
 
         public override void Initialize(PlayerStateParameters parameters)

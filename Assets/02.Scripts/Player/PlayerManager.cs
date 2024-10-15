@@ -45,9 +45,9 @@ namespace FoxHill.Player
         public bool IsTowerSpawnerOpen => _isTowerSpawnerOpen;
         public bool IsMovable // 플레이어가 움직일 수 있는지 확인
         {
-            get => (State.CurrentActionState != PlayerState.Knockback) 
-                && (State.CurrentActionState != PlayerState.Dodge); 
-        } 
+            get => (State.CurrentActionState != PlayerState.Knockback)
+                && (State.CurrentActionState != PlayerState.Dodge);
+        }
         public bool IsActable { get => State.CurrentActionState == PlayerState.None; } // 플레이어가 Action을 수행할 수 있는지 확인
         public bool IsOnKnockback { get => State.CurrentActionState == PlayerState.Knockback; } // 플레이어가 넉백을 당하고 있는지 확인
 
@@ -66,11 +66,11 @@ namespace FoxHill.Player
 
                 _direction = value;
 
-                if(_direction.x > 0)
+                if (_direction.x > 0)
                 {
                     _isLeftward = false;
                 }
-                else if(_direction.x < 0)
+                else if (_direction.x < 0)
                 {
                     _isLeftward = true;
                 }
@@ -86,7 +86,7 @@ namespace FoxHill.Player
         public PlayerQuestManager Quest { get; private set; }
         public PlayerInventory Inventory { get; private set; }
         [field: SerializeField] public TowerManager Tower { get; private set; }
-        
+
         public Transform Transform => transform;
 
         [SerializeField] private PlayerData _data;
@@ -209,6 +209,7 @@ namespace FoxHill.Player
         public void Knockback(Transform attackerTransform)
         {
             State.Parameters.AttackerTransform = attackerTransform;
+            State.SetState(PlayerState.Idle);
             State.SetState(PlayerState.Knockback, true);
         }
     }
