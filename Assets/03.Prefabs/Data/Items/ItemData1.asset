@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e756fbe955482bc4797b8d704d7cac5c, type: 3}
-  m_Name: DummyItem2
+  m_Name: ItemData1
   m_EditorClassIdentifier: 
-  ItemNumber: 102
-  ItemName: "\uCE60\uC9C0\uB3C4"
-  ItemString: "\uC54C \uC218 \uC5C6\uB294 \uD6A8\uACFC"
-  ItemType: 2
-  Perform: 2
+  ItemNumber: 1
+  ItemName: "\uC7A5\uC2B9"
+  ItemString: "\uC9C0\uC815\uD55C \uC704\uCE58\uC5D0 \uACF5\uACA9 \uD0C0\uC6CC \"\uC7A5\uC2B9\"\uC744
+    \uC124\uCE58\uD569\uB2C8\uB2E4."
+  ItemType: 1
+  Perform: 1
   Amount: 0
   LastingTime: 0
   Range: 0

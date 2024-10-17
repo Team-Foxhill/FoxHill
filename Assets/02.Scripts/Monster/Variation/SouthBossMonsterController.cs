@@ -20,7 +20,7 @@ namespace FoxHill.Monster.AI
     {
         public Transform Transform => transform;
 
-        public float MaxHp => 100f;
+        public float MaxHp => 1000f;
 
         public float CurrentHp { get; private set; }
 
@@ -373,6 +373,11 @@ namespace FoxHill.Monster.AI
         public void Resume()
         {
             _isPaused = false;
+        }
+
+        public void MakeStun(IDamager damager)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

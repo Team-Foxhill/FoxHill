@@ -7,6 +7,7 @@ using FoxHill.Core.Utils;
 using FoxHill.Player.Data;
 using FoxHill.Player.Inventory;
 using FoxHill.Player.Quest;
+using FoxHill.Player.Stat;
 using FoxHill.Player.State;
 using FoxHill.Tower;
 using System;
@@ -84,14 +85,14 @@ namespace FoxHill.Player
         public PlayerStat Stat { get; private set; }
         public PlayerStateManager State { get; private set; }
         public CharacterController CharacterController { get; private set; }
-        public PlayerQuestManager Quest { get; private set; }
         public PlayerInventory Inventory { get; private set; }
-        [field: SerializeField] public TowerManager Tower { get; private set; }
+        public TowerManager Tower { get; private set; }
 
         public Transform Transform => transform;
 
 
         [SerializeField] private PlayerData _data;
+        [SerializeField] private LevelTable _levelTable;
 
         private Vector2 _direction = Vector2.right;
         private bool _isLeftward = false;
@@ -105,8 +106,7 @@ namespace FoxHill.Player
 
             CharacterController = GetComponent<CharacterController>();
 
-            Stat = new PlayerStat(_data);
-            Quest = new PlayerQuestManager();
+            Stat = new PlayerStat(_data, _levelTable);
             State ??= FindFirstObjectByType<PlayerStateManager>();
             Inventory ??= FindFirstObjectByType<PlayerInventory>();
             Tower ??= FindFirstObjectByType<TowerManager>();
@@ -190,21 +190,16 @@ namespace FoxHill.Player
 
         public void TakeDamage(IDamager damager, float damage)
         {
-            if (IsPaused == true)
-                return;
-
             if (damager.Transform.gameObject.layer == LayerRepository.LAYER_BOSS_MONSTER)
             {
                 Knockback(damager.Transform);
             }
+
             OnPlayerDamaged?.Invoke(damage);
         }
 
         public void Dead()
         {
-            if (IsPaused == true)
-                return;
-
             OnDead?.Invoke();
             _isDead = true;
 

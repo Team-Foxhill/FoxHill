@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace FoxHill.Player.Data
 {
+
     /// <summary>
     /// Player Stat의 초기값 데이터
     /// </summary>

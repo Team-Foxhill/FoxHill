@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace FoxHill.Tower
 {
-    public class DefaultAttackTowerAttackController : TowerAttackControllerBase
+    public class DefaultAttackTower_AttackController : TowerAttackControllerBase
     {
         public override void StartAttack()
         {

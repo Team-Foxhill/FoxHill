@@ -26,6 +26,8 @@ namespace FoxHill.Player
         private Dictionary<PlayerState, int> _animations = new Dictionary<PlayerState, int>(4); // {state, animationId}
 
         private bool _isInitialized = false;
+        private bool _isPaused = false;
+
         private void Awake()
         {
             Initialize();
@@ -34,11 +36,17 @@ namespace FoxHill.Player
         private void Update()
         {
             SetDirection();
+
+            if (_playerManager.IsPaused != _isPaused)
+            {
+                _isPaused = _playerManager.IsPaused;
+
+                _animator.speed = (_isPaused == true) ? 0f : 1f;
+            }
         }
 
         public void PlayAnimation(PlayerState state)
         {
-
             if (_animations.TryGetValue(state, out int stateHash) == true)
             {
                 _animator.Play(stateHash, 0, 0f);

@@ -1,14 +1,25 @@
+using FoxHill.Core.Dialogue;
 using FoxHill.Quest;
+using System.Data.Common;
 using UnityEngine;
 
 namespace FoxHill.Player.Quest
 {
-    public class PlayerQuestManager
+    public class PlayerQuestManager : MonoBehaviour
     {
-        private const int NOT_IN_PROGRESS = 0;
+        [SerializeField] private PlayerManager _playerManager;
+        [SerializeField] private GlobalDialogue _globalDialogue;
 
-        private int _currentIndex = NOT_IN_PROGRESS;
+        private const int NOT_IN_PROGRESS = -1;
+
+        [SerializeField] private int _currentIndex = NOT_IN_PROGRESS;
         private QuestForm _currentQuest;
+
+        private void Awake()
+        {
+            _playerManager ??= GetComponentInParent<PlayerManager>();
+            _globalDialogue ??= FindFirstObjectByType<GlobalDialogue>();    
+        }
 
         public bool TryStartQuest(int questNumber, int parameter = default)
         {
@@ -18,18 +29,60 @@ namespace FoxHill.Player.Quest
                 return false;
             }
 
+            if(QuestManager.TryGetQuest(questNumber, out var quest) == false)
+            {
+                return false;
+            }
+            
+            foreach ( var preCondition in quest.PreCondition)
+            {
+                switch (preCondition.Type)
+                {
+                    case PreConditionType.HaveItem:
+                        break;
+                    case PreConditionType.NotHaveItem:
+                        break;
+                    case PreConditionType.MinPlayerLevel:
+                        {
+                            parameter = _playerManager.Stat.Level;
+                        }
+                        break;
+                    case PreConditionType.MaxPlayerLevel:
+                        {
+                            parameter = _playerManager.Stat.Level;
+                        }
+                        break;
+                    case PreConditionType.ClearQuest:
+                        break;
+                    case PreConditionType.NotClearQuest:
+                        break;
+                }
+
+                if(StartQuest(questNumber, parameter) == true)
+                {
+                    _globalDialogue.StartDialogue(_currentQuest.StartDialogue);
+                }
+            }
+
+            return true;
+        }
+
+        public bool IsQuestCompleted(int questNumber, int parameter = default)
+        {
+            return QuestManager.IsQuestCompleted(questNumber, parameter);
+        }
+
+        private bool StartQuest(int questNumber, int parameter)
+        {
             // 퀘스트 시작 조건 만족하면
             if (QuestManager.CheckPreCondition(questNumber, parameter) == true)
             {
                 if (QuestManager.StartQuest(questNumber, out _currentQuest) == false)
                 {
-                    Debug.LogError($"Failed to start quest {questNumber}");
-
                     return false;
                 }
 
                 _currentIndex = _currentQuest.QuestNumber;
-                Debug.Log($"Started quest {questNumber}");
 
                 return true;
             }

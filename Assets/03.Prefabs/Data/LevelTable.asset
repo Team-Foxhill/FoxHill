@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44ab4c217a941b64682dd4dfb9b8ef4d, type: 3}
+  m_Name: LevelTable
+  m_EditorClassIdentifier: 
+  NeedExp: 00000000300000008b000000260100000d0200004b030000eb040000f606000075090000700c0000f00f0000fc1300009c180000

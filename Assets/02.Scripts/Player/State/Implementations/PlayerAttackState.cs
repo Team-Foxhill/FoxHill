@@ -28,7 +28,7 @@ namespace FoxHill.Player.State.Implementations
 
         protected override void OnEnable()
         {
-            base.OnEnable();
+            IsDone = false;
 
             if (_manager.IsLeftward == true)
             {
@@ -64,11 +64,10 @@ namespace FoxHill.Player.State.Implementations
                         if ((hit.TryGetComponent<IDamageable>(out var damageable) == true)
                             && (IsFatalAttackableRange(hit.transform) == true))
                         {
-
                             _manager.State.Parameters.FatalAttackTarget = damageable;
+                            _manager.State.Parameters.StaggerTarget = staggerable;
                             _manager.SetState(PlayerState.FatalAttack, true);
 
-                            IsDone = true;
                             return;
                         }
                     }
@@ -83,12 +82,13 @@ namespace FoxHill.Player.State.Implementations
             var angle = Vector3.Angle((target.position - _manager.transform.position).normalized, Vector2.right);
             angle = (angle > 90f) ? 180f - angle : angle;
 
-            Debug.Log(angle);
             return (angle < FATAL_ATTACKABLE_RANGE);
         }
 
         private IEnumerator C_Attack()
         {
+            PlayAnimation();
+
             bool isPerformed = false;
 
             yield return null;
