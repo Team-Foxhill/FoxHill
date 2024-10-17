@@ -7,7 +7,6 @@ namespace FoxHill.Monster.FSM
 {
     public class DeadState : StateBase
     {
-        // todo. isRunning은 Dead Node에서 처리.
         public DeadState(StateMachine machine, IInputCommand inputCommand) : base(machine, inputCommand)
         {
             _deathHash = Animator.StringToHash("Dead"); // "Dead"는 애니메이터에서 설정한 죽음 애니메이션의 이름.
@@ -21,7 +20,16 @@ namespace FoxHill.Monster.FSM
         {
             // 이동 애니매이션으로 전환 실행.
             animator.Play(_deathHash);
-            yield return new WaitUntil(() => IsAnimationComplete(_deathHash));
+            bool temp = true;
+            while (temp == true)
+            {
+                if (IsAnimationComplete(_deathHash))
+                {
+                    animator.speed = 0;
+                    temp = false;
+                }
+                yield return null;
+            }
         }
 
         public override IEnumerator OnExit()

@@ -105,7 +105,7 @@ MonoBehaviour:
   m_Type: 0
   m_Size:
     x: 0.53
-    y: 1.2
+    y: 2.27
     z: 1
 --- !u!58 &4815094117884478191
 CircleCollider2D:
@@ -141,7 +141,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.32
+  m_Radius: 1.5
 --- !u!114 &4758325161692392291
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -15,7 +15,10 @@ namespace FoxHill.Monster.AI
         public Transform Transform { get; set; } // 블랙보드 소유자의 트랜스폼.
         public Vector2 OriginPosition { get; set; } // 각 컨트롤러의 Awake에서 설정해줘야 함.
         public Transform Target { get; set; } // 목표물의 트랜스폼.
+        public SouthBossMonsterController Controller { get; set; }
         public bool IsNextActionReady { get; set; }
-        public Vector2 NowDirection { get; set; }
+        public bool IsDead { get; set; }
+        public bool IsStunInvoked { get; set; }
+        public bool IsStunRunning { get; set; }
     }
 }

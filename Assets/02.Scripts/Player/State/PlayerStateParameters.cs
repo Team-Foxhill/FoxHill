@@ -7,5 +7,6 @@ namespace FoxHill.Player.State
     {
         public Transform AttackerTransform;
         public IDamageable FatalAttackTarget;
+        public IStaggerable StaggerTarget;
     }
 }

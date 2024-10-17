@@ -1,12 +1,13 @@
 namespace FoxHill.Monster.AI
 {
     /// <summary>
-    /// 자식 노드들을 순차적으로 실행하며, 성공하거나 실행 중인 첫 번째 자식의 결과를 반환하는 복합 노드.
-    /// 모든 자식이 실패할 경우에만 실패를 반환한다.
+    /// 자식 노드들을 순차적으로 실행하는 컴포지트 노드.
+    /// 성공하거나 실행 중인 첫 번째 자식의 결과를 즉시 반환.
+    /// 모든 자식이 실패할 경우에만 전체가 실패.
     /// </summary>
     public class Selector : Composite
     {
-        public Selector(MonsterBehaviourTree tree, SouthBossMonsterController controller) : base(tree, controller)
+        public Selector(MonsterBehaviourTree tree) : base(tree)
         {
         }
 

@@ -13,14 +13,12 @@ namespace FoxHill.Monster.AI
         /// </summary>
         /// <param name="tree">이 행동을 가지고 있을 트리.</param>
         /// <param name="execute">람다식을 활용하여 실행될 함수와 경우에 따라 돌려줄 값을 정의.</param>
-        public Execution(MonsterBehaviourTree tree, SouthBossMonsterController controller, Func<Result> execute) : base(tree, controller)
+        public Execution(MonsterBehaviourTree tree, Func<Result> execute) : base(tree)
         {
             _execute = execute;
-            _controller = controller;
         }
 
         private Func<Result> _execute; // 실제로 실행될 행동이 담긴 함수를 저장하는 필드.
-        private SouthBossMonsterController _controller;
 
         /// <summary>
         /// 실행 상황에 대해 반환하는 메서드.

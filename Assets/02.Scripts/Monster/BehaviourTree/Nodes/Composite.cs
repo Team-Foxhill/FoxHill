@@ -4,10 +4,9 @@ namespace FoxHill.Monster.AI
 {
     public abstract class Composite : Node, IParentOfChilldren
     {
-        public Composite(MonsterBehaviourTree behaviourTree, SouthBossMonsterController controller) : base(behaviourTree, controller)
+        public Composite(MonsterBehaviourTree behaviourTree) : base(behaviourTree)
         {
             children = new List<Node>();
-            _controller = controller;
         }
 
         public List<Node> children { get; set; }

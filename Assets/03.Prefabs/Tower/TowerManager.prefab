@@ -45,8 +45,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc9a353b5c3c5e94da0adeaa57c98a9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _towerPrefabs: []
+  _towerPrefabs:
+  - {fileID: 1186978205777042293, guid: bb84cb045481f0d468966459fd772580, type: 3}
+  - {fileID: 1186978205777042293, guid: 598a5368b80566e4f9a958ca2876be23, type: 3}
+  - {fileID: 1186978205777042293, guid: d1687ef1df784ba4c8829d4deea24740, type: 3}
   _previewImage: {fileID: 6041691342503485109}
+  _invalidPositionLayer:
+    serializedVersion: 2
+    m_Bits: 192
 --- !u!1 &6802240080300640402
 GameObject:
   m_ObjectHideFlags: 0
@@ -74,7 +80,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3171165438863274924}

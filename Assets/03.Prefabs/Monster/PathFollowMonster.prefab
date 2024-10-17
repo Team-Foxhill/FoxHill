@@ -23,7 +23,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4194727312697721098
 Transform:
   m_ObjectHideFlags: 0
@@ -103,7 +103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d100d0744d5954b4cb6bc1932de8472c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Radius: 0.4
+  Radius: 0.6
 --- !u!114 &358057283899116649
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,19 +162,25 @@ MonoBehaviour:
   _spriteRenderer: {fileID: 2632341321413208652}
   _rotateUpdateInterval: 2
   _moveSpriteSet:
-  - {fileID: -1668348169, guid: 9e5f142d05f1c044ba335e26e0533f4e, type: 3}
-  - {fileID: 1473692992, guid: 9e5f142d05f1c044ba335e26e0533f4e, type: 3}
-  - {fileID: -1309623612, guid: 9e5f142d05f1c044ba335e26e0533f4e, type: 3}
-  - {fileID: 1654154420, guid: 9e5f142d05f1c044ba335e26e0533f4e, type: 3}
-  - {fileID: 398596860, guid: 9e5f142d05f1c044ba335e26e0533f4e, type: 3}
-  - {fileID: 801242668, guid: 9e5f142d05f1c044ba335e26e0533f4e, type: 3}
+  - {fileID: -1829545993, guid: 9fac117efaa4c3d44a98ae57c3aae005, type: 3}
+  - {fileID: 588671417, guid: 9fac117efaa4c3d44a98ae57c3aae005, type: 3}
+  - {fileID: 1922741010, guid: 9fac117efaa4c3d44a98ae57c3aae005, type: 3}
+  - {fileID: -1863038206, guid: 9fac117efaa4c3d44a98ae57c3aae005, type: 3}
+  - {fileID: -473675748, guid: 9fac117efaa4c3d44a98ae57c3aae005, type: 3}
+  - {fileID: 1796753914, guid: 9fac117efaa4c3d44a98ae57c3aae005, type: 3}
+  - {fileID: 387746381, guid: 9fac117efaa4c3d44a98ae57c3aae005, type: 3}
+  - {fileID: 1491793352, guid: 9fac117efaa4c3d44a98ae57c3aae005, type: 3}
   _deadSpriteSet:
-  - {fileID: 1430147768, guid: 1338d8bf0fa25754bbbbd239ec7d4955, type: 3}
-  - {fileID: -830764073, guid: 1338d8bf0fa25754bbbbd239ec7d4955, type: 3}
-  - {fileID: 1115919397, guid: 1338d8bf0fa25754bbbbd239ec7d4955, type: 3}
-  - {fileID: 1210456152, guid: 1338d8bf0fa25754bbbbd239ec7d4955, type: 3}
-  - {fileID: 398750329, guid: 1338d8bf0fa25754bbbbd239ec7d4955, type: 3}
-  - {fileID: -2034914514, guid: 1338d8bf0fa25754bbbbd239ec7d4955, type: 3}
+  - {fileID: 136336868, guid: 36ac7d96173361041b12de964e58e276, type: 3}
+  - {fileID: 1053181174, guid: 36ac7d96173361041b12de964e58e276, type: 3}
+  - {fileID: -991905508, guid: 36ac7d96173361041b12de964e58e276, type: 3}
+  - {fileID: 1709302103, guid: 36ac7d96173361041b12de964e58e276, type: 3}
+  - {fileID: -1869840785, guid: 36ac7d96173361041b12de964e58e276, type: 3}
+  - {fileID: -1134003127, guid: 36ac7d96173361041b12de964e58e276, type: 3}
+  - {fileID: 30193827, guid: 36ac7d96173361041b12de964e58e276, type: 3}
+  - {fileID: 843199120, guid: 36ac7d96173361041b12de964e58e276, type: 3}
+  - {fileID: -1280245091, guid: 36ac7d96173361041b12de964e58e276, type: 3}
+  - {fileID: 723296, guid: 36ac7d96173361041b12de964e58e276, type: 3}
   _teleportPosition: {x: -55, y: -70}
 --- !u!114 &1231365322864599061
 MonoBehaviour:
@@ -202,7 +208,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7058249196260978090}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -224,9 +230,9 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.4
+  m_Radius: 0.6

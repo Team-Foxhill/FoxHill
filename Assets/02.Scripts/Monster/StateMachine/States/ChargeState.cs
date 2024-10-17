@@ -32,7 +32,7 @@ namespace FoxHill.Monster.FSM
         {
             return new List<(Func<bool>, State)>()
             {
-             (() => IsAnimationComplete(_chargeHash), State.Idle)
+             (() => IsAnimationComplete(_chargeHash), State.Jump)
             };
         }
     }

@@ -49,22 +49,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4400e513deb26854ebdc628bc85aed95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _maxHP: 100
+  _moveSpeed: 5
+  _power: 10
+  _defense: 3
   _seekRadius: 9.43
   _seekAngle: 90
   _seektargetLayer: 3
-  _seekMaxDistance: 12
-  _maxDistanceFromOrigin: 19
-  _attackRange: 1
+  _seekMaxDistance: 7
+  _maxDistanceFromOrigin: 15
   _specialAttackMinRange: 0.6
-  _specialAttackProbability: 0.00001
-  _stoppingDistance: 5
-  _moveSpeed: 5
+  _attackRange: 1
+  _stoppingDistance: 3
+  _reChaseStartDistance: 7
   _directionUpdateInterval: 5
   _horizontalAttackRange: 5
-  _verticalAttackRange: 5
+  _verticalAttackRange: 4
   _chargeAttackRange: 0
   _jumpAttackRange: 10
-  _returnToOriginDelay: 0
+  _returnToOriginDelay: 3
+  _specialAttackProbability: 0.00001
+  _horizontalAttackProbability: 0.3
+  _verticalAttackProbability: 0.3
+  _jumpAttackProbability: 0.3
 --- !u!114 &1484942983940529080
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,8 +135,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -443488947
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 88841137, guid: 3f308099eb7f518448bb868e1115eaa7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -192,7 +199,7 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.20479989, y: 0.4}

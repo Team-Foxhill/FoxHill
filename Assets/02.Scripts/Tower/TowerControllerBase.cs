@@ -2,8 +2,10 @@ using FoxHill.Core;
 using FoxHill.Core.Damage;
 using FoxHill.Core.Pause;
 using FoxHill.Core.Stat;
+using FoxHill.Core.Test;
 using System;
 using System.Collections;
+using UnityEditor.EditorTools;
 using UnityEngine;
 
 namespace FoxHill.Tower
@@ -63,7 +65,7 @@ namespace FoxHill.Tower
             {
                 DebugFox.LogError("Failed to initialize TowerStat");
             }
-
+            ObjectPoolManager.RegisterColliderCheckneededObject(this);
             PauseManager.Register(this);
         }
 

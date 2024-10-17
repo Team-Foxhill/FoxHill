@@ -1,13 +1,14 @@
 using FoxHill.Core;
 using FoxHill.Core.Damage;
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 namespace FoxHill.Monster.AI
 {
     public class Seek : Node
     {
-        public Seek(MonsterBehaviourTree tree, SouthBossMonsterController controller, float maxDistanceFromOrigin, Vector2 checkDirection, float radius, float angle, LayerMask targetMask, float chaseDistance, float stoppingDistance, float moveSpeed, float directionUpdateInterval) : base(tree, controller)
+        public Seek(MonsterBehaviourTree tree, float maxDistanceFromOrigin, Vector2 checkDirection, float radius, float angle, LayerMask targetMask, float chaseDistance, float stoppingDistance, float reChaseDistance, float moveSpeed, float directionUpdateInterval) : base(tree)
         {
             _maxDistanceFromOrigin = maxDistanceFromOrigin;
             _radius = radius;
@@ -15,20 +16,19 @@ namespace FoxHill.Monster.AI
             _targetMask = targetMask;
             _chaseDistance = chaseDistance;
             _stoppingDistance = stoppingDistance;
+            _reChaseStartDistance = reChaseDistance;
             _moveSpeed = moveSpeed;
             _checkDirection = checkDirection;
             _directionUpdateInterval = directionUpdateInterval;
-            _controller = controller;
         }
 
-
-        private SouthBossMonsterController _controller;
         private float _maxDistanceFromOrigin; // 타겟을 추적중일 때 몬스터가 타겟의 위치를 알 수 있는 최대 거리.(radius보다 길어야 한다.)
         private float _radius; // 타겟을 탐지할 때 인식할 수 있는 거리. _resetDistance보다 짧아야 한다.(인식 범위 가지고 장난치는 걸 막기 위해.)
         private float _angle; // 시야각(degree). 캐릭터의 전방을 기준으로 이 각도 내에 있는 타겟만 감지합니다.
         private LayerMask _targetMask; // 타겟으로 인식할 수 있는 게임 오브젝트의 레이어.
         private float _chaseDistance; // 타겟을 추적중일 때 몬스터가 타겟의 위치를 알 수 있는 최대 거리.(radius보다 길어야 한다.)
         private float _stoppingDistance; // 타겟에 접근했을 때 멈출 거리. 이 거리 이내로 타겟에 접근하면 이동을 멈추고 'Success'를 반환.
+        private float _reChaseStartDistance; // 타겟이 존재할 때, 다시 공격을 하기 위해 타겟과의 거리를 좁히지 않을 최대 거리.
         private float _moveSpeed; // 타겟을 향해 이동할 때의 속도.
         private Vector2 _checkDirection; // 시야를 확인할 기준 방향. 이 방향을 중심으로 _angle 만큼의 시야각 내에서 타겟을 탐지합니다.
         private float _directionUpdateTimer = 0f;
@@ -37,10 +37,18 @@ namespace FoxHill.Monster.AI
         private float _lostTargetTimer;
         private bool _isWaiting = false;
         private bool _isReturning = false;
+        private bool _isInitiativeChase = false; // 공격을 시작하기 위해 가까이 다가가는 경우.
+
+
+        private float _nowDistanceFromOrigin => Vector2.Distance(blackboard.Transform.position, blackboard.OriginPosition);
 
 
         public override Result Invoke()
         {
+            if (blackboard.IsStunInvoked || blackboard.IsStunRunning)
+            {
+                return Result.Failure;
+            }
             if (blackboard.Target)
             {
                 return CaseTargetFounded();
@@ -59,16 +67,22 @@ namespace FoxHill.Monster.AI
             _lostTargetTimer = 0f; // 타이머 리셋.
             float distance = Vector2.Distance(blackboard.Transform.position, blackboard.Target.position); // 거리는 타겟과 이 트랜스폼의 사이의 것을 사용.
 
-            if (distance <= _stoppingDistance) // 만약 멈추는 거리보다 가깝다면,
+            if (distance <= _stoppingDistance && _isInitiativeChase) // 타겟이 설정된 이후 처음으로 멈추는 거리보다 가깝게 진입한다면,
+            {
+                _isInitiativeChase = false;
+                return Result.Success; // 아무 것도 하지 않음.
+            }
+            else if (distance < _reChaseStartDistance && _isInitiativeChase == false) // 다시 움직이기 시작할 거리 안에 있다면.
             {
                 return Result.Success; // 아무 것도 하지 않음.
             }
-            else if (distance < _chaseDistance) // 쫓아갈 수 있는 거리 내에 있다면.
+            else if (distance < _chaseDistance && distance > _reChaseStartDistance) // 쫓아갈 수 있는 거리 내에 있다면.
             {
-                TryMove(); // 이동을 시도.
+                _isInitiativeChase = true; // 다시 가까운 곳에서 멈추도록.
+                TryMove(CalculateDirection()); // 이동을 시도.
                 return Result.Running;
             }
-            else // 쫓아갈 수 있는 범위 밖이라면,
+            else
             {
                 blackboard.Target = null; // 타겟을 초기화하고.
                 return Result.Failure; // 실패를 반환.
@@ -87,7 +101,7 @@ namespace FoxHill.Monster.AI
             if (_directionUpdateTimer >= _directionUpdateInterval)
             {
                 _checkDirection = GetRandomDirection();
-                _controller.ChangeDirection(_checkDirection);
+                blackboard.Controller.ChangeDirection(_checkDirection);
                 _directionUpdateTimer = 0f; // 타이머 리셋
             }
 
@@ -101,19 +115,19 @@ namespace FoxHill.Monster.AI
                 }
                 if (IsInSight(collider.transform, _checkDirection)) // 시야 내에 콜라이더가 있다면.
                 {
-                    blackboard.Target = collider.transform; // 타겟을 설정하고 이동 시도.
+                    blackboard.Target = collider.transform; // 타겟을 설정.
+                    _isInitiativeChase = true; // 첫 추적 활성화.
                     IDamageable damageable = collider.transform.GetComponent<IDamageable>();
                     if (damageable != null)
                     {
                         damageable.OnDead += ResetTarget;
                     }
-                    TryMove();
+                    TryMove(CalculateDirection());
                     return Result.Running;
                 }
             }
 
-            float distance = Vector2.Distance(blackboard.Transform.position, blackboard.OriginPosition);
-            if (distance > _stoppingDistance && _isReturning == false)
+            if (_nowDistanceFromOrigin > _stoppingDistance && _isReturning == false)
             {
                 _lostTargetTimer += Time.deltaTime;
             }
@@ -126,32 +140,36 @@ namespace FoxHill.Monster.AI
             if (_lostTargetTimer < _returnToOriginDelay && _isReturning == false) // 타겟을 잃은 직후에는 타겟을 찾은 후 없다면 잠시 정지.
             {
                 _isWaiting = true;
-                _controller.SetIdle();
+                blackboard.Controller.SetIdle();
                 return Result.Running;
             }
 
-            if (distance <= _stoppingDistance) // 만약 원점과 가깝다면,
+            if (_nowDistanceFromOrigin <= _stoppingDistance) // 만약 원점과 가깝다면,
             {
                 _isReturning = false;
-                _controller.SetIdle();
+                blackboard.Controller.SetIdle();
                 return Result.Success; // 아무 것도 하지 않음.
             }
-            else if (distance >= _maxDistanceFromOrigin || _isWaiting == false) // 만일 원점과의 거리가 최대 거리보다 멀거나, 대기 시간이 지났다면.
+            else if (_nowDistanceFromOrigin >= _maxDistanceFromOrigin || _isWaiting == false) // 만일 원점과의 거리가 최대 거리보다 멀거나, 대기 시간이 지났다면.
             {
 
-                TryMove(); // 이동을 시도(원점으로).
+                TryMove(CalculateDirection()); // 이동을 시도(원점으로).
                 return Result.Running;
             }
             else
                 return Result.Failure;
         }
 
-        private void TryMove()
+        private void TryMove(Vector2 direction)
         {
             if ((Vector2)blackboard.Transform.position == blackboard.OriginPosition && blackboard.Target == null) // 원점에 있고, 타겟이 없다면.
             {
                 return; // 아무 것도 하지 않음.
             }
+            blackboard.Controller.Move(direction);
+        }
+        private Vector2 CalculateDirection()
+        {
             Vector2 direction;
             if (blackboard.Target == null && _isWaiting == false) // 타겟이 없고 복귀 시간이 되었다면
             {
@@ -164,12 +182,18 @@ namespace FoxHill.Monster.AI
             }
             else // 만일 타겟이 있다면
             {
-                direction = ((Vector2)blackboard.Target.position - (Vector2)blackboard.Transform.position).normalized; // 타겟을 향해 방향 설정.
-                blackboard.NowDirection = direction;
+                if (_nowDistanceFromOrigin >= _maxDistanceFromOrigin)
+                {
+                    blackboard.Target = null;
+                    direction = ((Vector2)blackboard.OriginPosition - (Vector2)blackboard.Transform.position).normalized; // 원점을 향해 방향 설정.
+                }
+                else
+                {
+                    direction = ((Vector2)blackboard.Target.position - (Vector2)blackboard.Transform.position).normalized; // 타겟을 향해 방향 설정.
+                }
             }
-            _controller.Move(direction);
+            return direction;
         }
-
         private Vector2 GetRandomDirection()
         {
             switch (Random.Range(0, 2))

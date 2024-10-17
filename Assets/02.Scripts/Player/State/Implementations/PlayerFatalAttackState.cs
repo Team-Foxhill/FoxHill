@@ -11,6 +11,7 @@ namespace FoxHill.Player.State.Implementations
         private float _damageMultiplier = 2f;
 
         private IDamageable _attackTarget;
+        private IStaggerable _staggerTarget;
 
         protected override void OnEnable()
         {
@@ -32,11 +33,13 @@ namespace FoxHill.Player.State.Implementations
         public override void Initialize(PlayerStateParameters parameters)
         {
             _attackTarget = parameters.FatalAttackTarget;
+            _staggerTarget = parameters.StaggerTarget;
         }
 
         private IEnumerator C_FatalAttack()
         {
             _attackTarget?.TakeDamage(_manager, _manager.Stat.Power * _damageMultiplier);
+            _staggerTarget?.MakeStun(_manager);
 
             while (_animator.AnimationTime < 1f)
             {

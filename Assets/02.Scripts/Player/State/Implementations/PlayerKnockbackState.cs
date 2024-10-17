@@ -8,8 +8,8 @@ namespace FoxHill.Player.State.Implementations
         public override PlayerState State { get; protected set; } = PlayerState.Knockback;
         public override bool IsMoveState { get; protected set; } = false;
 
-        private const float KNOCKBACK_SPEED = 0.5f;
-        private const float KNOCKBACK_TIME = 0.8f;
+        private const float KNOCKBACK_SPEED = 4f;
+        private const float KNOCKBACK_TIME = 0.5f;
 
         private Vector2 _direction;
         private Transform _playerTransform;

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace FoxHill.Quest
 {
-    public class QuestManager
+    public static class QuestManager
     {
         public enum QuestStatus
         {
@@ -36,8 +36,24 @@ namespace FoxHill.Quest
                 _forms.Add(form.QuestNumber, form);
                 _status.Add(form.QuestNumber, QuestStatus.NotStarted);
             }
+        }
 
-            Debug.Log($"Initialized {_forms.Count} Quests");
+        /// <summary>
+        /// NPC에게 본인이 연관된 Quest들의 index를 제공하는 메소드
+        /// </summary>
+        public static List<int> InitializeNPCQuests(int npcNumber)
+        {
+            List<int> questIndexList = new List<int>();
+
+            foreach (QuestForm quest in _forms.Values)
+            {
+                if ((quest.StartNPC == npcNumber) || (quest.EndNPC == npcNumber))
+                {
+                    questIndexList.Add(quest.QuestNumber);
+                }
+            }
+
+            return questIndexList;
         }
 
         /// <summary>
@@ -46,15 +62,7 @@ namespace FoxHill.Quest
         /// </summary>
         public static bool TryGetQuest(int questNumber, out QuestForm quest)
         {
-            if (_forms.TryGetValue(questNumber, out quest) == false)
-            {
-                Debug.LogWarning($"Quest number {questNumber} not found.");
-                return false;
-            }
-            else
-            {
-                return true;
-            }
+            return _forms.TryGetValue(questNumber, out quest);
         }
 
         /// <summary>
@@ -103,13 +111,13 @@ namespace FoxHill.Quest
                         break;
                     case PreConditionType.ClearQuest:
                         {
-                            if (CheckPreCondition_ClearQuest(parameter) == false)
+                            if (CheckPreCondition_ClearQuest(questNumber) == false)
                                 return false;
                         }
                         break;
                     case PreConditionType.NotClearQuest:
                         {
-                            if (CheckPreCondition_NotClearQuest(parameter) == false)
+                            if (CheckPreCondition_NotClearQuest(questNumber) == false)
                                 return false;
                         }
                         break;
@@ -311,7 +319,7 @@ namespace FoxHill.Quest
 
         private static bool CheckPreCondition_NotClearQuest(int questNumber)
         {
-            if (TryGetQuest(questNumber, out QuestForm ques) == false)
+            if (TryGetQuest(questNumber, out QuestForm quest) == false)
             {
                 return false;
             }

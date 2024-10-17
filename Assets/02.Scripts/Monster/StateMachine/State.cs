@@ -10,6 +10,8 @@ namespace FoxHill.Monster.FSM
         Jump,
         Charge,
         Stagger,
+        KnockBack,
+        AfterShock,
         Dead
     }
 }

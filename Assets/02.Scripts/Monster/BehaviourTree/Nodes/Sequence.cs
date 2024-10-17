@@ -3,12 +3,14 @@ using System.Collections;
 namespace FoxHill.Monster.AI
 {
     /// <summary>
-    /// 자식 노드들을 순차적으로 실행하며, 실패하거나 실행 중인 첫 번째 자식의 결과를 반환하는 복합 노드.
-    /// 모든 자식이 성공한 경우에만 성공을 반환한다.
+    /// 자식 노드들을 순차적으로 실행하는 컴포지트 노드.
+    /// 하나의 자식이 실패하면 전체가 실패하고 처음부터 다시 시작.
+    /// 자식이 진행 중(Running)이면 그 상태를 유지.
+    /// 모든 자식이 성공한 경우에만 전체가 성공.
     /// </summary>
     public class Sequence : Composite
     {
-        public Sequence(MonsterBehaviourTree tree, SouthBossMonsterController controller) : base(tree, controller)
+        public Sequence(MonsterBehaviourTree tree) : base(tree)
         {
         }
 

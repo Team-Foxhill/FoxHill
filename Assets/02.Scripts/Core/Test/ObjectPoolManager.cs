@@ -45,8 +45,11 @@ namespace FoxHill.Core.Test
         [SerializeField] private int _capacity = 3000;
         [SerializeField] private float _checkInterval = 0.1f;
         [SerializeField] private float _outOfBoundsDistance = 1f;
+        [Header("Destination Visibility Check")]
+        [SerializeField] private float _visibilityRadius = 10f;
         public Color gizmoColor = new Color(1, 0, 0, 0.2f);
 
+        private static HashSet<MonoBehaviour> _colliderCheckneededObjects = new HashSet<MonoBehaviour>();
         private Plane[] _frustumPlanes;
         private List<PooledObjectData> _pooledObjects;
         private Queue<int> _availableIndices;
@@ -69,6 +72,22 @@ namespace FoxHill.Core.Test
             _mainCamera = Camera.main;
             InitializePool();
             _frustumPlanes = new Plane[6];
+        }
+
+        public static void RegisterColliderCheckneededObject(MonoBehaviour colliderCheckneededObject)
+        {
+            if (colliderCheckneededObject != null && !_colliderCheckneededObjects.Contains(colliderCheckneededObject))
+            {
+                _colliderCheckneededObjects.Add(colliderCheckneededObject);
+            }
+        }
+
+        public static void UnregisterCenterObject(MonoBehaviour colliderCheckneededObject)
+        {
+            if (colliderCheckneededObject != null)
+            {
+                _colliderCheckneededObjects.Remove(colliderCheckneededObject);
+            }
         }
 
         private void InitializePool()
@@ -119,7 +138,7 @@ namespace FoxHill.Core.Test
             if (Time.time - _lastCheckTime >= _checkInterval)
             {
                 UpdateFrustumPlanes();
-                CheckObjectVisibility();
+                CheckCombinedObjectVisibility();
                 _lastCheckTime = Time.time;
             }
         }
@@ -129,42 +148,81 @@ namespace FoxHill.Core.Test
             GeometryUtility.CalculateFrustumPlanes(_mainCamera, _frustumPlanes);
         }
 
-
-        private void CheckObjectVisibility()
+        private void CheckCombinedObjectVisibility()
         {
             Vector3 cameraPosition = _mainCamera.transform.position;
 
             NativeArray<Vector3> positions = new NativeArray<Vector3>(_pooledObjects.Count, Allocator.TempJob);
-            NativeArray<bool> results = new NativeArray<bool>(_pooledObjects.Count, Allocator.TempJob);
+            NativeArray<bool> frustumResults = new NativeArray<bool>(_pooledObjects.Count, Allocator.TempJob);
+            NativeArray<bool> radialResults = new NativeArray<bool>(_pooledObjects.Count, Allocator.TempJob);
 
             for (int i = 0; i < _pooledObjects.Count; i++)
             {
                 positions[i] = _pooledObjects[i].GameObject.transform.position;
             }
 
-            VisibilityCheckJob job = new VisibilityCheckJob
+            VisibilityCheckJob frustumJob = new VisibilityCheckJob
             {
                 CameraPosition = cameraPosition,
                 FrustumPlanes = new NativeArray<Plane>(_frustumPlanes, Allocator.TempJob),
                 OutOfBoundsDistance = _outOfBoundsDistance,
                 Positions = positions,
-                Results = results
+                Results = frustumResults
             };
 
-            JobHandle jobHandle = job.Schedule(_pooledObjects.Count, 32);
-            jobHandle.Complete();
+            JobHandle frustumJobHandle = frustumJob.Schedule(_pooledObjects.Count, 64);
+            frustumJobHandle.Complete();
+
+            bool[] isNearAnyCenter = new bool[_pooledObjects.Count];
+
+            foreach (var colliderCheckneededObject in _colliderCheckneededObjects)
+            {
+                if (colliderCheckneededObject == null) continue;
+
+                RadialVisibilityCheckJob radialJob = new RadialVisibilityCheckJob
+                {
+                    CenterPosition = colliderCheckneededObject.transform.position,
+                    VisibilityRadiusSquared = _visibilityRadius * _visibilityRadius,
+                    Positions = positions,
+                    Results = radialResults
+                };
+
+                JobHandle radialJobHandle = radialJob.Schedule(_pooledObjects.Count, 64);
+                radialJobHandle.Complete();
+
+                for (int i = 0; i < _pooledObjects.Count; i++)
+                {
+                    isNearAnyCenter[i] |= radialResults[i];
+                }
+            }
 
             for (int i = 0; i < _pooledObjects.Count; i++)
             {
                 PooledObjectData data = _pooledObjects[i];
-                bool isVisible = results[i];
-                data.SpriteRenderer.enabled = isVisible;
-                data.Collider2D.enabled = isVisible;
+                bool isInFrustum = frustumResults[i];
+                bool isNearCenter = isNearAnyCenter[i];
+
+                if (isInFrustum)
+                {
+                    data.SpriteRenderer.enabled = true;
+                    data.Collider2D.enabled = true;
+                }
+                else if (isNearCenter)
+                {
+                    data.SpriteRenderer.enabled = false;
+                    data.Collider2D.enabled = true;
+                }
+                else
+                {
+                    data.SpriteRenderer.enabled = false;
+                    data.Collider2D.enabled = false;
+                }
             }
 
-            job.FrustumPlanes.Dispose();
+            frustumJob.FrustumPlanes.Dispose();
             positions.Dispose();
-            results.Dispose();
+            frustumResults.Dispose();
+            radialResults.Dispose();
         }
 
         #region Gizmo
@@ -241,6 +299,20 @@ namespace FoxHill.Core.Test
                 }
             }
             return true;
+        }
+    }
+
+    public struct RadialVisibilityCheckJob : IJobParallelFor
+    {
+        public Vector3 CenterPosition;
+        public float VisibilityRadiusSquared;
+        [ReadOnly] public NativeArray<Vector3> Positions;
+        [WriteOnly] public NativeArray<bool> Results;
+
+        public void Execute(int index)
+        {
+            float distanceSquared = (Positions[index] - CenterPosition).sqrMagnitude;
+            Results[index] = distanceSquared <= VisibilityRadiusSquared;
         }
     }
 }

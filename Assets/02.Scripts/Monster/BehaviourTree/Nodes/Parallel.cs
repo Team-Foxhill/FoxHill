@@ -2,7 +2,12 @@ namespace FoxHill.Monster.AI
 {
     public class Parallel : Composite
     {
-        public Parallel(MonsterBehaviourTree tree, SouthBossMonsterController controller, int successCountRequired) : base(tree, controller)
+        /// <summary>
+        /// 성공 조건 정리하기.
+        /// </summary>
+        /// <param name="tree"></param>
+        /// <param name="successCountRequired"></param>
+        public Parallel(MonsterBehaviourTree tree, int successCountRequired) : base(tree)
         {
             _successCountRequired = successCountRequired;
         }

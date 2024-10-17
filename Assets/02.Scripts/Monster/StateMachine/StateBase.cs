@@ -1,17 +1,20 @@
+using FoxHill.Core.Pause;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace FoxHill.Monster.FSM
 {
-    public abstract class StateBase : IState
+    public abstract class StateBase : IState, IPausable
     {
         public StateBase(StateMachine machine, IInputCommand inputCommand)
         {
             this.inputCommand = inputCommand;
             transitions = SetTransitions();
             animator = machine.GetComponent<Animator>();
+            PauseManager.Register(this);
         }
 
 
@@ -20,6 +23,7 @@ namespace FoxHill.Monster.FSM
         protected IInputCommand inputCommand;
         protected Animator animator;
         protected AnimatorStateInfo animatorStateInfo; // 자식 클래스에서 할당해줘야 함.
+        protected bool _isPaused;
 
         public abstract IEnumerator OnEnter(params object[] parameters);
 
@@ -49,5 +53,14 @@ namespace FoxHill.Monster.FSM
             return isAnimationComplete;
         }
 
+        public void Pause()
+        {
+            _isPaused = true;
+        }
+
+        public void Resume()
+        {
+            _isPaused = false;
+        }
     }
 }

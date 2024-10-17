@@ -138,7 +138,7 @@ namespace FoxHill.UI.Menu
 
         private IEnumerator C_StartGame()
         {
-            var progress = SceneManager.LoadSceneAsync("GameScene");
+            var progress = SceneManager.LoadSceneAsync("GameSceneTest");
             while(progress.isDone == false)
             {
                 yield return null;

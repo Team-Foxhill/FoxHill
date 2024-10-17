@@ -3,7 +3,6 @@ using ProjectDawn.Navigation.Hybrid;
 using System;
 using System.Collections;
 using UnityEngine;
-using DebugFox = FoxHill.Core.DebugFox;
 using IPoolable = FoxHill.Core.IPoolable;
 
 
@@ -25,6 +24,7 @@ namespace FoxHill.Monster
         private WaitForSecondsRealtime _animationInterval;
         private float _xVelocity;
         private bool _loop;
+        private Coroutine _deadCoroutine;
 
 
         private void Start()
@@ -65,10 +65,8 @@ namespace FoxHill.Monster
                 }
                 if (_agentAuthoring != default && _spriteRenderer != default)
                 {
-                    DebugFox.Log("All components Found.");
                     yield break;
                 }
-                DebugFox.Log("Some Component Not Found.");
                 yield return _animationInterval;
             }
         }
@@ -78,7 +76,6 @@ namespace FoxHill.Monster
         {
             _loop = loop;
             float endFrame = spriteSet.Length;
-            DebugFox.Log(endFrame);
             _animationInterval = new WaitForSecondsRealtime(1 / endFrame);
 
             do
@@ -121,8 +118,7 @@ namespace FoxHill.Monster
                 }
                 _agentBody = _agentAuthoring.EntityBody;
                 _xVelocity = _agentBody.Velocity.x;
-                //transform.localScale = _agentBody.Velocity.x > 0f ? Vector3.one : _left;
-                _spriteRenderer.flipX = _agentBody.Velocity.x <= 0f; // todo. 최종 코드에 추가하기.
+                _spriteRenderer.flipX = _agentBody.Velocity.x <= 0f;
                 yield return _waitTime;
             }
         }
@@ -131,13 +127,20 @@ namespace FoxHill.Monster
         {
             base.Dead();
             _loop = false;
-            StartCoroutine(PerformDie());
+            if (_deadCoroutine == default && gameObject.active)
+            {
+                _deadCoroutine = StartCoroutine(PerformDie());
+            }
         }
 
         private IEnumerator PerformDie()
         {
             //죽음 애니메이션 실행시키기.
-            yield return StartCoroutine(UpdateSprite(_deadSpriteSet, false));
+            if (_spriteRenderer.enabled)
+            {
+                yield return StartCoroutine(UpdateSprite(_deadSpriteSet, false));
+            }
+            _deadCoroutine = null;
             // 풀에 되돌리기.
             OnRelease?.Invoke(this);
             yield break;

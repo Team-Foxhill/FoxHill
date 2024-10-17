@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace FoxHill.Player.Data
 {
+
     /// <summary>
     /// Player Stat의 초기값 데이터
     /// </summary>
@@ -13,6 +14,6 @@ namespace FoxHill.Player.Data
         public float Defense = 0.05f;
         public float MoveSpeed = 5f;
         public float AttackSpeed = 2f;
-        public float DodgeCooldown = 4f;
+        public float DodgeCooldown = 1f;
     }
 }

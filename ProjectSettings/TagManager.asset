@@ -23,7 +23,7 @@ TagManager:
   - TowerAttackRange
   - 
   - 
-  - 
+  - NPC
   - 
   - 
   - 
@@ -55,6 +55,9 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 777893151
+    locked: 0
+  - name: ForeGround
+    uniqueID: 2080960549
     locked: 0
   - name: SkillFront
     uniqueID: 3011655595

@@ -11,7 +11,6 @@ namespace FoxHill.Scene.Production
         [SerializeField] private List<Vector3> _wayPoints = new List<Vector3>(); // 2D 환경이므로 z좌표는 zoom size로 사용
         [SerializeField] private CinemachineVirtualCamera _productionCamera;
         [SerializeField] private CinemachineVirtualCamera _playerCamera;
-        [SerializeField] private GameObject _player;
 
         public IEnumerator C_StartSceneProduction()
         {
@@ -53,7 +52,6 @@ namespace FoxHill.Scene.Production
 
                 while (elapsedTime < time)
                 {
-                    Debug.Log(elapsedTime);
                     elapsedTime += Time.deltaTime;
                     _productionCamera.transform.position = Vector3.Lerp(startPosition, targetPosition, elapsedTime / time);
 

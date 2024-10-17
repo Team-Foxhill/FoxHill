@@ -13,21 +13,19 @@ namespace FoxHill.Monster.AI
         /// </summary>
         /// <param name="tree">이 행동을 가지고 있을 트리.</param>
         /// <param name="condition">람다 함수를 활용하여 확인하고자 하는 조건 함수를 작성.</param>
-        public Decorator(MonsterBehaviourTree tree, SouthBossMonsterController controller, Func<bool> condition) : base(tree, controller)
+        public Decorator(MonsterBehaviourTree tree, Func<bool> condition) : base(tree)
         {
             _condition = condition;
-            _controller = controller;
         }
 
         public Node child { get; set; } // _condition의 결과가 true일 때 실행될 노드.
         private Func<bool> _condition; // 실제로 확인할 조건이 담긴 함수를 저장하는 필드.
-        private SouthBossMonsterController _controller;
 
         public override Result Invoke()
         {
             if (_condition.Invoke()) // 조건 함수가 성공을 반환할 경우.
             {
-                tree.stack.Push(child); // 실행 스택에 자식 노드를 추가.
+                tree.NodeStack.Push(child); // 실행 스택에 자식 노드를 추가.
                 return Result.Success;
             }
 

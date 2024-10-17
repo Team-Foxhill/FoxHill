@@ -1,3 +1,4 @@
+using FoxHill.Core;
 using FoxHill.Core.Pause;
 using FoxHill.Player;
 using FoxHill.Scene.Production;
@@ -11,8 +12,9 @@ namespace FoxHill.Scene
     {
         [SerializeField] private GameSceneMenuController _menu;
         [SerializeField] private GameSceneProduction _production;
-        [SerializeField] private PlayerManager _playerManager;
         private MenuInputAction _inputAction;
+
+        [SerializeField] private PathFollowMonsterSpawner _pathFollowMonsterSpawner;
 
         public void OnShowMenu(InputAction.CallbackContext context)
         {
@@ -30,12 +32,14 @@ namespace FoxHill.Scene
 
             _production ??= transform.Find("Production").GetComponent<GameSceneProduction>();
 
-            _playerManager ??= FindFirstObjectByType<PlayerManager>();
+            _pathFollowMonsterSpawner ??= FindFirstObjectByType<PathFollowMonsterSpawner>();
         }
 
         private void Start()
         {
             _menu.ToggleUI(false);
+
+            _pathFollowMonsterSpawner.Initialize();
 
             // StartCoroutine(C_SceneProduction());
         }
@@ -47,9 +51,9 @@ namespace FoxHill.Scene
 
         private IEnumerator C_SceneProduction()
         {
-            _playerManager.Pause();
+            PauseManager.Pause();
             yield return StartCoroutine(_production.C_StartSceneProduction());
-            _playerManager.Resume();
+            PauseManager.Resume();
         }
     }
 }
