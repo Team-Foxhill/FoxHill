@@ -1,5 +1,4 @@
 using FoxHill.Core.Pause;
-using FoxHill.Core.Settings;
 using FoxHill.UI.Buttons;
 using System;
 using System.Collections;
@@ -79,19 +78,19 @@ public class GameSceneMenuController : MonoBehaviour, MenuInputAction.IGameScene
     public void ToggleUI(bool toggle)
     {
         _canvas.enabled = toggle;
+        _currentMenu = 0;
 
         if (toggle == true)
         {
             _inputAction.GameSceneMenu.Enable();
             OnHoverOptionEnter();
-            PauseManager.Pause();
+            PauseManager.Pause(true);
         }
         else
         {
             _inputAction.GameSceneMenu.Disable();
-            _currentMenu = 0;
             OnHoverOptionExit();
-            PauseManager.Resume();
+            PauseManager.Resume(true);
         }
     }
 

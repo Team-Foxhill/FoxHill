@@ -88842,6 +88842,7 @@ MonoBehaviour:
   _capacity: 500
   _checkInterval: 0.1
   _outOfBoundsDistance: 1
+  _visibilityRadius: 10
   gizmoColor: {r: 1, g: 0, b: 0, a: 0.2}
 --- !u!1 &7504897647979582646
 GameObject:

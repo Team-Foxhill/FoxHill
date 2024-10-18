@@ -17,6 +17,10 @@ namespace FoxHill.Monster.FSM
             PauseManager.Register(this);
         }
 
+        ~StateBase()
+        {
+            PauseManager.Unregister(this);
+        }
 
         public abstract State monsterState { get; }
         protected List<(Func<bool>, State)> transitions; // 컨디션과, 다음 상태를 가지고 있는 튜플. 유니티 애니메이터의 트랜지션 대신 사용.

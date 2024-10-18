@@ -72,6 +72,14 @@ MonoBehaviour:
     m_Localized: Exit Game
     m_Metadata:
       m_Items: []
+  - m_Id: 2999241323765760
+    m_Localized: You Died...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2999245375463424
+    m_Localized: Returning to title screen soon
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

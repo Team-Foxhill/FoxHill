@@ -28,6 +28,11 @@ namespace FoxHill.Items
             StartCoroutine(C_CheckLifeTime());
         }
 
+        private void OnDestroy()
+        {
+            PauseManager.Unregister(this);
+        }
+
         private IEnumerator C_CheckLifeTime()
         {
             float lifeTime = 0f;

@@ -14,8 +14,10 @@ namespace FoxHill.Core.Effect
 
         private static Dictionary<FeedbackType, MMF_Player> _feedbacks = new Dictionary<FeedbackType, MMF_Player>();
 
-        private void Awake()
+        private void OnEnable()
         {
+            _feedbacks.Clear();
+
             foreach (Transform child in transform)
             {
                 if (child.TryGetComponent<MMF_Player>(out var player) == true)

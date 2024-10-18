@@ -21,6 +21,19 @@ namespace FoxHill.Player.Quest
             _globalDialogue ??= FindFirstObjectByType<GlobalDialogue>();    
         }
 
+        private void Start()
+        {
+            _playerManager.OnReset?.AddListener(this.OnReset);
+        }
+
+        private void OnReset()
+        {
+            _currentQuest = null;
+            _currentIndex = NOT_IN_PROGRESS;
+            _globalDialogue ??= FindFirstObjectByType<GlobalDialogue>();
+            Debug.Log("DSfsdf");
+        }
+
         public bool TryStartQuest(int questNumber, int parameter = default)
         {
             // 현재 진행중인 퀘스트가 있다면
@@ -60,6 +73,7 @@ namespace FoxHill.Player.Quest
 
                 if(StartQuest(questNumber, parameter) == true)
                 {
+                    _globalDialogue ??= FindFirstObjectByType<GlobalDialogue>();
                     _globalDialogue.StartDialogue(_currentQuest.StartDialogue);
                 }
             }

@@ -1,0 +1,92 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2224490980459871066
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7880925876712127517}
+  - component: {fileID: 2305228271086107752}
+  - component: {fileID: 4062889222142027773}
+  m_Layer: 0
+  m_Name: PathFollowMonsterSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7880925876712127517
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2224490980459871066}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 13.24416, y: -27.155807, z: -1.9857659}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2305228271086107752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2224490980459871066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e22f6b37edaf0548b8d371da0fce712, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _testObjectPoolManager: {fileID: 4062889222142027773}
+  _getCount: 50
+  _spawnPosition: {fileID: 0}
+  _range: 0
+  _spawnCountOfStages: 0a00000014000000280000003c000000500000006400000096000000c8000000dc0000002c010000
+  _roundTimes:
+  - 20
+  - 40
+  - 70
+  - 100
+  - 100
+  - 140
+  - 140
+  - 200
+  - 200
+  - 400
+  _spawnEndTimeOfStages:
+  - 5
+  - 9
+  - 20
+  - 25
+  - 30
+  - 35
+  - 40
+  - 30
+  - 20
+  - 10
+--- !u!114 &4062889222142027773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2224490980459871066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0da12cdeb355c7b4bab0eebc3c476149, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _itemPrefab: {fileID: 0}
+  _capacity: 500
+  _checkInterval: 0.03
+  _outOfBoundsDistance: 1
+  _visibilityRadius: 10
+  gizmoColor: {r: 1, g: 0, b: 0, a: 0.2}

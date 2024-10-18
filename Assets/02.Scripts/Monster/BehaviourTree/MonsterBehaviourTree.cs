@@ -25,6 +25,11 @@ namespace FoxHill.Monster.AI
             StartCoroutine(C_Tick());
         }
 
+        private void OnDestroy()
+        {
+            PauseManager.Unregister(this);
+        }
+
         /// <summary>
         /// 트리 탐색하는 단위
         /// </summary>

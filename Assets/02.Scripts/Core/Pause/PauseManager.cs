@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace FoxHill.Core.Pause
 {
@@ -8,10 +9,11 @@ namespace FoxHill.Core.Pause
     /// </summary>
     public static class PauseManager
     {
-        public static bool IsPaused => _isPaused; // 가급적 사용하지 말 것.
+        public static bool IsSuperPaused { get; private set; } = false; // 최상단의 일시정지가 수행되었는지를 관리 (ex. pauseMenu 등 게임 로직과 무관한 일시정지)
+        public static bool IsPaused { get; private set; } = false;
+
 
         private static HashSet<IPausable> pausables = new HashSet<IPausable>(1024);
-        private static bool _isPaused = false;
 
         public static void Register(IPausable pausable)
         {
@@ -23,9 +25,16 @@ namespace FoxHill.Core.Pause
             pausables.Remove(pausable);
         }
 
-        public static void Pause()
+        public static void Pause(bool isSuperPause = false)
         {
-            _isPaused = true;
+            if (isSuperPause == true)
+            {
+                IsSuperPaused = true;
+            }
+            else
+            {
+                IsPaused = true;
+            }
 
             foreach (IPausable pausable in pausables)
             {
@@ -33,13 +42,29 @@ namespace FoxHill.Core.Pause
             }
         }
 
-        public static void Resume()
+        public static void Resume(bool isSuperPause = false)
         {
-            _isPaused = false;
-
-            foreach (IPausable pausable in pausables)
+            // 게임이 멈춰있지 않으면 그대로 진행
+            if (IsPaused == false && IsSuperPaused == false)
             {
-                pausable.Resume();
+                return;
+            }
+
+            if (isSuperPause == true)
+            {
+                IsSuperPaused = false;
+            }
+            else
+            {
+                IsPaused = false;
+            }
+
+            if (IsPaused == false && IsSuperPaused == false)
+            {
+                foreach (IPausable pausable in pausables)
+                {
+                    pausable.Resume();
+                }
             }
         }
     }

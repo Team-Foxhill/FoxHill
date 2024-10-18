@@ -27,6 +27,10 @@ namespace FoxHill.Player.Inventory
             _inventory ??= FindFirstObjectByType<PlayerInventory>();
         }
 
+        private void OnDestroy()
+        {
+            PauseManager.Unregister(this);
+        }
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if(_isPaused == true)

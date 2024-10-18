@@ -29,6 +29,11 @@ namespace FoxHill.Monster.FSM
             PauseManager.Register(this);
         }
 
+        private void OnDestroy()
+        {
+            PauseManager.Unregister(this);
+        }
+
         private void Update()
         {
             if (!_isInitialized)

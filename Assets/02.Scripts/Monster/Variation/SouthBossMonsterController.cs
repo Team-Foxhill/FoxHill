@@ -103,6 +103,11 @@ namespace FoxHill.Monster.AI
             CurrentHp = MaxHp;
         }
 
+        private void OnDestroy()
+        {
+            PauseManager.Unregister(this);
+        }
+
         private void MakeBehaviourTree()
         {
             // 체이닝 함수를 활용하여 빌드.
