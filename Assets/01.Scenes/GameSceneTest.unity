@@ -6702,6 +6702,11 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.017944526, y: 0.011419266, z: 1}
   m_Center: {x: -0.028276237, y: -0.33686787, z: -0}
+--- !u!223 &920300998 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 2327395556883741846, guid: 85ad96625ff210745b54e456d0388ad0, type: 3}
+  m_PrefabInstance: {fileID: 455751950}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &920514157
 GameObject:
   m_ObjectHideFlags: 0
@@ -7685,8 +7690,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _menu: {fileID: 9100135862841699979}
+  _deadUI: {fileID: 920300998}
   _production: {fileID: 1846119160}
-  _pathFollowMonsterSpawner: {fileID: 0}
+  _pathFollowMonsterSpawner: {fileID: 2912029092748542970}
+  _playerManager: {fileID: 5172630788928857738}
+  StartProductionOnLoad: 0
 --- !u!1 &1159099082
 GameObject:
   m_ObjectHideFlags: 0
@@ -8915,7 +8923,7 @@ PrefabInstance:
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 8716101125514639389, guid: 66a62ca0761c9ef40862e10ac3fa5d3c, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1949341229}
+      addedObject: {fileID: 6042275056514730177}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6385488875848584110, guid: 66a62ca0761c9ef40862e10ac3fa5d3c, type: 3}
       insertIndex: -1
@@ -12544,11 +12552,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.06905928, y: 0.034801543, z: 1}
   m_Center: {x: 0.37248504, y: 0.026644915, z: -0}
---- !u!4 &1949341229 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2617915375982465055, guid: d21906ddd70c2ed4dba858e62af0020d, type: 3}
-  m_PrefabInstance: {fileID: 6196420298053018678}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1960499147
 GameObject:
   m_ObjectHideFlags: 0
@@ -13581,6 +13584,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2180087488260329557, guid: 85ad96625ff210745b54e456d0388ad0, type: 3}
   m_PrefabInstance: {fileID: 5200866823723854605}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2912029092748542970 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2305228271086107752, guid: d21906ddd70c2ed4dba858e62af0020d, type: 3}
+  m_PrefabInstance: {fileID: 6196420298053018678}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e22f6b37edaf0548b8d371da0fce712, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!20 &3268566774488466918
 Camera:
   m_ObjectHideFlags: 0
@@ -13958,6 +13972,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &6042275056514730177 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7880925876712127517, guid: d21906ddd70c2ed4dba858e62af0020d, type: 3}
+  m_PrefabInstance: {fileID: 6196420298053018678}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6196420298053018678
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13978,14 +13997,6 @@ PrefabInstance:
       propertyPath: _itemPrefab
       value: 
       objectReference: {fileID: 298706369}
-    - target: {fileID: 6899268865435292070, guid: d21906ddd70c2ed4dba858e62af0020d, type: 3}
-      propertyPath: _itemPrefab
-      value: 
-      objectReference: {fileID: 298706369}
-    - target: {fileID: 6910586730807892772, guid: d21906ddd70c2ed4dba858e62af0020d, type: 3}
-      propertyPath: _spawnPosition
-      value: 
-      objectReference: {fileID: 5207604499161500536}
     - target: {fileID: 7880925876712127517, guid: d21906ddd70c2ed4dba858e62af0020d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

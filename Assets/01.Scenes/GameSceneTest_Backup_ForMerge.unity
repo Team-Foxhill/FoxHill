@@ -599,6 +599,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Map_Final
       objectReference: {fileID: 0}
+    - target: {fileID: 7526392295402362177, guid: 66a62ca0761c9ef40862e10ac3fa5d3c, type: 3}
+      propertyPath: _spawnPosition
+      value: 
+      objectReference: {fileID: 2111121100}
     - target: {fileID: 8716101125514639389, guid: 66a62ca0761c9ef40862e10ac3fa5d3c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 13.24416
@@ -1237,7 +1241,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _menu: {fileID: 9100135862841699979}
   _production: {fileID: 1846119160}
-  _pathFollowMonsterSpawner: {fileID: 1873283735}
+  _pathFollowMonsterSpawner: {fileID: 0}
 --- !u!1 &1231096794
 GameObject:
   m_ObjectHideFlags: 0
@@ -2424,17 +2428,6 @@ MonoBehaviour:
   - {x: -10, y: -64, z: 8}
   _productionCamera: {fileID: 774573302}
   _playerCamera: {fileID: 1153915735}
---- !u!114 &1873283735 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2912029093415531021, guid: 66a62ca0761c9ef40862e10ac3fa5d3c, type: 3}
-  m_PrefabInstance: {fileID: 675541495}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e22f6b37edaf0548b8d371da0fce712, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1900754879
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2609,6 +2602,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 38da25c69df2e7944ae8c80eec28ca0a, type: 3}
+--- !u!1 &2111121100 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5207604498494438031, guid: 66a62ca0761c9ef40862e10ac3fa5d3c, type: 3}
+  m_PrefabInstance: {fileID: 675541495}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2144640308
 PrefabInstance:
   m_ObjectHideFlags: 0
