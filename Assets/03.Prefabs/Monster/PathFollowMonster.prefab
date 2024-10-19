@@ -170,6 +170,15 @@ MonoBehaviour:
   - {fileID: 1796753914, guid: 9fac117efaa4c3d44a98ae57c3aae005, type: 3}
   - {fileID: 387746381, guid: 9fac117efaa4c3d44a98ae57c3aae005, type: 3}
   - {fileID: 1491793352, guid: 9fac117efaa4c3d44a98ae57c3aae005, type: 3}
+  _damagedSpriteSet:
+  - {fileID: 2144046366, guid: ac9a349b000bbd548a477776ab5e5554, type: 3}
+  - {fileID: -1044418269, guid: ac9a349b000bbd548a477776ab5e5554, type: 3}
+  - {fileID: -434031302, guid: ac9a349b000bbd548a477776ab5e5554, type: 3}
+  - {fileID: 440758439, guid: ac9a349b000bbd548a477776ab5e5554, type: 3}
+  - {fileID: 1977704510, guid: ac9a349b000bbd548a477776ab5e5554, type: 3}
+  - {fileID: -96948831, guid: ac9a349b000bbd548a477776ab5e5554, type: 3}
+  - {fileID: -548517365, guid: ac9a349b000bbd548a477776ab5e5554, type: 3}
+  - {fileID: -864768985, guid: ac9a349b000bbd548a477776ab5e5554, type: 3}
   _deadSpriteSet:
   - {fileID: 136336868, guid: 36ac7d96173361041b12de964e58e276, type: 3}
   - {fileID: 1053181174, guid: 36ac7d96173361041b12de964e58e276, type: 3}
@@ -181,7 +190,14 @@ MonoBehaviour:
   - {fileID: 843199120, guid: 36ac7d96173361041b12de964e58e276, type: 3}
   - {fileID: -1280245091, guid: 36ac7d96173361041b12de964e58e276, type: 3}
   - {fileID: 723296, guid: 36ac7d96173361041b12de964e58e276, type: 3}
+  _audioClips:
+  - {fileID: 8300000, guid: a6dc7e0aef4e0d2478668be858015b10, type: 3}
+  - {fileID: 8300000, guid: dcda60596d41b9f4eb661db294cde485, type: 3}
+  - {fileID: 8300000, guid: a0399d5bb98021b4b8c3d2ad0491fc93, type: 3}
+  - {fileID: 8300000, guid: 272f0c789fb588549a5200bc2940ed5f, type: 3}
+  - {fileID: 8300000, guid: c9ef63dfc4aed1544bab517b1264378f, type: 3}
   _teleportPosition: {x: -55, y: -70}
+  _colorChangeWait: 0.2
 --- !u!114 &1231365322864599061
 MonoBehaviour:
   m_ObjectHideFlags: 0
