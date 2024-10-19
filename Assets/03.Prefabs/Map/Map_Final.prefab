@@ -89399,96 +89399,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.0029296875, y: 0.0009765625, z: 1}
   m_Center: {x: 0.022949219, y: -0.29296875, z: -0}
---- !u!1 &7497453222852075503
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6042275056912988470}
-  - component: {fileID: 2912029093415531021}
-  - component: {fileID: 2896357126603110543}
-  m_Layer: 0
-  m_Name: PathFollowMonsterSpawner
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6042275056912988470
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7497453222852075503}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8716101125514639389}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2912029093415531021
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7497453222852075503}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e22f6b37edaf0548b8d371da0fce712, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _testObjectPoolManager: {fileID: 2896357126603110543}
-  _getCount: 50
-  _spawnPosition: {fileID: 5207604498494438031}
-  _range: 0
-  _spawnCountOfStages: 0a00000014000000280000003c000000500000006400000096000000c8000000dc0000002c010000
-  _roundTimes:
-  - 20
-  - 40
-  - 70
-  - 100
-  - 100
-  - 140
-  - 140
-  - 200
-  - 200
-  - 400
-  _spawnEndTimeOfStages:
-  - 5
-  - 9
-  - 20
-  - 25
-  - 30
-  - 35
-  - 40
-  - 30
-  - 20
-  - 10
---- !u!114 &2896357126603110543
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7497453222852075503}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0da12cdeb355c7b4bab0eebc3c476149, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _itemPrefab: {fileID: 0}
-  _capacity: 500
-  _checkInterval: 0.03
-  _outOfBoundsDistance: 1
-  _visibilityRadius: 10
-  gizmoColor: {r: 1, g: 0, b: 0, a: 0.2}
 --- !u!1 &7504897647979582646
 GameObject:
   m_ObjectHideFlags: 0
@@ -109927,3 +109837,69 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.0146484375, y: 0.02734375, z: 1}
   m_Center: {x: -0.1743164, y: 0.119628906, z: -0}
+--- !u!1001 &8615048591447664937
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8716101125514639389}
+    m_Modifications:
+    - target: {fileID: 2270518960556553926, guid: d21906ddd70c2ed4dba858e62af0020d, type: 3}
+      propertyPath: m_Name
+      value: PathFollowMonsterSpawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 2617915375982465055, guid: d21906ddd70c2ed4dba858e62af0020d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2617915375982465055, guid: d21906ddd70c2ed4dba858e62af0020d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2617915375982465055, guid: d21906ddd70c2ed4dba858e62af0020d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2617915375982465055, guid: d21906ddd70c2ed4dba858e62af0020d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2617915375982465055, guid: d21906ddd70c2ed4dba858e62af0020d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2617915375982465055, guid: d21906ddd70c2ed4dba858e62af0020d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2617915375982465055, guid: d21906ddd70c2ed4dba858e62af0020d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2617915375982465055, guid: d21906ddd70c2ed4dba858e62af0020d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2617915375982465055, guid: d21906ddd70c2ed4dba858e62af0020d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2617915375982465055, guid: d21906ddd70c2ed4dba858e62af0020d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6910586730807892772, guid: d21906ddd70c2ed4dba858e62af0020d, type: 3}
+      propertyPath: _spawnPosition
+      value: 
+      objectReference: {fileID: 5207604498494438031}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d21906ddd70c2ed4dba858e62af0020d, type: 3}
+--- !u!4 &6042275056912988470 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2617915375982465055, guid: d21906ddd70c2ed4dba858e62af0020d, type: 3}
+  m_PrefabInstance: {fileID: 8615048591447664937}
+  m_PrefabAsset: {fileID: 0}
