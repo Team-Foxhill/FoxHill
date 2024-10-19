@@ -23,15 +23,16 @@ namespace FoxHill.Items
             {
                 Instance = this;
                 DontDestroyOnLoad(gameObject);
+
+
+                foreach (var item in _dropTable.Items)
+                {
+                    _itemPrefabs.Add(item.ItemIndex, item.ItemPrefab);
+                }
             }
             else
             {
-                Destroy(Instance);
-            }
-
-            foreach (var item in _dropTable.Items)
-            {
-                _itemPrefabs.Add(item.ItemIndex, item.ItemPrefab);
+                Destroy(gameObject);
             }
         }
 

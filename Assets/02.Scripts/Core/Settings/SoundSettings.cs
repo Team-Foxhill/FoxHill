@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,6 +11,7 @@ namespace FoxHill.Core.Settings
             _volumeSlider = volumeSlider;
         }
 
+        public Action<float> OnVolumeChanged;
         private const float VOLUME_CONTROL_AMOUNT = 0.1f;
 
         private Slider _volumeSlider;
@@ -30,7 +32,9 @@ namespace FoxHill.Core.Settings
                     ? _volumeSlider.value + VOLUME_CONTROL_AMOUNT
                     : 1f;
             }
+            OnVolumeChanged.Invoke(_volumeSlider.value);
         }
+
         public override void OnExitSettingSelection()
         {
             return;

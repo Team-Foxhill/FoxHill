@@ -16,8 +16,8 @@ namespace FoxHill.Monster
         public float Defense { get; private set; }
 
         public Transform Transform => gameObject.transform;
-
         public event Action OnDead;
+
         protected int _monsterNumber;
         protected MonsterForm _monsterForm;
         protected bool _isPaused = false;
@@ -39,7 +39,7 @@ namespace FoxHill.Monster
         /// 대미지를 처리하는 메서드.
         /// </summary>
         /// <param name="damage">PerformAttack에서 받은 대미지</param>
-        public void TakeDamage(IDamager damager, float damage)
+        public virtual void TakeDamage(IDamager damager, float damage)
         {
             //프로퍼티 체력 깎기.
             CurrentHp -= damage;

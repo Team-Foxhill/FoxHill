@@ -66,7 +66,12 @@ namespace FoxHill.Map
             if (collision.gameObject.layer == LayerRepository.LAYER_PATH_FOLLOW_MONSTER && !_monsterSet.Contains(collision))
             {
                 _monsterSet.Add(collision);
-                float power = collision.gameObject.GetComponent<PathFollowMonsterController>().Power;
+                float power = 0f;
+                if (collision.gameObject.GetComponent<PathFollowMonsterController>() != null)
+                {
+                    power = collision.gameObject.GetComponent<PathFollowMonsterController>().Power;
+                }
+
                 if (_periodlyGetDamageCoroutine == null)
                 {
                     _periodlyGetDamageCoroutine = StartCoroutine(PeriodlyGetDamage(power));
@@ -76,7 +81,7 @@ namespace FoxHill.Map
 
         private void OnTriggerExit2D(Collider2D collision)
         {
-            if (collision.gameObject.layer == LayerRepository.LAYER_PATH_FOLLOW_MONSTER && _monsterSet.Contains(collision) )
+            if (collision.gameObject.layer == LayerRepository.LAYER_PATH_FOLLOW_MONSTER && _monsterSet.Contains(collision))
             {
                 _monsterSet.Remove(collision);
                 if (_monsterSet.Count == 0 && _periodlyGetDamageCoroutine != null)
