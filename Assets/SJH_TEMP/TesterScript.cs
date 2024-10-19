@@ -20,8 +20,8 @@ public class TesterScript : MonoBehaviour, IDamager
     {
         player = FindFirstObjectByType<PlayerManager>();
 
-        button1.onClick.AddListener(PauseManager.Pause);
-        button2.onClick.AddListener(PauseManager.Resume);
+        //button1.onClick.AddListener(PauseManager.Pause);
+        //button2.onClick.AddListener(PauseManager.Resume);
         //button3.onClick.AddListener(() => { player.Quest.TryStartQuest(1, 1); });
         //button3.onClick.AddListener(() => { player.Knockback(enemy.transform); });
         button3.onClick.AddListener(() => { DropManager.Instance.TryGetItem(1, out var item); Instantiate(item); });

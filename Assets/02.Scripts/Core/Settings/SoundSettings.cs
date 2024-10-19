@@ -6,6 +6,7 @@ namespace FoxHill.Core.Settings
 {
     public class SoundSettings : SettingsBase
     {
+        public float Volume => _volumeSlider.value;
         public SoundSettings(Slider volumeSlider)
         {
             _volumeSlider = volumeSlider;

@@ -55,6 +55,11 @@ namespace FoxHill.Player.Skill
                 _onCooldownComplete = outerClass.OnCooldownComplete;
             }
 
+            public static void Initialize()
+            {
+                _skillCount = 0;
+            }
+
             public IEnumerator C_StartCooldown()
             {
                 _cooldown = _skill.Stat.Cooldown;
@@ -80,6 +85,8 @@ namespace FoxHill.Player.Skill
         private void Awake()
         {
             _playerManager ??= GetComponentInParent<PlayerManager>();
+
+            SkillContainer.Initialize();
 
             foreach (var skill in _skillPrefabs)
             {

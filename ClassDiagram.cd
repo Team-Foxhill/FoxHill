@@ -1,0 +1,1237 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="FoxHill.Controller.CharacterControllerBase" Collapsed="true">
+    <Position X="19.75" Y="18.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAhAAIAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAgAAEA=</HashCode>
+      <FileName>Assets\02.Scripts\Controller\CharacterControllerBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FoxHill.Core.Agent.AgentDestinationAuthoring" Collapsed="true">
+    <Position X="29.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQIAAAAACAAAAAAAAAAADAAAAAAAAEAAAAAAAAACAA=</HashCode>
+      <FileName>Assets\02.Scripts\Core\Agent\AgentDestinationAuthoring.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Core.DebugFox" Collapsed="true">
+    <Position X="38.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAAAAAAAAAAAAAIAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Core\DebugFox.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Core.GameManager" Collapsed="true">
+    <Position X="38.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAiCAAAAAAAAAAAAAAgAAAAAAAQAABAAAAAEA=</HashCode>
+      <FileName>Assets\02.Scripts\Core\GameManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Core.CameraPositionFollowMonsterSpawner" Collapsed="true">
+    <Position X="34.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAJECCAAAQIUAAAAAAAAAAAAAAIAAMAACAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Dummy\Villin\CameraPositionFollowMonsterSpawner.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Core.PathFollowMonsterSpawner" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="31.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAEgAAIJCACAIQAAUAEQAAAAAAAAgAAAAAgABCgAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Monster\PathFollowMonsterSpawner.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="FoxHill.Core.Dialogue.DialogueHUD" Collapsed="true">
+    <Position X="41.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABgAAAAAIAAAIAAAAAAAAAAAAAIAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\02.Scripts\Core\Dialogue\DialogueHUD.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Core.Dialogue.GlobalDialogue" Collapsed="true">
+    <Position X="31.25" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAACAAAYAAAAAABAQAAAAAAAAIAABAAAAAAEA=</HashCode>
+      <FileName>Assets\02.Scripts\Core\Dialogue\GlobalDialogue.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Core.Effect.EffectManager" Collapsed="true">
+    <Position X="31.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAgAAAAAAAAEA=</HashCode>
+      <FileName>Assets\02.Scripts\Core\Effect\EffectManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Core.Exp.Exp" Collapsed="true">
+    <Position X="33" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAAAAAAIAAAACAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Core\Exp\Exp.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Core.Pause.PauseManager" Collapsed="true">
+    <Position X="33" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAIAQAAAAAAAAAAAAAAAAAABAAAAAAAgAAgAEAA=</HashCode>
+      <FileName>Assets\02.Scripts\Core\Pause\PauseManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Core.Settings.GameSettingsManager" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="29.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgYBAAAAAAAQACAEAAAIIAAAAQIAgAEAAICAgIkg=</HashCode>
+      <FileName>Assets\02.Scripts\Core\Settings\GameSettingsManager.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="FoxHill.Core.Settings.GraphicsSettings" Collapsed="true">
+    <Position X="16.25" Y="16.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAACAAAICAAAAAEAAAAAAACBAAAIBAAEAAAiAAIAA=</HashCode>
+      <FileName>Assets\02.Scripts\Core\Settings\GraphicsSettings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Core.Settings.LanguageManager" Collapsed="true">
+    <Position X="41.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAQAAAAAAAAgAAAAAAAAAAAAIAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Core\Settings\LanguageManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Core.Settings.OtherSettings" Collapsed="true">
+    <Position X="18.5" Y="16.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEBAAAAAAIAAAAAACAAAAAAAAAAAAAAAAEAAAgAAIAA=</HashCode>
+      <FileName>Assets\02.Scripts\Core\Settings\OtherSettings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Core.Settings.SettingsBase" Collapsed="true">
+    <Position X="16.25" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAgAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Core\Settings\SettingsBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Core.Settings.SettingSelection" Collapsed="true">
+    <Position X="41.75" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAyAAAQAA=</HashCode>
+      <FileName>Assets\02.Scripts\Core\Settings\SettingSelection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Core.Settings.SettingSelector" Collapsed="true">
+    <Position X="43.5" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAFAAAAQACEAgAAAACAAQAQAAAFAAAAAAAIAA=</HashCode>
+      <FileName>Assets\02.Scripts\Core\Settings\SettingSelector.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Core.Settings.SoundSettings" Collapsed="true">
+    <Position X="14" Y="16.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAoAAAAAAAAAgAEAAAgAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Core\Settings\SoundSettings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Core.Test.PooledObjectData" Collapsed="true">
+    <Position X="41.75" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAMAIAA=</HashCode>
+      <FileName>Assets\02.Scripts\Core\Test\ObjectPoolManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Core.Test.ObjectPoolManager" Collapsed="true">
+    <Position X="29.5" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AYQEAABUAAAgAARAAAAEAQQAACAABAEAQAAAABAAAkE=</HashCode>
+      <FileName>Assets\02.Scripts\Core\Test\ObjectPoolManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Core.Utils.FreezeRotation" Collapsed="true">
+    <Position X="36.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Core\Utils\FreezeRotation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Core.Utils.LayerRepository" Collapsed="true">
+    <Position X="43.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAABAAAAgAACAAEAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Core\Utils\LayerRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Tester.ObjectPoolManager" Collapsed="true">
+    <Position X="45.25" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AcAEAAAABEAgAARAAIUAAARAATAAAAUEAQQAABAAgEA=</HashCode>
+      <FileName>Assets\02.Scripts\Dummy\Villin\ObjectPoolManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpawnTester" Collapsed="true">
+    <Position X="36.5" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAEAAiAAAACAAAAAAAAQMAQAAAAEA=</HashCode>
+      <FileName>Assets\02.Scripts\Dummy\Villin\SpawnTester.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MonsterData" Collapsed="true">
+    <Position X="31.25" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Monster\MonsterData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AttackSpec" Collapsed="true">
+    <Position X="31.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAAAAAAACAAAAAAIAAAAABAAAAAAAgAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\ScriptableObjects\AttackSpec.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PrefabSpawner" Collapsed="true">
+    <Position X="45.25" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAJAAAAgAAAAAAAgAAEAAAAAgAAAgAIAAAAAIAAAAEA=</HashCode>
+      <FileName>Assets\02.Scripts\Tower\PrefabSpawner.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameSceneMenuController" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="43.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAADAABAACAAAYAAAAEAQAEIEAAAAEAAAAAAAAACIkA=</HashCode>
+      <FileName>Assets\02.Scripts\UI\Menu\GameSceneMenuController.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="FoxHill.Items.DropManager" Collapsed="true">
+    <Position X="43.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAEIABABAAAAAAAABAAAQCAAAAAAAEA=</HashCode>
+      <FileName>Assets\02.Scripts\Items\DropManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Items.DropTableFormRaw" Collapsed="true">
+    <Position X="29.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAACAAAAEABAAAAEAAAAAAACAAACAAAEAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Items\DropTableForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Items.DropTableForm" Collapsed="true">
+    <Position X="45.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAACAAAAEABAAAAEAAAAAAACAAACAAAEAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Items\DropTableForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Items.Item" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="33" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAgAAKAACAAAAAAAIAAAAAAAAAAABCAAAAAAEgAAEE=</HashCode>
+      <FileName>Assets\02.Scripts\Items\Item.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="FoxHill.Items.ItemData" Collapsed="true">
+    <Position X="34.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAACgAAAAAAAACAAAAICAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Assets\02.Scripts\Items\ItemData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Items.ItemDropTable" Collapsed="true">
+    <Position X="38.25" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Items\ItemDropTable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Map.DestinationHPManager" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="40" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgACKDACAAAACAAIAQACAAAEAAAAAAAAAAAAhAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Map\Destination\DestinationHPManager.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="FoxHill.Map.GameObjectDestroyer" Collapsed="true">
+    <Position X="40" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\02.Scripts\Map\GameObjectDestroyer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Monster.AI.Blackboard" Collapsed="true">
+    <Position X="33" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAQAAAAAAACAAECQAAAAAAABAAAEAAAAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Monster\BehaviourTree\Blackboard.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Monster.AI.MonsterBehaviourTree" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="29.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIQwQAKAAAAACABACAAAIAAAAIAAgAAAAAAIBDkQAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Monster\BehaviourTree\MonsterBehaviourTree.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="FoxHill.Monster.AI.Node" Collapsed="true">
+    <Position X="13" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAIAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Monster\BehaviourTree\Node.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Monster.AI.Composite" Collapsed="true">
+    <Position X="8.5" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAIAAAACAAAAAAEAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Monster\BehaviourTree\Nodes\Composite.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FoxHill.Monster.AI.Decorator" Collapsed="true">
+    <Position X="13" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIAAAAAACAAAAAAIgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Monster\BehaviourTree\Nodes\Decorator.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FoxHill.Monster.AI.Execution" Collapsed="true">
+    <Position X="15.25" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIAAAAAACAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Monster\BehaviourTree\Nodes\Execution.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Monster.AI.Parallel" Collapsed="true">
+    <Position X="6.25" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIAAAAAAAAAgAAAAAAAAAAAAAAAAAAAQA=</HashCode>
+      <FileName>Assets\02.Scripts\Monster\BehaviourTree\Nodes\Parallel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Monster.AI.Seek" Collapsed="true">
+    <Position X="17.5" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAACUBAABKBAAAAAgAJAAhkRABAAQAQAAAAAIAAhA=</HashCode>
+      <FileName>Assets\02.Scripts\Monster\BehaviourTree\Nodes\Seek.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Monster.AI.Selector" Collapsed="true">
+    <Position X="8.5" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Monster\BehaviourTree\Nodes\Selector.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Monster.AI.Sequence" Collapsed="true">
+    <Position X="10.75" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Monster\BehaviourTree\Nodes\Sequence.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Monster.AI.Root" Collapsed="true">
+    <Position X="19.75" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIAAAAAACAAAAAAIAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Monster\BehaviourTree\Root.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FoxHill.Monster.AI.SouthBossMonsterController" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="34.75" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABA0ALctYYKiEBEBBMgAh4QRASEAgeAJDEIAiogAEMA=</HashCode>
+      <FileName>Assets\02.Scripts\Monster\Variation\SouthBossMonsterController.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="FoxHill.Monster.MonsterBase" Collapsed="true">
+    <Position X="5.75" Y="20.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgiABIAAAAAABAAAIAAgAQAAAAAAAABIAAAiggAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Monster\MonsterBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FoxHill.Monster.MonsterDataManager" Collapsed="true">
+    <Position X="33" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAABAA=</HashCode>
+      <FileName>Assets\02.Scripts\Monster\MonsterDataManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Monster.MonsterFormRaw" Collapsed="true">
+    <Position X="38.25" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAABAAAAAAABAABAAAEAAAAAAAAAABAAAgAgAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Monster\MonsterForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Monster.MonsterForm" Collapsed="true">
+    <Position X="34.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAABAAAAAAABAABAAAEAAAAAAAAAABAAAgAgAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Monster\MonsterForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Monster.MonsterFormConverter" Collapsed="true">
+    <Position X="36.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Monster\MonsterFormConverter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Monster.PathFollowMonsterController" Collapsed="true">
+    <Position X="5.75" Y="21.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgABAAgACAQgAAgAAACAABgEAAIACwACCAECAABCAA=</HashCode>
+      <FileName>Assets\02.Scripts\Monster\Variation\PathFollowMonsterController.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FoxHill.Monster.FSM.StateBase" Collapsed="true">
+    <Position X="16.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAgAAIAAAAAABAICAAAAAAAAAAQCAAAAIAAAAkAACg=</HashCode>
+      <FileName>Assets\02.Scripts\Monster\StateMachine\StateBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FoxHill.Monster.FSM.StateMachine" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="38.25" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEQgAAIQAAAABQAAAACAACAAAAAAAABAIAAABAoACAA=</HashCode>
+      <FileName>Assets\02.Scripts\Monster\StateMachine\StateMachine.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="FoxHill.Monster.FSM.AfterShockState" Collapsed="true">
+    <Position X="22.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAAAICAAAAAAAAAAQAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Monster\StateMachine\States\AfterShockState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Monster.FSM.AttackHorizontalState" Collapsed="true">
+    <Position X="24.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAAAAICAAAAAAAAAAQAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Monster\StateMachine\States\AttackHorizontalState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Monster.FSM.AttackVerticalState" Collapsed="true">
+    <Position X="27" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAICAAAAAAAAAAQAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Monster\StateMachine\States\AttackVerticalState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Monster.FSM.ChargeState" Collapsed="true">
+    <Position X="6.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAAAAAICAAAAAAAAgAQAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Monster\StateMachine\States\ChargeState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Monster.FSM.DeadState" Collapsed="true">
+    <Position X="9" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAACICAAAAAAAAAAQAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Monster\StateMachine\States\DeadState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Monster.FSM.IdleState" Collapsed="true">
+    <Position X="11.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAICAAAABAAAAAQAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Monster\StateMachine\States\IdleState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Monster.FSM.JumpState" Collapsed="true">
+    <Position X="13.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAAAAAICAAAAAAAAAAQAAAAAIAEAAAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Monster\StateMachine\States\JumpState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Monster.FSM.KnockBackState" Collapsed="true">
+    <Position X="15.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAAAAAICAAAAAAAAAAQAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Monster\StateMachine\States\KnockBackState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Monster.FSM.MoveState" Collapsed="true">
+    <Position X="18" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAAAAAICAAAAAAEAAAQAAAAAIAAAAEAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Monster\StateMachine\States\MoveState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Monster.FSM.StaggerState" Collapsed="true">
+    <Position X="20.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAICIAAAAAAAAAQAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Monster\StateMachine\States\StaggerState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Monster.FSM.MonsterStateCommand" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="40" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAABAAAIIAAAAEAAACAAgAAAAAAAEAAAQAA=</HashCode>
+      <FileName>Assets\02.Scripts\Monster\Variation\MonsterStateCommand.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="FoxHill.NPC.NPC" Collapsed="true">
+    <Position X="41.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAACAAAAAAAAAAAAAAAEAAAAAAAAgAAABAAEA=</HashCode>
+      <FileName>Assets\02.Scripts\NPC\NPC.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Pet.Pet" Collapsed="true">
+    <Position X="36.5" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAEAAAAAAAEAAAIAAABAAAAAAAAEA=</HashCode>
+      <FileName>Assets\02.Scripts\Pet\Pet.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Player.Data.LevelTable" Collapsed="true">
+    <Position X="45.25" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Player\Data\LevelTable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Player.Data.PlayerData" Collapsed="true">
+    <Position X="40" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAABAAAAAAAAAAAAAAAAIBAAAAAgAAQAA=</HashCode>
+      <FileName>Assets\02.Scripts\Player\Data\PlayerData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Player.Exp.ExpTriggerController" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="34.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAIAAAAAAAAAAAAAABAAAEAAAAAAAAAAAAgAAEA=</HashCode>
+      <FileName>Assets\02.Scripts\Player\Exp\ExpTriggerController.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="FoxHill.Player.Exp.PlayerLevelController" Collapsed="true">
+    <Position X="31.25" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAACAAAAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Player\Exp\PlayerLevelController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Player.HP.DamageTriggerController" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="36.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAIAAAAAAAAAAAAAABAAAEAAAAAAAAAAAAgAAEA=</HashCode>
+      <FileName>Assets\02.Scripts\Player\HP\DamageTriggerController.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="FoxHill.Player.HP.PlayerHPController" Collapsed="true">
+    <Position X="41.75" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACEAAACAAAAAABAAAAABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Player\HP\PlayerHPController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Player.HP.PlayerHPUIController" Collapsed="true">
+    <Position X="43.5" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>iAAAACAgECAAAAAgAAAAAAAAAAAAAAAAJEAAAAAIAEA=</HashCode>
+      <FileName>Assets\02.Scripts\Player\HP\PlayerHPUIController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Player.Inventory.ItemDescription" Collapsed="true">
+    <Position X="36.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAwCAAAAAAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\02.Scripts\Player\Inventory\ItemDescription.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Player.Inventory.ItemTriggerController" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="40" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAIAAAAAAAAAAAAAAAAAAEAAAACAAAAAAAgAAEA=</HashCode>
+      <FileName>Assets\02.Scripts\Player\Inventory\ItemTriggerController.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="FoxHill.Player.Inventory.PlayerInventory" Collapsed="true">
+    <Position X="29.5" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CoBAAAYAACCEAACBAAAQgAIAINCIAACAAABAAABAAmQ=</HashCode>
+      <FileName>Assets\02.Scripts\Player\Inventory\PlayerInventory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Player.Inventory.SelectionPopUp" Collapsed="true">
+    <Position X="40" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAACAAAAAAECAAAAAAAAAIAhAAEAAAAAAAAEI=</HashCode>
+      <FileName>Assets\02.Scripts\Player\Inventory\SelectionPopUp.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Player.Inventory.Slot" Collapsed="true">
+    <Position X="33" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAABAAQAAAACAAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Player\Inventory\Slot.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Player.PlayerAnimationController" Collapsed="true">
+    <Position X="38.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAIwAAAAAQAAAAAAABABACAgAwAAIACAAAAACEA=</HashCode>
+      <FileName>Assets\02.Scripts\Player\PlayerAnimationController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Player.PlayerInputController" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="45.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACwhgSAAgCAAACCAAAgIQhAIAAgEAQACAAYCAQIAIEE=</HashCode>
+      <FileName>Assets\02.Scripts\Player\PlayerInputController.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="FoxHill.Player.PlayerManager" Collapsed="true">
+    <Position X="19.75" Y="19.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>kAAARCAAFGAAQQgIACAAkAQAAEoAiAgAAgoqn0AIQEA=</HashCode>
+      <FileName>Assets\02.Scripts\Player\PlayerManager.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FoxHill.Player.Quest.PlayerQuestManager" Collapsed="true">
+    <Position X="33" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgQAAAAEAAAABAAAAgBCAEAAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\02.Scripts\Player\Quest\PlayerQuestManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Player.Skill.Implementations.Skill_AzureDragon" Collapsed="true">
+    <Position X="18.5" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAEAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\02.Scripts\Player\Skill\Implementations\Skill_AzureDragon.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Player.Skill.Implementations.Skill_BlackTortoise" Collapsed="true">
+    <Position X="20.75" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAEAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAACEA=</HashCode>
+      <FileName>Assets\02.Scripts\Player\Skill\Implementations\Skill_BlackTortoise.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Player.Skill.Implementations.Skill_VermilionBird" Collapsed="true">
+    <Position X="14" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAABAAAAAAAEAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\02.Scripts\Player\Skill\Implementations\Skill_VermilionBird.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Player.Skill.Implementations.Skill_WhiteTiger" Collapsed="true">
+    <Position X="16.25" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAACEA=</HashCode>
+      <FileName>Assets\02.Scripts\Player\Skill\Implementations\Skill_WhiteTiger.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Player.Skill.PlayerSkillController" Collapsed="true">
+    <Position X="34.75" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIgAIAAAICCAAgAAhAAAABQAACAkAAAIkAAAIAQAAEQ=</HashCode>
+      <FileName>Assets\02.Scripts\Player\Skill\PlayerSkillController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Player.Skill.SkillBase" Collapsed="true">
+    <Position X="17.25" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAlAEIABAAAAAAAAgAAAAQAAAAAAAAAIAIAAAgAAEA=</HashCode>
+      <FileName>Assets\02.Scripts\Player\Skill\SkillBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FoxHill.Player.Skill.SkillData" Collapsed="true">
+    <Position X="45.25" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAAAAAAAAAABAAAAAAAhAQAAAAAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Player\Skill\SkillData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Player.Skill.SkillModel" Collapsed="true">
+    <Position X="29.5" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAAAAAgAAAABAAAAAAAhAQAAAAAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Player\Skill\SkillModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Player.Skill.SkillUI" Collapsed="true">
+    <Position X="31.25" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIiAEEBAAAAAAAAAAAAAAAQAAACAIICAAAAAAAIAAEA=</HashCode>
+      <FileName>Assets\02.Scripts\Player\Skill\SkillUI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Player.Stat.PlayerStat" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="36.5" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAmABEABAAAABAAAIQAgQAAACAAAAIBBAAAAgAEQAA=</HashCode>
+      <FileName>Assets\02.Scripts\Player\Stat\PlayerStat.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="FoxHill.Player.State.Implementations.PlayerAttackState" Collapsed="true">
+    <Position X="22.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEQAAAAEEgAAAAAAAAAAAAAIAAIFAIAAAABgAACEA=</HashCode>
+      <FileName>Assets\02.Scripts\Player\State\Implementations\PlayerAttackState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Player.State.Implementations.PlayerDeadState" Collapsed="true">
+    <Position X="24.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABgAACAA=</HashCode>
+      <FileName>Assets\02.Scripts\Player\State\Implementations\PlayerDeadState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Player.State.Implementations.PlayerDodgeState" Collapsed="true">
+    <Position X="6.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAAAAQAAAAACAAAEAAAAAAAIBgAACAA=</HashCode>
+      <FileName>Assets\02.Scripts\Player\State\Implementations\PlayerDodgeState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Player.State.Implementations.PlayerFatalAttackState" Collapsed="true">
+    <Position X="8.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAgAAAAAIAAAMBkAACAA=</HashCode>
+      <FileName>Assets\02.Scripts\Player\State\Implementations\PlayerFatalAttackState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Player.State.Implementations.PlayerGuardState" Collapsed="true">
+    <Position X="11" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAAAEAAAAAAAAAAAAAAAAAAAAAABgAACAA=</HashCode>
+      <FileName>Assets\02.Scripts\Player\State\Implementations\PlayerGuardState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Player.State.Implementations.PlayerIdleState" Collapsed="true">
+    <Position X="13.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABgAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Player\State\Implementations\PlayerIdleState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Player.State.Implementations.PlayerKnockbackState" Collapsed="true">
+    <Position X="15.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABAAAAAQAAARAAAAAAAIAAAAAIAAAIBgAACAA=</HashCode>
+      <FileName>Assets\02.Scripts\Player\State\Implementations\PlayerKnockbackState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Player.State.Implementations.PlayerMoveState" Collapsed="true">
+    <Position X="17.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAABgAACEA=</HashCode>
+      <FileName>Assets\02.Scripts\Player\State\Implementations\PlayerMoveState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Player.State.Implementations.PlayerNoneState" Collapsed="true">
+    <Position X="20" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAABgAACAA=</HashCode>
+      <FileName>Assets\02.Scripts\Player\State\Implementations\PlayerNoneState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Player.State.PlayerStateBase" Collapsed="true">
+    <Position X="15.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAACAAAAAAAQAAAAAAAQAAAAAgAAAIIAAABgABCEA=</HashCode>
+      <FileName>Assets\02.Scripts\Player\State\PlayerStateBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Player.State.PlayerStateManager" Collapsed="true">
+    <Position X="38.25" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQABAAAACAAAAAAAAAiAAAAAAAEAAAAAIAAAAAAAEA=</HashCode>
+      <FileName>Assets\02.Scripts\Player\State\PlayerStateManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Player.State.PlayerStateParameters" Collapsed="true">
+    <Position X="40" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAIAAAAEAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Player\State\PlayerStateParameters.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Quest.QuestFormRaw" Collapsed="true">
+    <Position X="33" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQCAAABAAAAAAAQEAAAAAQABAAAEgAAAAAhAAAAAAQQ=</HashCode>
+      <FileName>Assets\02.Scripts\Quest\QuestForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Quest.QuestForm" Collapsed="true">
+    <Position X="29.5" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQCAAABAAAAAAAQEAAAAAQABAAAEgAAAAAhAAAAAAQQ=</HashCode>
+      <FileName>Assets\02.Scripts\Quest\QuestForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Quest.PreCondition" Collapsed="true">
+    <Position X="43.5" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAgAAAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Quest\QuestForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Quest.Objective" Collapsed="true">
+    <Position X="43.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAgAAAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Quest\QuestForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Quest.Reward" Collapsed="true">
+    <Position X="38.25" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAgAAAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Quest\QuestForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Quest.Penalty" Collapsed="true">
+    <Position X="34.75" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAgAAAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Quest\QuestForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Quest.QuestFormConverter" Collapsed="true">
+    <Position X="31.25" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAAAAUAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Quest\QuestFormConverter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Quest.QuestManager" Collapsed="true">
+    <Position X="34.75" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>lEEIAAIAARgAAACAAAAIAKAAAAgAAAAAAAIAAAAABgI=</HashCode>
+      <FileName>Assets\02.Scripts\Quest\QuestManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Quest.QuestSheet" Collapsed="true">
+    <Position X="36.5" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Quest\QuestSheet.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Scene.GameSceneManager" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="41.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAACAAAACAAAAAAAAIAAEAAAAABAAAACAAAEA=</HashCode>
+      <FileName>Assets\02.Scripts\Scene\GameSceneManager.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="FoxHill.Scene.Production.GameSceneProduction" Collapsed="true">
+    <Position X="45.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAIAAACAAAAgAAAEAAAAAYAAAAAQAAAAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Scene\Production\GameSceneProduction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Tower.AttackTowerControllerBase" Collapsed="true">
+    <Position X="8.25" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgIAAAACAAAAAAAAAAAAAAAAAAAQAAAAAAAAgAAEA=</HashCode>
+      <FileName>Assets\02.Scripts\Tower\AttackTowerControllerBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Tower.DebuffTowerControllerBase" Collapsed="true">
+    <Position X="10.5" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAACAAAAAAAAAAAAAAAAAAAQAAAAAAAgAAAEA=</HashCode>
+      <FileName>Assets\02.Scripts\Tower\DebuffTowerControllerBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Tower.DefenseTowerControllerBase" Collapsed="true">
+    <Position X="6" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Tower\DefenseTowerControllerBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Tower.TowerAttackControllerBase" Collapsed="true">
+    <Position X="13.75" Y="18.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABgAAKAAAAAAQAAAAAAIIQAIkABAABAACAAAAgCAgA=</HashCode>
+      <FileName>Assets\02.Scripts\Tower\TowerAttackControllerBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FoxHill.Tower.TowerControllerBase" Collapsed="true">
+    <Position X="8.25" Y="13.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAIAICAAAAAAAAAAiAQAAAAAAQAAAAEAqAgAQEA=</HashCode>
+      <FileName>Assets\02.Scripts\Tower\TowerControllerBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FoxHill.Tower.TowerData" Collapsed="true">
+    <Position X="43.5" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Tower\TowerData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Tower.TowerDataManager" Collapsed="true">
+    <Position X="45.25" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAACAAAAAAAQAAAAAAAAABAA=</HashCode>
+      <FileName>Assets\02.Scripts\Tower\TowerDataManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Tower.TowerDebuffControllerBase" Collapsed="true">
+    <Position X="10.75" Y="17.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAgAAQAAAAAAAAAAAEABAAAAAAAAAgAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Tower\TowerDebuffControllerBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Tower.TowerFormRaw" Collapsed="true">
+    <Position X="33" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAAIAAAAAAAAAAAAAAAACIBBAAAQgAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Tower\TowerForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Tower.TowerForm" Collapsed="true">
+    <Position X="29.5" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAAIAAAAAAAAAAAAAAAACIBBAAAQgAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Tower\TowerForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Tower.TowerFormConverter" Collapsed="true">
+    <Position X="31.25" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Tower\TowerFormConverter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Tower.TowerManager" Collapsed="true">
+    <Position X="34.75" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAUQCAAIACAIAAgAACAACkAAACCAAEAAACAIAEA=</HashCode>
+      <FileName>Assets\02.Scripts\Tower\TowerManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Tower.DefaultAttackTower" Collapsed="true">
+    <Position X="8.25" Y="16.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Tower\Variation\DefaultAttackTower.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Tower.DefaultAttackTower_AttackController" Collapsed="true">
+    <Position X="13.75" Y="19.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAAAAAAAAAAAAAAAAIQAAAAAAAAIAAAAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Tower\Variation\DefaultAttackTower_AttackController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Tower.DefaultDebuffTower" Collapsed="true">
+    <Position X="10.5" Y="16.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Tower\Variation\DefaultDebuffTower.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Tower.DefaultDebuffTower_DebuffController" Collapsed="true">
+    <Position X="10.75" Y="18.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Tower\Variation\DefaultDebuffTower_DebuffController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.Tower.DefaultDefenseTower" Collapsed="true">
+    <Position X="6" Y="16.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Tower\Variation\DefaultDefenseTower.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.UI.Buttons.TitleButtonAnimation" Collapsed="true">
+    <Position X="40" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAgAAAAAAAAAAAIQAQAAIAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\02.Scripts\UI\Buttons\TitleButtonAnimation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FoxHill.UI.Menu.TitleSceneMenuController" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="41.75" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAADAQAAACAAkAAAACAAIAAoAAAAAAAAAAAAAQACIkA=</HashCode>
+      <FileName>Assets\02.Scripts\UI\Menu\TitleSceneMenuController.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Struct Name="FoxHill.Core.Test.VisibilityCheckJob" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="33" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAEAAABAQAAQgAAAAAAAACAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Core\Test\ObjectPoolManager.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Struct>
+  <Struct Name="FoxHill.Core.Test.RadialVisibilityCheckJob" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="29.5" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQgABAAAAAACAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Assets\02.Scripts\Core\Test\ObjectPoolManager.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Struct>
+  <Struct Name="FoxHill.Player.Skill.SkillParameter" Collapsed="true">
+    <Position X="31.25" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAACAAAAQAAAAAAAABAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Player\Skill\SkillParameter.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Interface Name="FoxHill.Core.IAttackable" Collapsed="true">
+    <Position X="29.5" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Core\Attack\IAttackable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="FoxHill.Core.IPoolable" Collapsed="true">
+    <Position X="45.25" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Core\Spawn\IPoolable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="FoxHill.Core.Damage.IDamageable" Collapsed="true">
+    <Position X="33" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAgAQAAAAAAAAAAAAAiAAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Core\Damage\IDamageable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="FoxHill.Core.Damage.IDamager" Collapsed="true">
+    <Position X="34.75" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Core\Damage\IDamager.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="FoxHill.Core.Damage.IStaggerable" Collapsed="true">
+    <Position X="31.25" Y="14.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEAAAAAAAAAAAAAACAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Core\Damage\IStaggerable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="FoxHill.Core.Debuff.IDebuffable" Collapsed="true">
+    <Position X="36.5" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Core\Debuff\IDebuffable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="FoxHill.Core.Knockback.IKnockbackable" Collapsed="true">
+    <Position X="40" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Core\Knockback\IKnockbackable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="FoxHill.Core.Parry.IParryable" Collapsed="true">
+    <Position X="41.75" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Core\Parry\IParryable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="FoxHill.Core.Pause.IPausable" Collapsed="true">
+    <Position X="43.5" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Core\Pause\IPausable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="FoxHill.Core.Stat.IStat" Collapsed="true">
+    <Position X="16.75" Y="18.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAAABAAAIAAAAAAAAAAAAABAAAAAgAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Core\Stat\IStat.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="FoxHill.Monster.AI.IBuilder" Collapsed="true">
+    <Position X="31.25" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAACAAACAAAIAAAAAAAgAAAAEAIACEAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Monster\BehaviourTree\IBuilder.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="FoxHill.Monster.AI.IParentOfChild" Collapsed="true">
+    <Position X="5.75" Y="18.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Monster\BehaviourTree\IParentOfChild.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="FoxHill.Monster.AI.IParentOfChilldren" Collapsed="true">
+    <Position X="8" Y="18.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Monster\BehaviourTree\IParentOfChilldren.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="FoxHill.Monster.IParent" Collapsed="true">
+    <Position X="7" Y="17.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Monster\BehaviourTree\IParent.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="FoxHill.Monster.FSM.IInputCommand" Collapsed="true">
+    <Position X="38.25" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAAIIAAAAEAAACAAgAAAAAAAEAAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Monster\StateMachine\IInputCommand.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="FoxHill.Monster.FSM.IState" Collapsed="true">
+    <Position X="33" Y="14.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAAAQAAAAAIAAAAEAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Monster\StateMachine\IState.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="FoxHill.Player.Skill.ISkill" Collapsed="true">
+    <Position X="29.5" Y="14.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Player\Skill\ISkill.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="FoxHill.Player.Stat.IPlayerStat" Collapsed="true">
+    <Position X="16.75" Y="19.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAIBAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Player\Stat\IPlayerStat.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="FoxHill.Core.Debuff.DebuffType" Collapsed="true">
+    <Position X="29.5" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAA=</HashCode>
+      <FileName>Assets\02.Scripts\Core\Debuff\IDebuffable.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="FoxHill.Items.ItemType" Collapsed="true">
+    <Position X="31.25" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAEAAAAAAAAAAAAAAAEAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Items\ItemData.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="FoxHill.Items.PerformType" Collapsed="true">
+    <Position X="38.25" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAACAAEAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Items\ItemData.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="FoxHill.Monster.AI.Result" Collapsed="true">
+    <Position X="43.5" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAgAAAACIAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Monster\BehaviourTree\Result.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="FoxHill.Monster.MonsterType" Collapsed="true">
+    <Position X="33" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAEAAAgAA=</HashCode>
+      <FileName>Assets\02.Scripts\Monster\MonsterForm.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="FoxHill.Monster.FSM.State" Collapsed="true">
+    <Position X="31.25" Y="16.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACBBAoQBgAAAAAAAACAAAAAAAAAAAAAACAEAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Monster\StateMachine\State.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="FoxHill.Player.Skill.SkillType" Collapsed="true">
+    <Position X="29.5" Y="16.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAAAEAAAAAAAAAAAABBAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Player\Skill\SkillData.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="FoxHill.Player.State.PlayerState" Collapsed="true">
+    <Position X="40" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACBAAoAAABAAAAAAAAAAAIAAAAAAAAAACAEBAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Player\State\PlayerStateManager.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="FoxHill.Quest.PreConditionType" Collapsed="true">
+    <Position X="41.75" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAIAQAAAAAAAAAAAAAAAAQAAAAIBAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Quest\QuestForm.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="FoxHill.Quest.ObjectiveType" Collapsed="true">
+    <Position X="34.75" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAEAAAgAAAAAAAAgAAAAAAAAAAEAAAAAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Quest\QuestForm.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="FoxHill.Quest.RewardType" Collapsed="true">
+    <Position X="45.25" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAgAAAAAAAAAAEAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Quest\QuestForm.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="FoxHill.Quest.PenaltyType" Collapsed="true">
+    <Position X="36.5" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAgAAAAAEAAAAEAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\02.Scripts\Quest\QuestForm.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="FoxHill.Tower.TowerType" Collapsed="true">
+    <Position X="33" Y="16.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAIg=</HashCode>
+      <FileName>Assets\02.Scripts\Tower\TowerForm.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="맑은 고딕" Size="9" />
+</ClassDiagram>

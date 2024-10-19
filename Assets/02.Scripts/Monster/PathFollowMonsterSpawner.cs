@@ -24,6 +24,10 @@ namespace FoxHill.Core
         private bool _isPaused;
         private float _elapsedTime;
 
+        private void OnDestroy()
+        {
+            PauseManager.Unregister(this);
+        }
 
         public IEnumerator ProgressStage(int[] getCounts, float[] roundTimes, float[] spawnEndTimes)
         {

@@ -40,6 +40,8 @@ namespace FoxHill.Player
         [HideInInspector] public UnityEvent OnConfirmSpawn;
         [HideInInspector] public UnityEvent OnCancelSpawn;
 
+        [HideInInspector] public UnityEvent OnReset; // GameScene 진입 시 Invoke
+
         public bool IsInventoryOpen => _isInventoryOpen;
         public bool IsPaused => _isPaused;
         public bool IsDead => _isDead;
@@ -190,7 +192,7 @@ namespace FoxHill.Player
 
         public void TakeDamage(IDamager damager, float damage)
         {
-            if (damager.Transform.gameObject.layer == LayerRepository.LAYER_BOSS_MONSTER)
+            if (damager?.Transform.gameObject.layer == LayerRepository.LAYER_BOSS_MONSTER)
             {
                 Knockback(damager.Transform);
             }

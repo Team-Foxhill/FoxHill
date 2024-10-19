@@ -1,0 +1,145 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 8
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acc7a2f7e5b2a7744a364b5459098f1c, type: 3}
+  m_Name: QuestSheet_En
+  m_EditorClassIdentifier: 
+  Sheet1:
+  - QuestNumber: 1
+    QuestShowTime: 120
+    PreCondition: MinPlayerLevel(1);
+    StartNPC: 10001
+    Objective: Kill(1, 10);
+    TimeLimit: 180
+    EndNPC: 10001
+    StartDialogue: 'Oh my, these days Eouduksini are appearing in droves.
+
+      It''s
+      quite peculiar, don''t you think?
+
+      I''d like to investigate this phenomenon.
+
+      Would
+      you be so kind as to catch ten of them for me?'
+    ProgressDialogue: 'Ten Eouduksini, that''s all I need.
+
+      It shouldn''t be
+      too taxing, eh?
+
+      I''m counting on you, dear.'
+    SuccessDialogue: 'Oh my, so Eouduksini multiply without growing larger...
+
+      What
+      a curious phenomenon indeed.
+
+      It seems some divine power is keeping the
+      darkness at bay.
+
+      Thanks to that, we can hold out for now.
+
+      I do
+      pray they retreat before that power wanes, yes I do.'
+    FailDialogue: 'Oh dear, I never imagined
+
+      your skills would be this lacking.
+
+      But
+      what can we do, eh?
+
+      From now on, you''ll just have to train harder,
+      won''t you?
+
+      Here, I''ll share some of my power with you.
+
+      Focus
+      on your training, there''s a good lad.'
+    Reward: Exp(100);
+    Penalty: Exp(120);
+  - QuestNumber: 2
+    QuestShowTime: 300
+    PreCondition: 'MinPlayerLevel(3);
+
+      ClearQuest(1);'
+    StartNPC: 10001
+    Objective: 'Deliver(5);
+
+      Talk();'
+    TimeLimit: 60
+    EndNPC: 10002
+    StartDialogue: 'I hate to trouble you again, my dear,
+
+      but could you deliver
+      this talisman paper to my younger sibling?
+
+      I''m terribly worried with
+      all these Eouduksini appearing lately.
+
+      You see, this talisman paper
+      loses its efficacy if it gets too old.
+
+      That''s why I need your help.
+
+      You
+      Dosa know the art of space folding, don''t you?
+
+      If you''re not quite
+      sure what I mean,
+
+      just imagine the Chinese character for ''go'' (Z)
+      in your mind.
+
+      If that wish reaches the Jade Emperor beyond our mortal
+      realm,
+
+      he''ll grant you the power to traverse great distances in an
+      instant.
+
+      So, please, deliver this talisman paper with haste.
+
+      My
+      sibling has gone to gather wood.
+
+      I''m counting on you, alright?'
+    ProgressDialogue: 'My sibling''s gather wood, remember?
+
+      Don''t dilly-dally
+      now.
+
+      Draw that ''go''(z) character in your mind.
+
+      Oh Jade Emperor,
+      we humbly beseech you...'
+    SuccessDialogue: 'Older brother sent you, did he? Ha ha!
+
+      he worries far
+      too much, bless his soul.
+
+      I''m doing just fine, but I can''t send you
+      back empty-handed
+
+      after you''ve done us a favor.
+
+      Take this restorative
+      broth. It''s my secret
+
+      to being able to gather wood all day long.
+
+      Give
+      it a try when you get the chance.'
+    FailDialogue: 'Oh dear me, didn''t I mention the talisman paper
+
+      become
+      loses its efficacy if it gets too old?
+
+      I never thought you''d disappoint
+      an old soul like this.'
+    Reward: Item(1, 1);
+    Penalty: Spawn(1, 100);

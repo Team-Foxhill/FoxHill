@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 
 namespace FoxHill.Quest
 {
@@ -14,27 +16,76 @@ namespace FoxHill.Quest
             Failed      // 퀘스트 실패
         }
 
-        private static Dictionary<int, QuestForm> _forms = new Dictionary<int, QuestForm>(8); // 엑셀 파싱 + 가공으로 얻은 Quest 데이터 : {QuestNumber, QuestForm}
+        private static Dictionary<int, QuestForm> _currentForm;
+
+        private static Dictionary<int, QuestForm> _forms_kr = new Dictionary<int, QuestForm>(8); // 엑셀 파싱 + 가공으로 얻은 Quest 데이터 : {QuestNumber, QuestForm}
+        private static Dictionary<int, QuestForm> _forms_en = new Dictionary<int, QuestForm>(8);
         private static Dictionary<int, QuestStatus> _status = new Dictionary<int, QuestStatus>(8); // 퀘스트들의 진행 상황
+
+        private static bool _isInitialized = false;
 
         /// <summary>
         /// quest sheet를 QuestForm의 형태로 변환하여 List에 저장하는 메소드
         /// </summary>
         /// <param name="sheet">ExcelImporter로 excel sheet를 변환하여 얻은 ScriptableObject</param>
-        public static void InitializeQuestForms(QuestSheet sheet)
+        public static void InitializeQuestForms(QuestSheet sheet, QuestSheet_En sheet_en)
         {
-            if (sheet == null)
+            if(_isInitialized == true)
+            {
+                return;
+            }
+
+            if (sheet == null || sheet_en == null)
             {
                 throw new NullReferenceException("Cannot find sheet while InitializeQuestForms");
             }
 
-            _forms.Clear();
+            _forms_kr.Clear();
+            _forms_en.Clear();
 
             foreach (var element in sheet.Sheet1)
             {
                 var form = QuestFormConverter.Convert(element);
-                _forms.Add(form.QuestNumber, form);
+                _forms_kr.Add(form.QuestNumber, form);
                 _status.Add(form.QuestNumber, QuestStatus.NotStarted);
+            }
+
+            foreach (var element in sheet_en.Sheet1)
+            {
+                var form = QuestFormConverter.Convert(element);
+                _forms_en.Add(form.QuestNumber, form);
+            }
+
+            if(LocalizationSettings.SelectedLocale == LocalizationSettings.AvailableLocales.GetLocale("ko-KR"))
+            {
+                _currentForm = _forms_kr;
+            }
+            else if(LocalizationSettings.SelectedLocale == LocalizationSettings.AvailableLocales.GetLocale("en-US"))
+            {
+                _currentForm = _forms_en;
+            }
+            else
+            {
+                _currentForm = _forms_en; // Default
+                throw new Exception($"Wrong Locale. Current : {LocalizationSettings.SelectedLocale}");
+            }
+
+            _isInitialized = true;
+        }
+
+        /// <summary>
+        /// 씬이 전환될 때 필요한 동작들을 수행합니다. (ex. Quest Status 초기화)
+        /// </summary>
+        public static void Reset()
+        {
+            if(_isInitialized == false)
+            {
+                return;
+            }
+
+            foreach(var key in _status.Keys.ToList())
+            {
+                _status[key] = QuestStatus.NotStarted;
             }
         }
 
@@ -45,7 +96,7 @@ namespace FoxHill.Quest
         {
             List<int> questIndexList = new List<int>();
 
-            foreach (QuestForm quest in _forms.Values)
+            foreach (QuestForm quest in _currentForm.Values)
             {
                 if ((quest.StartNPC == npcNumber) || (quest.EndNPC == npcNumber))
                 {
@@ -62,7 +113,7 @@ namespace FoxHill.Quest
         /// </summary>
         public static bool TryGetQuest(int questNumber, out QuestForm quest)
         {
-            return _forms.TryGetValue(questNumber, out quest);
+            return _currentForm.TryGetValue(questNumber, out quest);
         }
 
         /// <summary>

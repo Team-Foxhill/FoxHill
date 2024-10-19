@@ -19,7 +19,8 @@ namespace FoxHill.Core
         [SerializeField] private LocalizationSettings _localizationSettings;
         [SerializeField] private MonsterData _monsterSheet; // Monster 명세가 담긴 엑셀 시트를 ExcelImporter로 import한 ScriptableObject.
         [SerializeField] private TowerData _towerSheet; // Tower 명세가 담긴 엑셀 시트를 ExcelImporter로 import한 ScriptableObject.
-        [SerializeField] private QuestSheet _questSheet; // Quest 명세가 담긴 엑셀 시트를 ExcelImporter로 import한 ScriptableObject
+        [SerializeField] private QuestSheet _questSheet_kr; // Quest 명세가 담긴 엑셀 시트를 ExcelImporter로 import한 ScriptableObject
+        [SerializeField] private QuestSheet_En _questSheet_en; // Quest 명세가 담긴 엑셀 시트를 ExcelImporter로 import한 ScriptableObject
 
         private void Awake()
         {
@@ -37,7 +38,7 @@ namespace FoxHill.Core
             Language = new LanguageManager(_localizationSettings);
             MonsterDataManager.InitializeMonsterForms(_monsterSheet);
             TowerDataManager.InitializeMonsterForms(_towerSheet);
-            QuestManager.InitializeQuestForms(_questSheet);
+            QuestManager.InitializeQuestForms(_questSheet_kr, _questSheet_en);
         }
     }
 }

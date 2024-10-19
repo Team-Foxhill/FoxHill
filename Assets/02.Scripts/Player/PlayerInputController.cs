@@ -1,4 +1,6 @@
+using FoxHill.Core.Pause;
 using FoxHill.Player.State;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -20,6 +22,17 @@ namespace FoxHill.Player
         private float _attackCooldown = 0f; // 공격 쿨타임
         private float _dodgeCooldown = 0f; // 회피 쿨타임
 
+        private bool _isPauseMenuActivated = false;
+
+        private enum InputActionType
+        {
+            Player,
+            Inventory,
+            Spawn
+        }
+
+        private Dictionary<InputActionType, bool> _inputMapCache = new Dictionary<InputActionType, bool>(3);
+
         private void Awake()
         {
             _playerManager ??= GetComponentInParent<PlayerManager>();
@@ -30,9 +43,13 @@ namespace FoxHill.Player
             _inputAction.InventoryAction.AddCallbacks(this);
             _inputAction.SpawnAction.AddCallbacks(this);
 
-            _inputAction.PlayerAction.Enable();
-            _inputAction.InventoryAction.Disable();
-            _inputAction.SpawnAction.Disable();
+            _inputMapCache.Add(InputActionType.Player, false);
+            _inputMapCache.Add(InputActionType.Inventory, false);
+            _inputMapCache.Add(InputActionType.Spawn, false);
+
+            ToggleInputAction(InputActionType.Player, true);
+            ToggleInputAction(InputActionType.Inventory, false);
+            ToggleInputAction(InputActionType.Spawn, false);
         }
 
         private void Start()
@@ -46,6 +63,28 @@ namespace FoxHill.Player
 
         private void Update()
         {
+            if (PauseManager.IsSuperPaused != _isPauseMenuActivated)
+            {
+                _isPauseMenuActivated = PauseManager.IsSuperPaused;
+                if (_isPauseMenuActivated == false)
+                {
+                    _inputAction.Enable();
+                    RestoreInputAction();
+                    foreach (var s in _inputMapCache)
+                    {
+                        Debug.Log($"{s.Key} : {s.Value}");
+                    }
+                }
+                else
+                {
+                    _inputAction.Disable();
+                    foreach(var s in _inputMapCache)
+                    {
+                        Debug.Log($"{s.Key} : {s.Value}");
+                    }
+                }
+            }
+
             if (_towerMoveInput != Vector2.zero)
             {
                 MoveTower();
@@ -250,6 +289,68 @@ namespace FoxHill.Player
 
         #endregion
 
+        private void ToggleInputAction(InputActionType type, bool toggle, bool doCache = true)
+        {
+            if (toggle == true)
+            {
+                switch (type)
+                {
+                    case InputActionType.Player:
+                        {
+                            _inputAction.PlayerAction.Enable();
+                        }
+                        break;
+                    case InputActionType.Inventory:
+                        {
+                            _inputAction.InventoryAction.Enable();
+                        }
+                        break;
+                    case InputActionType.Spawn:
+                        {
+                            _inputAction.SpawnAction.Enable();
+                        }
+                        break;
+                }
+            }
+            else
+            {
+                switch (type)
+                {
+                    case InputActionType.Player:
+                        {
+                            _inputAction.PlayerAction.Disable();
+                        }
+                        break;
+                    case InputActionType.Inventory:
+                        {
+                            _inputAction.InventoryAction.Disable();
+                        }
+                        break;
+                    case InputActionType.Spawn:
+                        {
+                            _inputAction.SpawnAction.Disable();
+                        }
+                        break;
+                }
+            }
+
+            if(doCache == true)
+            {
+                _inputMapCache[type] = toggle;
+            }
+        }
+
+        /// <summary>
+        /// InputAction을 cache된 map에 대해서만 enable합니다.
+        /// </summary>
+        private void RestoreInputAction()
+        {
+            foreach (var input in _inputMapCache)
+            {
+                ToggleInputAction(input.Key, input.Value, false);
+            }
+        }
+
         private void CastSkill()
         {
             if (_playerManager.IsPaused == true)
@@ -276,15 +377,15 @@ namespace FoxHill.Player
             if (toggle == true && _playerManager.IsInventoryOpen == false)
             {
                 _playerManager.OnOpenInventory?.Invoke();
-                _inputAction.PlayerAction.Disable();
-                _inputAction.InventoryAction.Enable();
+                ToggleInputAction(InputActionType.Player, false);
+                ToggleInputAction(InputActionType.Inventory, true);
             }
 
             else if (toggle == false && _playerManager.IsInventoryOpen == true)
             {
                 _playerManager.OnCloseInventory?.Invoke();
-                _inputAction.InventoryAction.Disable();
-                _inputAction.PlayerAction.Enable();
+                ToggleInputAction(InputActionType.Player, true);
+                ToggleInputAction(InputActionType.Inventory, false);
             }
         }
 
@@ -292,14 +393,14 @@ namespace FoxHill.Player
         {
             if (toggle == false && _playerManager.IsInventoryOpen == true)
             {
-                _inputAction.SpawnAction.Disable();
-                _inputAction.InventoryAction.Enable();
+                ToggleInputAction(InputActionType.Spawn, false);
+                ToggleInputAction(InputActionType.Inventory, true);
             }
 
             else if (toggle == true && _playerManager.IsInventoryOpen == true)
             {
-                _inputAction.InventoryAction.Disable();
-                _inputAction.SpawnAction.Enable();
+                ToggleInputAction(InputActionType.Spawn, true);
+                ToggleInputAction(InputActionType.Inventory, false);
             }
         }
 
@@ -312,14 +413,13 @@ namespace FoxHill.Player
 
             if (toggle == true)
             {
-                _inputAction.InventoryAction.Disable();
-                _inputAction.SpawnAction.Enable();
+                ToggleInputAction(InputActionType.Spawn, true);
+                ToggleInputAction(InputActionType.Inventory, false);
             }
-
-            if (toggle == false)
+            else if (toggle == false)
             {
-                _inputAction.SpawnAction.Disable();
-                _inputAction.InventoryAction.Enable();
+                ToggleInputAction(InputActionType.Spawn, false);
+                ToggleInputAction(InputActionType.Inventory, true);
             }
         }
 

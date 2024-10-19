@@ -71,6 +71,9 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
+#TOO BIG ASSET
+/[Aa]ssets/05.Images/Map/
+
 # Paid Assets
 /[Pp]ackages/com.projectdawn.navigation/
 /[Pp]ackages/com.projectdawn.navigation.crowds/

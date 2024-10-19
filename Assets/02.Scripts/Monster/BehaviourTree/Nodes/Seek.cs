@@ -1,7 +1,4 @@
-using FoxHill.Core;
 using FoxHill.Core.Damage;
-using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 namespace FoxHill.Monster.AI

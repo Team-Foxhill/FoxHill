@@ -16,6 +16,11 @@ namespace FoxHill.Player.Exp
             PauseManager.Register(this);
         }
 
+        private void OnDestroy()
+        {
+            PauseManager.Unregister(this);
+        }
+
         public void Pause()
         {
             _isPaused = true;

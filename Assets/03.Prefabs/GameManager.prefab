@@ -47,4 +47,5 @@ MonoBehaviour:
   _localizationSettings: {fileID: 11400000, guid: 8d69a7eeb2e07394385a95d036af38cf, type: 2}
   _monsterSheet: {fileID: 11400000, guid: 5998608f74c02e34692e66b0f23bad18, type: 2}
   _towerSheet: {fileID: 11400000, guid: 5a9f2656b908b3443ba8adf45e7d4480, type: 2}
-  _questSheet: {fileID: 11400000, guid: dd784842ceb64d5408cbbf46ea6d001a, type: 2}
+  _questSheet_kr: {fileID: 11400000, guid: dd784842ceb64d5408cbbf46ea6d001a, type: 2}
+  _questSheet_en: {fileID: 11400000, guid: 6d67e587241d2454a91a1c3d51b466b0, type: 2}
