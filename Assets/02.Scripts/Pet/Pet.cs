@@ -6,7 +6,7 @@ namespace FoxHill.Pet
     {
         [SerializeField] private Transform _followTarget;
         private float _range = 3f;
-        private float _speed = 1f;
+        private float _speed = 2f;
         private SpriteRenderer _renderer;
 
         private void Awake()

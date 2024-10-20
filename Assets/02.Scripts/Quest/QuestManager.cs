@@ -1,3 +1,4 @@
+using FoxHill.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -162,7 +163,7 @@ namespace FoxHill.Quest
                         break;
                     case PreConditionType.ClearQuest:
                         {
-                            if (CheckPreCondition_ClearQuest(questNumber) == false)
+                            if (CheckPreCondition_ClearQuest(preCondition.Value) == false)
                                 return false;
                         }
                         break;
@@ -203,6 +204,9 @@ namespace FoxHill.Quest
             }
 
             _status.TryGetValue(questNumber, out QuestStatus status);
+
+            if (status == QuestStatus.Cleared)
+                return true;
 
             if (status != QuestStatus.InProgress)
                 return false;
@@ -279,7 +283,8 @@ namespace FoxHill.Quest
                 {
                     rewards = null;
                     penalties = null;
-                    Debug.LogError($"Quest status of quest({questNumber}) is invalid to get reward / penalty : {_status[questNumber]}.");
+                    DebugFox.Log($"Quest status of quest({questNumber}) is invalid to get reward / penalty : {_status[questNumber]}.");
+                    return false;
                 }
                 return true;
             }
@@ -291,7 +296,7 @@ namespace FoxHill.Quest
         /// </summary>
         /// <param name="questNumber">퀘스트의 QuestNumber</param>
         /// <param name="hasSucceeded">지정하고자 하는 QuestStatus</param>
-        private static bool SetQuestResult(int questNumber, bool hasSucceeded)
+        public static bool SetQuestResult(int questNumber, bool hasSucceeded)
         {
             if (TryGetQuest(questNumber, out QuestForm quest) == false)
             {
@@ -317,9 +322,9 @@ namespace FoxHill.Quest
             return (killCount >= target);
         }
 
-        private static bool CheckObjective_Deliver(int hitCount, int target)
+        private static bool CheckObjective_Deliver(int itemIndex, int target)
         {
-            return (hitCount < target);
+            return (itemIndex == target);
         }
 
         private static bool CheckObjective_Escort(int hitCount, int target)

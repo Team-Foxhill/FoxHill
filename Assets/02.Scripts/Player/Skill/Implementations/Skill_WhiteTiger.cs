@@ -12,6 +12,9 @@ namespace FoxHill.Player.Skill.Implementations
     {
         private const float SKILL_RANGE = 3f;
 
+        private SkillParameter _parameter;
+
+
         protected override void Awake()
         {
             base.Awake();
@@ -19,6 +22,8 @@ namespace FoxHill.Player.Skill.Implementations
 
         public override void Cast(SkillParameter parameters)
         {
+            _parameter = parameters;
+
             gameObject.transform.Translate(parameters.Direction * SKILL_RANGE);
             EffectManager.Play(EffectManager.FeedbackType.Impulse);
 
@@ -27,7 +32,12 @@ namespace FoxHill.Player.Skill.Implementations
             {
                 if (hit.TryGetComponent<IDamageable>(out var damageable) == true)
                 {
+                    damageable.OnDead += OnKillMonster;
+
                     damageable.TakeDamage(this, Stat.Power);
+
+                    if (damageable != null)
+                        damageable.OnDead -= OnKillMonster;
                 }
             }
             StartCoroutine(C_Cast());
@@ -50,6 +60,14 @@ namespace FoxHill.Player.Skill.Implementations
             }
 
             Destroy(gameObject);
+        }
+
+        private void OnKillMonster()
+        {
+            if (_parameter.Transform.TryGetComponent(out PlayerManager manager) == true)
+            {
+                manager.OnKillMonster.Invoke();
+            }
         }
     }
 }

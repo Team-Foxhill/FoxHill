@@ -1,3 +1,4 @@
+using FoxHill.Core;
 using FoxHill.Core.Pause;
 using System.Collections;
 using UnityEngine;
@@ -7,14 +8,42 @@ namespace FoxHill.Items
     [RequireComponent(typeof(SpriteRenderer))]
     public class Item : MonoBehaviour, IPausable
     {
-        public ItemData Info;
-        public Sprite Image => _icon.sprite;
+        [HideInInspector]
+        public ItemData Info
+        {
+            get
+            {
+                switch (GameManager.Instance.Language.CurrentLanguage)
+                {
+                    case Core.Settings.LanguageManager.LanguageType.Korean:
+                        return _data_kr;
+                    case Core.Settings.LanguageManager.LanguageType.English:
+                        return _data_en;
+                    default: 
+                        return _data_en;
+                }
+            }
+        }
+        public Sprite Image => Icon.sprite;
 
         private const float MAX_LIFETIME = 60f;
 
+        public SpriteRenderer Icon
+        {
+            get
+            {
+                if (_icon == null)
+                    _icon = GetComponent<SpriteRenderer>();
+
+                return _icon;
+            }
+        }
         private SpriteRenderer _icon;
 
         private bool _isPaused = false;
+
+        [SerializeField] private ItemData _data_kr;
+        [SerializeField] private ItemData _data_en;
 
         private void Awake()
         {

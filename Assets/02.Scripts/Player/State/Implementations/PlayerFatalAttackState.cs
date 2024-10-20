@@ -1,4 +1,5 @@
 using FoxHill.Core.Damage;
+using FoxHill.Core.Effect;
 using System.Collections;
 
 namespace FoxHill.Player.State.Implementations
@@ -38,8 +39,15 @@ namespace FoxHill.Player.State.Implementations
 
         private IEnumerator C_FatalAttack()
         {
+            EffectManager.Play(EffectManager.FeedbackType.Impulse);
+
+            _attackTarget.OnDead += OnKillMonster;
+
             _attackTarget?.TakeDamage(_manager, _manager.Stat.Power * _damageMultiplier);
             _staggerTarget?.MakeStun(_manager);
+
+            if (_attackTarget != null)
+                _attackTarget.OnDead -= OnKillMonster;
 
             while (_animator.AnimationTime < 1f)
             {
@@ -49,6 +57,11 @@ namespace FoxHill.Player.State.Implementations
             yield return FRAME_END_WAIT;
 
             IsDone = true;
+        }
+
+        private void OnKillMonster()
+        {
+            _manager.OnKillMonster.Invoke();
         }
     }
 }

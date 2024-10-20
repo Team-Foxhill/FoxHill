@@ -17,7 +17,7 @@ MonoBehaviour:
     QuestShowTime: 120
     PreCondition: MinPlayerLevel(1);
     StartNPC: 10001
-    Objective: Kill(1, 10);
+    Objective: Kill(1,10);
     TimeLimit: 180
     EndNPC: 10001
     StartDialogue: "\uC694\uC998 \uB4E4\uC5B4 \uC5B4\uB451\uC2DC\uB2C8\uB4E4\uC774
@@ -78,5 +78,5 @@ MonoBehaviour:
     FailDialogue: "\uD5C8\uD5C8, \uADF8 \uBD80\uC801\uC740 \uC624\uB798\uB418\uBA74
       \uD6A8\uD5D8\uC744 \uC783\uB294\uB2E4\uACE0 \uD588\uAC70\uB298.\n\uC790\uB124\uAC00
       \uC774\uB807\uAC8C \uC2E4\uB9DD\uC744 \uC548\uAE38 \uC904\uC774\uC57C."
-    Reward: Item(1, 1);
-    Penalty: Spawn(1, 100);
+    Reward: Item(1,1);
+    Penalty: Spawn(1,100);

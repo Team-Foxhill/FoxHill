@@ -4,7 +4,7 @@ namespace FoxHill.Player.Data
 {
 
     /// <summary>
-    /// Player Stat의 초기값 데이터
+    /// Player Stat의 초기값 데이터   
     /// </summary>
     [CreateAssetMenu(fileName = "PlayerData", menuName = "Data/Create PlayerData")]
     public class PlayerData : ScriptableObject

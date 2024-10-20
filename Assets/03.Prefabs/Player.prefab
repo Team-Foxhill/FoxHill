@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3046739890300339374}
   - component: {fileID: 4112218669617882239}
   - component: {fileID: 737271653392372235}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: ExpTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -80,7 +80,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 600dce774fcbfea46b13eb8ee204ad67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerManager: {fileID: 0}
+  _playerManager: {fileID: 396249020564095347}
 --- !u!1 &1262955951989089182
 GameObject:
   m_ObjectHideFlags: 0
@@ -290,7 +290,7 @@ GameObject:
   - component: {fileID: 2743710092443491163}
   - component: {fileID: 4951199066247587261}
   - component: {fileID: 5308015287468221674}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: DamageTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -344,9 +344,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.2}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.8
 --- !u!114 &5308015287468221674
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1797,6 +1797,18 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   OnCancelSpawn:
+    m_PersistentCalls:
+      m_Calls: []
+  OnReset:
+    m_PersistentCalls:
+      m_Calls: []
+  OnClearQuest:
+    m_PersistentCalls:
+      m_Calls: []
+  OnKillMonster:
+    m_PersistentCalls:
+      m_Calls: []
+  OnEncounterNPC:
     m_PersistentCalls:
       m_Calls: []
   _data: {fileID: 11400000, guid: f46a3cc6ec4921441ba4b8527600e3ec, type: 2}

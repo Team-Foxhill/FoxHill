@@ -183,7 +183,7 @@ namespace FoxHill.Player.Skill
             {
                 Direction = _playerManager.Direction,
                 Power = _playerManager.Stat.Power,
-                Transform = _playerManager.transform
+                Transform = _playerManager.transform,
             };
 
             castedSkillGO.GetComponent<ISkill>().Cast(parameters);

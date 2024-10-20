@@ -16,6 +16,8 @@ namespace FoxHill.Player.Inventory
         [HideInInspector] public UnityEvent<ItemData> OnUseConstructiveItem;
         [HideInInspector] public UnityEvent<ItemData> OnUseQuestItem;
 
+        [HideInInspector] public UnityEvent<int> OnGetItem;
+
         public Mode CurrentMode => _currentMode;
         public enum Mode
         {
@@ -198,6 +200,8 @@ namespace FoxHill.Player.Inventory
             int indexToPush = -1;
             bool pushed = false;
 
+            OnGetItem?.Invoke(newItem.Info.ItemNumber);
+
             for (int index = 0; index < MAX_SLOT; index++)
             {
                 // 최초의 빈 slot 기억
@@ -322,6 +326,19 @@ namespace FoxHill.Player.Inventory
             {
                 _itemDescription.ClearDescription();
             }
+        }
+
+        public bool HasItem(int itemIndex)
+        {
+            for(int i = 0; i < MAX_SLOT; i++)
+            {
+                if (_slots[i].Amount > 0 && _slots[i].ItemInfo.ItemNumber == itemIndex)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         private void ReserveSlot(Slot slotToReserve)

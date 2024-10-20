@@ -10,6 +10,8 @@ namespace FoxHill.Player.Skill.Implementations
     [RequireComponent(typeof(CircleCollider2D))]
     public class Skill_VermilionBird : SkillBase
     {
+        private SkillParameter _parameter;
+
         protected override void Awake()
         {
             base.Awake();
@@ -17,6 +19,8 @@ namespace FoxHill.Player.Skill.Implementations
 
         public override void Cast(SkillParameter parameters)
         {
+            _parameter = parameters;
+
             // 스킬 방향에 따라 이펙트의 이미지 회전값 변환
             Vector3 rotationValue = Vector3.forward * Mathf.Atan2(parameters.Direction.y, parameters.Direction.x) * Mathf.Rad2Deg;
             transform.GetChild(0).localRotation = Quaternion.Euler(rotationValue);
@@ -30,7 +34,12 @@ namespace FoxHill.Player.Skill.Implementations
             {
                 if(((1 << damageable.Transform.gameObject.layer) & _attackableLayer) != 0)
                 {
+                    damageable.OnDead += OnKillMonster;
+
                     damageable?.TakeDamage(this, Stat.Power);
+
+                    if (damageable != null)
+                        damageable.OnDead -= OnKillMonster;
                 }
             }
         }
@@ -52,6 +61,14 @@ namespace FoxHill.Player.Skill.Implementations
             }
 
             Destroy(gameObject);
+        }
+
+        private void OnKillMonster()
+        {
+            if(_parameter.Transform.TryGetComponent(out PlayerManager manager) == true)
+            {
+                manager.OnKillMonster.Invoke();
+            }
         }
     }
 }

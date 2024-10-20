@@ -9,8 +9,10 @@ using FoxHill.Player.Inventory;
 using FoxHill.Player.Quest;
 using FoxHill.Player.Stat;
 using FoxHill.Player.State;
+using FoxHill.Quest;
 using FoxHill.Tower;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -41,6 +43,11 @@ namespace FoxHill.Player
         [HideInInspector] public UnityEvent OnCancelSpawn;
 
         [HideInInspector] public UnityEvent OnReset; // GameScene 진입 시 Invoke
+
+
+        [HideInInspector] public UnityEvent<List<Reward>> OnClearQuest;
+        [HideInInspector] public UnityEvent OnKillMonster;
+        [HideInInspector] public UnityEvent<int> OnEncounterNPC;
 
         public bool IsInventoryOpen => _isInventoryOpen;
         public bool IsPaused => _isPaused;

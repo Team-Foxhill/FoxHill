@@ -17,7 +17,7 @@ MonoBehaviour:
     QuestShowTime: 120
     PreCondition: MinPlayerLevel(1);
     StartNPC: 10001
-    Objective: Kill(1, 10);
+    Objective: Kill(1,10);
     TimeLimit: 180
     EndNPC: 10001
     StartDialogue: 'Oh my, these days Eouduksini are appearing in droves.
@@ -141,5 +141,5 @@ MonoBehaviour:
 
       I never thought you''d disappoint
       an old soul like this.'
-    Reward: Item(1, 1);
-    Penalty: Spawn(1, 100);
+    Reward: Item(1,1);
+    Penalty: Spawn(1,100);

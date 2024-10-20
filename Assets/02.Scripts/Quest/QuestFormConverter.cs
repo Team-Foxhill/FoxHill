@@ -6,7 +6,7 @@ using UnityEngine;
 namespace FoxHill.Quest
 {
     /// <summary>
-    /// Sheet¸¦ ExcelImporter·Î importÇÏ¿© ¾òÀº QuestFormRaw ÇüÅÂÀÇ sheet¸¦ °ÔÀÓ ³»¿¡¼­ »ç¿ëÇÏ±â À§ÇÑ QuestForm ÇüÅÂ·Î ConvertÇÏ´Â Å¬·¡½º
+    /// Sheetë¥¼ ExcelImporterë¡œ importí•˜ì—¬ ì–»ì€ QuestFormRaw í˜•íƒœì˜ sheetë¥¼ ê²Œì„ ë‚´ì—ì„œ ì‚¬ìš©í•˜ê¸° ìœ„í•œ QuestForm í˜•íƒœë¡œ Convertí•˜ëŠ” í´ë˜ìŠ¤
     /// </summary>
     public static class QuestFormConverter
     {
@@ -32,100 +32,109 @@ namespace FoxHill.Quest
 
         private static List<PreCondition> ParseCondition(List<string> conditions)
         {
-            return conditions.Select(condition =>
+            return conditions.SelectMany(condition =>
             {
-                var parts = condition.Split('(');
+                var splitBySpace = condition.Split(' ');
 
-                if (parts.Length != 2
-                    || Enum.TryParse(parts[0], out PreConditionType conditionType) == false
+                return splitBySpace.Select(part =>
+                {
+                    var parts = part.Split('(');
+
+                    if (Enum.TryParse(parts[0], out PreConditionType conditionType) == false
                     || int.TryParse(parts[1].Split(')')[0], out int parameter) == false)
-                {
-                    Debug.LogWarning($"Failed to parse condition: {condition}");
-                    return null;
-                }
+                    {
+                        Debug.LogWarning($"Failed to parse condition: {condition}");
+                        return null;
+                    }
 
-                return new PreCondition
-                {
-                    Type = conditionType,
-                    Value = parameter
-                };
+                    return new PreCondition
+                    {
+                        Type = conditionType,
+                        Value = parameter
+                    };
+                });
             }).Where(c => c != null).ToList();
         }
 
         private static List<T> ParseComponents<T, TEnum>(List<string> components)
             where TEnum : struct
         {
-            return components.Select(component =>
+            return components.SelectMany(component =>
             {
-                var parts = component.Split('(');
-                if (parts.Length != 2
-                    || Enum.TryParse(parts[0], out TEnum componentType) == false)
-                {
-                    Debug.LogWarning($"Failed to parse {typeof(T).Name}: {component}");
-                    return default;
-                }
+                var splitBySpace = component.Split(' ');
 
-                var parameters = parts[1].Split(')')[0].Split(',');
-                parameters = (string.IsNullOrWhiteSpace(parameters[0])) ? Array.Empty<string>() : parameters;
-
-                if (parameters.Length > 2)
+                return splitBySpace.Select(parts =>
                 {
-                    Debug.LogWarning($"Invalid number of parameters in {typeof(T).Name}: {component}");
-                    return default;
-                }
-
-                T newComponent;
-                try
-                {
-                    newComponent = (T)Activator.CreateInstance(typeof(T));
-                }
-                catch (Exception ex)
-                {
-                    Debug.LogError($"Failed to create instance of {typeof(T).Name}: {ex.Message}");
-                    return default;
-                }
-
-                var typeField = typeof(T).GetField("Type");
-                var value1Field = typeof(T).GetField("Value1");
-                var value2Field = typeof(T).GetField("Value2");
-
-                if (typeField == null)
-                {
-                    Debug.LogWarning($"Invalid property structure in {typeof(T).Name}");
-                    return default;
-                }
-
-                typeField.SetValue(newComponent, componentType);
-
-                if (parameters.Length == 0)
-                {
-                    return newComponent;
-                }
-
-                if (float.TryParse(parameters[0], out float value1))
-                {
-                    value1Field.SetValue(newComponent, value1);
-                }
-                else
-                {
-                    Debug.LogWarning($"Failed to parse Value1 in {typeof(T).Name}: {component}");
-                    return default;
-                }
-
-                if (parameters.Length == 2 && value2Field != null)
-                {
-                    if (float.TryParse(parameters[1], out float value2))
+                    var part = parts.Split('(');
+                    if (part.Length != 2
+                    || Enum.TryParse(part[0], out TEnum componentType) == false)
                     {
-                        value2Field.SetValue(newComponent, value2);
+                        Debug.LogWarning($"Failed to parse {typeof(T).Name}: {component}");
+                        return default;
+                    }
+
+                    var parameters = part[1].Split(')')[0].Split(',');
+                    parameters = (string.IsNullOrWhiteSpace(parameters[0])) ? Array.Empty<string>() : parameters;
+
+                    if (parameters.Length > 2)
+                    {
+                        Debug.LogWarning($"Invalid number of parameters in {typeof(T).Name}: {component}");
+                        return default;
+                    }
+
+                    T newComponent;
+                    try
+                    {
+                        newComponent = (T)Activator.CreateInstance(typeof(T));
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.LogError($"Failed to create instance of {typeof(T).Name}: {ex.Message}");
+                        return default;
+                    }
+
+                    var typeField = typeof(T).GetField("Type");
+                    var value1Field = typeof(T).GetField("Value1");
+                    var value2Field = typeof(T).GetField("Value2");
+
+                    if (typeField == null)
+                    {
+                        Debug.LogWarning($"Invalid property structure in {typeof(T).Name}");
+                        return default;
+                    }
+
+                    typeField.SetValue(newComponent, componentType);
+
+                    if (parameters.Length == 0)
+                    {
+                        return newComponent;
+                    }
+
+                    if (float.TryParse(parameters[0], out float value1))
+                    {
+                        value1Field.SetValue(newComponent, value1);
                     }
                     else
                     {
-                        Debug.LogWarning($"Failed to parse Value2 in {typeof(T).Name}: {component}");
+                        Debug.LogWarning($"Failed to parse Value1 in {typeof(T).Name}: {component}");
+                        return default;
                     }
-                }
 
-                return newComponent;
-            }).ToList();
+                    if (parameters.Length == 2 && value2Field != null)
+                    {
+                        if (float.TryParse(parameters[1], out float value2))
+                        {
+                            value2Field.SetValue(newComponent, value2);
+                        }
+                        else
+                        {
+                            Debug.LogWarning($"Failed to parse Value2 in {typeof(T).Name}: {component}");
+                        }
+                    }
+
+                    return newComponent;
+                });
+            }).Where(c => c != null).ToList();
         }
     }
 }

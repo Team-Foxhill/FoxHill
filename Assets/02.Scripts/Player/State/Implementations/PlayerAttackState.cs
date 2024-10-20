@@ -15,7 +15,7 @@ namespace FoxHill.Player.State.Implementations
 
         private LayerMask _attackableLayer;
         private float _attackOffset = 1f;
-        private Vector2 _attackRange = Vector2.one * 2f;
+        private Vector2 _attackRange = Vector2.one * 3f;
         private Vector3 _attackPoint;
 
 
@@ -116,10 +116,21 @@ namespace FoxHill.Player.State.Implementations
             {
                 if (hit.TryGetComponent<IDamageable>(out var damageable) == true)
                 {
+                    damageable.OnDead += OnKillMonster;
+
                     damageable.TakeDamage(_manager, _manager.Stat.Power);
+
+                    if(damageable != null)
+                        damageable.OnDead -= OnKillMonster;
                 }
             }
         }
+
+        private void OnKillMonster()
+        {
+            _manager.OnKillMonster.Invoke();
+        }
+
         private void OnDrawGizmos()
         {
             Gizmos.DrawWireCube(_attackPoint, _attackRange);

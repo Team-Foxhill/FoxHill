@@ -1,5 +1,6 @@
 using FoxHill.Core.Damage;
 using System.Collections;
+using System.Data.Common;
 using UnityEngine;
 
 namespace FoxHill.Player.Skill.Implementations
@@ -7,6 +8,8 @@ namespace FoxHill.Player.Skill.Implementations
     public class Skill_BlackTortoise : SkillBase
     {
         private const float SKILL_RANGE = 3f;
+
+        private SkillParameter _parameter;
 
         /// <summary>
         /// 일정 시간동안 범위 내의 적들에게 지속적인 데미지를 주는 장판/도트 데미지형 공격 스킬
@@ -18,6 +21,7 @@ namespace FoxHill.Player.Skill.Implementations
 
         public override void Cast(SkillParameter parameters)
         {
+            _parameter = parameters;
             StartCoroutine(C_Cast(parameters.Transform));
         }
 
@@ -45,7 +49,13 @@ namespace FoxHill.Player.Skill.Implementations
                     {
                         if (hit.TryGetComponent<IDamageable>(out var damageable) == true)
                         {
+                            damageable.OnDead += OnKillMonster;
+
                             damageable.TakeDamage(this, Stat.Power);
+
+                            if(damageable != null)
+                                damageable.OnDead -= OnKillMonster;
+
                         }
                     }
 
@@ -59,6 +69,13 @@ namespace FoxHill.Player.Skill.Implementations
             }
 
             Destroy(gameObject);
+        }
+        private void OnKillMonster()
+        {
+            if (_parameter.Transform.TryGetComponent(out PlayerManager manager) == true)
+            {
+                manager.OnKillMonster.Invoke();
+            }
         }
 
         private void OnDrawGizmos()

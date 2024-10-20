@@ -13,7 +13,7 @@ namespace FoxHill.Core.Settings
         public LanguageManager(LocalizationSettings settings)
         {
             _settings = settings;
-            CurrentLanguage = LanguageType.Korean;
+            ChangeLanguage(LanguageType.English);
         }
 
         public LanguageType CurrentLanguage { get; private set; }
