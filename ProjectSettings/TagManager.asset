@@ -14,8 +14,8 @@ TagManager:
   - Tower
   - PathFollowMonster
   - BossMonster
-  - 
-  - 
+  - GoalPosition
+  - BGObject
   - 
   - 
   - Exp

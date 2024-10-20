@@ -1,8 +1,8 @@
+using FoxHill.Audio;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 namespace FoxHill.Core.Settings
@@ -73,8 +73,13 @@ namespace FoxHill.Core.Settings
             _optionDictionary.Add(SettingOptions.Sound, _soundSetting);
             _optionDictionary.Add(SettingOptions.Graphics, _graphicsSetting);
             _optionDictionary.Add(SettingOptions.Other, _otherSetting);
+            SoundVolumeManager.LinkSoundSetting(_soundSetting.Setting as SoundSettings);
         }
 
+        private void OnDestroy()
+        {
+            SoundVolumeManager.UnLinkSoundSetting(_soundSetting.Setting as SoundSettings);
+        }
 
         public void ToggleUI(bool toggle)
         {
