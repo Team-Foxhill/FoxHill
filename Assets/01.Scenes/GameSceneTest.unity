@@ -917,6 +917,11 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.008700371, y: 0.026916802, z: 1}
   m_Center: {x: 0.31185427, y: 0.40470365, z: -0}
+--- !u!212 &120682816 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 1551229721333095978, guid: 66a62ca0761c9ef40862e10ac3fa5d3c, type: 3}
+  m_PrefabInstance: {fileID: 1330724179}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &122812697
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7699,6 +7704,7 @@ MonoBehaviour:
   _production: {fileID: 1846119160}
   _pathFollowMonsterSpawner: {fileID: 2912029092748542970}
   _playerManager: {fileID: 5172630788928857738}
+  _destinationHPManager: {fileID: 0}
   StartProductionOnLoad: 0
 --- !u!1 &1159099082
 GameObject:
@@ -8874,13 +8880,41 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1033634284023927438, guid: 66a62ca0761c9ef40862e10ac3fa5d3c, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1033634284023927438, guid: 66a62ca0761c9ef40862e10ac3fa5d3c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1282239641530437269, guid: 66a62ca0761c9ef40862e10ac3fa5d3c, type: 3}
+      propertyPath: _spriteRenderer
+      value: 
+      objectReference: {fileID: 1944151622}
+    - target: {fileID: 1282239641530437269, guid: 66a62ca0761c9ef40862e10ac3fa5d3c, type: 3}
+      propertyPath: _spriteRenderer2
+      value: 
+      objectReference: {fileID: 120682816}
+    - target: {fileID: 1282239641530437269, guid: 66a62ca0761c9ef40862e10ac3fa5d3c, type: 3}
+      propertyPath: destinationMaxHP
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 1737490028689449339, guid: 66a62ca0761c9ef40862e10ac3fa5d3c, type: 3}
       propertyPath: _itemPrefab
       value: 
       objectReference: {fileID: 298706369}
+    - target: {fileID: 2081996496968513516, guid: 66a62ca0761c9ef40862e10ac3fa5d3c, type: 3}
+      propertyPath: m_BodyType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7436603520249775800, guid: 66a62ca0761c9ef40862e10ac3fa5d3c, type: 3}
       propertyPath: m_Name
       value: Map_Final
+      objectReference: {fileID: 0}
+    - target: {fileID: 7995128770685777643, guid: 66a62ca0761c9ef40862e10ac3fa5d3c, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8716101125514639389, guid: 66a62ca0761c9ef40862e10ac3fa5d3c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8922,10 +8956,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7929524846830883246, guid: 66a62ca0761c9ef40862e10ac3fa5d3c, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7995128770685777643, guid: 66a62ca0761c9ef40862e10ac3fa5d3c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1944151626}
   m_SourcePrefab: {fileID: 100100000, guid: 66a62ca0761c9ef40862e10ac3fa5d3c, type: 3}
 --- !u!1 &1339257414
 GameObject:
@@ -9716,7 +9754,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1500492567}
   - component: {fileID: 1500492566}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: EdgeCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10226,6 +10264,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2632341321413208652, guid: 63ebd87cbb011a848b512983b7214bc1, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4194727312697721098, guid: 63ebd87cbb011a848b512983b7214bc1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -12411,6 +12453,51 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.018760175, y: 0.008972287, z: 1}
   m_Center: {x: -0.29241437, y: -0.36092985, z: -0}
+--- !u!1 &1944151621 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7995128770685777643, guid: 66a62ca0761c9ef40862e10ac3fa5d3c, type: 3}
+  m_PrefabInstance: {fileID: 1330724179}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &1944151622 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 4644005030400018489, guid: 66a62ca0761c9ef40862e10ac3fa5d3c, type: 3}
+  m_PrefabInstance: {fileID: 1330724179}
+  m_PrefabAsset: {fileID: 0}
+--- !u!58 &1944151626
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1944151621}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.45, y: 0}
+  serializedVersion: 2
+  m_Radius: 5.12
 --- !u!1 &1946693793
 GameObject:
   m_ObjectHideFlags: 0
@@ -13311,6 +13398,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 508125908509253515, guid: 01b853cf9dd02db448c2c2aea9da70ca, type: 3}
+      propertyPath: m_Size.x
+      value: 6.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 508125908509253515, guid: 01b853cf9dd02db448c2c2aea9da70ca, type: 3}
+      propertyPath: m_Size.y
+      value: 6.83
+      objectReference: {fileID: 0}
+    - target: {fileID: 508125908509253515, guid: 01b853cf9dd02db448c2c2aea9da70ca, type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 508125908509253515, guid: 01b853cf9dd02db448c2c2aea9da70ca, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -443488947
+      objectReference: {fileID: 0}
     - target: {fileID: 6611801550113355011, guid: 01b853cf9dd02db448c2c2aea9da70ca, type: 3}
       propertyPath: _maxHP
       value: 2000

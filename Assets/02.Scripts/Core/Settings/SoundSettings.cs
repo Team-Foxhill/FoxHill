@@ -10,10 +10,11 @@ namespace FoxHill.Core.Settings
         public SoundSettings(Slider volumeSlider)
         {
             _volumeSlider = volumeSlider;
+            _volumeSlider.value = 1f;
         }
 
         public Action<float> OnVolumeChanged;
-        private const float VOLUME_CONTROL_AMOUNT = 0.1f;
+        private const float VOLUME_CONTROL_AMOUNT = 0.05f;
 
         private Slider _volumeSlider;
 

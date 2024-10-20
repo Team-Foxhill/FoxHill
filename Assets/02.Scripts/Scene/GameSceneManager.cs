@@ -1,5 +1,6 @@
 using FoxHill.Core;
 using FoxHill.Core.Pause;
+using FoxHill.Map;
 using FoxHill.Player;
 using FoxHill.Quest;
 using FoxHill.Scene.Production;
@@ -18,6 +19,7 @@ namespace FoxHill.Scene
         private MenuInputAction _inputAction;
         [SerializeField] private PathFollowMonsterSpawner _pathFollowMonsterSpawner;
         [SerializeField] private PlayerManager _playerManager;
+        [SerializeField] private DestinationHPManager _destinationHPManager;
 
         public bool StartProductionOnLoad = false; // TODO : 지우기
 
@@ -43,6 +45,7 @@ namespace FoxHill.Scene
             _production ??= transform.Find("Production").GetComponent<GameSceneProduction>();
 
             _pathFollowMonsterSpawner ??= FindFirstObjectByType<PathFollowMonsterSpawner>();
+            _destinationHPManager ??= FindFirstObjectByType<DestinationHPManager>();
             _playerManager ??= FindFirstObjectByType<PlayerManager>();
         }
 
@@ -59,6 +62,7 @@ namespace FoxHill.Scene
             QuestManager.Reset();
 
             _playerManager.OnDead += ExitToTitleScene;
+            _destinationHPManager.OnDead += ExitToTitleScene;
             _playerManager.OnReset?.Invoke();
         }
 

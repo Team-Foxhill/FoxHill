@@ -53,6 +53,7 @@ namespace FoxHill.Monster
             SetStat();
             _spriteRenderer.enabled = false;
             StartCoroutine(UpdateSprite(_moveSpriteSet, true));
+            SoundVolumeManager.Register(this);
         }
         protected override void SetStat()
         {
@@ -71,6 +72,11 @@ namespace FoxHill.Monster
             CurrentHp = MaxHp;
             _agentAuthoring.enabled = true;
             _deadCoroutine = null;
+        }
+
+        private void OnDestroy()
+        {
+            SoundVolumeManager.Unregister(this);
         }
 
         private IEnumerator WaitForComponents()

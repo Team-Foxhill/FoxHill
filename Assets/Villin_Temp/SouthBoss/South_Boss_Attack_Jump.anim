@@ -24,19 +24,19 @@ AnimationClip:
       value: {fileID: -810786289, guid: e1c341e30990a454291c1c15f3f0bc42, type: 3}
     - time: 0.083333336
       value: {fileID: -35886183, guid: e1c341e30990a454291c1c15f3f0bc42, type: 3}
-    - time: 0.16666667
-      value: {fileID: -117854399, guid: e1c341e30990a454291c1c15f3f0bc42, type: 3}
-    - time: 0.25
-      value: {fileID: 560856417, guid: e1c341e30990a454291c1c15f3f0bc42, type: 3}
-    - time: 0.33333334
-      value: {fileID: 455007503, guid: e1c341e30990a454291c1c15f3f0bc42, type: 3}
-    - time: 0.41666666
-      value: {fileID: -1190156197, guid: e1c341e30990a454291c1c15f3f0bc42, type: 3}
-    - time: 0.5
-      value: {fileID: -1458661495, guid: e1c341e30990a454291c1c15f3f0bc42, type: 3}
     - time: 0.5833333
+      value: {fileID: -117854399, guid: e1c341e30990a454291c1c15f3f0bc42, type: 3}
+    - time: 1.1666666
+      value: {fileID: 560856417, guid: e1c341e30990a454291c1c15f3f0bc42, type: 3}
+    - time: 1.25
+      value: {fileID: 455007503, guid: e1c341e30990a454291c1c15f3f0bc42, type: 3}
+    - time: 1.3333334
+      value: {fileID: -1190156197, guid: e1c341e30990a454291c1c15f3f0bc42, type: 3}
+    - time: 1.4166666
+      value: {fileID: -1458661495, guid: e1c341e30990a454291c1c15f3f0bc42, type: 3}
+    - time: 1.5
       value: {fileID: -137017582, guid: e1c341e30990a454291c1c15f3f0bc42, type: 3}
-    - time: 0.6666667
+    - time: 1.5833334
       value: {fileID: 1895732427, guid: e1c341e30990a454291c1c15f3f0bc42, type: 3}
     attribute: m_Sprite
     path: 
@@ -74,7 +74,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.75
+    m_StopTime: 1.6666667
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -94,10 +94,17 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.33333334
-    functionName: PerformAttack
+  - time: 0.083333336
+    functionName: OnJumpUp
     data: 
-    objectReferenceParameter: {fileID: 11400000, guid: 9a5f7ba9db01d154ca2494dff1598153, type: 2}
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.5833333
+    functionName: OnJumpDown
+    data: 
+    objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0

@@ -4,6 +4,7 @@ using FoxHill.Monster.AI;
 using UnityEditor.Experimental.GraphView;
 using Unity.Transforms;
 using System;
+using FoxHill.Core;
 
 namespace FoxHill.Monster.AI
 {
@@ -17,6 +18,10 @@ namespace FoxHill.Monster.AI
         public void PlayAnimation()
         {
             _animator.Play(_jumpHash);
+            if (_animator.isActiveAndEnabled)
+            {
+                DebugFox.Log("애니메이션 실행!");
+            }
         }
 
         public void OnJumpUp() // 애니메이션 이벤트로 실행되는 메서드.
@@ -27,7 +32,7 @@ namespace FoxHill.Monster.AI
         public void OnJumpDown() // 애니메이션 이벤트로 실행되는 메서드.
         {
 
-            StartCoroutine(LerpPositionExecutor(_originPosition, 0.1f));//이동및 스프라이트 렌더러 비활성 처리.
+            StartCoroutine(LerpPositionExecutor(_originPosition, 0.5f));//이동및 스프라이트 렌더러 비활성 처리.
         }
 
         private IEnumerator MoveDirectionExecutor(Vector2 direction, float time)
@@ -54,7 +59,7 @@ namespace FoxHill.Monster.AI
                 {
                     yield break;
                 }
-                transform.position = Vector2.Lerp(transform.position, position, t);
+                transform.position = Vector2.Lerp(transform.parent.position, position, t);
                 yield return null;
             }
         }

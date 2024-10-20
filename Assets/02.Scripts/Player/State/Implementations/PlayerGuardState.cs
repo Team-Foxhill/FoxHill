@@ -11,13 +11,12 @@ namespace FoxHill.Player.State.Implementations
         protected override void OnEnable()
         {
             base.OnEnable();
-
             StartCoroutine(C_Guard());
         }
 
         private IEnumerator C_Guard()
         {
-            while(_animator.AnimationTime < 1f)
+            while (_animator.AnimationTime < 1f)
             {
                 yield return null;
             }
@@ -27,7 +26,18 @@ namespace FoxHill.Player.State.Implementations
 
         public void PerfectGuard()
         {
-            _manager.IsPerfectGuard = !_manager.IsPerfectGuard;
+            StartCoroutine(C_PerfectGuard());
+        }
+
+        private IEnumerator C_PerfectGuard()
+        {
+            while (_animator.AnimationTime < 0.5f && State == PlayerState.Guard)
+            {
+                _manager.IsPerfectGuard = true;
+                yield return null;
+            }
+            _manager.IsPerfectGuard = false;
+            yield break;
         }
     }
 }

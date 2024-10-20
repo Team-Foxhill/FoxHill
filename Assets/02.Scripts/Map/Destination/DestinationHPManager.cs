@@ -3,6 +3,7 @@ using FoxHill.Core.Pause;
 using FoxHill.Core.Test;
 using FoxHill.Core.Utils;
 using FoxHill.Monster;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,54 +12,27 @@ namespace FoxHill.Map
 {
     public class DestinationHPManager : MonoBehaviour, IPausable
     {
+        public event Action OnDead;
         public float CurrentHP { get; private set; }
         [SerializeField] private float destinationMaxHP = 1000;
         [SerializeField] private float getDamageInterval;
+        [SerializeField] private SpriteRenderer _spriteRenderer;
+        [SerializeField] private SpriteRenderer _spriteRenderer2;
         private HashSet<Collider2D> _monsterSet = new HashSet<Collider2D>(512);
         private bool _isPaused;
         private float _elapsedTime;
         private Coroutine _periodlyGetDamageCoroutine;
         private float _intervalStartTime;
-
+        private Color _initialColor;
+        private readonly Color COLOR_DAMAGED = new Color(255f / 255f, 47f / 255f, 47f / 255f);
+        private readonly WaitForSeconds _colorChangeWait = new WaitForSeconds(0.2f);
 
 
         private void Start()
         {
             CurrentHP = destinationMaxHP;
             ObjectPoolManager.RegisterColliderCheckneededObject(this);
-        }
-
-        private IEnumerator PeriodlyGetDamage(float damage)
-        {
-            DebugFox.Log("PeriodlyGetDamage Coroutine Started");
-            if (_intervalStartTime == default)
-            { _intervalStartTime = Time.time; }
-            while (_monsterSet.Count > 0)
-            {
-                if (_isPaused == true)
-                {
-                    float pauseStartedTime = Time.time;
-                    yield return new WaitUntil(() => _isPaused == false);
-                    float pauseDuration = Time.time - pauseStartedTime;
-                    _intervalStartTime += pauseDuration;
-                }
-                _elapsedTime = Time.time - _intervalStartTime;
-                if (_elapsedTime > getDamageInterval)
-                {
-                    float totalDamage = damage * _monsterSet.Count;
-                    CurrentHP -= totalDamage;
-                    DebugFox.Log($"currentHP = {CurrentHP}, Monsters: {_monsterSet.Count}, Damage: {totalDamage}");
-                    if (CurrentHP <= 0f)
-                    {
-                        // todo.Villin 게임 오버 화면과 이어주기.
-                    }
-                    _elapsedTime = 0f;
-                    _intervalStartTime = Time.time;
-                }
-                yield return null;
-            }
-            DebugFox.Log($"MonsterSet count is {_monsterSet.Count}");
-            _periodlyGetDamageCoroutine = null;
+            _initialColor = _spriteRenderer.color;
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
@@ -92,6 +66,50 @@ namespace FoxHill.Map
             }
         }
 
+        private IEnumerator PeriodlyGetDamage(float damage)
+        {
+            DebugFox.Log("PeriodlyGetDamage Coroutine Started");
+            if (_intervalStartTime == default)
+            { _intervalStartTime = Time.time; }
+            while (_monsterSet.Count > 0)
+            {
+                if (_isPaused == true)
+                {
+                    float pauseStartedTime = Time.time;
+                    yield return new WaitUntil(() => _isPaused == false);
+                    float pauseDuration = Time.time - pauseStartedTime;
+                    _intervalStartTime += pauseDuration;
+                }
+                _elapsedTime = Time.time - _intervalStartTime;
+                if (_elapsedTime > getDamageInterval)
+                {
+                    float totalDamage = damage * _monsterSet.Count;
+                    CurrentHP -= totalDamage;
+                    DebugFox.Log($"currentHP = {CurrentHP}, Monsters: {_monsterSet.Count}, Damage: {totalDamage}");
+                    if (CurrentHP <= 0f)
+                    {
+                        OnDead.Invoke();
+                        yield break;
+                    }
+                    _elapsedTime = 0f;
+                    _intervalStartTime = Time.time;
+                }
+                StartCoroutine(C_ChangeColor());
+                yield return null;
+            }
+            DebugFox.Log($"MonsterSet count is {_monsterSet.Count}");
+            _periodlyGetDamageCoroutine = null;
+        }
+
+        private IEnumerator C_ChangeColor()
+        {
+            _spriteRenderer.color = COLOR_DAMAGED;
+            _spriteRenderer2.color = COLOR_DAMAGED;
+            yield return _colorChangeWait;
+            _spriteRenderer.color = _initialColor;
+            _spriteRenderer2.color = _initialColor;
+        }
+
         public void Pause()
         {
             _isPaused = true;
@@ -101,5 +119,7 @@ namespace FoxHill.Map
         {
             _isPaused = false;
         }
+
+
     }
 }
