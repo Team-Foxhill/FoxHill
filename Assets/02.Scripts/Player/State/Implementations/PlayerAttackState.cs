@@ -1,13 +1,15 @@
 using FoxHill.Core.Damage;
 using FoxHill.Core.Utils;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.U2D;
 
 namespace FoxHill.Player.State.Implementations
 {
     public class PlayerAttackState : PlayerStateBase
     {
+        [SerializeField] AudioClip[] _attackNonTargetSounds;
+        [SerializeField] AudioClip[] _attackTargetSounds;
         public override PlayerState State { get; protected set; } = PlayerState.Attack;
         public override bool IsMoveState { get; protected set; } = false;
 
@@ -17,6 +19,7 @@ namespace FoxHill.Player.State.Implementations
         private float _attackOffset = 1f;
         private Vector2 _attackRange = Vector2.one * 3f;
         private Vector3 _attackPoint;
+        private bool _isPlayedOnce;
 
 
         protected override void Awake()
@@ -104,6 +107,11 @@ namespace FoxHill.Player.State.Implementations
                 yield return null;
             }
 
+            if (_isPlayedOnce == true && _animator.AnimationTime > 0.9f)
+            {
+                _isPlayedOnce = false;
+            }
+
             yield return FRAME_END_WAIT;
 
             IsDone = true;
@@ -112,15 +120,28 @@ namespace FoxHill.Player.State.Implementations
         private void PerformDamage()
         {
             var hits = Physics2D.OverlapBoxAll(_attackPoint, _attackRange, 0f, _attackableLayer);
+            if (hits.Length == 0 && _audioSource.isPlaying == false)
+            {
+                int i = (int)Random.Range(0, _attackNonTargetSounds.Length);
+                _audioSource.PlayOneShot(_attackNonTargetSounds[i]);
+            }
+
             foreach (var hit in hits)
             {
                 if (hit.TryGetComponent<IDamageable>(out var damageable) == true)
                 {
+                    if (_isPlayedOnce == false)
+                    {
+                        _isPlayedOnce = true;
+                int i = (int)Random.Range(0, _attackTargetSounds.Length);
+                        _audioSource.PlayOneShot(_attackTargetSounds[i]); // 공격 성공 사운드.
+                    }
+
                     damageable.OnDead += OnKillMonster;
 
                     damageable.TakeDamage(_manager, _manager.Stat.Power);
 
-                    if(damageable != null)
+                    if (damageable != null)
                         damageable.OnDead -= OnKillMonster;
                 }
             }

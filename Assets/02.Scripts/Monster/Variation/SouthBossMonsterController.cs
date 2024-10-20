@@ -62,6 +62,11 @@ namespace FoxHill.Monster.AI
         [SerializeField] private float _verticalAttackProbability = 0.3f;
         [SerializeField] private float _jumpAttackProbability = 0.3f;
         [SerializeField] private SouthBossMonsterSubController _subController;
+        [SerializeField] private AudioSource _audioSource;
+        [Header ("PlayerSound")]
+        [SerializeField] private AudioClip _perfectGuardSound;
+        [Header ("BossSound")]
+        [SerializeField] private AudioClip[] _southBossSounds;
 
         private readonly Color COLOR_DAMAGED = new Color(255f / 255f, 47f / 255f, 47f / 255f);
         private readonly WaitForSeconds _colorChangeWait = new WaitForSeconds(0.2f);
@@ -320,6 +325,11 @@ namespace FoxHill.Monster.AI
             }
         }
 
+        public void PerformSound(int a)
+        {
+            _audioSource.PlayOneShot(_southBossSounds[a]);
+        }
+
         public void OnJumpActionStart() // 애니메이션 이벤트로 실행되는 메서드.
         {
             DebugFox.Log("애니메이션 실행 시도!");
@@ -335,7 +345,7 @@ namespace FoxHill.Monster.AI
         public void OnJumpDown() // 애니메이션 이벤트로 실행되는 메서드.
         {
 
-            StartCoroutine(LerpPositionExecutor(_blackboard.Target.position, 0.1f, true));//이동및 스프라이트 렌더러 비활성 처리.
+            StartCoroutine(LerpPositionExecutor(_blackboard.Target.position, 0.5f, true));//이동및 스프라이트 렌더러 비활성 처리.
         }
 
         private IEnumerator MoveDirectionExecutor(Vector2 direction, float time, bool isEnable)
@@ -462,6 +472,7 @@ namespace FoxHill.Monster.AI
                     if (parry != null && parry.IsPerfectGuard == true)// 상대가 퍼펙트 가드 타이밍인지 확인.
                     {
                         DebugFox.Log($"perfectguard state is {parry.IsPerfectGuard}");
+                        _audioSource.PlayOneShot(_perfectGuardSound);
                         _machine.ChangeState(State.Stagger);//stagger 상태 진입.
                     }
                     else

@@ -23,6 +23,10 @@ namespace FoxHill.Player.Skill
         [SerializeField] private PlayerManager _playerManager;
         [SerializeField] private SkillUI _skillUI;
 
+        [Header("Skill Sounds")]
+        [SerializeField] private AudioSource _audioSource;
+        [SerializeField] private AudioClip[] _audioClips;
+
         private readonly WaitForSecondsRealtime _switchingCooldownWait = new WaitForSecondsRealtime(COOLDOWN_SWITCH_SKILL);
         private int _currentSkillIndex = 0;
         private bool _isRotating = false;
@@ -178,6 +182,7 @@ namespace FoxHill.Player.Skill
             }
 
             var castedSkillGO = Instantiate(_skillPrefabs[_currentSkillIndex].gameObject, transform.root.position, Quaternion.identity);
+            _audioSource.PlayOneShot(_audioClips[_currentSkillIndex]);
 
             SkillParameter parameters = new SkillParameter
             {

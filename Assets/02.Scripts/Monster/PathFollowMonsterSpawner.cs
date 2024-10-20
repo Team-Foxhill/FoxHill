@@ -18,6 +18,9 @@ namespace FoxHill.Core
         [SerializeField] private int[] _spawnCountOfStages;
         [SerializeField] private float[] _roundTimes;
         [SerializeField] private float[] _spawnEndTimeOfStages;
+        [SerializeField] private GameObject[] _bossMonsters;
+        [SerializeField] private int[] _bossActiveStage;
+        [SerializeField] private bool[] _isAlreadySpawned;
         private WaitForSecondsRealtime _spawnInterval;
         private int _randomValue;
         private Vector2 _newPosition;
@@ -32,12 +35,22 @@ namespace FoxHill.Core
         public IEnumerator ProgressStage(int[] getCounts, float[] roundTimes, float[] spawnEndTimes)
         {
             Stage = 0;
+            int i = 0;
             if (_isPaused == true)
             {
                 yield return new WaitUntil(() => _isPaused == false);
             }
             foreach (float roundTime in roundTimes)
             {
+                if (_bossActiveStage[i] >= Stage && _isAlreadySpawned[i] == false)
+                {
+                    _bossMonsters[i].SetActive(true);
+                    _isAlreadySpawned[i] = true;
+                    if(i< _bossMonsters.Length)
+                    {
+                    i++;
+                    }
+                }
                 float stageStartTime = Time.time;
                 float spawnEndTimeOfStage = spawnEndTimes[Stage];
                 _elapsedTime = 0f; 
@@ -99,6 +112,7 @@ namespace FoxHill.Core
             PauseManager.Register(this);
             IsInitialized = true;
             StartCoroutine(ProgressStage(_spawnCountOfStages, _roundTimes, _spawnEndTimeOfStages));
+ 
         }
 
         //private void GetFromPool(int getCount)

@@ -20,6 +20,10 @@ namespace FoxHill.UI.Menu
         [SerializeField] private TitleButton _settingsButton;
         [SerializeField] private TitleButton _exitButton;
 
+        [SerializeField] private AudioSource _audioSource;
+        [SerializeField] private AudioClip[] _keySound;
+
+
         [System.Serializable]
         private class TitleButton
         {
@@ -86,6 +90,7 @@ namespace FoxHill.UI.Menu
             {
                 var input = context.ReadValue<Vector2>();
 
+                PlayKeySound(0);
                 _menuButtons[_currentMenu].Animation.OnHoverExit();
                 if (input == Vector2.up)
                 {
@@ -103,6 +108,7 @@ namespace FoxHill.UI.Menu
         {
             if (context.started == true && _settingsManager.IsEnabled == false)
             {
+                PlayKeySound(1);
                 switch (_currentMenu)
                 {
                     case Menu.Start:
@@ -126,6 +132,7 @@ namespace FoxHill.UI.Menu
 
         public void OnDeselect(InputAction.CallbackContext context) // X, Esc
         {
+                PlayKeySound(2);
             return;
         }
         #endregion
@@ -144,6 +151,21 @@ namespace FoxHill.UI.Menu
                 yield return null;
             }
         }
+
+        private void PlayKeySound(int id)
+        {
+
+            if (_audioSource != null && _keySound[id] != null)
+            {
+                _audioSource.PlayOneShot(_keySound[id]);
+            }
+        }
+
+        public void OnVolumeChanged(float volume)
+        {
+            _audioSource.volume = volume;
+        }
+
         private void ExitGame()
         {
 #if UNITY_EDITOR

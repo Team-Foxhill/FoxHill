@@ -95,14 +95,14 @@ namespace FoxHill.Monster.FSM
         {
             _isPaused = true;
             _animator.speed = 0;
-            DebugFox.Log($"Paused, {gameObject.name}'s {_animator.name}'s speed is now {(float)_animator.speed}");
+            DebugFox.Log($"Paused, {gameObject.name}'s animator speed is now {(float)_animator.speed}");
         }
 
         public void Resume()
         {
             _isPaused = false;
             _animator.speed = 1;
-            DebugFox.Log($"Resumed, {gameObject.name}'s {_animator.name}'s speed is now {(float)_animator.speed}");
+            DebugFox.Log($"Resumed, {gameObject.name}'s {_animator.name} animator speed is now {(float)_animator.speed}");
         }
     }
 }

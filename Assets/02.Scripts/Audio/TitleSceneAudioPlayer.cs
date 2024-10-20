@@ -12,6 +12,7 @@ public class TitleSceneAudioPlayer : MonoBehaviour, IVolumeAdjustable
     private void Start()
     {
         _audioSource = GetComponent<AudioSource>();
+        _audioSource.volume = 0.25f;
         StartCoroutine(PlayAudioSequence());
         SoundVolumeManager.Register(this);
     }
@@ -45,6 +46,6 @@ public class TitleSceneAudioPlayer : MonoBehaviour, IVolumeAdjustable
 
     public void OnVolumeChanged(float volume)
     {
-        _audioSource.volume = volume;
+        _audioSource.volume = volume / 4f;
     }
 }

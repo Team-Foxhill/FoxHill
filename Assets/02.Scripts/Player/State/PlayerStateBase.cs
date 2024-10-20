@@ -12,6 +12,7 @@ namespace FoxHill.Player.State
 
         protected PlayerManager _manager;
         protected PlayerAnimationController _animator;
+        protected AudioSource _audioSource;
 
         protected readonly WaitForEndOfFrame FRAME_END_WAIT = new WaitForEndOfFrame();
 
@@ -19,6 +20,7 @@ namespace FoxHill.Player.State
         {
             _manager = GetComponentInParent<PlayerManager>();
             _animator = GetComponent<PlayerAnimationController>();
+            _audioSource = GetComponent<AudioSource>();
 
             this.enabled = false;
         }

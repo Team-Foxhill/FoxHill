@@ -1,6 +1,7 @@
 using FoxHill.Core.Damage;
 using FoxHill.Core.Effect;
 using System.Collections;
+using UnityEngine;
 
 namespace FoxHill.Player.State.Implementations
 {
@@ -8,6 +9,8 @@ namespace FoxHill.Player.State.Implementations
     {
         public override PlayerState State { get; protected set; } = PlayerState.FatalAttack;
         public override bool IsMoveState { get; protected set; } = false;
+
+        [SerializeField] private AudioClip _fatalAttackSound;
 
         private float _damageMultiplier = 2f;
 
@@ -42,7 +45,7 @@ namespace FoxHill.Player.State.Implementations
             EffectManager.Play(EffectManager.FeedbackType.Impulse);
 
             _attackTarget.OnDead += OnKillMonster;
-
+            _audioSource.PlayOneShot(_fatalAttackSound);
             _attackTarget?.TakeDamage(_manager, _manager.Stat.Power * _damageMultiplier);
             _staggerTarget?.MakeStun(_manager);
 

@@ -5,15 +5,28 @@ using UnityEditor.Experimental.GraphView;
 using Unity.Transforms;
 using System;
 using FoxHill.Core;
+using FoxHill.Core.Pause;
 
 namespace FoxHill.Monster.AI
 {
-    public class SouthBossMonsterSubController : MonoBehaviour
+    public class SouthBossMonsterSubController : MonoBehaviour, IPausable
     {
         public event Action<AnimationEvent> OnJumpAttack;
         [SerializeField] Animator _animator;
         private int _jumpHash = Animator.StringToHash("Jump");
+        private bool _isPaused;
         private Vector2 _originPosition => (Vector2)transform.parent.position;
+
+
+        private void Awake()
+        {
+            PauseManager.Register(this);
+        }
+
+        private void OnDestroy()
+        {
+            PauseManager.Unregister(this);
+        }
 
         public void PlayAnimation()
         {
@@ -67,6 +80,18 @@ namespace FoxHill.Monster.AI
         public void PerformAttack(AnimationEvent animationEvent)
         {
             OnJumpAttack.Invoke(animationEvent);
+        }
+
+        public void Pause()
+        {
+            _isPaused = true;
+            _animator.speed = 0f;
+        }
+
+        public void Resume()
+        {
+            _isPaused = false;
+            _animator.speed = 1f;
         }
     }
 }

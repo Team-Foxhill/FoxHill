@@ -2,29 +2,32 @@ using FoxHill.Core;
 using FoxHill.Core.Pause;
 using FoxHill.Core.Utils;
 using FoxHill.Monster;
-using ProjectDawn.Navigation;
 using ProjectDawn.Navigation.Hybrid;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace FoxHill.Tower
 {
     public class DefaultDefenseTower : DefenseTowerControllerBase
     {
         [SerializeField] private float getDamageInterval = 1f;
+        [SerializeField] private SpriteRenderer _spriteRenderer;
         private HashSet<Collider2D> _monsterSet = new HashSet<Collider2D>(256);
         private HashSet<Transform> _monsterTransformSet = new HashSet<Transform>(256);
         private Coroutine _periodlyGetDamageCoroutine;
         private float _intervalStartTime;
         private float _elapsedTime;
+        private Color _initialColor;
+        private readonly Color COLOR_DAMAGED = new Color(255f / 255f, 47f / 255f, 47f / 255f);
+        private readonly WaitForSeconds _colorChangeWait = new WaitForSeconds(0.2f);
+
 
         protected override void Awake()
         {
             base.Awake();
             PauseManager.Register(this);
+            _spriteRenderer = GetComponent<SpriteRenderer>();
         }
 
         protected override IEnumerator PerformTowerFunction()
@@ -93,6 +96,8 @@ namespace FoxHill.Tower
                 {
                     float totalDamage = damage * _monsterSet.Count;
                     _stat.CurrentHp -= totalDamage;
+                    StartCoroutine(C_ChangeColor());
+
                     if (_stat.CurrentHp <= 0f)
                     {
                         foreach (var monster in _monsterSet)
@@ -113,6 +118,13 @@ namespace FoxHill.Tower
             }
             DebugFox.Log($"MonsterSet count is {_monsterSet.Count}");
             _periodlyGetDamageCoroutine = null;
+        }
+
+        private IEnumerator C_ChangeColor()
+        {
+            _spriteRenderer.color = COLOR_DAMAGED;
+            yield return _colorChangeWait;
+            _spriteRenderer.color = _initialColor;
         }
     }
 }
