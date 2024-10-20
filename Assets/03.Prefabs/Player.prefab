@@ -809,7 +809,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 300279f9b0148fa49979fe2879206526, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerManager: {fileID: 396249020564095347}
+  OnQuestStatusUpdated:
+    m_PersistentCalls:
+      m_Calls: []
   _globalDialogue: {fileID: 0}
   _currentIndex: -1
 --- !u!1 &3890441769647921113
@@ -2005,7 +2007,7 @@ GameObject:
   - component: {fileID: 234774525187204125}
   - component: {fileID: 903484328812297331}
   - component: {fileID: 1039817314689058636}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: ItemTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}

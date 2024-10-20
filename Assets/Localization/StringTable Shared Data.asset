@@ -71,6 +71,42 @@ MonoBehaviour:
     m_Key: Dead_Transition
     m_Metadata:
       m_Items: []
+  - m_Id: 3818991571951616
+    m_Key: Tutorial_Move
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3818993115455488
+    m_Key: Tutorial_Attack
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3818994289860608
+    m_Key: Tutorial_Skill
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3818995065806848
+    m_Key: Tutorial_Dodge
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3818995611066368
+    m_Key: Tutorial_Guard
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3818996206657536
+    m_Key: Tutorial_Inventory
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3818996743528448
+    m_Key: Tutorial_Inventory_select
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3819184988086272
+    m_Key: Tutorial_Stagger
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3819203732430848
+    m_Key: Tutorial_FatalAttack
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

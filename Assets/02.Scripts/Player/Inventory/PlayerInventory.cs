@@ -341,6 +341,17 @@ namespace FoxHill.Player.Inventory
             return false;
         }
 
+        public void UseItem(int itemIndex)
+        {
+            for (int i = 0; i < MAX_SLOT; i++)
+            {
+                if (_slots[i].Amount > 0 && _slots[i].ItemInfo.ItemNumber == itemIndex)
+                {
+                    UseItem(_slots[i]);
+                }
+            }
+        }
+
         private void ReserveSlot(Slot slotToReserve)
         {
             _reservedSlot.Index = _currentSlotIndex;

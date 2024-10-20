@@ -80,6 +80,51 @@ MonoBehaviour:
     m_Localized: Returning to title screen soon
     m_Metadata:
       m_Items: []
+  - m_Id: 3818991571951616
+    m_Localized: Press arrow keys to move.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3818993115455488
+    m_Localized: Press V key to attack.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3818994289860608
+    m_Localized: 'Press X key to switch skill.
+
+      Press B key to cast skill.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3818995065806848
+    m_Localized: Press Z key to dash.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3818995611066368
+    m_Localized: Press C key to guard.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3818996206657536
+    m_Localized: Press F key to toggle inventory.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3818996743528448
+    m_Localized: '[Inventory]
+
+      Press Z key to select.
+
+      Press X key to
+      deselect.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3819184988086272
+    m_Localized: If you defend against the attack of a strong enemy at the right
+      time, the enemy will stagger.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3819203732430848
+    m_Localized: If you attack the staggered enemy head-on, a powerful attack will
+      be unleashed.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

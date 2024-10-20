@@ -46,13 +46,13 @@ namespace FoxHill.Core.Dialogue
 
         public void StartDialogue(List<string> texts)
         {
-            //StartCoroutine(C_StartDialogue(texts));
+            StartCoroutine(C_StartDialogue(texts));
         }
 
         private IEnumerator C_StartDialogue(List<string> texts)
         {
             ToggleUI(true);
-            PauseManager.Pause();
+            PauseManager.Pause(true);
             
             foreach(string text in texts)
             {
@@ -62,7 +62,7 @@ namespace FoxHill.Core.Dialogue
             }
 
             ToggleUI(false);
-            PauseManager.Resume();
+            PauseManager.Resume(true);
         }
     }
 }

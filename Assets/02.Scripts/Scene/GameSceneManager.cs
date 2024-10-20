@@ -4,6 +4,7 @@ using FoxHill.Map;
 using FoxHill.Player;
 using FoxHill.Quest;
 using FoxHill.Scene.Production;
+using FoxHill.UI;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -20,10 +21,10 @@ namespace FoxHill.Scene
         [SerializeField] private PathFollowMonsterSpawner _pathFollowMonsterSpawner;
         [SerializeField] private PlayerManager _playerManager;
         [SerializeField] private DestinationHPManager _destinationHPManager;
+        [SerializeField] private TutorialUI _tutorialUI;
 
-        public bool StartProductionOnLoad = false; // TODO : 지우기
 
-        public void OnShowMenu(InputAction.CallbackContext context)
+        public void OnShowMenu(InputAction.CallbackContext context) // esc
         {
             if (context.started == true)
             {
@@ -40,6 +41,9 @@ namespace FoxHill.Scene
             _menu ??= transform.Find("UI_Menu").GetComponent<GameSceneMenuController>();
             _menu.Initialize(_inputAction);
 
+            _tutorialUI ??= transform.Find("UI_Tutorial").GetComponent<TutorialUI>();
+            _tutorialUI.Initialize();
+
             _deadUI ??= transform.Find("UI_Dead").GetComponent<Canvas>();
 
             _production ??= transform.Find("Production").GetComponent<GameSceneProduction>();
@@ -49,21 +53,22 @@ namespace FoxHill.Scene
             _playerManager ??= FindFirstObjectByType<PlayerManager>();
         }
 
-        private void Start()
+        private IEnumerator Start()
         {
             _menu.ToggleUI(false);
             _deadUI.enabled = false;
 
             _pathFollowMonsterSpawner.Initialize();
 
-            if (StartProductionOnLoad == true)
-                StartCoroutine(C_SceneProduction());
-
             QuestManager.Reset();
 
             _playerManager.OnDead += ExitToTitleScene;
             _destinationHPManager.OnDead += ExitToTitleScene;
             _playerManager.OnReset?.Invoke();
+
+            yield return StartCoroutine(C_SceneProduction());
+
+            _tutorialUI.Show();
         }
 
         private void OnDestroy()

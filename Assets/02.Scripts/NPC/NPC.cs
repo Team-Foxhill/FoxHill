@@ -92,7 +92,7 @@ namespace FoxHill.NPC
                                 break;
                         }
                         _dialogueHUD.ToggleUI(true);
-
+                        playerQuest.ShowSuccessDialogue();
                         playerQuest.OnClearQuest();
 
                         break;

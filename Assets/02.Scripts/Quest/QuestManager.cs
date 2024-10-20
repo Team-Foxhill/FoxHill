@@ -17,7 +17,21 @@ namespace FoxHill.Quest
             Failed      // 퀘스트 실패
         }
 
-        private static Dictionary<int, QuestForm> _currentForm;
+        private static Dictionary<int, QuestForm> _currentForm
+        {
+            get
+            {
+                switch (GameManager.Instance.Language.CurrentLanguage)
+                {
+                    case Core.Settings.LanguageManager.LanguageType.Korean:
+                        return _forms_kr;
+                    case Core.Settings.LanguageManager.LanguageType.English:
+                        return _forms_en;
+                    default:
+                        return _forms_en;
+                }
+            }
+        }
 
         private static Dictionary<int, QuestForm> _forms_kr = new Dictionary<int, QuestForm>(8); // 엑셀 파싱 + 가공으로 얻은 Quest 데이터 : {QuestNumber, QuestForm}
         private static Dictionary<int, QuestForm> _forms_en = new Dictionary<int, QuestForm>(8);
@@ -31,7 +45,7 @@ namespace FoxHill.Quest
         /// <param name="sheet">ExcelImporter로 excel sheet를 변환하여 얻은 ScriptableObject</param>
         public static void InitializeQuestForms(QuestSheet sheet, QuestSheet_En sheet_en)
         {
-            if(_isInitialized == true)
+            if (_isInitialized == true)
             {
                 return;
             }
@@ -57,20 +71,6 @@ namespace FoxHill.Quest
                 _forms_en.Add(form.QuestNumber, form);
             }
 
-            if(LocalizationSettings.SelectedLocale == LocalizationSettings.AvailableLocales.GetLocale("ko-KR"))
-            {
-                _currentForm = _forms_kr;
-            }
-            else if(LocalizationSettings.SelectedLocale == LocalizationSettings.AvailableLocales.GetLocale("en-US"))
-            {
-                _currentForm = _forms_en;
-            }
-            else
-            {
-                _currentForm = _forms_en; // Default
-                throw new Exception($"Wrong Locale. Current : {LocalizationSettings.SelectedLocale}");
-            }
-
             _isInitialized = true;
         }
 
@@ -79,12 +79,12 @@ namespace FoxHill.Quest
         /// </summary>
         public static void Reset()
         {
-            if(_isInitialized == false)
+            if (_isInitialized == false)
             {
                 return;
             }
 
-            foreach(var key in _status.Keys.ToList())
+            foreach (var key in _status.Keys.ToList())
             {
                 _status[key] = QuestStatus.NotStarted;
             }

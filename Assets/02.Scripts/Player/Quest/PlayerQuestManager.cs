@@ -114,6 +114,15 @@ namespace FoxHill.Player.Quest
             return true;
         }
 
+        public void ShowSuccessDialogue()
+        {
+            if (_currentIndex == NOT_IN_PROGRESS)
+                return;
+
+            _globalDialogue ??= FindFirstObjectByType<GlobalDialogue>();
+            _globalDialogue.StartDialogue(_currentQuest.SuccessDialogue);
+        }
+
         public bool IsQuestCompleted(int questNumber, int parameter = default)
         {
             // 이미 진행 완료 후 보상까지 수령한 퀘스트라면 판단 범위 X
@@ -304,6 +313,7 @@ namespace FoxHill.Player.Quest
                     case ObjectiveType.Deliver:
                         {
                             PlayerManager.OnEncounterNPC?.RemoveListener(OnEncounterNPC);
+                            PlayerManager.Inventory.UseItem(_deliverItemIndex);
                             _deliverItemIndex = 0;
                             _hasDelivered = false;
                         }
