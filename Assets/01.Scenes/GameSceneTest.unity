@@ -3761,6 +3761,11 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.054377377, y: 0.0057096183, z: 1}
   m_Center: {x: -0.17509517, y: -0.074089184, z: -0}
+--- !u!212 &523307574 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 508125908509253515, guid: 01b853cf9dd02db448c2c2aea9da70ca, type: 3}
+  m_PrefabInstance: {fileID: 2144640308}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &533439627
 GameObject:
   m_ObjectHideFlags: 0
@@ -4155,6 +4160,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &560655771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 560655741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 857435149a9c808429d83b7e6434f0d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rate: 1
+  _lifeTime: 1
+  _capacity: 1
 --- !u!1 &567194321
 GameObject:
   m_ObjectHideFlags: 0
@@ -8709,6 +8729,10 @@ PrefabInstance:
       value: StageManager
       objectReference: {fileID: 0}
     - target: {fileID: 4576595273255418606, guid: 66a62ca0761c9ef40862e10ac3fa5d3c, type: 3}
+      propertyPath: _gameSceneProduction
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4576595273255418606, guid: 66a62ca0761c9ef40862e10ac3fa5d3c, type: 3}
       propertyPath: _bossMonsters.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -8726,7 +8750,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4576595273255418606, guid: 66a62ca0761c9ef40862e10ac3fa5d3c, type: 3}
       propertyPath: _bossActiveStage.Array.data[0]
-      value: 3
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4576595273255418606, guid: 66a62ca0761c9ef40862e10ac3fa5d3c, type: 3}
+      propertyPath: _gameSceneProductions.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4576595273255418606, guid: 66a62ca0761c9ef40862e10ac3fa5d3c, type: 3}
+      propertyPath: _gameSceneProductions.Array.data[0]
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7436603520249775800, guid: 66a62ca0761c9ef40862e10ac3fa5d3c, type: 3}
       propertyPath: m_Name
@@ -11823,6 +11855,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 357339660698342357, guid: f9d19e0f019222e489ef3e00403251bb, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 745683648097212173, guid: f9d19e0f019222e489ef3e00403251bb, type: 3}
       propertyPath: _audioSource
       value: 
@@ -11970,6 +12006,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5172079674440504060, guid: f9d19e0f019222e489ef3e00403251bb, type: 3}
       insertIndex: -1
       addedObject: {fileID: 560655756}
+    - targetCorrespondingSourceObject: {fileID: 5172079674440504060, guid: f9d19e0f019222e489ef3e00403251bb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 560655771}
     - targetCorrespondingSourceObject: {fileID: 2252405436857959775, guid: f9d19e0f019222e489ef3e00403251bb, type: 3}
       insertIndex: -1
       addedObject: {fileID: 812352498}
@@ -13158,9 +13197,13 @@ PrefabInstance:
       propertyPath: m_SortingLayerID
       value: -443488947
       objectReference: {fileID: 0}
+    - target: {fileID: 6492157835303294733, guid: 01b853cf9dd02db448c2c2aea9da70ca, type: 3}
+      propertyPath: _spriteRenderer
+      value: 
+      objectReference: {fileID: 523307574}
     - target: {fileID: 6611801550113355011, guid: 01b853cf9dd02db448c2c2aea9da70ca, type: 3}
       propertyPath: _maxHP
-      value: 2000
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 6611801550113355011, guid: 01b853cf9dd02db448c2c2aea9da70ca, type: 3}
       propertyPath: _moveSpeed
@@ -13175,8 +13218,20 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: 6fd2c8e0de5997545848afa2522e0e8d, type: 3}
     - target: {fileID: 6611801550113355011, guid: 01b853cf9dd02db448c2c2aea9da70ca, type: 3}
+      propertyPath: _jumpAttackProbability
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6611801550113355011, guid: 01b853cf9dd02db448c2c2aea9da70ca, type: 3}
+      propertyPath: _verticalAttackProbability
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6611801550113355011, guid: 01b853cf9dd02db448c2c2aea9da70ca, type: 3}
       propertyPath: _southBossSounds.Array.size
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6611801550113355011, guid: 01b853cf9dd02db448c2c2aea9da70ca, type: 3}
+      propertyPath: _horizontalAttackProbability
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 6611801550113355011, guid: 01b853cf9dd02db448c2c2aea9da70ca, type: 3}
       propertyPath: _southBossSounds.Array.data[0]
@@ -13294,7 +13349,7 @@ Transform:
   m_GameObject: {fileID: 15548660478923351}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.45, y: -82.97, z: -10}
+  m_LocalPosition: {x: 58.7, y: -59.1, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -13427,7 +13482,7 @@ Camera:
   far clip plane: 5000
   field of view: 40
   orthographic: 1
-  orthographic size: 8
+  orthographic size: 105.390015
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -13732,7 +13787,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3179763692979852570, guid: 5072b20fe1f48da4dbd4e76c24d2cae2, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6245337790382646948, guid: 5072b20fe1f48da4dbd4e76c24d2cae2, type: 3}
       propertyPath: m_Name

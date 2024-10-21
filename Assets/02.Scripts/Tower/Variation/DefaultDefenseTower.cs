@@ -25,6 +25,7 @@ namespace FoxHill.Tower
 
         protected override void Awake()
         {
+            _initialColor = _spriteRenderer.color;
             base.Awake();
             PauseManager.Register(this);
             _spriteRenderer = GetComponent<SpriteRenderer>();

@@ -1,11 +1,9 @@
-using UnityEngine;
-using System.Collections;
-using FoxHill.Monster.AI;
-using UnityEditor.Experimental.GraphView;
-using Unity.Transforms;
-using System;
 using FoxHill.Core;
 using FoxHill.Core.Pause;
+using System;
+using System.Collections;
+using UnityEditor.Experimental.GraphView;
+using UnityEngine;
 
 namespace FoxHill.Monster.AI
 {
@@ -13,14 +11,37 @@ namespace FoxHill.Monster.AI
     {
         public event Action<AnimationEvent> OnJumpAttack;
         [SerializeField] Animator _animator;
+        [SerializeField] SpriteRenderer _spriteRenderer;
         private int _jumpHash = Animator.StringToHash("Jump");
         private bool _isPaused;
-        private Vector2 _originPosition => (Vector2)transform.parent.position;
+        private Vector2 _originPosition;
+        private Blackboard _blackboard;
+        private bool _isStagger;
 
 
         private void Awake()
         {
             PauseManager.Register(this);
+            StartCoroutine(C_GetComponent());
+            _spriteRenderer = GetComponent<SpriteRenderer>();
+        }
+
+        private IEnumerator C_GetComponent()
+        {
+            while(_blackboard == default)
+            {
+                if (transform.parent.TryGetComponent<MonsterBehaviourTree>(out MonsterBehaviourTree monsterBehaviourTree))
+                {
+                    _blackboard = monsterBehaviourTree.Blackboard;
+                    yield break;
+                }
+                yield return null;
+            }
+        }
+
+        public void FlipX(bool isFlipped)
+        {
+            _spriteRenderer.flipX = isFlipped;
         }
 
         private void OnDestroy()
@@ -37,18 +58,20 @@ namespace FoxHill.Monster.AI
             }
         }
 
+
+
         public void OnJumpUp() // 애니메이션 이벤트로 실행되는 메서드.
         {
-            StartCoroutine(MoveDirectionExecutor(Vector2.up, 0.5f));//이동및 스프라이트 렌더러 비활성 처리.
+            StartCoroutine(C_MoveDirectionExecutor(Vector2.up, 0.5f));//이동및 스프라이트 렌더러 비활성 처리.
         }
 
         public void OnJumpDown() // 애니메이션 이벤트로 실행되는 메서드.
         {
-
-            StartCoroutine(LerpPositionExecutor(_originPosition, 0.5f));//이동및 스프라이트 렌더러 비활성 처리.
+            _originPosition = _blackboard.Target.position;
+            StartCoroutine(C_LerpPositionExecutor(_originPosition, 1f));//이동및 스프라이트 렌더러 비활성 처리.
         }
 
-        private IEnumerator MoveDirectionExecutor(Vector2 direction, float time)
+        private IEnumerator C_MoveDirectionExecutor(Vector2 direction, float time)
         {
             float elapsedTime = 0;
             while (time > elapsedTime)
@@ -59,7 +82,7 @@ namespace FoxHill.Monster.AI
             }
         }
 
-        private IEnumerator LerpPositionExecutor(Vector2 position, float duration)
+        private IEnumerator C_LerpPositionExecutor(Vector2 position, float duration)
         {
             position.y += 1f;
             float elapsedTime = 0;
@@ -72,14 +95,9 @@ namespace FoxHill.Monster.AI
                 {
                     yield break;
                 }
-                transform.position = Vector2.Lerp(transform.parent.position, position, t);
+                transform.position = Vector2.Lerp(transform.position, position, t);
                 yield return null;
             }
-        }
-
-        public void PerformAttack(AnimationEvent animationEvent)
-        {
-            OnJumpAttack.Invoke(animationEvent);
         }
 
         public void Pause()

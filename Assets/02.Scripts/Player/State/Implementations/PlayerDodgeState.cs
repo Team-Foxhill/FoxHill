@@ -13,6 +13,7 @@ namespace FoxHill.Player.State.Implementations
 
         private Transform _playerTransform;
         private Vector2 _direction;
+        private MotionTrailGenerator _generator;
 
         protected override void OnEnable()
         {
@@ -20,6 +21,7 @@ namespace FoxHill.Player.State.Implementations
             
             _playerTransform = _manager.Transform;
             _direction = _manager.Direction.normalized;
+            _generator = gameObject.GetComponent<MotionTrailGenerator>();
 
             StartCoroutine(C_Dodge());
         }
@@ -27,6 +29,7 @@ namespace FoxHill.Player.State.Implementations
         private IEnumerator C_Dodge()
         {
             float elapsedTime = 0f;
+            _generator.On();
 
             while (elapsedTime < DODGE_TIME)
             {
@@ -38,6 +41,7 @@ namespace FoxHill.Player.State.Implementations
                 yield return null;
             }
 
+            _generator.Off();
             IsDone = true;
         }
     }

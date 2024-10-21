@@ -8,6 +8,7 @@ using FoxHill.Monster.FSM;
 using FoxHill.Player;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using IState = FoxHill.Monster.FSM.IState;
 using State = FoxHill.Monster.FSM.State;
@@ -211,10 +212,12 @@ namespace FoxHill.Monster.AI
             if (direction.x > Vector2.zero.x)
             {
                 _spriteRenderer.flipX = false;
+                _subController.FlipX(false);
             }
             else if (direction.x < Vector2.zero.x)
             {
                 _spriteRenderer.flipX = true;
+                _subController.FlipX(true);
             }
             else // 0인 경우 .
             {
@@ -337,34 +340,26 @@ namespace FoxHill.Monster.AI
         }
 
         // todo.Villin 이어서 작업하기.(점프 공격)
-        public void OnJumpUp() // 애니메이션 이벤트로 실행되는 메서드.
+        public void ColliderEnabler(int isEnabled) // 애니메이션 이벤트로 실행되는 메서드.
         {
-            StartCoroutine(MoveDirectionExecutor(Vector2.up, 0.5f, false));//이동및 스프라이트 렌더러 비활성 처리.
+            bool isColliderEnable;
+            if (isEnabled == 0) {
+                isColliderEnable = false;
+            }
+            else {
+                isColliderEnable = true;
+            }
+            _collider.enabled = isColliderEnable;
+            // MoveDirectionExecutor코루틴 삭제해놓음.
         }
 
         public void OnJumpDown() // 애니메이션 이벤트로 실행되는 메서드.
         {
-
-            StartCoroutine(LerpPositionExecutor(_blackboard.Target.position, 0.5f, true));//이동및 스프라이트 렌더러 비활성 처리.
+            Vector2 newPosition = _blackboard.Target.position;
+            StartCoroutine(C_LerpPositionExecutor(newPosition, 1f, true));//이동및 스프라이트 렌더러 비활성 처리.
         }
 
-        private IEnumerator MoveDirectionExecutor(Vector2 direction, float time, bool isEnable)
-        {
-            _collider.enabled = isEnable;
-            float elapsedTime = 0;
-            while (time > elapsedTime)
-            {
-                elapsedTime += Time.deltaTime;
-                //transform.position = (Vector2)transform.position + direction * _moveSpeed * elapsedTime; // todo.Villin 화면 위로 사라졌다가 돌아오는 스프라이트 렌더러 오브젝트 하나 따로 만들고, 대신 실제 몬스터는 그림자 애니메이션만 실행하기.
-                if (Vector2.Distance(transform.position, _blackboard.OriginPosition) > (_maxDistanceFromOrigin - 1f))
-                {
-                    transform.position = _blackboard.OriginPosition;
-                }
-                yield return null;
-            }
-        }
-
-        private IEnumerator LerpPositionExecutor(Vector2 position, float duration, bool isEnable)
+        private IEnumerator C_LerpPositionExecutor(Vector2 position, float duration, bool isEnable)
         {
             position.y += 1f;
             float elapsedTime = 0;
@@ -375,9 +370,9 @@ namespace FoxHill.Monster.AI
                 float t = Mathf.Clamp01(elapsedTime / duration);
                 if (Vector2.Distance(transform.position, position) < 0.1f)
                 {
-                    _collider.enabled = isEnable;
                     yield break;
                 }
+
                 transform.position = Vector2.Lerp(transform.position, position, t);
                 yield return null;
             }
@@ -512,7 +507,7 @@ namespace FoxHill.Monster.AI
             {
                 DebugFox.Log("stun Coroutine Started!");
                 tree.Blackboard.IsStunInvoked = false;
-                StartCoroutine(KnockBack());
+                StartCoroutine(C_KnockBack());
                 tree.Blackboard.IsNextActionReady = false;
                 return Result.Running;
             }
@@ -539,7 +534,7 @@ namespace FoxHill.Monster.AI
             return Result.Failure;
         }
 
-        private IEnumerator KnockBack()
+        private IEnumerator C_KnockBack()
         {
             _blackboard.IsStunRunning = true;
             DebugFox.Log($"ChangeState as Stun, now State is {_machine.CurrentState.ToString()}!");

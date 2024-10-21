@@ -1,4 +1,5 @@
 using FoxHill.Core.Pause;
+using FoxHill.Scene.Production;
 using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -21,6 +22,7 @@ namespace FoxHill.Core
         [SerializeField] private GameObject[] _bossMonsters;
         [SerializeField] private int[] _bossActiveStage;
         [SerializeField] private bool[] _isAlreadySpawned;
+
         private WaitForSecondsRealtime _spawnInterval;
         private int _randomValue;
         private Vector2 _newPosition;
@@ -42,7 +44,7 @@ namespace FoxHill.Core
             }
             foreach (float roundTime in roundTimes)
             {
-                if (_bossActiveStage[i] >= Stage && _isAlreadySpawned[i] == false)
+                if (_bossActiveStage[i] <= Stage && _isAlreadySpawned[i] == false)
                 {
                     _bossMonsters[i].SetActive(true);
                     _isAlreadySpawned[i] = true;
@@ -112,7 +114,6 @@ namespace FoxHill.Core
             PauseManager.Register(this);
             IsInitialized = true;
             StartCoroutine(ProgressStage(_spawnCountOfStages, _roundTimes, _spawnEndTimeOfStages));
- 
         }
 
         //private void GetFromPool(int getCount)

@@ -26,17 +26,17 @@ AnimationClip:
       value: {fileID: 730392333, guid: 4ea96a51ed2c2b7448603fd9061d443a, type: 3}
     - time: 0.5833333
       value: {fileID: 1481675675, guid: 4ea96a51ed2c2b7448603fd9061d443a, type: 3}
-    - time: 1.1666666
+    - time: 0.75
       value: {fileID: -709929001, guid: 4ea96a51ed2c2b7448603fd9061d443a, type: 3}
-    - time: 1.25
+    - time: 0.8333333
       value: {fileID: -744416440, guid: 4ea96a51ed2c2b7448603fd9061d443a, type: 3}
-    - time: 1.3333334
+    - time: 0.9166667
       value: {fileID: -469533983, guid: 4ea96a51ed2c2b7448603fd9061d443a, type: 3}
-    - time: 1.4166666
+    - time: 1
       value: {fileID: 1620984326, guid: 4ea96a51ed2c2b7448603fd9061d443a, type: 3}
-    - time: 1.5
+    - time: 1.0833334
       value: {fileID: 1201430948, guid: 4ea96a51ed2c2b7448603fd9061d443a, type: 3}
-    - time: 1.5833334
+    - time: 1.1666666
       value: {fileID: -1688853636, guid: 4ea96a51ed2c2b7448603fd9061d443a, type: 3}
     attribute: m_Sprite
     path: 
@@ -74,7 +74,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 1.6666667
+    m_StopTime: 1.25
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -102,7 +102,7 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 0.083333336
-    functionName: OnJumpUp
+    functionName: ColliderEnabler
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -115,17 +115,24 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 1.1666666
+  - time: 0.75
     functionName: PerformSound
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 2
     messageOptions: 0
-  - time: 1.25
+  - time: 0.8333333
     functionName: PerformAttack
     data: 
     objectReferenceParameter: {fileID: 11400000, guid: 9a5f7ba9db01d154ca2494dff1598153, type: 2}
     floatParameter: 0
     intParameter: 0
+    messageOptions: 0
+  - time: 1.1666666
+    functionName: ColliderEnabler
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 1
     messageOptions: 0
