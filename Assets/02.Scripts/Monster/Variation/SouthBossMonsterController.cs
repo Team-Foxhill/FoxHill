@@ -1,3 +1,4 @@
+using FoxHill.Audio;
 using FoxHill.Core;
 using FoxHill.Core.Damage;
 using FoxHill.Core.Parry;
@@ -20,7 +21,7 @@ namespace FoxHill.Monster.AI
     [RequireComponent(typeof(Animator))]
     [RequireComponent(typeof(StateMachine))]
 
-    public class SouthBossMonsterController : MonoBehaviour, IDamager, IDamageable, IStat, IStaggerable, IPausable
+    public class SouthBossMonsterController : MonoBehaviour, IDamager, IDamageable, IStat, IStaggerable, IPausable, IVolumeAdjustable
     {
         public Transform Transform => transform;
 
@@ -64,9 +65,9 @@ namespace FoxHill.Monster.AI
         [SerializeField] private float _jumpAttackProbability = 0.3f;
         [SerializeField] private SouthBossMonsterSubController _subController;
         [SerializeField] private AudioSource _audioSource;
-        [Header ("PlayerSound")]
+        [Header("PlayerSound")]
         [SerializeField] private AudioClip _perfectGuardSound;
-        [Header ("BossSound")]
+        [Header("BossSound")]
         [SerializeField] private AudioClip[] _southBossSounds;
 
         private readonly Color COLOR_DAMAGED = new Color(255f / 255f, 47f / 255f, 47f / 255f);
@@ -116,6 +117,12 @@ namespace FoxHill.Monster.AI
             CurrentHp = MaxHp;
             _initialColor = _spriteRenderer.color;
             _collider = gameObject.GetComponent<CapsuleCollider2D>();
+            SoundVolumeManager.Register(this);
+        }
+
+        private void OnDestroy()
+        {
+            SoundVolumeManager.Unregister(this);
         }
 
         private void MakeBehaviourTree()
@@ -343,10 +350,12 @@ namespace FoxHill.Monster.AI
         public void ColliderEnabler(int isEnabled) // 애니메이션 이벤트로 실행되는 메서드.
         {
             bool isColliderEnable;
-            if (isEnabled == 0) {
+            if (isEnabled == 0)
+            {
                 isColliderEnable = false;
             }
-            else {
+            else
+            {
                 isColliderEnable = true;
             }
             _collider.enabled = isColliderEnable;
@@ -472,11 +481,13 @@ namespace FoxHill.Monster.AI
                     }
                     else
                     {
+                        PerformSound(6);
                         target.TakeDamage(this, attackSpec.DamageMultiplier * Power);
                     }
                 }
                 else
                 {
+                    PerformSound(6);
                     target.TakeDamage(this, attackSpec.DamageMultiplier * Power);
                 }
             }
@@ -566,6 +577,11 @@ namespace FoxHill.Monster.AI
         public void Resume()
         {
             _isPaused = false;
+        }
+
+        public void OnVolumeChanged(float volume)
+        {
+            _audioSource.volume = volume;
         }
     }
 }

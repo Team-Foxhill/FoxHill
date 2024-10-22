@@ -105,7 +105,7 @@ public partial class @TutorialInputAction: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""711c064a-5845-4970-a167-1ba9ae746e74"",
-                    ""path"": ""<Keyboard>/x"",
+                    ""path"": ""<Keyboard>/c"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

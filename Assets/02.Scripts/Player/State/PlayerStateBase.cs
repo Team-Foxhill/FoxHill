@@ -1,10 +1,12 @@
+using FoxHill.Audio;
 using System.Security.Cryptography;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace FoxHill.Player.State
 {
     [RequireComponent(typeof(PlayerAnimationController))]
-    public abstract class PlayerStateBase : MonoBehaviour
+    public abstract class PlayerStateBase : MonoBehaviour, IVolumeAdjustable
     {
         public abstract PlayerState State { get; protected set; }
         public abstract bool IsMoveState { get; protected set; }
@@ -21,9 +23,16 @@ namespace FoxHill.Player.State
             _manager = GetComponentInParent<PlayerManager>();
             _animator = GetComponent<PlayerAnimationController>();
             _audioSource = GetComponent<AudioSource>();
+            SoundVolumeManager.Register(this);
 
             this.enabled = false;
         }
+
+        protected virtual void OnDestroy()
+        {
+            SoundVolumeManager.Unregister(this);
+        }
+
 
         protected virtual void OnEnable()
         {
@@ -48,6 +57,11 @@ namespace FoxHill.Player.State
         public void PlayAnimation()
         {
             _animator.PlayAnimation(State);
+        }
+
+        public void OnVolumeChanged(float volume)
+        {
+            _audioSource.volume = volume;
         }
     }
 }

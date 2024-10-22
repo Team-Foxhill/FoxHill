@@ -2,7 +2,6 @@ using FoxHill.Core;
 using FoxHill.Core.Pause;
 using System;
 using System.Collections;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 namespace FoxHill.Monster.AI
@@ -12,6 +11,7 @@ namespace FoxHill.Monster.AI
         public event Action<AnimationEvent> OnJumpAttack;
         [SerializeField] Animator _animator;
         [SerializeField] SpriteRenderer _spriteRenderer;
+        [SerializeField] MonsterBehaviourTree _tree;
         private int _jumpHash = Animator.StringToHash("Jump");
         private bool _isPaused;
         private Vector2 _originPosition;
@@ -21,6 +21,10 @@ namespace FoxHill.Monster.AI
 
         private void Awake()
         {
+            try { _blackboard = _tree.Blackboard; }
+            catch {
+                DebugFox.Log($"can't find {_tree} or {_tree.Blackboard}");
+            };
             PauseManager.Register(this);
             StartCoroutine(C_GetComponent());
             _spriteRenderer = GetComponent<SpriteRenderer>();
@@ -52,10 +56,6 @@ namespace FoxHill.Monster.AI
         public void PlayAnimation()
         {
             _animator.Play(_jumpHash);
-            if (_animator.isActiveAndEnabled)
-            {
-                DebugFox.Log("애니메이션 실행!");
-            }
         }
 
 

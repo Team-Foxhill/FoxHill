@@ -49,7 +49,7 @@ namespace FoxHill.Core.Test
         [SerializeField] private float _visibilityRadius = 10f;
         public Color gizmoColor = new Color(1, 0, 0, 0.2f);
 
-        private static HashSet<MonoBehaviour> _colliderCheckneededObjects = new HashSet<MonoBehaviour>();
+        private static HashSet<MonoBehaviour> _colliderCheckNeededObjects = new HashSet<MonoBehaviour>();
         private Plane[] _frustumPlanes;
         private List<PooledObjectData> _pooledObjects;
         private Queue<int> _availableIndices;
@@ -76,9 +76,9 @@ namespace FoxHill.Core.Test
 
         public static void RegisterColliderCheckneededObject(MonoBehaviour colliderCheckneededObject)
         {
-            if (colliderCheckneededObject != null && !_colliderCheckneededObjects.Contains(colliderCheckneededObject))
+            if (colliderCheckneededObject != null && !_colliderCheckNeededObjects.Contains(colliderCheckneededObject))
             {
-                _colliderCheckneededObjects.Add(colliderCheckneededObject);
+                _colliderCheckNeededObjects.Add(colliderCheckneededObject);
             }
         }
 
@@ -86,7 +86,7 @@ namespace FoxHill.Core.Test
         {
             if (colliderCheckneededObject != null)
             {
-                _colliderCheckneededObjects.Remove(colliderCheckneededObject);
+                _colliderCheckNeededObjects.Remove(colliderCheckneededObject);
             }
         }
 
@@ -175,7 +175,7 @@ namespace FoxHill.Core.Test
 
             bool[] isNearAnyCenter = new bool[_pooledObjects.Count];
 
-            foreach (var colliderCheckneededObject in _colliderCheckneededObjects)
+            foreach (var colliderCheckneededObject in _colliderCheckNeededObjects)
             {
                 if (colliderCheckneededObject == null) continue;
 

@@ -1,0 +1,19 @@
+라이선스 모음
+
+
+안 적어도 되는 라이선스 CC0
+Main_Move - Paper_Twist_11 by Valenspire -- https://freesound.org/s/699356/ -- License: Creative Commons 0
+Button_Main - Paper Handling 2.wav by Geoff-Bremner-Audio -- https://freesound.org/s/684078/ -- License: Creative Commons 0
+Cancel_Main - 014_throw_paper.wav by Lau7 -- https://freesound.org/s/153341/ -- License: Creative Commons 0
+Player_Died - Poof of Smoke by Planman -- https://freesound.org/s/208111/ -- License: Creative Commons 0
+Player_Attack_Non_Target - Swinging a whip.wav by MioMeg -- https://freesound.org/s/707014/ -- License: Creative Commons 0
+Player_Attack_Non_Target1 - Stick-Swoosh Whoosh  by Hitrison -- https://freesound.org/s/216675/ -- License: Attribution 4.0
+Player_Attack - hit 1.wav by ddragonpearl -- https://freesound.org/s/463351/ -- License: Creative Commons 0
+Player_Attack_Fatal - knock out 2 by D4XX -- https://freesound.org/s/607283/ -- License: Creative Commons 0
+Player_Defense - swing_blood_splatter.mp3 by minian89 -- https://freesound.org/s/195952/ -- License: Creative Commons 0
+Boss_Attack - Thud3.wav by yummy9987 -- https://freesound.org/s/494931/ -- License: Creative Commons 0
+
+적어야 하는 라이선스 Attribution 4.0
+Player_PerfectGuard - Large Anvil & Steel Hammer 2.wav by Benboncan -- https://freesound.org/s/103630/ -- License: Attribution 4.0
+Player_PerfectGuard - USAT BOMB.wav by sandyrb -- https://freesound.org/s/35643/ -- License: Attribution 4.0
+Skill_Vermilion_Bird - Fire/wind noise by Zaccattack -- https://freesound.org/s/732033/ -- License: Attribution 4.0

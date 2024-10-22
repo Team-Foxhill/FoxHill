@@ -17,7 +17,7 @@ namespace FoxHill.Player.State.Implementations
 
         private LayerMask _attackableLayer;
         private float _attackOffset = 1f;
-        private Vector2 _attackRange = Vector2.one * 3f;
+        private Vector2 _attackRange = Vector2.one * 4f;
         private Vector3 _attackPoint;
         private bool _isPlayedOnce;
 
@@ -98,7 +98,7 @@ namespace FoxHill.Player.State.Implementations
 
             while (_animator.AnimationTime < 1f)
             {
-                if (_animator.AnimationTime > 0.6f && isPerformed == false)
+                if (_animator.AnimationTime > 0.9f && isPerformed == false)
                 {
                     isPerformed = true;
                     PerformDamage();
@@ -119,6 +119,10 @@ namespace FoxHill.Player.State.Implementations
 
         private void PerformDamage()
         {
+            _attackPoint
+                = (_manager.IsLeftward == true)
+                ? _manager.Transform.position + Vector3.left * _attackOffset
+                : _manager.transform.position + Vector3.right * _attackOffset;
             var hits = Physics2D.OverlapBoxAll(_attackPoint, _attackRange, 0f, _attackableLayer);
             if (hits.Length == 0 && _audioSource.isPlaying == false)
             {
@@ -133,7 +137,7 @@ namespace FoxHill.Player.State.Implementations
                     if (_isPlayedOnce == false)
                     {
                         _isPlayedOnce = true;
-                int i = (int)Random.Range(0, _attackTargetSounds.Length);
+                        int i = (int)Random.Range(0, _attackTargetSounds.Length);
                         _audioSource.PlayOneShot(_attackTargetSounds[i]); // 공격 성공 사운드.
                     }
 

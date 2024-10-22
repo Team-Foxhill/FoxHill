@@ -114,7 +114,7 @@ public partial class @MenuInputAction: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""43521946-1db9-41ea-83fc-beda2cf271a5"",
-                    ""path"": ""<Keyboard>/z"",
+                    ""path"": ""<Keyboard>/v"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -136,7 +136,7 @@ public partial class @MenuInputAction: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""e549e5d9-37df-435c-a090-b5f4c1450800"",
-                    ""path"": ""<Keyboard>/x"",
+                    ""path"": ""<Keyboard>/c"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -248,7 +248,7 @@ public partial class @MenuInputAction: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""bb0c4e8f-a3d3-4202-9eeb-a27a66c90f39"",
-                    ""path"": ""<Keyboard>/z"",
+                    ""path"": ""<Keyboard>/v"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -270,7 +270,7 @@ public partial class @MenuInputAction: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""fb49a10e-94e1-4459-8656-59336471f24c"",
-                    ""path"": ""<Keyboard>/x"",
+                    ""path"": ""<Keyboard>/c"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -401,7 +401,7 @@ public partial class @MenuInputAction: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""8bb22d21-d6fd-4032-bd0c-3650e839551e"",
-                    ""path"": ""<Keyboard>/z"",
+                    ""path"": ""<Keyboard>/v"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

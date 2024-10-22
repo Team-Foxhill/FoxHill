@@ -1,5 +1,8 @@
 using FoxHill.Core.Settings;
+using FoxHill.Player.Skill;
 using System.Collections.Generic;
+using UnityEngine.Rendering;
+using UnityEngine.UI;
 namespace FoxHill.Audio
 {
     /// <summary>
@@ -8,7 +11,17 @@ namespace FoxHill.Audio
     public static class SoundVolumeManager
     {
         private static HashSet<IVolumeAdjustable> playerbles = new HashSet<IVolumeAdjustable>(1024);
-        private static bool _isPaused = false;
+        private static PlayerSkillController _playerSkillController;
+        public static float VolumeValue => _lastValue;
+        private static float _lastValue;
+        private static bool _isVolumeChangedOnceOrMore;
+
+        public static void SetInitialVolume(Slider slider)
+        {
+            _lastValue = slider.value;
+            OnVolumeChanged(slider.value);
+        }
+
 
         public static void LinkSoundSetting(SoundSettings soundSettings)
         {
@@ -23,6 +36,11 @@ namespace FoxHill.Audio
         public static void Register(IVolumeAdjustable playerble)
         {
             playerbles.Add(playerble);
+            if (_isVolumeChangedOnceOrMore == false)
+            {
+                return;
+            }
+            playerble.OnVolumeChanged(_lastValue);
         }
 
         public static void Unregister(IVolumeAdjustable playerble)
@@ -32,6 +50,12 @@ namespace FoxHill.Audio
 
         private static void OnVolumeChanged(float volume)
         {
+            if (_isVolumeChangedOnceOrMore == false)
+            {
+                _isVolumeChangedOnceOrMore = true;
+            }
+            _lastValue = volume;
+
             foreach (IVolumeAdjustable playerble in playerbles)
             {
                 playerble.OnVolumeChanged(volume);

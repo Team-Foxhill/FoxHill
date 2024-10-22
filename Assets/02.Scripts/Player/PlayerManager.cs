@@ -49,6 +49,7 @@ namespace FoxHill.Player
         [HideInInspector] public UnityEvent OnKillMonster;
         [HideInInspector] public UnityEvent<int> OnEncounterNPC;
 
+
         public bool IsInventoryOpen => _isInventoryOpen;
         public bool IsPaused => _isPaused;
         public bool IsDead => _isDead;
@@ -108,6 +109,7 @@ namespace FoxHill.Player
 
         private bool _isInventoryOpen = false;
         private bool _isTowerSpawnerOpen = false;
+        private bool _isPlayerDodging = false;
 
         protected override void Awake()
         {
@@ -195,10 +197,23 @@ namespace FoxHill.Player
         public void SetState(PlayerState state, bool needParamters = false)
         {
             State.SetState(state, needParamters);
+            if (state == PlayerState.Dodge)
+            {
+                _isPlayerDodging = true;
+            }
+            else
+            {
+                _isPlayerDodging = false;
+            }
         }
 
         public void TakeDamage(IDamager damager, float damage)
         {
+            if (_isPlayerDodging == true)
+            {
+                return;
+            }
+
             if (damager?.Transform.gameObject.layer == LayerRepository.LAYER_BOSS_MONSTER)
             {
                 Knockback(damager.Transform);

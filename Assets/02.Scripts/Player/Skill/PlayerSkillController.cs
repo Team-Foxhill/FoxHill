@@ -1,3 +1,4 @@
+using FoxHill.Audio;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -103,7 +104,7 @@ namespace FoxHill.Player.Skill
             _playerManager.OnSwitchSkill?.AddListener(SwitchSkill);
             _playerManager.OnCastSkill?.AddListener(CastSkill);
             OnCooldownComplete?.AddListener(_skillUI.EnableIcon);
-
+            _audioSource.volume = SoundVolumeManager.VolumeValue;
             _skillUI.ToggleUI(false);
         }
 

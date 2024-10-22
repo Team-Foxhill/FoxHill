@@ -1,6 +1,7 @@
 using FoxHill.Core.Pause;
 using FoxHill.Scene.Production;
 using System.Collections;
+using Unity.Entities.UniversalDelegates;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -44,20 +45,16 @@ namespace FoxHill.Core
             }
             foreach (float roundTime in roundTimes)
             {
-                if (_bossActiveStage[i] <= Stage && _isAlreadySpawned[i] == false)
+                if (i <= _bossMonsters.Length)
                 {
-                    _bossMonsters[i].SetActive(true);
-                    _isAlreadySpawned[i] = true;
-                    if(i< _bossMonsters.Length)
-                    {
-                    i++;
-                    }
+                    i = CheckBossSpawn(i);
                 }
+
                 float stageStartTime = Time.time;
                 float spawnEndTimeOfStage = spawnEndTimes[Stage];
-                _elapsedTime = 0f; 
+                _elapsedTime = 0f;
                 StartCoroutine(Spawn(getCounts[Stage], spawnEndTimeOfStage));
-                while(_elapsedTime < roundTime)
+                while (_elapsedTime < roundTime)
                 {
                     if (_isPaused == true)
                     {
@@ -75,7 +72,33 @@ namespace FoxHill.Core
             yield break;
         }
 
-        public IEnumerator Spawn(int getCount, float spawnEndTime)
+        private int CheckBossSpawn(int i)
+        {
+            if (_bossActiveStage[i] > Stage || _isAlreadySpawned[i] == true || i >= _bossMonsters.Length)
+            {
+                return i;
+            }
+            _bossMonsters[i].SetActive(true);
+            _isAlreadySpawned[i] = true;
+                return i++;
+
+            //if (_bossActiveStage[i] <= Stage && _isAlreadySpawned[i] == false)
+            //{
+            //    _bossMonsters[i].SetActive(true);
+            //    _isAlreadySpawned[i] = true;
+            //    if (i < _bossMonsters.Length)
+            //    {
+            //        return i++;
+            //    }
+            //    else
+            //    {
+            //        return i;
+            //    }
+            //}
+            //return i;
+        }
+
+            public IEnumerator Spawn(int getCount, float spawnEndTime)
         {
             _spawnInterval = new WaitForSecondsRealtime(1 / spawnEndTime);
 

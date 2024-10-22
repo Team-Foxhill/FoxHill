@@ -53,9 +53,9 @@ MonoBehaviour:
   - m_Id: 5340614811648
     m_Localized: 'Arrows = Move
 
-      X / Esc = Cancel
+      C / Esc = Cancel
 
-      Z / Enter = Apply
+      V / Enter = Apply
 
 '
     m_Metadata:
@@ -109,9 +109,9 @@ MonoBehaviour:
   - m_Id: 3818996743528448
     m_Localized: '[Inventory]
 
-      Press Z key to select.
+      Press V key to select.
 
-      Press X key to
+      Press C key to
       deselect.'
     m_Metadata:
       m_Items: []

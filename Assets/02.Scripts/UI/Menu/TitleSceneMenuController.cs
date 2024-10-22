@@ -1,3 +1,4 @@
+using FoxHill.Audio;
 using FoxHill.Core.Settings;
 using FoxHill.UI.Buttons;
 using System.Collections;
@@ -12,7 +13,7 @@ namespace FoxHill.UI.Menu
     /// <summary>
     /// TitleScene에서의 메뉴를 관리합니다.
     /// </summary>
-    public class TitleSceneMenuController : MonoBehaviour, MenuInputAction.ITitleSceneActions
+    public class TitleSceneMenuController : MonoBehaviour, MenuInputAction.ITitleSceneActions, IVolumeAdjustable
     {
         [SerializeField] private MenuInputAction _inputAction;
 
@@ -51,6 +52,7 @@ namespace FoxHill.UI.Menu
 
         private void Awake()
         {
+            SoundVolumeManager.Register(this);
             _inputAction ??= new MenuInputAction();
 
             _inputAction.TitleScene.AddCallbacks(this);
@@ -79,6 +81,7 @@ namespace FoxHill.UI.Menu
 
         private void OnDestroy()
         {
+            SoundVolumeManager.Unregister(this);
             _inputAction?.Dispose();
         }
 

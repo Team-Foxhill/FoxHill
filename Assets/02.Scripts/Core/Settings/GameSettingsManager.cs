@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 namespace FoxHill.Core.Settings
 {
     [RequireComponent(typeof(Canvas))]
-    public class GameSettingsManager : MonoBehaviour, MenuInputAction.ITitleSceneSettingsActions
+    public class GameSettingsManager : MonoBehaviour, MenuInputAction.ITitleSceneSettingsActions, IVolumeAdjustable
     {
         public MenuInputAction InputAction
         {
@@ -40,6 +41,8 @@ namespace FoxHill.Core.Settings
         [SerializeField] private SettingType _soundSetting;
         [SerializeField] private SettingType _graphicsSetting;
         [SerializeField] private SettingType _otherSetting;
+        [SerializeField] private AudioClip[] _audioClip;
+        [SerializeField]private AudioSource _audioSource;
 
         private SettingOptions _currentOption = 0;
         private Dictionary<SettingOptions, SettingType> _optionDictionary = new Dictionary<SettingOptions, SettingType>(3);
@@ -73,12 +76,25 @@ namespace FoxHill.Core.Settings
             _optionDictionary.Add(SettingOptions.Sound, _soundSetting);
             _optionDictionary.Add(SettingOptions.Graphics, _graphicsSetting);
             _optionDictionary.Add(SettingOptions.Other, _otherSetting);
+
             SoundVolumeManager.LinkSoundSetting(_soundSetting.Setting as SoundSettings);
+            SoundVolumeManager.Register(this);
+            if (_volumeSlider.value == default)
+            {
+            _volumeSlider.value = 1;
+            SoundVolumeManager.SetInitialVolume(_volumeSlider);
+            }
+        }
+
+        private void OnEnable()
+        {
+            _volumeSlider.value = SoundVolumeManager.VolumeValue;
         }
 
         private void OnDestroy()
         {
             SoundVolumeManager.UnLinkSoundSetting(_soundSetting.Setting as SoundSettings);
+            SoundVolumeManager.Unregister(this);
         }
 
         public void ToggleUI(bool toggle)
@@ -107,10 +123,10 @@ namespace FoxHill.Core.Settings
 
         public void OnSwitchMenu(InputAction.CallbackContext context) // Arrow
         {
+                _audioSource.PlayOneShot(_audioClip[0]);
             if (context.started == true && IsEnabled == true)
             {
                 var input = context.ReadValue<Vector2>();
-
                 // 아직 커스텀할 설정이 고정되지 않은 상태라면 설정 간에 이동 수행
                 if (_isSettingSelected == false)
                 {
@@ -197,6 +213,8 @@ namespace FoxHill.Core.Settings
         {
             if (context.started == true && IsEnabled == true)
             {
+
+                _audioSource.PlayOneShot(_audioClip[1]);
                 // Sound
 
                 // Graphics
@@ -211,9 +229,11 @@ namespace FoxHill.Core.Settings
         {
             if (context.started == true && IsEnabled == true)
             {
+                _audioSource.PlayOneShot(_audioClip[2]);
                 // 아직 커스텀할 설정이 고정되지 않은 상태라면 캔버스를 끕니다.
                 if (_isSettingSelected == false)
                 {
+                    
                     ToggleUI(false);
                     return;
                 }
@@ -239,5 +259,9 @@ namespace FoxHill.Core.Settings
             _optionDictionary[_currentOption].Text.color = Color.white;
         }
 
+        public void OnVolumeChanged(float volume)
+        {
+            _audioSource.volume = volume;
+        }
     }
 }

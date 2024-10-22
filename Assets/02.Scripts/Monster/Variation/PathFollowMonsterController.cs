@@ -67,11 +67,13 @@ namespace FoxHill.Monster
         private void OnEnable()
         {
             StartCoroutine(WaitForComponents());
-            StartCoroutine(UpdateSprite(_moveSpriteSet, true));
-            StartCoroutine(UpdateRotation());
+            _isDamaged = false;
+            _isCheckElapsedTime = false;
             CurrentHp = MaxHp;
             _agentAuthoring.enabled = true;
             _deadCoroutine = null;
+            StartCoroutine(UpdateSprite(_moveSpriteSet, true));
+            StartCoroutine(UpdateRotation());
         }
 
         private void OnDestroy()
