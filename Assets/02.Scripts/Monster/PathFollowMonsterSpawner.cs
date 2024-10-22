@@ -1,13 +1,12 @@
 using FoxHill.Core.Pause;
-using FoxHill.Scene.Production;
+using FoxHill.Audio;
 using System.Collections;
-using Unity.Entities.UniversalDelegates;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace FoxHill.Core
 {
-    public class PathFollowMonsterSpawner : MonoBehaviour, IPausable
+    public class PathFollowMonsterSpawner : MonoBehaviour, IPausable, IVolumeAdjustable
     {
         public bool IsInitialized { get; private set; }
 
@@ -23,12 +22,20 @@ namespace FoxHill.Core
         [SerializeField] private GameObject[] _bossMonsters;
         [SerializeField] private int[] _bossActiveStage;
         [SerializeField] private bool[] _isAlreadySpawned;
+        [SerializeField] private AudioSource _audioSoure;
+        [SerializeField] private AudioClip[] _bgms;
 
         private WaitForSecondsRealtime _spawnInterval;
         private int _randomValue;
         private Vector2 _newPosition;
         private bool _isPaused;
         private float _elapsedTime;
+
+        private void Awake()
+        {
+            _audioSoure.clip = _bgms[0];
+            _audioSoure.Play();
+        }
 
         private void OnDestroy()
         {
@@ -79,6 +86,7 @@ namespace FoxHill.Core
                 return i;
             }
             _bossMonsters[i].SetActive(true);
+            //_audioSoure.PlayOneShot(_bgms[i]);
             _isAlreadySpawned[i] = true;
                 return i++;
 
@@ -165,6 +173,11 @@ namespace FoxHill.Core
         public void Resume()
         {
             _isPaused = false;
+        }
+
+        public void OnVolumeChanged(float volume)
+        {
+            _audioSoure.volume = volume / 2;
         }
     }
 }
