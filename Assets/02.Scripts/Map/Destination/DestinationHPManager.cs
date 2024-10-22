@@ -18,6 +18,7 @@ namespace FoxHill.Map
         [SerializeField] private float getDamageInterval;
         [SerializeField] private SpriteRenderer _spriteRenderer;
         [SerializeField] private SpriteRenderer _spriteRenderer2;
+        [SerializeField] private DestinationHPUI _hpUI;
         private HashSet<Collider2D> _monsterSet = new HashSet<Collider2D>(512);
         private bool _isPaused;
         private float _elapsedTime;
@@ -85,6 +86,10 @@ namespace FoxHill.Map
                 {
                     float totalDamage = damage * _monsterSet.Count;
                     CurrentHP -= totalDamage;
+                    if (totalDamage != 0)
+                    {
+                    _hpUI.HPBar(CurrentHP/ destinationMaxHP);
+                    }
                     DebugFox.Log($"currentHP = {CurrentHP}, Monsters: {_monsterSet.Count}, Damage: {totalDamage}");
                     if (CurrentHP <= 0f)
                     {

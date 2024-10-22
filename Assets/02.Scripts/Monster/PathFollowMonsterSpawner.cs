@@ -22,7 +22,7 @@ namespace FoxHill.Core
         [SerializeField] private GameObject[] _bossMonsters;
         [SerializeField] private int[] _bossActiveStage;
         [SerializeField] private bool[] _isAlreadySpawned;
-        [SerializeField] private AudioSource _audioSoure;
+        [SerializeField] private AudioSource _audioSource;
         [SerializeField] private AudioClip[] _bgms;
 
         private WaitForSecondsRealtime _spawnInterval;
@@ -33,8 +33,9 @@ namespace FoxHill.Core
 
         private void Awake()
         {
-            _audioSoure.clip = _bgms[0];
-            _audioSoure.Play();
+            _audioSource.clip = _bgms[0];
+            _audioSource.loop = true;
+            _audioSource.Play();
         }
 
         private void OnDestroy()
@@ -177,7 +178,7 @@ namespace FoxHill.Core
 
         public void OnVolumeChanged(float volume)
         {
-            _audioSoure.volume = volume / 2;
+            _audioSource.volume = volume / 2;
         }
     }
 }
