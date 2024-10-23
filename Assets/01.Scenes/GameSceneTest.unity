@@ -8920,6 +8920,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2912029092748542972}
     - target: {fileID: 4576595273255418606, guid: 66a62ca0761c9ef40862e10ac3fa5d3c, type: 3}
+      propertyPath: _audioSource
+      value: 
+      objectReference: {fileID: 2912029092748542972}
+    - target: {fileID: 4576595273255418606, guid: 66a62ca0761c9ef40862e10ac3fa5d3c, type: 3}
       propertyPath: _bgms.Array.size
       value: 1
       objectReference: {fileID: 0}
